@@ -1,0 +1,10 @@
+
+#menu-1 tr td:first-child{
+	font-weight: bold;
+	color: navy;
+}
+
+
+.optionsbtn button{
+	margin-bottom: 2%;
+}
