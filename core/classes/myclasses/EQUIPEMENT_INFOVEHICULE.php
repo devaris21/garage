@@ -10,13 +10,13 @@ class EQUIPEMENT_MODELEVEHICULE extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $equipement_id;
-	public $modelevehicule_id;
+	public $infovehicule_id;
 
 	public function enregistre(){
 		$data = new RESPONSE;
 		$datas = EQUIPEMENT::findBy(["id ="=>$equipement_id]);
 		if (count($datas) == 1) {
-			$datas = MODELEVEHICULE::findBy(["id ="=>$modelevehicule_id]);
+			$datas = MODELEVEHICULE::findBy(["id ="=>$infovehicule_id]);
 			if (count($datas) == 1) {
 				$data = $this->save();
 			}else{

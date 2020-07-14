@@ -8,17 +8,14 @@ use \DateInterval;
 /**
  * 
  */
-class PARTENAIRE extends TABLE
+class PARTENAIRE extends PERSONNE
 {
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
 
-	public $raisonSociale;
+	public $typepartenaire_id;
 	public $nomResponsable;
-	public $adresse;
-	public $contact;
-	public $email;
 	
 
 	public function enregistre(){

@@ -11,16 +11,15 @@ class VEHICULE extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $immatriculation;
-	public $modelevehicule_id;
-	public $chasis;
 	public $dateMiseCirculation;
+	public $image;
 	public $etatvehicule_id = ETATVEHICULE::RAS;
 
 
 	public function enregistre(){
 		$data = new RESPONSE;
 		if ($this->immatriculation != "") {
-			$datas = MODELEVEHICULE::findBy(["id ="=>$this->modelevehicule_id]);
+			$datas = MODELEVEHICULE::findBy(["id ="=>$this->infovehicule_id]);
 			if (count($datas) == 1) {
 				$data = $this->save();
 				if ($data->status) {

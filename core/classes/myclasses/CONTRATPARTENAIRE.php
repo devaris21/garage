@@ -9,6 +9,7 @@ class CONTRATPARTENAIRE extends TABLE
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
+	public $reference;
 	public $partenaire_id;
 	public $started;
 	public $finished;

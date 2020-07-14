@@ -14,9 +14,7 @@ class INSPECTEUR extends PERSONNE
 	public static $namespace = __NAMESPACE__;
 
 
-	public $typeclient_id;
-	public $nomResponsable;
-	
+	public $agence_id;	
 
 
 	public function enregistre(){

@@ -10,13 +10,14 @@ class LOCATION extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $reservation_id;
+	public $agence_id;
 	public $started;
 	public $finished;
 	public $vehicule_id;
 	public $conducteur_id;
 	public $employe_id;
 	public $etat_id = ETAT::PARTIEL;
-	public $tarif_id;
+	public $tarifvehicule_id;
 
 	public function enregistre(){
 		$data = new RESPONSE;

@@ -13,7 +13,6 @@ class RETOURLOCATION extends TABLE
 	public $dateRetour;
 	public $agence_id;
 	public $employe_id;
-	public $etat_id = ETAT::PARTIEL;
 
 
 	public function enregistre(){

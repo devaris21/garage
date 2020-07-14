@@ -3,15 +3,17 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class MODELEVEHICULE extends TABLE
+class INFOVEHICULE extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
+	public $vehicule_id;
 	public $typevehicule_id;
 	public $marque_id;
 	public $modele;
+	public $chasis;
 	public $transmission_id;
 	public $energie_id;
 	public $puissance;

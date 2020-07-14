@@ -10,13 +10,13 @@ class MAINTENANCE_OPTIONREPARATION extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $maintenance_id;
-	public $optionreparation;
+	public $optionreparation_id;
 
 	public function enregistre(){
 		$data = new RESPONSE;
 		$datas = MAINTENANCE::findBy(["id ="=>$maintenance_id]);
 		if (count($datas) == 1) {
-			$datas = OPTIONREPARATION::findBy(["id ="=>$optionreparation]);
+			$datas = OPTIONREPARATION::findBy(["id ="=>$optionreparation_id]);
 			if (count($datas) == 1) {
 				$data = $this->save();
 			}else{

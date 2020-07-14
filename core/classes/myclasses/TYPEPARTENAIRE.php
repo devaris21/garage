@@ -3,14 +3,13 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class EQUIPEMENT extends TABLE
+class TYPEPARTENAIRE extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
 	public $name;
-	public $price;
 
 	public function enregistre(){
 		$data = new RESPONSE;
@@ -18,20 +17,20 @@ class EQUIPEMENT extends TABLE
 			$data = $this->save();
 		}else{
 			$data->status = false;
-			$data->message = "Veuillez renseigner le nom de l'equipement !";
+			$data->message = "Veuillez renseigner le nom du type de vehicule !";
 		}
 		return $data;
 	}
 
 
 		public function sentenseCreate(){
-			return $this->sentense = "Ajout d'une nouvel equipement: $this->name dans les paramétrages";
+			return $this->sentense = "Ajout d'un nouveau type de vehicule : $this->name dans les paramétrages";
 	}
 	public function sentenseUpdate(){
-			return $this->sentense = "Modification des informations de l'equipement $this->id : $this->name ";
+			return $this->sentense = "Modification des informations du type de vehicule $this->id : $this->name ";
 	}
 	public function sentenseDelete(){
-			return $this->sentense = "Suppression definitive de l'equipement $this->id : $this->name";
+			return $this->sentense = "Suppression definitive du type de vehicule $this->id : $this->name";
 	}
 }
 ?>
