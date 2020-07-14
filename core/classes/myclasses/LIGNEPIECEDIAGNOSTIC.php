@@ -5,32 +5,25 @@ use Native\EMAIL;
 /**
  * 
  */
-class LIGNEETIQUETTEJOUR extends TABLE
+class LIGNEPIECEDIAGNOSTIC extends TABLE
 {
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $productionjour_id;
-	public $etiquette_id;
-	public $consommation = 0;
+	public $diagnostic_id;
+	public $piece;
 
 
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = PRODUCTIONJOUR::findBy(["id ="=>$this->productionjour_id]);
+		$datas = DIAGNOSTIC::findBy(["id ="=>$this->diagnostic_id]);
 		if (count($datas) == 1) {
-			$datas = ETIQUETTE::findBy(["id ="=>$this->etiquette_id]);
-			if (count($datas) == 1) {
-				if ($this->consommation >= 0) {
-					$data = $this->save();
-				}else{
-					$data->status = false;
-					$data->message = "La quantité entrée n'est pas correcte !";
-				}
+			if ($this->piece != "") {
+				$data = $this->save();
 			}else{
 				$data->status = false;
-				$data->message = "Une erreur s'est produite lors de l'ajout du produit !";
+				$data->message = "Veuillez renseigner la piece !";
 			}
 		}else{
 			$data->status = false;
@@ -43,7 +36,7 @@ class LIGNEETIQUETTEJOUR extends TABLE
 
 
 	public function sentenseCreate(){
-	
+		
 	}
 
 

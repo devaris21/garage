@@ -5,27 +5,35 @@ use Native\EMAIL;
 /**
  * 
  */
-class LIGNEDEVENTE extends TABLE
+class LIGNEPIECEREPARATION extends TABLE
 {
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $vente_id;
+	public $reparation_id;
+	public $lignepiecediagnostic_id;
 	public $produit_id;
 	public $quantite;
 
 
+
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = VENTE::findBy(["id ="=>$this->vente_id]);
+		$datas = REPARATION::findBy(["id ="=>$this->reparation_id]);
 		if (count($datas) == 1) {
-			$datas = PRODUIT::findBy(["id ="=>$this->produit_id]);
+			$datas = LIGNEPIECEDIAGNOSTIC::findBy(["id ="=>$this->lignepiecediagnostic_id]);
 			if (count($datas) == 1) {
-				if ($this->quantite > 0) {
-					$data = $this->save();
+				$datas = PRODUIT::findBy(["id ="=>$this->produit_id]);
+				if (count($datas) == 1) {
+					if ($this->quantite > 0) {
+						$data = $this->save();
+					}else{
+						$data->status = false;
+						$data->message = "Veuillez renseigner la piece !";
+					}
 				}else{
 					$data->status = false;
-					$data->message = "La quantité n'est pas correcte !";
+					$data->message = "Une erreur s'est produite lors de l'ajout du produit !";
 				}
 			}else{
 				$data->status = false;
@@ -42,14 +50,16 @@ class LIGNEDEVENTE extends TABLE
 
 
 	public function sentenseCreate(){
-
+		
 	}
 
 
-	public function sentenseUpdate(){}
+	public function sentenseUpdate(){
+	}
 
 
-	public function sentenseDelete(){}
+	public function sentenseDelete(){
+	}
 
 }
 

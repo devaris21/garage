@@ -5,13 +5,13 @@ use Native\EMAIL;
 /**
  * 
  */
-class LIGNEMACANICIENDIAGNOSTIC extends TABLE
+class LIGNEREPARATIONDIAGNOSTIC extends TABLE
 {
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
 	public $diagnostic_id;
-	public $mecanicien_id;
+	public $reparation;
 
 
 
@@ -19,12 +19,11 @@ class LIGNEMACANICIENDIAGNOSTIC extends TABLE
 		$data = new RESPONSE;
 		$datas = DIAGNOSTIC::findBy(["id ="=>$this->diagnostic_id]);
 		if (count($datas) == 1) {
-			$datas = MECANICIEN::findBy(["id ="=>$this->mecanicien_id]);
-			if (count($datas) == 1) {
+			if ($this->reparation != "") {
 				$data = $this->save();
 			}else{
 				$data->status = false;
-				$data->message = "Une erreur s'est produite lors de l'ajout du produit !";
+				$data->message = "Veuillez renseigner la reparation !";
 			}
 		}else{
 			$data->status = false;

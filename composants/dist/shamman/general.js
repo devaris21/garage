@@ -5,18 +5,32 @@ $(function(){
 	// Initialisation des plugins
 	$("select.select2").select2();
 
-	$("input[type=checkbox]").change(function(event) {
-		if ($(this).is(":checked")) {
-			$(this).parent("label").css("color", "orangered");
-		}else{
-			$(this).parent("label").css("color", "#888");
-		}
-	});
-	$("input[type=radio]").change(function(event) {
-		name = $(this).attr("name")
-		$("input[name="+name+"]").parent("label").css("color", "#888");
-		$(this).parent("label").css("color", "orangered");
-	});
+   $('.tagsinput').tagsinput({
+    tagClass: 'label label-primary'
+});
+
+   $('.clockpicker').clockpicker();
+
+
+   $('.i-checks').iCheck({
+    checkboxClass: 'icheckbox_square-green',
+    radioClass: 'iradio_square-green',
+});
+
+
+   $("input[type=checkbox]").change(function(event) {
+      if ($(this).is(":checked")) {
+       $(this).parent("label").css("color", "orangered");
+   }else{
+       $(this).parent("label").css("color", "#888");
+   }
+});
+
+   $("input[type=radio]").change(function(event) {
+      name = $(this).attr("name")
+      $("input[name="+name+"]").parent("label").css("color", "#888");
+      $(this).parent("label").css("color", "orangered");
+  });
 
 	//
 	$('body').on("click", "button.btn_image", function(event) {
@@ -56,16 +70,6 @@ $(function(){
         $(window).on('beforeprint', beforePrint);
         $(window).on('afterprint', afterPrint);
     }
-
-    function beforePrint() {
-        $("i#print").click()
-    }
-
-    function afterPrint() {
-        $("i#print").click()
-    }
-
-
 
     //mettre en session par ajax
     session = function(name, value){

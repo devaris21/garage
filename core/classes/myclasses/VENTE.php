@@ -10,33 +10,23 @@ class VENTE extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $reference;
-	public $typevente_id;
-	public $groupecommande_id  = null;
-	public $zonedevente_id;
-	public $boutique_id = BOUTIQUE::PRINCIPAL;
-	public $commercial_id      = COMMERCIAL::MAGASIN;
 	public $etat_id            = ETAT::ENCOURS;
-	public $employe_id         = null;
 	public $reglementclient_id = null;
-	
+	public $client;
+	public $contact;
+	public $comment;
 	public $montant            = 0;
 	public $rendu              = 0;
 	public $recu               = 0;
-	public $comment;
+	public $employe_id;
 
 	
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = ZONEDEVENTE::findBy(["id ="=>$this->zonedevente_id]);
-		if (count($datas) == 1) {
-			$this->employe_id = getSession("employe_connecte_id");
-			$this->reference = "BVE/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
-			$data = $this->save();
-		}else{
-			$data->status = false;
-			$data->message = "Une erreur s'est produite lors de l'enregistrement de la vente!";
-		}
+		$this->employe_id = getSession("employe_connecte_id");
+		$this->reference = "BVE/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
+		$data = $this->save();
 		return $data;
 	}
 
@@ -212,43 +202,43 @@ class VENTE extends TABLE
 		$requette = "SELECT SUM(montant) as montant  FROM operation, categorieoperation WHERE operation.categorieoperation_id = categorieoperation.id AND categorieoperation.typeoperationcaisse_id = ? AND operation.valide = 1 AND DATE(operation.created) >= ? AND DATE(operation.created) <= ?";
 		$item = OPERATION::execute($requette, [TYPEOPERATIONCAISSE::ENTREE, $date1, $date2]);
 		if (count($item) < 1) {$item = [new OPERATION()]; }
-		return $item[0]->montant;
-	}
+return $item[0]->montant;
+}
 
 
 
-	public static function stats(string $date1 = "2020-04-01", string $date2, int $boutique_id){
-		$tableaux = [];
-		$nb = ceil(dateDiffe($date1, $date2) / 12);
-		$index = $date1;
-		while ( $index <= $date2 ) {
-			$debut = $index;
-			$fin = dateAjoute1($index, ceil($nb/2));
+public static function stats(string $date1 = "2020-04-01", string $date2, int $boutique_id){
+	$tableaux = [];
+	$nb = ceil(dateDiffe($date1, $date2) / 12);
+	$index = $date1;
+	while ( $index <= $date2 ) {
+		$debut = $index;
+		$fin = dateAjoute1($index, ceil($nb/2));
 
-			$data = new \stdclass;
-			$data->year = date("Y", strtotime($index));
-			$data->month = date("m", strtotime($index));
-			$data->day = date("d", strtotime($index));
-			$data->nb = $nb;
+		$data = new \stdclass;
+		$data->year = date("Y", strtotime($index));
+		$data->month = date("m", strtotime($index));
+		$data->day = date("d", strtotime($index));
+		$data->nb = $nb;
 			////////////
 
-			$data->direct = comptage(VENTE::direct($debut, $fin, $boutique_id), "vendu", "somme");
-			$data->prospection = comptage(VENTE::prospection($debut, $fin, $boutique_id), "vendu", "somme");
-			$data->marge = 0 ;
+		$data->direct = comptage(VENTE::direct($debut, $fin, $boutique_id), "vendu", "somme");
+		$data->prospection = comptage(VENTE::prospection($debut, $fin, $boutique_id), "vendu", "somme");
+		$data->marge = 0 ;
 
-			$tableaux[] = $data;
+		$tableaux[] = $data;
 			///////////////////////
-			
-			$index = $fin;
-		}
-		return $tableaux;
+		
+		$index = $fin;
 	}
+	return $tableaux;
+}
 
 
 
-	public function sentenseCreate(){}
-	public function sentenseUpdate(){}
-	public function sentenseDelete(){}
+public function sentenseCreate(){}
+public function sentenseUpdate(){}
+public function sentenseDelete(){}
 
 
 }

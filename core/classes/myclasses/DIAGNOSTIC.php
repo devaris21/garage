@@ -5,7 +5,7 @@ use Native\RESPONSE;
 /**
  * 
  */
-class TICKETREPARATION extends TABLE
+class DIAGNOSTIC extends TABLE
 {
 	
 	
@@ -13,44 +13,21 @@ class TICKETREPARATION extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $reference;
-	public $client;
-	public $contact;
-	public $email;
+	public $montant;
+	public $datefin;
+	public $heure;
 
-	public $typevehicule_id;
-	public $immatrculation;
-	public $modele;
-	public $marque_id;
-	public $couleur;
-
-	public $panne;
-	public $etat_id = ETAT::ENCOURS;
+	public $ticketreparation_id;
 	public $employe_id;
 
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = TYPEVEHICULE::findBy(["id ="=>$this->typevehicule_id]);
+		$datas = TICKETREPARATION::findBy(["id ="=>$this->ticketreparation_id]);
 		if (count($datas) == 1) {
-			$datas = MARQUE::findBy(["id ="=>$this->marque_id]);
-			if (count($datas) == 1) {
-				if ($this->client != "") {
-					if ($this->immatrculation != "") {
-						$this->reference = "TKREP/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
-						$this->employe_id = getSession("employe_connecte_id");
-						$data = $this->save();
-					}else{
-						$data->status = false;
-						$data->message = "Veuillez renseigner l'immatrculation du véhicule!";
-					}
-				}else{
-					$data->status = false;
-					$data->message = "Veuillez renseigner le nom complet du client !";
-				}			
-			}else{
-				$data->status = false;
-				$data->message = "Une erreur s'est produite lors du prix !";
-			}				
+			$this->reference = "DIAGN/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
+			$this->employe_id = getSession("employe_connecte_id");
+			$data = $this->save();
 		}else{
 			$data->status = false;
 			$data->message = "Une erreur s'est produite lors du prix !";

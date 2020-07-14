@@ -16,7 +16,7 @@
 
           <div class="wrapper wrapper-content">
             <div class="border-bottom white-bg">
-             <div class="row  dashboard-header">
+               <div class="row  dashboard-header">
                 <div class="col-md-3">
                     <h2>Welcome Amelia</h2>
                     <small>You have 42 messages and 6 notifications.</small>
@@ -34,16 +34,16 @@
                             <span class="label label-info">2</span> Sign a contract
                         </li>
                         <li class="list-group-item">
-                            <span class="float-right">
-                                08:22 pm
-                            </span>
-                            <span class="label label-primary">3</span> Open new shop
+                            <a href="">
+                                Location en cours
+                                <span class="float-right">2</span>
+                            </a>
                         </li>
                         <li class="list-group-item">
-                            <span class="float-right">
-                                11:06 pm
-                            </span>
-                            <span class="label label-default">4</span> Call back to Sylvia
+                            <a href="">
+                                Expertise en cours
+                                <span class="float-right">2</span>
+                            </a>
                         </li>
                         <li class="list-group-item">
                             <span class="float-right">
@@ -104,8 +104,9 @@
             <hr>
 
             <div class="text-center">
-                <div class="row">
+                <div class="row" style="font-size: 11px">
                     <div class="col-sm"><button data-toggle="modal" data-target="#modal-newreparation" class="btn btn-success dim"><i class="fa fa-wrench"></i> Réparation / Entretien</button></div>
+                    <div class="col-sm"><button data-toggle="modal" data-target="#modal-newreparation" class="btn btn-info dim"><i class="fa fa-wrench"></i> Rémorque / Fourrière </button></div>
                     <div class="col-sm"><button data-toggle="modal" data-target="#modal-newvente" class="btn btn-primary dim"><i class="fa fa-cubes"></i> Vente de pièces</button></div>
                     <div class="col-sm"><button data-toggle="modal" data-target="#modal-newlocation" class="btn btn-danger dim"><i class="fa fa-cab"></i> Location de véhicule</button></div>
                     <div class="col-sm"><button data-toggle="modal" data-target="#modal-newdevis" class="btn btn-warning dim"><i class="fa fa-file-text-o"></i> Devis / proforma</button></div>
@@ -117,50 +118,22 @@
         <h3 class="text-uppercase ">En cours de dianostic</h3>
         <div class="row">
 
-            <div class="col-lg-3">
-                <div class="contact-box p-2">
-                    <a class="row" href="profile.html">
-                        <div class="col-8">
-                            <h3><strong>Sandra Smith</strong></h3>
+            <?php foreach ($tickets as $key => $ticket) {
+                $ticket->actualise(); ?>
+                <div class="col-lg-3">
+                    <div class="contact-box p-2">
+                        <a href="<?= $this->url("gestion", "garage", "diagnostic", $ticket->id)  ?>">
+                            <h3><strong><?= $ticket->reference ?></strong> <i class="fa fa-close text-danger cursor float-right"></i></h3>
                             <address>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107<br>
-                                <abbr title="Phone">P:</abbr> (123) 456-7890
+                                <?= $ticket->immatriculation ?><br>
+                                <?= $ticket->marque->name() ?> <?= $ticket->modele ?><br>
+                                <abbr title="Phone">Client:</abbr> <?= $ticket->client ?>
                             </address>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            <?php } ?>
 
-            <div class="col-lg-3">
-                <div class="contact-box p-2">
-                    <a class="row" href="profile.html">
-                        <div class="col-8">
-                            <h3><strong>Sandra Smith</strong></h3>
-                            <address>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107<br>
-                                <abbr title="Phone">P:</abbr> (123) 456-7890
-                            </address>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-                <div class="contact-box p-2">
-                    <a class="row" href="profile.html">
-                        <div class="col-8">
-                            <h3><strong>Sandra Smith</strong></h3>
-                            <address>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107<br>
-                                <abbr title="Phone">P:</abbr> (123) 456-7890
-                            </address>
-                        </div>
-                    </a>
-                </div>
-            </div>
         </div>
 
 

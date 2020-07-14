@@ -33,6 +33,9 @@
 
     <!-- Data picker -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/datapicker/bootstrap-datepicker.js") ?>"></script>
+        <!-- Tags Input -->
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js") ?>"></script>
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/clockpicker/clockpicker.js") ?>"></script>
 
     <!-- mansory -->
     <script src="<?= $this->rootPath("composants/dist/js/plugins/masonary/masonry.pkgd.min.js") ?>"></script>

@@ -15,19 +15,19 @@
                             <div class="">
                                 <label>Nom & prénoms <span1>*</span1></label>
                                 <div class="form-group">
-                                    <input type="text" number class="form-control" name="montant" required>
+                                    <input type="text" number class="form-control" name="client" required>
                                 </div>
                             </div>
                             <div class="">
                                 <label>Contact / téléphone</label>
                                 <div class="form-group">
-                                    <input type="text" number class="form-control" name="montant">
+                                    <input type="text" number class="form-control" name="contact">
                                 </div>
                             </div>
                             <div class="">
                                 <label>Email</label>
                                 <div class="form-group">
-                                    <input type="text" number class="form-control" name="montant">
+                                    <input type="email" number class="form-control" name="email">
                                 </div>
                             </div> <hr>
 
@@ -59,7 +59,7 @@
                                 <div class="col-sm-6">
                                     <label>Modele du véhicule <span style="color: red">*</span> </label>                                
                                     <div class="form-group">
-                                        <input type="text" number class="form-control" name="montant" required>
+                                        <input type="text" number class="form-control" name="modele" required>
                                     </div>
                                 </div>
                             </div><br> 
@@ -67,7 +67,7 @@
                                 <div class="col-sm-7">
                                     <label>Immatriculation du véhicule <span1>*</span1></label>
                                     <div class="form-group">
-                                        <input type="text" number class="form-control" uppercase name="Immatriculation" required>
+                                        <input type="text" number class="form-control" uppercase name="immatriculation" required>
                                     </div>
                                 </div> <br>
                                 <div class="col-sm-5">

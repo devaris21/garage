@@ -11,17 +11,13 @@ class VEHICULE extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $typevehicule_id;
-	public $groupevehicule_id;
-	public $prestataire_id = 1;
 	public $immatriculation;
 	public $chasis;
-	public $image = "default.jpg";
 	public $nb_place;
 	public $nb_porte;
 	public $marque_id;
 	public $price = 0;
 	public $comment;
-	public $date_acquisition;
 	public $modele;
 	public $energie_id;
 	public $typetransmission_id;
@@ -29,11 +25,8 @@ class VEHICULE extends TABLE
 	public $kilometrage;
 	public $date_mise_circulation;
 	public $date_sortie;
-	public $date_visitetechnique;
-	public $date_vidange;
-	public $date_assurance;
-	public $etatvehicule_id = 0;
-	public $location = 0;
+	public $etatvehicule_id = ETATVEHICULE::RAS;
+	public $image = "default.jpg";
 
 
 	public function enregistre(){
@@ -44,15 +37,9 @@ class VEHICULE extends TABLE
 		if ($this->immatriculation != "" && $this->modele != "") {
 			$datas = TYPEVEHICULE::findBy(["id ="=>$this->typevehicule_id]);
 			if (count($datas) == 1) {
-				$datas = PRESTATAIRE::findBy(["id ="=>$this->prestataire_id]);
-				if (count($datas) == 1) {
-					$data = $this->save();
-					if ($data->status) {
-						$this->uploading($this->files);
-					}
-				}else{
-					$data->status = false;
-					$data->message = "Une erreur s'est produite lors de l'ajout du véhicule !";
+				$data = $this->save();
+				if ($data->status) {
+					$this->uploading($this->files);
 				}
 			}else{
 				$data->status = false;

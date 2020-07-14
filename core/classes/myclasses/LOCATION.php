@@ -10,27 +10,38 @@ class LOCATION extends TABLE
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $ticket;
+	public $reference;
 	public $typelocation_id;
-	public $prestataire_id = null;
+	public $vehicule_id;
 	public $started;
 	public $finished;
 	public $comment;
-	public $date_fin;
+	public $dateretour;
+
+	public $client;
+	public $contact;
+	public $carte_id;
+	public $numcarte;
 	public $etat_id = ETAT::ENCOURS;
 
-	public $vehicules;
+	public $reparation_id;
 
 
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		if ($this->finished >= $this->started && $this->started >= date("Y-m-d")) {
-			$this->ticket = strtoupper(substr(uniqid(), 5, 6));
-			$data = $this->save();
+		$datas = VEHICULE::findBy(["id ="=>$this->vehicule_id]);
+		if (count($datas) == 1) {
+			if ($this->finished >= $this->started && $this->started >= date("Y-m-d")) {
+				$this->reference = "LOC/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
+				$data = $this->save();
+			}else{
+				$data->status = false;
+				$data->message = "Les dates pour la location ne sont pas correctes  * !";
+			}
 		}else{
 			$data->status = false;
-			$data->message = "Les dates pour la location ne sont pas correctes  * !";
+			$data->message = "Veuillez renseigner tous les champs !";
 		}
 		return $data;
 	}

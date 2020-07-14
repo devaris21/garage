@@ -33,6 +33,9 @@
     <link href="<?= $this->rootPath("composants/dist/css/plugins/ionRangeSlider/ion.rangeSlider.css") ?>" rel="stylesheet">
     <link href="<?= $this->rootPath("composants/dist/css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css") ?>" rel="stylesheet">
     <link href="<?= $this->rootPath("composants/dist/css/plugins/datapicker/datepicker3.css") ?>" rel="stylesheet">
+    <link href="<?= $this->rootPath("composants/dist/css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css") ?>" rel="stylesheet">
+    <link href="<?= $this->rootPath("composants/dist/css/plugins/clockpicker/clockpicker.css") ?>" rel="stylesheet">
+
 
     <!-- FooTable -->
     <link href="<?= $this->rootPath("composants/dist/css/plugins/footable/footable.core.css") ?>" rel="stylesheet">

@@ -5,28 +5,24 @@ use Native\EMAIL;
 /**
  * 
  */
-class LIGNEDEVENTE extends TABLE
+class LIGNEOPTIONENTRETIEN extends TABLE
 {
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $vente_id;
-	public $produit_id;
-	public $quantite;
+	public $diagnostic_id;
+	public $optionentretien_id;
+	public $checked = TABLE::NON;
+
 
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = VENTE::findBy(["id ="=>$this->vente_id]);
+		$datas = DIAGNOSTIC::findBy(["id ="=>$this->diagnostic_id]);
 		if (count($datas) == 1) {
-			$datas = PRODUIT::findBy(["id ="=>$this->produit_id]);
+			$datas = OPTIONENTRETIEN::findBy(["id ="=>$this->optionentretien_id]);
 			if (count($datas) == 1) {
-				if ($this->quantite > 0) {
-					$data = $this->save();
-				}else{
-					$data->status = false;
-					$data->message = "La quantité n'est pas correcte !";
-				}
+				$data = $this->save();
 			}else{
 				$data->status = false;
 				$data->message = "Une erreur s'est produite lors de l'ajout du produit !";
@@ -42,14 +38,16 @@ class LIGNEDEVENTE extends TABLE
 
 
 	public function sentenseCreate(){
-
+		
 	}
 
 
-	public function sentenseUpdate(){}
+	public function sentenseUpdate(){
+	}
 
 
-	public function sentenseDelete(){}
+	public function sentenseDelete(){
+	}
 
 }
 

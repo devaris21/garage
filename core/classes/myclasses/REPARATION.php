@@ -5,7 +5,7 @@ use Native\RESPONSE;
 /**
  * 
  */
-class DIAGNOSTIC extends TABLE
+class REPARATION extends TABLE
 {
 	
 	
@@ -13,20 +13,34 @@ class DIAGNOSTIC extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $reference;
-	public $montant;
-	public $datefinreparation;
+	public $diagnostic_id;
+	public $started;
+	public $finished;
+	public $garantie;
+	public $etat_id = ETAT::ENCOURS;
+	public $abouti = TABLE::NON;
+	public $motif;
 
-	public $ticketreparation_id;
 	public $employe_id;
 
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = TICKETREPARATION::findBy(["id ="=>$this->ticketreparation_id]);
+		$datas = DIAGNOSTIC::findBy(["id ="=>$this->diagnostic_id]);
 		if (count($datas) == 1) {
-			$this->reference = "DIAGN/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
-			$this->employe_id = getSession("employe_connecte_id");
-			$data = $this->save();
+			if (($this->started >= dateAjoute()) && ($this->started >= $this->finished)) {
+				if (($this->garantie >= dateAjoute())) {
+					$this->reference = "REPART/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
+					$this->employe_id = getSession("employe_connecte_id");
+					$data = $this->save();
+				}else{
+					$data->status = false;
+					$data->message = "Veuillez revoir la date de garantie de la reparation !";
+				}
+			}else{
+				$data->status = false;
+				$data->message = "Veuillez revoir les dates de debut et de fin de la reparation !";
+			}
 		}else{
 			$data->status = false;
 			$data->message = "Une erreur s'est produite lors du prix !";
