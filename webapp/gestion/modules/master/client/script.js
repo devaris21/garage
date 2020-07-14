@@ -142,7 +142,7 @@ $(function(){
 			}			
 		});
 		formdata.append('prixdeventes', tableau);
-		formdata.append('typebareme_id', $("select[name=typebareme_id]").val());
+		formdata.append('typebareme_id', $("[name=typebareme_id]").val());
 		formdata.append('recu', $("input[name=recu]").val());
 
 		formdata.append('action', "calcul");

@@ -12,13 +12,25 @@ class MARQUE extends TABLE
 	public $name;
 
 	public function enregistre(){
-		return $this->save();
+		$data = new RESPONSE;
+		if ($this->name != "") {
+			$data = $this->save();
+		}else{
+			$data->status = false;
+			$data->message = "Veuillez renseigner le nom de la marque !";
+		}
+		return $data;
 	}
 
 
-	public function sentenseCreate(){}
-	public function sentenseUpdate(){}
-	public function sentenseDelete(){}
-
+		public function sentenseCreate(){
+			return $this->sentense = "Ajout d'une nouvelle marque: $this->name dans les paramétrages";
+	}
+	public function sentenseUpdate(){
+			return $this->sentense = "Modification des informations de la marque $this->id : $this->name ";
+	}
+	public function sentenseDelete(){
+			return $this->sentense = "Suppression definitive de la marque $this->id : $this->name";
+	}
 }
 ?>

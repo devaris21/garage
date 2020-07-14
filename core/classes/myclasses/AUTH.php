@@ -6,19 +6,15 @@ use Native\SHAMMAN;
 /**
  * 
  */
-abstract class AUTH extends TABLE
+abstract class AUTH extends PERSONNE
 {
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $nationalite;
-	public $adresse;
-	public $date_naissance;
-	public $lieu_naissance;
-	public $contact;
-	public $contact2;
-	public $ville;
-
+	public $started;
+	public $isAllowed = TABLE::OUI;
+	public $isNew = TABLE::OUI;
+	public $isAdmin = TABLE::NON;
 	public $login;
 	public $password;
 

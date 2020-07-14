@@ -14,13 +14,8 @@ class EMPLOYE extends AUTH
 	public static $namespace = __NAMESPACE__;
 
 	public $name;
-	public $is_allowed = 1;
-	public $started;
 	public $email;
-	public $is_new = 1;
-	public $isAdmin = TABLE::NON;
 	public $image = "default.png";
-	public $is_connecte = false;
 
 	public $pass = false;
 	
