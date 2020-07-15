@@ -10,6 +10,7 @@ class TARIF extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $agence_id;
+	public $modereservation_id;
 	public $typevehicule_id;
 	public $started;
 	public $finished;

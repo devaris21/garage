@@ -34,9 +34,13 @@
             // $datas1__ = array_merge(Home\PANNE::encours(), Home\DEMANDEENTRETIEN::encours(), Home\ENTRETIENVEHICULE::encours(), Home\ENTRETIENMACHINE::encours());
 
             ?>
+
             <ul class="nav metismenu" id="side-menu">
                 <li class="" id="dashboard">
                     <a href="<?= $this->url($this->section, "master", "dashboard") ?>"><i class="fa fa-tachometer"></i> <span class="nav-label">Tableau de bord</span></a>
+                </li>
+                <li class="" id="rechercher">
+                    <a href="<?= $this->url($this->section, "master", "rechercher") ?>"><i class="fa fa-search"></i> <span class="nav-label">Liste des clients</span></a>
                 </li>
                 <li class="" id="rechercher">
                     <a href="<?= $this->url($this->section, "master", "rechercher") ?>"><i class="fa fa-search"></i> <span class="nav-label">Rechercher</span></a>
@@ -45,28 +49,27 @@
 
 
                 <li class="" id="entretiens">
-                    <a href="<?= $this->url($this->section, "master", "entretiens") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Entretiens / Reparation</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                    <a href="<?= $this->url($this->section, "master", "entretiens") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Parc auto</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                </li>
+                <li class="" id="entretiens">
+                    <a href="<?= $this->url($this->section, "master", "entretiens") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Reservations</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="expertise">
-                    <a href="<?= $this->url($this->section, "master", "expertise") ?>"><i class="fa fa-home"></i> <span class="nav-label">Expertise</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                    <a href="<?= $this->url($this->section, "master", "expertise") ?>"><i class="fa fa-home"></i> <span class="nav-label">Locations en cours</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
-
+                <li class="" id="expertise">
+                    <a href="<?= $this->url($this->section, "master", "expertise") ?>"><i class="fa fa-home"></i> <span class="nav-label">Planning </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                </li>
 
                 <li><hr class="mp3" style="background-color: transparent; "></li>
                 <li class="" id="ventepieces">
-                    <a href="<?= $this->url($this->section, "master", "ventepieces") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Vente de pièces</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                    <a href="<?= $this->url($this->section, "master", "ventepieces") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Rapport du jour</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="entrepot">
-                    <a href="<?= $this->url($this->section, "master", "entrepot") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Magasin de pièces</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                    <a href="<?= $this->url($this->section, "master", "entrepot") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Inspections </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
-
-
-                <li><hr class="mp3" style="background-color: transparent; "></li>
-                <li class="" id="parcauto">
-                    <a href="<?= $this->url($this->section, "master", "parcauto") ?>"><i class="fa fa-truck"></i> <span class="nav-label">Parc auto</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= count([]) ?></span> <?php } ?></a>
-                </li>
-                <li class="" id="locations">
-                    <a href="<?= $this->url($this->section, "master", "locations") ?>"><i class="fa fa-truck"></i> <span class="nav-label">Location de véhicules</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= count([]) ?></span> <?php } ?></a>
+                <li class="" id="entrepot">
+                    <a href="<?= $this->url($this->section, "master", "entrepot") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Maintenance </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
 
 
@@ -92,6 +95,6 @@
 
 <style type="text/css">
     li.dropdown-divider{
-     !important;
- }
+       !important;
+   }
 </style>

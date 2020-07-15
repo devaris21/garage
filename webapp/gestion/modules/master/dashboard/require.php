@@ -3,7 +3,5 @@ namespace Home;
 unset_session("produits");
 unset_session("commande-encours");
 
-$tickets = TICKETREPARATION::encours();
-
 
 ?>

@@ -33,7 +33,7 @@ if ($action == "newUser") {
 		if ($element->setLogin($login)) {
 			if ($pass != "" && $pass == $pass0) {
 				$element->password = hasher($pass);
-				$element->is_new = 0;
+				$element->isNew = 0;
 				$element->historique("Prémière connexion, nouvelle configuration des paramètres de connexion !");
 				$data = $element->save();
 				if ($data->status) {

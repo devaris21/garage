@@ -1,8 +1,17 @@
 <?php 
 namespace Home;
 
-//n'oublie pas de configurer la date par defaut PARAMS
-//n'oublie pas d'importer la base de données des marques de vehicules
+
+$item = new AGENCE();
+$item->name = "Agence principal";
+$item->setProtected(1);
+$item->save();
+
+$item = new GARAGE();
+$item->name = "Garage principal";
+$item->setProtected(1);
+$item->save();
+
 
 $datas = ["Au magasin", "Dans tout Bassam"];
 foreach ($datas as $key => $value) {
@@ -12,35 +21,8 @@ foreach ($datas as $key => $value) {
 	$item->save();
 }
 
-$item = new BOUTIQUE();
-$item->name = "Boutique principal";
-$item->setProtected(1);
-$item->save();
 
-$item = new ENTREPOT();
-$item->name = "Entrepôt principal";
-$item->setProtected(1);
-$item->save();
-
-
-$datas = ["Directe", "Par Prospection/livraison"];
-foreach ($datas as $key => $value) {
-	$item = new TYPEVENTE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
-
-
-$datas = ["Prospection par commercial", "livraison de commande"];
-foreach ($datas as $key => $value) {
-	$item = new TYPEPROSPECTION();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
-
-$datas = ["Voiture", "Camion benne", "Tricycle", "Moto"];
+$datas = ["Voiture", "Camion", "Tricycle", "Moto", "Camping-car"];
 foreach ($datas as $key => $value) {
 	$item = new TYPEVEHICULE();
 	$item->name = $value;
@@ -49,9 +31,27 @@ foreach ($datas as $key => $value) {
 }
 
 
-$datas = ["Entrée de caisse", "Sortie de caisse"];
+$datas = ["Tourisme", "Utilitaire", "Prestige", "Camping-car"];
 foreach ($datas as $key => $value) {
-	$item = new TYPEOPERATIONCAISSE();
+	$item = new FONCTIONVEHICULE();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
+
+
+$datas = ["Manuelle", "Automatique"];
+foreach ($datas as $key => $value) {
+	$item = new TRANSMISSION();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
+
+
+$datas = ["Tourisme", "Utilitaire", "Prestige", "Camping-car"];
+foreach ($datas as $key => $value) {
+	$item = new ENERGIE();
 	$item->name = $value;
 	$item->setProtected(1);
 	$item->save();
@@ -59,140 +59,25 @@ foreach ($datas as $key => $value) {
 
 
 
-
-$item = new TYPEBIEN();
-$item->name = "Magasin / Entrepot / Usine";
-$item->min = 15;
-$item->max = 50;
-$item->setProtected(1);
-$item->save();
-
-
-$item = new TYPEBIEN();
-$item->name = "Meubles / Mobiliers";
-$item->min = 5;
-$item->max = 10;
-$item->setProtected(1);
-$item->save();
-
-
-$item = new TYPEBIEN();
-$item->name = "Véhicules";
-$item->min = 3;
-$item->max = 5;
-$item->setProtected(1);
-$item->save();
-
-
-$item = new TYPEBIEN();
-$item->name = "Materiels industriels / Outillages";
-$item->min = 5;
-$item->max = 10;
-$item->setProtected(1);
-$item->save();
-
-
-$item = new TYPEBIEN();
-$item->name = "Materiels informatiques";
-$item->min = 2;
-$item->max = 5;
-$item->setProtected(1);
-$item->save();
-
-
-$item = new TYPEBIEN();
-$item->name = "Brevets";
-$item->min = 3;
-$item->max = 5;
-$item->setProtected(1);
-$item->save();
-
-
-$item = new TYPEBIEN();
-$item->name ="Logiciels / Sites internet";
-$item->min = 2;
-$item->max = 3;
-$item->setProtected(1);
-$item->save();
-
-
-
-$datas = ["Immobilisation corporelle", "Immobilisation incorporelle", "Immobilisation financière"];
+$datas = ["Lecteur CD", "Lecteur Cassette", "Radio"];
 foreach ($datas as $key => $value) {
-	$item = new TYPEIMMOBILISATION();
+	$item = new ACCESSOIRE();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
+
+$datas = ["Option GPS", "Siège Bébé", "Siège Enfant", "Rehaussement Enfant", "Equipement neige", "chaines", "Portes Skis"];
+foreach ($datas as $key => $value) {
+	$item = new EQUIPEMENT();
 	$item->name = $value;
 	$item->setProtected(1);
 	$item->save();
 }
 
 
-$datas = ["Dépôt", "Retrait"];
-foreach ($datas as $key => $value) {
-	$item = new TYPEMOUVEMENT();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
 
-
-$datas = ["Caisse courante"];
-foreach ($datas as $key => $value) {
-	$item = new COMPTEBANQUE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
-
-$datas = ["Amortissement linéaire", "Amortissement dégressif"];
-foreach ($datas as $key => $value) {
-	$item = new TYPEAMORTISSEMENT();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
-
-
-$datas = ["Accrochage", "Crevaison", "Autre"];
-foreach ($datas as $key => $value) {
-	$item = new TYPEENTRETIENVEHICULE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
-
-$datas = ["Camion de livraison", "Véhicule de mission"];
-foreach ($datas as $key => $value) {
-	$item = new GROUPEVEHICULE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
-
-
-$item = new VEHICULE();
-$item->immatriculation = "...";
-$item->modele = "PAR NOS COMMERCIAUX";
-$item->marque_id = 0;
-$item->typevehicule_id = 1;
-$item->groupevehicule_id = 1;
-$item->prestataire_id = 1;
-$item->visibility = 0;
-$item->setProtected(1);
-$item->save();
-
-$item = new VEHICULE();
-$item->immatriculation = "...";
-$item->modele = "LE VEHICULE DU CLIENT";
-$item->marque_id = 0;
-$item->typevehicule_id = 1;
-$item->groupevehicule_id = 1;
-$item->prestataire_id = 1;
-$item->visibility = 0;
-$item->setProtected(1);
-$item->save();
-
-
-$datas = ["Entreprise", "Particulier"];
+$datas = ["Particulier", "Entreprise", "Partenaire"];
 foreach ($datas as $key => $value) {
 	$item = new TYPECLIENT();
 	$item->name = $value;
@@ -200,21 +85,57 @@ foreach ($datas as $key => $value) {
 	$item->save();
 }
 
-$item = new SEXE();
-$item->name = "Homme";
-$item->abreviation = "H";
-$item->setProtected(1);
-$item->save();
-
-$item = new SEXE();
-$item->name = "Femme";
-$item->abreviation = "F";
-$item->setProtected(1);
-$item->save();
+$datas = ["Azur", "Affaire", "Senior", "Prestige"];
+foreach ($datas as $key => $value) {
+	$item = new TYPEABONNEMENT();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
 
 
+$datas = ["Directeur commercial", "Responsable Agence", "Agent commercial", "Responsable parc auto"];
+foreach ($datas as $key => $value) {
+	$item = new FONCTION();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
 
-$datas = ["master", "production", "ventes", "approvisionnement", "caisse", "parametres", "paye des manoeuvre", "modifier-supprimer", "archives"];
+
+
+
+$datas = ["Sous garantie constructeur", "Hors garantie constructeur"];
+foreach ($datas as $key => $value) {
+	$item = new CADREMAINTENANCE();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
+
+
+$datas = ["Maintenance préventive", "Maintenance corrective", "Maintenance légale"];
+foreach ($datas as $key => $value) {
+	$item = new TYPEMAINTENANCE();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
+
+
+$datas = ["Carrosserie", "Chassis", "Moteur", "Train avant", "Train arrière", "Boite à vitesse", "Accessoire moteur", "Tableau de Bord", "Accessoire interne", "Habitacle", "Mise à niveau fluide", "Vidange", "Tollerie", "Pienture", "Electricité"];
+foreach ($datas as $key => $value) {
+	$item = new OPTIONREPARATION();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
+
+
+
+
+
+$datas = ["Master", "Administrateur"];
 foreach ($datas as $key => $value) {
 	$item = new ROLE();
 	$item->name = $value;
@@ -240,45 +161,6 @@ $item->tentative = 0;
 $item->expired = dateAjoute(7);
 $item->setProtected(1);
 $item->enregistre();
-
-
-$item = new PRESTATAIRE();
-$item->name = "Devaris PRESTATAIRE";
-$item->email = "info@devaris21.com";
-$item->login = "...";
-$item->password = "...";
-$item->adresse = "...";
-$item->contact = "...";
-$item->setProtected(1);
-$item->save();
-
-$item = new FOURNISSEUR();
-$item->name = "Devaris FOURNISSEUR";
-$item->email = "info@devaris21.com";
-$item->adresse = "...";
-$item->contact = "...";
-$item->fax = "...";
-$item->visibility = 0;
-$item->setProtected(1);
-$item->save();
-
-
-$item = new CLIENT();
-$item->name = "Monsieur Tout le Monde";
-$item->adresse = "...";
-$item->contact = "...";
-$item->visibility = 0;
-$item->setProtected(1);
-$item->save();
-
-
-$item = new COMMERCIAL();
-$item->name = "La boutique";
-$item->adresse = "Magazin à bassam";
-$item->contact = "...";
-$item->visibility = 0;
-$item->setProtected(1);
-$item->save();
 
 
 
@@ -345,86 +227,66 @@ $item->save();
 
 
 
-$item = new DISPONIBILITE();
-$item->name = "Indisponible";
-$item->class = "danger";
-$item->setProtected(1);
-$item->save();
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
+// $item->name = "Réglement de commande";
+// $item->setProtected(1);
+// $item->save();
 
-$item = new DISPONIBILITE();
-$item->name = "Libre";
-$item->class = "warning";
-$item->setProtected(1);
-$item->save();
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
+// $item->name = "Remboursement par le fournisseur";
+// $item->setProtected(1);
+// $item->save();
 
-$item = new DISPONIBILITE();
-$item->name = "En mission";
-$item->class = "info";
-$item->setProtected(1);
-$item->save();
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
+// $item->name = "Location d'engins pour livraison";
+// $item->setProtected(1);
+// $item->save();
 
-
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
-$item->name = "Réglement de commande";
-$item->setProtected(1);
-$item->save();
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
-$item->name = "Remboursement par le fournisseur";
-$item->setProtected(1);
-$item->save();
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
-$item->name = "Location d'engins pour livraison";
-$item->setProtected(1);
-$item->save();
-
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
-$item->name = "Autre entrée en caisse";
-$item->setProtected(1);
-$item->save();
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
+// $item->name = "Autre entrée en caisse";
+// $item->setProtected(1);
+// $item->save();
 
 
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Réglement de facture d'approvisionnemnt";
-$item->setProtected(1);
-$item->save();
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Réglement de facture d'approvisionnemnt";
+// $item->setProtected(1);
+// $item->save();
 
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Payement de salaire du personnel";
-$item->setProtected(1);
-$item->save();
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Payement de salaire du personnel";
+// $item->setProtected(1);
+// $item->save();
 
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Réglement de facture de reparation / d'entretien";
-$item->setProtected(1);
-$item->save();
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Réglement de facture de reparation / d'entretien";
+// $item->setProtected(1);
+// $item->save();
 
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Remboursement du client";
-$item->setProtected(1);
-$item->save();
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Remboursement du client";
+// $item->setProtected(1);
+// $item->save();
 
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Location de tricycle pour livraison";
-$item->setProtected(1);
-$item->save();
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Location de tricycle pour livraison";
+// $item->setProtected(1);
+// $item->save();
 
-$item = new CATEGORIEOPERATION();
-$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-$item->name = "Autre dépense";
-$item->setProtected(1);
-$item->save();
+// $item = new CATEGORIEOPERATION();
+// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+// $item->name = "Autre dépense";
+// $item->setProtected(1);
+// $item->save();
 
 
 
@@ -444,69 +306,6 @@ foreach (ROLE::getAll() as $key => $value) {
 	$tr->setProtected(1);
 	$tr->enregistre();
 }
-
-
-$datas = [200, 250, 300, 500, 1000, 1500, 2000];
-foreach ($datas as $key => $value) {
-	$item = new PRIX();
-	$item->price = $value;
-	$item->setProtected(1);
-	$item->enregistre();
-}
-
-
-// $item = new PRODUIT();
-// $item->files = [];
-// $item->stock = 100;
-// $item->name = "Jus de passion";
-// $item->description = "Hourdis";
-// $item->enregistre();
-
-// $item = new PRODUIT();
-// $item->files = [];
-// $item->stock = 100;
-// $item->name = "Jus d'orange";
-// $item->description = "AC 15";
-// $item->enregistre();
-
-// $item = new PRODUIT();
-// $item->files = [];
-// $item->stock = 100;
-// $item->name = "Jus de bissap";
-// $item->description = "AP 15";
-// $item->enregistre();
-
-// $item = new RESSOURCE();
-// $item->files = [];
-// $item->stock = 100;
-// $item->name = "EAU";
-// $item->class = "Sac";
-// $item->abbr = "Sacs";
-// $item->enregistre();
-
-// $item = new RESSOURCE();
-// $item->files = [];
-// $item->stock = 100;
-// $item->name = "Orange";
-// $item->class = "unités";
-// $item->abbr = "Chgs";
-// $item->enregistre();
-
-// $item = new RESSOURCE();
-// $item->files = [];
-// $item->stock = 100;
-// $item->name = "Sucre";
-// $item->class = "Tonne";
-// $item->abbr = "T";
-// $item->enregistre();
-
-// $item = new RESSOURCE();
-// $item->files = [];
-// $item->stock = 100;
-// $item->name = "Bidons";
-// $item->class = "Tonne";
-// $item->abbr = "T";
-// $item->enregistre();
 
 
 $datas = ["standart"];
@@ -531,10 +330,6 @@ foreach ($datas as $key => $value) {
 	$item->setProtected(1);
 	$item->save();
 
-	$item = new GROUPEMANOEUVRE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
 
 	$item = new TYPESUGGESTION();
 	$item->name = $value;

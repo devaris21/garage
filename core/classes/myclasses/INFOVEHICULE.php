@@ -11,8 +11,10 @@ class INFOVEHICULE extends TABLE
 
 	public $vehicule_id;
 	public $typevehicule_id;
+	public $fonctionvehicule_id;
 	public $marque_id;
 	public $modele;
+	public $couleur;
 	public $chasis;
 	public $transmission_id;
 	public $energie_id;

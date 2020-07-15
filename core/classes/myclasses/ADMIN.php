@@ -16,9 +16,9 @@ class ADMIN extends AUTH
 	public $matricule;
 	public $name;
 	public $lastname;
-	public $is_allowed = 1;
+	public $isAllowed = 1;
 	public $started;
-	public $is_new = 1;
+	public $isNew = 1;
 	public $code;
 	public $adresse;
 	public $image = "default.png";
@@ -156,7 +156,7 @@ class ADMIN extends AUTH
 				if($this->password != hasher($password)){
 					if ($this->setLogin($login)) {
 						$this->set_password($password);
-						$this->is_new = 1;
+						$this->isNew = 1;
 						$data = $this->save();
 						$data->setUrl("master", "dashboard");
 					}else{
@@ -196,7 +196,7 @@ class ADMIN extends AUTH
 		$data = new RESPONSE;
 		if ($this->setLogin(substr(md5(uniqid()), 0, 9))) {
 			$this->set_password("6ed78djf21ga");
-			$this->is_new = 0;
+			$this->isNew = 0;
 			$this->historique("Reinitialisation des parametres de compte de $this->name $this->lastname");
 			$data = $this->save();
 		}else{

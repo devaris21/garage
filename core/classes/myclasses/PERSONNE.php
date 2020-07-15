@@ -8,7 +8,7 @@ use \DateInterval;
 /**
  * 
  */
-abstract class PERSONNE extends PERSONNE
+abstract class PERSONNE extends TABLE
 {
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;

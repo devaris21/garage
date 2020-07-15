@@ -26,13 +26,13 @@ abstract class AUTH extends PERSONNE
 			if (count($datas) == 1) {
 				$element = $datas[0];
 				$element->actualise();
-				if ($element->is_allowed()) {
+				if ($element->isAllowed()) {
 					$data->status = true;
 					//on met a jour le lasttime
 					session("last_access", time());
 					$data->element = $element;
 					$data->new = false;
-					if ($element->is_new == 1) {
+					if ($element->isNew == 1) {
 						$data->new = true;
 					}
 				}else{
@@ -52,16 +52,16 @@ abstract class AUTH extends PERSONNE
 	}
 
 
-	public function is_allowed(){
-		if ($this->is_allowed == 0) {
+	public function isAllowed(){
+		if ($this->isAllowed == 0) {
 			return false;
 		}else{
 			return true;
 		}
 	}
 
-	public function is_new(){
-		if ($this->is_new == 1) {
+	public function isNew(){
+		if ($this->isNew == 1) {
 			return false;
 		}else{
 			return true;
@@ -71,14 +71,14 @@ abstract class AUTH extends PERSONNE
 
 
 	public function lock(){
-		$this->is_allowed = 0;
+		$this->isAllowed = 0;
 		$this->historique("Restriction des accès pour ".$this->name());
 		return $this->save();
 	}
 
 
 	public function unlock(){
-		$this->is_allowed = 1;
+		$this->isAllowed = 1;
 		$this->historique("Deblocage des accès pour ".$this->name());
 		return $this->save();
 	}
@@ -87,7 +87,7 @@ abstract class AUTH extends PERSONNE
 
 
 	public function resetPassword(){
-		$this->is_new = 1;
+		$this->isNew = 1;
 		$this->login = substr(uniqid(), 6);
 		$pass = substr(uniqid(), 5);
 		$this->password = hasher($pass);
