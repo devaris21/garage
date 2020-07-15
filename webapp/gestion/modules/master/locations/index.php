@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-8 text-right">
                                 <span>Locations ce mois </span>
-                                <h2 class="font-bold"><?= start0(count(Home\SINISTRE::encours()))  ?></h2>
+                                <h2 class="font-bold"><?= start0(count(Home\LOCATION::encours()))  ?></h2>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="col-8 text-right">
                                 <span> Prêts ce mois </span>
-                                <h2 class="font-bold"><?= start0(count(Home\SINISTRE::valideesCeMois()))  ?></h2>
+                                <h2 class="font-bold"><?= start0(count(Home\LOCATION::encours()))  ?></h2>
                             </div>
                         </div>
                     </div>
@@ -170,7 +170,7 @@
 
 <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
 
-<?php include($this->rootPath("composants/assets/modals/modal-location.php")); ?> 
+<?php //include($this->rootPath("composants/assets/modals/modal-location.php")); ?> 
 
 
 <div class="modal inmodal fade" id="modal-listevehicule">

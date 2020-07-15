@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 14 juil. 2020 à 17:01
+-- Généré le : mer. 15 juil. 2020 à 13:14
 -- Version du serveur :  5.7.24
 -- Version de PHP : 7.3.2
 
@@ -48,7 +48,6 @@ CREATE TABLE `abonnement` (
 CREATE TABLE `accessoire` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
-  `price` int(11) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',
@@ -150,6 +149,24 @@ CREATE TABLE `client` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `comptebanque`
+--
+
+CREATE TABLE `comptebanque` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8_bin NOT NULL,
+  `initial` int(11) NOT NULL DEFAULT '0',
+  `numero` varchar(50) COLLATE utf8_bin DEFAULT '0',
+  `etablissement` varchar(100) COLLATE utf8_bin DEFAULT '0',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `connexion`
 --
 
@@ -158,9 +175,6 @@ CREATE TABLE `connexion` (
   `date_connexion` datetime DEFAULT NULL,
   `date_deconnexion` timestamp NULL DEFAULT NULL,
   `employe_id` int(11) DEFAULT NULL,
-  `utilisateur_id` int(11) DEFAULT NULL,
-  `carplan_id` int(11) DEFAULT NULL,
-  `prestataire_id` int(11) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '1',
@@ -224,7 +238,7 @@ CREATE TABLE `energie` (
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',
   `valide` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -305,6 +319,36 @@ CREATE TABLE `etatvehicule` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `fonctionemploye`
+--
+
+CREATE TABLE `fonctionemploye` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `fonctionvehicule`
+--
+
+CREATE TABLE `fonctionvehicule` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `garage`
 --
 
@@ -348,6 +392,7 @@ CREATE TABLE `infovehicule` (
   `id` int(11) NOT NULL,
   `vehicule_id` int(11) NOT NULL,
   `typevehicule_id` int(11) NOT NULL,
+  `fonctionvehicule_id` int(11) NOT NULL,
   `marque_id` int(11) NOT NULL,
   `modele` varchar(200) NOT NULL,
   `chasis` text,
@@ -538,17 +583,73 @@ CREATE TABLE `modepayement` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `modereservation`
+--
+
+CREATE TABLE `modereservation` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8_bin NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `mycompte`
 --
 
 CREATE TABLE `mycompte` (
   `id` int(11) NOT NULL,
   `identifiant` varchar(9) NOT NULL,
-  `typecompte_id` int(11) NOT NULL,
   `expired` datetime NOT NULL,
   `protected` int(11) NOT NULL DEFAULT '1',
   `valide` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `optionreparation`
+--
+
+CREATE TABLE `optionreparation` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `price` int(11) NOT NULL DEFAULT '0',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `params`
+--
+
+CREATE TABLE `params` (
+  `id` int(11) NOT NULL,
+  `societe` varchar(50) COLLATE utf8_bin NOT NULL,
+  `email` varchar(200) COLLATE utf8_bin NOT NULL,
+  `contact` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `fax` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `devise` varchar(50) COLLATE utf8_bin NOT NULL,
+  `tva` int(11) NOT NULL,
+  `seuilCredit` int(11) NOT NULL,
+  `ruptureStock` int(11) NOT NULL,
+  `minImmobilisation` int(11) NOT NULL,
+  `adresse` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `postale` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `image` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `autoriserVersementAttente` varchar(11) COLLATE utf8_bin NOT NULL,
+  `bloquerOrfonds` varchar(11) COLLATE utf8_bin NOT NULL,
+  `protected` int(11) NOT NULL DEFAULT '1',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -572,6 +673,29 @@ CREATE TABLE `partenaire` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `reservation`
+--
+
+CREATE TABLE `reservation` (
+  `id` int(11) NOT NULL,
+  `agence_id` int(11) DEFAULT NULL,
+  `typevehicule_id` int(11) NOT NULL,
+  `modereservation_id` int(11) NOT NULL,
+  `started` date NOT NULL,
+  `finished` date NOT NULL,
+  `tarif_id` int(11) DEFAULT NULL,
+  `conducteur` int(11) DEFAULT NULL,
+  `employe_id` int(11) DEFAULT NULL,
+  `etat_id` int(11) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `retourlocation`
 --
 
@@ -586,6 +710,38 @@ CREATE TABLE `retourlocation` (
   `protected` int(11) NOT NULL DEFAULT '0',
   `valide` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `role`
+--
+
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8_bin NOT NULL,
+  `description` text COLLATE utf8_bin,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `role_employe`
+--
+
+CREATE TABLE `role_employe` (
+  `id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `employe_id` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -619,6 +775,21 @@ CREATE TABLE `transmission` (
   `protected` int(11) NOT NULL DEFAULT '0',
   `valide` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `typeabonnement`
+--
+
+CREATE TABLE `typeabonnement` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8_bin NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -745,6 +916,12 @@ ALTER TABLE `client`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `comptebanque`
+--
+ALTER TABLE `comptebanque`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `connexion`
 --
 ALTER TABLE `connexion`
@@ -796,6 +973,18 @@ ALTER TABLE `etat`
 -- Index pour la table `etatvehicule`
 --
 ALTER TABLE `etatvehicule`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `fonctionemploye`
+--
+ALTER TABLE `fonctionemploye`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `fonctionvehicule`
+--
+ALTER TABLE `fonctionvehicule`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -871,9 +1060,27 @@ ALTER TABLE `modepayement`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `modereservation`
+--
+ALTER TABLE `modereservation`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `mycompte`
 --
 ALTER TABLE `mycompte`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `optionreparation`
+--
+ALTER TABLE `optionreparation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `params`
+--
+ALTER TABLE `params`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -883,9 +1090,27 @@ ALTER TABLE `partenaire`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `reservation`
+--
+ALTER TABLE `reservation`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `retourlocation`
 --
 ALTER TABLE `retourlocation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `role_employe`
+--
+ALTER TABLE `role_employe`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -898,6 +1123,12 @@ ALTER TABLE `tarifvehicule`
 -- Index pour la table `transmission`
 --
 ALTER TABLE `transmission`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `typeabonnement`
+--
+ALTER TABLE `typeabonnement`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -977,6 +1208,12 @@ ALTER TABLE `client`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `comptebanque`
+--
+ALTER TABLE `comptebanque`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `connexion`
 --
 ALTER TABLE `connexion`
@@ -1028,6 +1265,18 @@ ALTER TABLE `etat`
 -- AUTO_INCREMENT pour la table `etatvehicule`
 --
 ALTER TABLE `etatvehicule`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `fonctionemploye`
+--
+ALTER TABLE `fonctionemploye`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `fonctionvehicule`
+--
+ALTER TABLE `fonctionvehicule`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1103,9 +1352,27 @@ ALTER TABLE `modepayement`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `modereservation`
+--
+ALTER TABLE `modereservation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `mycompte`
 --
 ALTER TABLE `mycompte`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `optionreparation`
+--
+ALTER TABLE `optionreparation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `params`
+--
+ALTER TABLE `params`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1115,9 +1382,27 @@ ALTER TABLE `partenaire`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `reservation`
+--
+ALTER TABLE `reservation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `retourlocation`
 --
 ALTER TABLE `retourlocation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `role_employe`
+--
+ALTER TABLE `role_employe`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1130,6 +1415,12 @@ ALTER TABLE `tarifvehicule`
 -- AUTO_INCREMENT pour la table `transmission`
 --
 ALTER TABLE `transmission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `typeabonnement`
+--
+ALTER TABLE `typeabonnement`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

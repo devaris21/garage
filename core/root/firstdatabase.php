@@ -13,15 +13,6 @@ $item->setProtected(1);
 $item->save();
 
 
-$datas = ["Au magasin", "Dans tout Bassam"];
-foreach ($datas as $key => $value) {
-	$item = new ZONEDEVENTE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
-
-
 $datas = ["Voiture", "Camion", "Tricycle", "Moto", "Camping-car"];
 foreach ($datas as $key => $value) {
 	$item = new TYPEVEHICULE();
@@ -40,7 +31,7 @@ foreach ($datas as $key => $value) {
 }
 
 
-$datas = ["Manuelle", "Automatique"];
+$datas = ["Peu importe", "Manuelle", "Automatique"];
 foreach ($datas as $key => $value) {
 	$item = new TRANSMISSION();
 	$item->name = $value;
@@ -49,7 +40,7 @@ foreach ($datas as $key => $value) {
 }
 
 
-$datas = ["Tourisme", "Utilitaire", "Prestige", "Camping-car"];
+$datas = ["Diesel", "Essence/Super", "Gasoil", "Electricité", "Gaz", "GPL/GNV"];
 foreach ($datas as $key => $value) {
 	$item = new ENERGIE();
 	$item->name = $value;
@@ -85,6 +76,17 @@ foreach ($datas as $key => $value) {
 	$item->save();
 }
 
+
+$datas = ["CNI", "Passeport", "Permis de conduire", "Carte professionnelle", "Carte d'étudiant", "Autre"];
+foreach ($datas as $key => $value) {
+	$item = new TYPECLIENT();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
+
+
+
 $datas = ["Azur", "Affaire", "Senior", "Prestige"];
 foreach ($datas as $key => $value) {
 	$item = new TYPEABONNEMENT();
@@ -96,7 +98,7 @@ foreach ($datas as $key => $value) {
 
 $datas = ["Directeur commercial", "Responsable Agence", "Agent commercial", "Responsable parc auto"];
 foreach ($datas as $key => $value) {
-	$item = new FONCTION();
+	$item = new FONCTIONEMPLOYE();
 	$item->name = $value;
 	$item->setProtected(1);
 	$item->save();
@@ -135,7 +137,7 @@ foreach ($datas as $key => $value) {
 
 
 
-$datas = ["Master", "Administrateur"];
+$datas = ["master", "administrateur"];
 foreach ($datas as $key => $value) {
 	$item = new ROLE();
 	$item->name = $value;
@@ -315,26 +317,10 @@ foreach ($datas as $key => $value) {
 	$item->setProtected(1);
 	$item->save();
 
-	$item = new TYPETRANSMISSION();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-
-	$item = new TYPEPRESTATAIRE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-
-	$item = new ENERGIE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-
-
-	$item = new TYPESUGGESTION();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
+	// $item = new TYPESUGGESTION();
+	// $item->name = $value;
+	// $item->setProtected(1);
+	// $item->save();
 }
 
 ?>
