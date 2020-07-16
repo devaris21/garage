@@ -27,6 +27,17 @@ abstract class TABLE
     public $sentense;
 
 
+    public function sentenseCreate(){
+        return $this->sentense = "Nouvel enregistrement";
+    }
+    public function sentenseUpdate(){
+        return $this->sentense = "Nouvelle Modification";
+    }
+    public function sentenseDelete(){
+        return $this->sentense = "Nouvelle Suppression";
+    }
+
+
     abstract public function enregistre();
     public function uploading(Array $files){}
 

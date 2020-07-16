@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <html>
+<!DOCTYPE html>
 
 <?php include($this->rootPath("webapp/gestion/elements/templates/head.php")); ?>
 
@@ -15,11 +15,16 @@
             <?php include($this->rootPath("webapp/gestion/elements/templates/header.php")); ?>  
 
             <div class="wrapper border-bottom white-bg page-heading animated fadeInRightBig">
-                <h1 class="text-uppercase gras">Nouvelle reservation</h1>
-                <small>Lorem ipsum dolor sit amet.</small>
+                <br>
+                <div class="container-fluid">
+                    <h1 class="text-uppercase gras d-inline">Nouvelle reservation</h1>
+                    <small>Lorem ipsum dolor sit amet.</small>
+                    <h3 class="text-uppercase gras d-inline pull-right nb text-blue"></h3>
+                </div><br>
                 <hr class="mp3">
                 <br>
-                <div class="row">
+                <form method="POST" id="formReservation">
+                   <div class="row">
                     <div class="col-sm-4 border-right">
                         <div class="row text-center">
                             <div class="form-group col-6 border-right">
@@ -39,7 +44,7 @@
 
                         <div class="form-group">
                             <label class="col-form-label">Nom et prénoms / Raison sociale</label>
-                            <input type="number" class="form-control" name="place" value="5">
+                            <input type="text" class="form-control" name="name">
                         </div>
 
                         <div class="row">
@@ -50,19 +55,19 @@
 
                             <div class="form-group col-6">
                                 <label class="col-form-label">Numero de la piece</label>
-                                <input type="number" class="form-control" uppercase name="place" value="5">
+                                <input type="text" class="form-control" uppercase name="numero">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col-5">
                                 <label class="col-form-label">Contact</label>
-                                <input type="number" class="form-control" name="place" value="5">
+                                <input type="text" class="form-control" name="contact">
                             </div>
 
                             <div class="form-group col-7">
                                 <label class="col-form-label">Adresse email</label>
-                                <input type="email" class="form-control" name="place">
+                                <input type="email" class="form-control" name="email">
                             </div>
                         </div>
                     </div>
@@ -71,7 +76,7 @@
                     <div class="old">
                         <div class="form-group">
                             <label class="col-form-label" for="status">Rechercher le client</label>
-                            <?php Native\BINDING::html("select-null", "client") ?>
+                            <?php Native\BINDING::html("select-startnull", "client") ?>
                         </div>
                     </div>
                 </div>
@@ -94,30 +99,56 @@
                             <div class="form-group">
                                 <label class="col-form-label">Voulez-vous un Chauffeur ?</label>
                                 <select class="form-control select2" name="climatisation" style="width: 100%">
-                                    <option value="<?= Home\TABLE::OUI  ?>">Oui</option>
                                     <option value="<?= Home\TABLE::NON  ?>">Non</option>
+                                    <option value="<?= Home\TABLE::OUI  ?>">Oui</option>
                                 </select>                           
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label class="col-form-label">Nombre de places</label>
                                 <div id="ionrange_1"></div>
+                            </div> -->
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label class="col-form-label">Min place</label>
+                                    <input type="number" class="form-control" value="5" name="min">
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <label class="col-form-label">Max place</label>
+                                    <input type="number" class="form-control" value="5" name="max">
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label" for="amount">Marques souhaitées</label>
+                                <?php Native\BINDING::html("select-multiple", "marque") ?>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="col-form-label" for="customer">Type d'energie du véhicule ?</label>
+                                <?php Native\BINDING::html("select", "energie") ?>
+                            </div>
+                        </div>
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="col-form-label" for="customer">Transmission du véhicule ?</label>
                                 <?php Native\BINDING::html("select", "transmission") ?>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="col-form-label" for="amount">Climatisation ?</label>
                                 <select class="form-control select2" name="climatisation" style="width: 100%">
-                                    <option value="">Peu importe</option>
+                                    <option value="a">Peu importe</option>
                                     <option value="<?= Home\TABLE::OUI  ?>">Oui</option>
                                     <option value="<?= Home\TABLE::NON  ?>">Non</option>
                                 </select>
@@ -136,7 +167,7 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="date_added">Date de départ</label>
                                 <div class="input-group date">
-                                    <input type="date" class="form-control" value="<?= dateAjoute()  ?>">
+                                    <input type="date" class="form-control" name="started" value="<?= dateAjoute()  ?>">
                                 </div>
                             </div>
                         </div>
@@ -144,7 +175,7 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="date_modified">Date d'arrivée</label>
                                 <div class="input-group date">
-                                    <input type="date" class="form-control" value="03/06/2014">
+                                    <input type="date" class="form-control" name="finished" >
                                 </div>
                             </div>
                         </div>
@@ -158,25 +189,26 @@
 
                     <hr>
                     <div>
-                        <button class="btn btn-primary dim"><i class="fa fa-plus"></i> Valider le devis</button>
+                        <button onclick="newReservation()" class="btn btn-primary dim"><i class="fa fa-plus"></i> Valider le devis</button>
 
-                        <button class="btn btn-primary dim pull-right"><i class="fa fa-plus"></i> Valider la reservation</button>
+                        <button onclick="newReservation()" class="btn btn-primary dim pull-right"><i class="fa fa-plus"></i> Valider la reservation</button>
                     </div><hr>
-                    <p>Nombre de véhicules correspondant aux critères spécifiés : <span> 0 véhicules</span></p>
+                    <p>Nombre de véhicules correspondant aux critères spécifiés : <span class="nb"></span></p>
 
                 </div>
 
-
-
             </div>
-        </div>
-
-
-        <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
-
-
-
+        </form>
     </div>
+
+    <br><br>
+    <br><br>
+
+    <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
+
+
+
+</div>
 </div>
 
 

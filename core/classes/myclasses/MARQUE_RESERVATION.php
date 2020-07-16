@@ -3,20 +3,20 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class ACCESSOIRE_MODELEVEHICULE extends TABLE
+class MARQUE_RESERVATION extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $accessoire_id;
+	public $equipement_id;
 	public $infovehicule_id;
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = ACCESSOIRE::findBy(["id ="=>$accessoire_id]);
+		$datas = EQUIPEMENT::findBy(["id ="=>$this->equipement_id]);
 		if (count($datas) == 1) {
-			$datas = MODELEVEHICULE::findBy(["id ="=>$infovehicule_id]);
+			$datas = INFOVEHICULE::findBy(["id ="=>$this->infovehicule_id]);
 			if (count($datas) == 1) {
 				$data = $this->save();
 			}else{
@@ -31,14 +31,6 @@ class ACCESSOIRE_MODELEVEHICULE extends TABLE
 	}
 
 
-	public function sentenseCreate(){
-		return $this->sentense = "Ajout d'une nouvel accessoire: $this->name dans les paramétrages";
-	}
-	public function sentenseUpdate(){
-		return $this->sentense = "Modification des informations de l'accessoire $this->id : $this->name ";
-	}
-	public function sentenseDelete(){
-		return $this->sentense = "Suppression definitive de l'accessoire $this->id : $this->name";
-	}
+
 }
 ?>

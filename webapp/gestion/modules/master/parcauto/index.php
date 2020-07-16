@@ -69,10 +69,10 @@
                                 $vehicule->actualise(); ?>
                                 <div class="col-sm-4 col-md-3 vehicule">
                                     <div class="contact-box product-box">
-                                        <a class="row" href="<?= $this->url("gestionnaire", "master", "vehicule", $vehicule->getId()) ?>">
+                                        <a class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->getId()) ?>">
                                             <div class="col-4">
                                                 <div class="text-center">
-                                                    <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image) ?>">
+                                                    <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image1) ?>">
                                                 </div>
                                             </div>
                                             <div class="col-8">
@@ -80,11 +80,8 @@
                                                 <span>
                                                     <strong><?= $vehicule->marque->name ?></strong><br>
                                                     <?= $vehicule->modele ?> 
-                                                    <?php if ($vehicule->groupevehicule_id == Home\GROUPEVEHICULE::VEHICULEMISSION || $vehicule->etatvehicule_id != Home\ETATVEHICULE::RAS) { ?>
-                                                        <br>
-                                                        <small class="label label-<?= $vehicule->etatvehicule->class; ?> float-right"><?= $vehicule->etatvehicule->name; ?></small>
-                                                    <?php } ?>
                                                 </span>
+                                                <span><?= $vehicule->infovehicule->fonctionvehicule->name() ?></span>
                                             </div>
                                         </a>
                                     </div>

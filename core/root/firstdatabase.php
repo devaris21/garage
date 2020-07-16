@@ -40,7 +40,7 @@ foreach ($datas as $key => $value) {
 }
 
 
-$datas = ["Diesel", "Essence/Super", "Gasoil", "Electricité", "Gaz", "GPL/GNV"];
+$datas = ["Peu importe", "Diesel", "Essence/Super", "Gasoil", "Electricité", "Gaz", "GPL/GNV"];
 foreach ($datas as $key => $value) {
 	$item = new ENERGIE();
 	$item->name = $value;
@@ -79,7 +79,7 @@ foreach ($datas as $key => $value) {
 
 $datas = ["CNI", "Passeport", "Permis de conduire", "Carte professionnelle", "Carte d'étudiant", "Autre"];
 foreach ($datas as $key => $value) {
-	$item = new TYPECLIENT();
+	$item = new TYPEPIECE();
 	$item->name = $value;
 	$item->setProtected(1);
 	$item->save();
@@ -312,10 +312,6 @@ foreach (ROLE::getAll() as $key => $value) {
 
 $datas = ["standart"];
 foreach ($datas as $key => $value) {
-	$item = new TYPEVEHICULE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
 
 	// $item = new TYPESUGGESTION();
 	// $item->name = $value;

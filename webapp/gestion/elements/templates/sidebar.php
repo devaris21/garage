@@ -39,8 +39,8 @@
                 <li class="" id="dashboard">
                     <a href="<?= $this->url($this->section, "master", "dashboard") ?>"><i class="fa fa-tachometer"></i> <span class="nav-label">Tableau de bord</span></a>
                 </li>
-                <li class="" id="rechercher">
-                    <a href="<?= $this->url($this->section, "master", "rechercher") ?>"><i class="fa fa-search"></i> <span class="nav-label">Liste des clients</span></a>
+                <li class="" id="clients">
+                    <a href="<?= $this->url($this->section, "master", "clients") ?>"><i class="fa fa-search"></i> <span class="nav-label">Liste des clients</span></a>
                 </li>
                 <li class="" id="rechercher">
                     <a href="<?= $this->url($this->section, "master", "rechercher") ?>"><i class="fa fa-search"></i> <span class="nav-label">Rechercher</span></a>
@@ -48,17 +48,20 @@
                 <li><hr class="mp3" style="background-color: transparent; "></li>
 
 
-                <li class="" id="entretiens">
-                    <a href="<?= $this->url($this->section, "master", "entretiens") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Parc auto</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                <li class="" id="parcauto">
+                    <a href="<?= $this->url($this->section, "master", "parcauto") ?>"><i class="fa fa-car"></i> <span class="nav-label">Parc auto</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="entretiens">
-                    <a href="<?= $this->url($this->section, "master", "entretiens") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Reservations</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                <li class="" id="reservations">
+                    <a href="<?= $this->url($this->section, "master", "reservations") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Reservations</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="expertise">
-                    <a href="<?= $this->url($this->section, "master", "expertise") ?>"><i class="fa fa-home"></i> <span class="nav-label">Locations en cours</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                <li class="" id="locations">
+                    <a href="<?= $this->url($this->section, "master", "locations") ?>"><i class="fa fa-home"></i> <span class="nav-label">Locations en cours</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="expertise">
                     <a href="<?= $this->url($this->section, "master", "expertise") ?>"><i class="fa fa-home"></i> <span class="nav-label">Planning </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                </li>
+                <li class="" id="expertise">
+                    <a href="<?= $this->url($this->section, "master", "expertise") ?>"><i class="fa fa-home"></i> <span class="nav-label">Les tarifs </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
 
                 <li><hr class="mp3" style="background-color: transparent; "></li>
@@ -95,6 +98,6 @@
 
 <style type="text/css">
     li.dropdown-divider{
-       !important;
-   }
+     !important;
+ }
 </style>

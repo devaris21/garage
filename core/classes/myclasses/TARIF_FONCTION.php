@@ -3,20 +3,20 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class EQUIPEMENT_INFOVEHICULE extends TABLE
+class TARIF_FONCTION extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $equipement_id;
-	public $infovehicule_id;
+	public $tarifvehicule_id;
+	public $fonctionvehicule_id;
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = EQUIPEMENT::findBy(["id ="=>$this->equipement_id]);
+		$datas = TARIFVEHICULE::findBy(["id ="=>$this->tarifvehicule_id]);
 		if (count($datas) == 1) {
-			$datas = INFOVEHICULE::findBy(["id ="=>$this->infovehicule_id]);
+			$datas = FONCTIONVEHICULE::findBy(["id ="=>$this->fonctionvehicule_id]);
 			if (count($datas) == 1) {
 				$data = $this->save();
 			}else{

@@ -11,16 +11,14 @@ $(function(){
 	});
 
 
-	$("#formVehicule").submit(function(event) {
-		var url = "../../webapp/gestion/modules/master/parcauto/ajax.php";
-		var formdata = new FormData($("#formVehicule")[0]);
-		formdata.append('equipements', $(this).find("select[name=equipement_id]").val());
-		formdata.append('accessoires', $(this).find("select[name=accessoire_id]").val());
-		formdata.append('action', "newVehicule");
+	$("#formTarif").submit(function(event) {
+		var url = "../../webapp/gestion/modules/master/tarifs/ajax.php";
+		var formdata = new FormData($("#formTarif")[0]);
+		formdata.append('fonctions', $(this).find("select[name=fonctionvehicule_id]").val());
+		formdata.append('action', "newTarif");
 		Loader.start();
 		$.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
 			if (data.status) {
-				window.open(data.url, "_blank");
 				window.location.reload();
 			}else{
 				Alerter.error('Erreur !', data.message);

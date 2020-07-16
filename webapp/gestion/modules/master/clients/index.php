@@ -36,7 +36,7 @@
                             <div class="row">
                                 <div class="col-12 text-right">
                                     <span> Ajoutés cette semaine</span>
-                                    <h2 class="font-bold"><?= start0(count(Home\CLIENT::getSemaine()))  ?></h2>
+                                    <h2 class="font-bold"><?= start0(count(Home\CLIENT::getAll()))  ?></h2>
                                 </div>
                             </div>
                         </div>

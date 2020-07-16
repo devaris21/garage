@@ -11,19 +11,29 @@ class VEHICULE extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $immatriculation;
-	public $dateMiseCirculation;
-	public $image;
+	public $marque_id;
+	public $modele;
+	public $couleur;
 	public $etatvehicule_id = ETATVEHICULE::RAS;
+
+	public $image1;
+	public $image2;
+	public $image3;
 
 
 	public function enregistre(){
 		$data = new RESPONSE;
 		if ($this->immatriculation != "") {
-			$datas = MODELEVEHICULE::findBy(["id ="=>$this->infovehicule_id]);
+			$datas = MARQUE::findBy(["id ="=>$this->marque_id]);
 			if (count($datas) == 1) {
-				$data = $this->save();
-				if ($data->status) {
-					$this->uploading($this->files);
+				if ($this->immatriculation != "") {
+					$data = $this->save();
+					if ($data->status) {
+						$this->uploading($this->files);
+					}
+				}else{
+					$data->status = false;
+					$data->message = "Veuillez renseigner l'immatriculation du véhicule !";
 				}
 			}else{
 				$data->status = false;
@@ -40,7 +50,7 @@ class VEHICULE extends TABLE
 
 	public function uploading(Array $files){
 		//les proprites d'images;
-		$tab = ["image"];
+		$tab = ["image1", "image2", "image3"];
 		if (is_array($files) && count($files) > 0) {
 			$i = 0;
 			foreach ($files as $key => $file) {
@@ -58,6 +68,15 @@ class VEHICULE extends TABLE
 				$i++;			
 			}			
 		}
+	}
+
+	public function name(){
+		return $this->marque->name()." ".$this->modele." - ".$this->immatriculation;
+	}
+
+
+	public function kilometrage(){
+		return 10;
 	}
 
 

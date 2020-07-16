@@ -13,13 +13,11 @@ class INFOVEHICULE extends TABLE
 	public $typevehicule_id;
 	public $cnit;
 	public $fonctionvehicule_id;
-	public $marque_id;
-	public $modele;
-	public $couleur;
-	public $chasis;
+	public $chassis;
 	public $transmission_id;
 	public $energie_id;
 	public $puissance;
+	public $dateMiseCirculation;
 	public $climatisation = TABLE::NON;
 	public $nbPortes;
 	public $nbPlaces;
@@ -30,14 +28,15 @@ class INFOVEHICULE extends TABLE
 	public $airbagConducteur = TABLE::NON;
 	public $airbagPassager = TABLE::NON;
 
+
 	public function enregistre(){
-		$data = new RESPONSE;
-		if ($this->name != "") {
-			$data = $this->save();
-		}else{
-			$data->status = false;
-			$data->message = "Veuillez renseigner le nom de la marque !";
+		if ($this->airbagConducteur == "on") {
+			$this->airbagConducteur = TABLE::OUI;
 		}
+		if ($this->airbagPassager == "on") {
+			$this->airbagPassager = TABLE::OUI;
+		}
+		$data = $this->save();
 		return $data;
 	}
 

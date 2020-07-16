@@ -15,25 +15,31 @@
                                 <?php Native\BINDING::html("select", "typeclient"); ?>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-5">
                             <label>Nom & prénoms de client <span1>*</span1></label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="name" required>
                             </div>
-                        </div>                        
+                        </div> 
+                        <div class="col-md-4 col-sm-6">
+                            <label>Type de pièce fournie <span1>*</span1></label>
+                            <div class="form-group">
+                                <?php Native\BINDING::html("select", "typepiece"); ?>
+                            </div>
+                        </div>                       
                     </div>
 
                     <div class="row">
                         <div class="col-md-4 col-sm-6">
-                            <label>Contact </label>
+                            <label>Numero de la pièce </label>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="contact" >
+                                <input type="text" class="form-control" uppercase name="numero" >
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">
-                            <label>Situation géographique </label>
+                            <label>Contact </label>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="adresse" >
+                                <input type="text" class="form-control" name="contact" >
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6">

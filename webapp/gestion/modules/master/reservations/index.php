@@ -28,7 +28,7 @@
             </div>
             <div class="col-sm-8">
                 <div class="title-action">
-                    <a href="<?= $this->url("gestion", "")  ?>" class="btn btn-primary dim"><i class="fa fa-plus"></i> Nouvelle reservation</a>
+                    <a href="<?= $this->url("gestion", "master", "newreservation")  ?>" class="btn btn-primary dim"><i class="fa fa-plus"></i> Nouvelle reservation</a>
                 </div>
             </div>
         </div>
