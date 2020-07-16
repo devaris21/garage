@@ -31,9 +31,16 @@
     <!-- Input Mask-->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/jasny/jasny-bootstrap.min.js") ?>"></script>
 
+    <!-- Steps -->
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/steps/jquery.steps.min.js") ?>"></script>
+
+    <!-- Jquery Validate -->
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/validate/jquery.validate.min.js") ?>"></script>
+
+
     <!-- Data picker -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/datapicker/bootstrap-datepicker.js") ?>"></script>
-        <!-- Tags Input -->
+    <!-- Tags Input -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/clockpicker/clockpicker.js") ?>"></script>
 
@@ -48,7 +55,7 @@
     <script src="<?= $this->rootPath("composants/dist/js/plugins/iCheck/icheck.min.js") ?>"></script>
 
 
-     <!-- idle-timer -->
+    <!-- idle-timer -->
     <script src="<?= $this->rootPath("composants/dist/js/plugins/idle-timer/idle-timer.min.js") ?>"></script>
 
     <!-- Select2 -->
@@ -82,12 +89,12 @@
 
         $("nav ul.metismenu li").removeClass('active');
         $("nav ul.metismenu li").each(function(index, el) {
-        if ($(this).attr("id") == url){
-            $(this).addClass("active")
-            $(this).parent("ul").addClass("in");
-            $(this).parent("ul").parent("li.groupe").addClass("active");
-        }
-    });
+            if ($(this).attr("id") == url){
+                $(this).addClass("active")
+                $(this).parent("ul").addClass("in");
+                $(this).parent("ul").parent("li.groupe").addClass("active");
+            }
+        });
 
 
         // var modul = "<?= $this->getModule() ?>"

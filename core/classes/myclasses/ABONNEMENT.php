@@ -33,6 +33,22 @@ class ABONNEMENT extends TABLE
 	}
 
 
+
+	public function name(){
+		$this->actualise();
+		return $this->remise." ".$this->typeremise->name();
+	}
+
+
+	public function montant(int $montant){
+		if ($this->typeremise_id = TYPEREMISE::BRUT) {
+			return $this->remise;
+		}else{
+			return round(($this->remise * $montant) / 100);
+		}
+	}
+
+
 	public function sentenseCreate(){
 		return $this->sentense = "Ajout d'une nouvel accessoire: $this->name dans les paramétrages";
 	}

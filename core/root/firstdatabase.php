@@ -85,6 +85,13 @@ foreach ($datas as $key => $value) {
 	$item->save();
 }
 
+$datas = ["Brut", "Pourcentage"];
+foreach ($datas as $key => $value) {
+	$item = new TYPEREMISE();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
 
 
 $datas = ["Azur", "Affaire", "Senior", "Prestige"];

@@ -1,16 +1,6 @@
 
 
 $(function(){
-	$("#ionrange_1").ionRangeSlider({
-		min: 1,
-		max: 100,
-		value: 5,
-		type: 'single',
-		postfix: " places",
-		maxPostfix: "+",
-		prettify: false,
-		hasGrid: true
-	});
 
 	$("div.old").hide()
 	$("input[name=client]").on('ifChanged', function(event){
@@ -23,20 +13,6 @@ $(function(){
 		}
 	})
 
-
-	$("tr.fini").hide()
-
-	$("input[type=checkbox].onoffswitch-checkbox").change(function(event) {
-		if($(this).is(":checked")){
-			Loader.start()
-			setTimeout(function(){
-				Loader.stop();
-				$("tr.fini").fadeIn(400);
-			}, 500);
-		}else{
-			$("tr.fini").fadeOut(400)
-		}
-	});
 
 
 	$("#top-search").on("keyup", function() {
@@ -57,9 +33,11 @@ $(function(){
 		formData.append('action', 'calculReservation');
 		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
 			$(".nb").html(data.nb+" véhicule(s) trouvée(s)");
-			// $("#modal-vehicule-preter").find("form input").val("");
-			// $("#modal-vehicule-preter").modal("hide");
-			// Loader.stop();
+
+			formData.append('action', 'fiche');
+			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
+				$(".fiche").html(data);
+			}, 'html');
 		}, 'json');
 	})
 

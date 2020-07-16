@@ -24,6 +24,7 @@
     <link href="<?= $this->rootPath("composants/dist/css/style.css") ?>" rel="stylesheet">
     
     <link href="<?= $this->rootPath("composants/dist/css/plugins/toastr/toastr.min.css") ?>" rel="stylesheet">
+    <link href="<?= $this->rootPath("composants/dist/css/plugins/steps/jquery.steps.css") ?>" rel="stylesheet">
 
     <link href="<?= $this->rootPath("composants/dist/css/plugins/iCheck/custom.css") ?>" rel="stylesheet">
     <link href="<?= $this->rootPath("composants/dist/css/plugins/chosen/bootstrap-chosen.css") ?>" rel="stylesheet">
