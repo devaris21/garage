@@ -3,21 +3,17 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class LOCATION extends TABLE
+class ABONNEMENT extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $reservation_id;
-	public $agence_id;
+	public $client_id;
+	public $typeabonnement_id;
 	public $started;
 	public $finished;
-	public $vehicule_id;
-	public $conducteur_id;
-	public $employe_id;
-	public $etat_id = ETAT::PARTIEL;
-	public $tarifvehicule_id;
+	public $remise;
 
 	public function enregistre(){
 		$data = new RESPONSE;
@@ -34,6 +30,22 @@ class LOCATION extends TABLE
 			$data->status = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";
 		}
 		return $data;
+	}
+
+
+
+	public function name(){
+		$this->actualise();
+		return $this->remise." ".$this->typeremise->name();
+	}
+
+
+	public function montant(int $montant){
+		if ($this->typeremise_id = TYPEREMISE::BRUT) {
+			return $this->remise;
+		}else{
+			return round(($this->remise * $montant) / 100);
+		}
 	}
 
 

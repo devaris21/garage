@@ -13,17 +13,24 @@ class PARAMS extends TABLE
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
+	const DATE_DEFAULT = "2020-06-01";
+
 
 	public $societe;
-	public $timeout;
 	public $email;
 	public $contact;
 	public $fax;
 	public $postale;
-	public $adresse;
-	public $delai_alert;
 	public $devise;
+
+	public $autoriserVersementAttente = "on";
+	public $bloquerOrfonds = "off";
 	public $image;
+
+	public $tva;
+	public $seuilCredit;
+	public $ruptureStock = 10;
+	public $minImmobilisation = 350000;
 
 
 
@@ -55,17 +62,20 @@ class PARAMS extends TABLE
 	}
 
 
+
+
 	//verifier le temps de latente entre deux actions de l'utilisateur
 	public static function checkTimeout($section){
 		$data = new RESPONSE;
-		$params = self::findLastId();
-		$session = $params->timeout * 60;
+		$session = 25 * 60;
+
+		$temps = time() - getSession("last_access");
 		//umpeu moins de 2x le temps;
-		if(is_null(getSession("last_access")) OR (time() - getSession("last_access") > $session * 2) ){
+		if(is_null(getSession("last_access")) OR ($temps > $session * 1.5) ){
 			$data->status = false;
 			$data->message = "temps depassée, page de connexion zz!";
-			$data->setUrl($section, "access", "login");
-		}else if ((time() - getSession("last_access") > $session) || !is_null(getSession("page_session"))) {
+			$data->setUrl($section, "access", "logout");
+		}else if (($temps > $session) || !is_null(getSession("page_session"))) {
 			$data->status = false;
 			$data->message = "temps depassée, verrouillage de la session !";
 			$data->setUrl($section, "access", "locked");
@@ -76,6 +86,8 @@ class PARAMS extends TABLE
 		}
 		return $data;
 	}
+
+
 
 
 	public function sentenseCreate(){}

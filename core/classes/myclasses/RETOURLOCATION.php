@@ -3,21 +3,17 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class LOCATION extends TABLE
+class RETOURLOCATION extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $reservation_id;
+	public $location_id;
+	public $dateRetour;
 	public $agence_id;
-	public $started;
-	public $finished;
-	public $vehicule_id;
-	public $conducteur_id;
 	public $employe_id;
-	public $etat_id = ETAT::PARTIEL;
-	public $tarifvehicule_id;
+
 
 	public function enregistre(){
 		$data = new RESPONSE;

@@ -8,28 +8,19 @@ use \DateInterval;
 /**
  * 
  */
-class CLIENT extends PERSONNE
+class INSPECTEUR extends PERSONNE
 {
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
 
-	public $typeclient_id;
-	public $typepiece_id;
-	public $numero;
-	public $nomResponsable;
-	
+	public $agence_id;	
 
 
 	public function enregistre(){
 		$data = new RESPONSE;
 		if ($this->name != "") {
-			if ($this->contact != "") {
-				$data = $this->save();
-			}else{
-				$data->status = false;
-				$data->message = "Veuillez renseigner le nom du type de vehicule !";
-			}
+			$data = $this->save();
 		}else{
 			$data->status = false;
 			$data->message = "Veuillez renseigner le nom du type de vehicule !";

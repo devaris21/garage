@@ -3,31 +3,24 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class LOCATION extends TABLE
+class LISTEVERIFICATION extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $reservation_id;
-	public $agence_id;
-	public $started;
-	public $finished;
-	public $vehicule_id;
-	public $conducteur_id;
-	public $employe_id;
-	public $etat_id = ETAT::PARTIEL;
-	public $tarifvehicule_id;
+	public $inspection_id;
+	public $verification;
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = CLIENT::findBy(["id ="=>$client_id]);
+		$datas = INSPECTION::findBy(["id ="=>$inspection_id]);
 		if (count($datas) == 1) {
-			if ($this->finished > $this->started && $this->finished > dateAjoute()) {
+			if ($this->verification != "") {
 				$data = $this->save();
 			}else{
 				$data->status = false;
-				$data->status = "les dates du contrat sont incorectes, veuillez recommencer !!!";
+				$data->status = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";
 			}
 		}else{
 			$data->status = false;

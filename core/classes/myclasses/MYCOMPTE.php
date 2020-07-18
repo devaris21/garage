@@ -1,7 +1,6 @@
 <?php
 namespace Home;
-use Native\RESPONSE;
-use Native\SHAMMAN;/**
+use Native\RESPONSE;/**
  * 
  */
 class MYCOMPTE extends TABLE
@@ -10,7 +9,6 @@ class MYCOMPTE extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $identifiant;
-	public $typecompte_id;
 	public $expired;
 	
 
@@ -20,17 +18,15 @@ class MYCOMPTE extends TABLE
 
 
 	public function sentenseCreate(){
-		return $this->sentense = "Ajout d'une nouvelle pièce d'identité :  dans les paramétrages";
+		return $this->sentense = "Nouvelle Installation, premier démarrage";
 	}
 
 
 	public function sentenseUpdate(){
-		return $this->sentense = "Modification des propriétés de la pièce d'identité : .";
 	}
 
 
 	public function sentenseDelete(){
-		return $this->sentense = "Suppression définitive de la pièce d'identité : .";
 	}
 
 }

@@ -14,13 +14,9 @@ class EMPLOYE extends AUTH
 	public static $namespace = __NAMESPACE__;
 
 	public $name;
-	public $is_allowed = 1;
-	public $started;
+	public $fonctionemploye_id;
 	public $email;
-	public $is_new = 1;
-	public $isAdmin = TABLE::NON;
 	public $image = "default.png";
-	public $is_connecte = false;
 
 	public $pass = false;
 	
@@ -141,7 +137,7 @@ class EMPLOYE extends AUTH
 				if($this->password != hasher($password)){
 					if ($this->set_login($login)) {
 						$this->set_password($password);
-						$this->is_new = 1;
+						$this->isNew = 1;
 						$data = $this->save();
 						$data->setUrl("master", "dashboard");
 					}else{

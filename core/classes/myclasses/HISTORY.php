@@ -11,10 +11,7 @@ public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
 	public $sentense; // phrase de l'historique
-	public $gestionnaire_id = null;
-	public $utilisateur_id = null;
-	public $carplan_id = null;
-	public $prestataire_id = null;
+	public $employe_id = null;
 	public $isOperationCaisse = 0; //1 si operation de caisse, 1 sinon
 	public $price = 0; //le montant si operation de caisse
 	public $typeSave; //-1 delete, 0 create, 1 update
@@ -22,7 +19,7 @@ public static $tableName = __CLASS__;
 	public $recordId; //id de la table
 
 
-	public static function createHistory(TABLE $element, String $typeSave){
+	public static function createHistory(TABLE $element, String $type_save){
 		$sentense = $element->sentense;
 		$element->actualise();
 		$element->sentense = $sentense;
@@ -30,12 +27,12 @@ public static $tableName = __CLASS__;
 		extract($element::tableName());
 		$story = new HISTORY;
 		$story->record = $table;
-		$story->record_key = $element->getId();
-		$story->typeSave = $typeSave;
+		$story->recordId = $element->id;
+		$story->typeSave = $type_save;
 		$story->sentense =  $element->sentense;
 
-		if (getSession("gestionnaire_connecte_id") != null) {
-			$story->gestionnaire_id = getSession("gestionnaire_connecte_id");
+		if (getSession("employe_connecte_id") != null) {
+			$story->employe_id = getSession("employe_connecte_id");
 		}
 		if ($story->typeSave == "insert") {
 			$story->sentense = $element->sentenseCreate();
@@ -43,12 +40,6 @@ public static $tableName = __CLASS__;
 			$story->sentense = $element->sentenseDelete();
 		}else if ($story->typeSave == "update") {
 			$story->sentense = $element->sentenseUpdate();
-		}
-		if (isset($element->utilisateur_id)) {
-			$story->utilisateur_id = $element->utilisateur_id;
-		}
-		if (isset($element->carplan_id)) {
-			$story->carplan_id = $element->carplan_id;
 		}
 		if (in_array($story->record, ["depense", "entree", "reglement", "remboursement", "lignefacture"])) {
 			$story->isOperationCaisse = 1;
@@ -67,12 +58,9 @@ public static $tableName = __CLASS__;
 
 	public function auteur(){
 		$this->actualise();
-		if ($this->gestionnaire_id != null) {
-			return $this->gestionnaire->name();
-
-		}elseif ($this->utilisateur_id != null) {
-			return $this->utilisateur->name();
-
+		if ($this->employe_id != null) {
+			return $this->employe->name();
+			
 		}elseif ($this->carplan_id != null) {
 			return $this->carplan->name();
 
@@ -83,8 +71,8 @@ public static $tableName = __CLASS__;
 
 
 	public function type(){
-		if ($this->gestionnaire_id != null) {
-			return "Gestionnaire AMB";
+		if ($this->employe_id != null) {
+			return "Employe AMB";
 
 		}elseif ($this->utilisateur_id != null) {
 			return "Responsable Direction";

@@ -1,48 +1,36 @@
 <?php
 namespace Home;
-use Native\RESPONSE;
-
-/**
+use Native\RESPONSE;/**
  * 
  */
 class OPTIONREPARATION extends TABLE
 {
-	
-	
+
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $categoriereparation_id;
 	public $name;
-	public $price;
-
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = CATEGORIEREPARATION::findBy(["id ="=>$this->categoriereparation_id]);
-		if (count($datas) == 1) {
-			if ($this->name != "") {
-				if ($this->price > 0) {
-					$data = $this->save();
-				}else{
-					$data->status = false;
-					$data->message = "Veuillez renseigner l'immatrculation du véhicule!";
-				}
-			}else{
-				$data->status = false;
-				$data->message = "Veuillez renseigner le nom complet du client !";
-			}					
+		if ($this->name != "") {
+			$data = $this->save();
 		}else{
 			$data->status = false;
-			$data->message = "Une erreur s'est produite lors du prix !";
+			$data->message = "Veuillez renseigner le nom de l'accessoire !";
 		}
 		return $data;
 	}
 
 
-	public function sentenseCreate(){}
-	public function sentenseUpdate(){}
-	public function sentenseDelete(){}
+		public function sentenseCreate(){
+			return $this->sentense = "Ajout d'une nouvel accessoire: $this->name dans les paramétrages";
+	}
+	public function sentenseUpdate(){
+			return $this->sentense = "Modification des informations de l'accessoire $this->id : $this->name ";
+	}
+	public function sentenseDelete(){
+			return $this->sentense = "Suppression definitive de l'accessoire $this->id : $this->name";
+	}
 }
-
 ?>
