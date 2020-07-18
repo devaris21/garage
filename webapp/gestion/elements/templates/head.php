@@ -41,6 +41,9 @@
     <!-- FooTable -->
     <link href="<?= $this->rootPath("composants/dist/css/plugins/footable/footable.core.css") ?>" rel="stylesheet">
     
+    <!-- DAte range picker -->
+    <link href="<?= $this->rootPath("composants/dist/css/plugins/daterangepicker/daterangepicker-bs3.css") ?>" rel="stylesheet">
+
     <!-- FooTable -->
     <link href="<?= $this->rootPath("composants/dist/css/plugins/chosen/bootstrap-chosen.css") ?>" rel="stylesheet">
     

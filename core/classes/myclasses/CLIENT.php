@@ -24,7 +24,12 @@ class CLIENT extends PERSONNE
 	public function enregistre(){
 		$data = new RESPONSE;
 		if ($this->name != "") {
-			$data = $this->save();
+			if ($this->contact != "") {
+				$data = $this->save();
+			}else{
+				$data->status = false;
+				$data->message = "Veuillez renseigner le nom du type de vehicule !";
+			}
 		}else{
 			$data->status = false;
 			$data->message = "Veuillez renseigner le nom du type de vehicule !";

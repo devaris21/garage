@@ -14,57 +14,60 @@ extract($_POST);
 if ($action == "calculReservation") {
 	$data = new RESPONSE;
 
-	$typefonction = " AND typevehicule_id = $typevehicule_id AND fonctionvehicule_id = $fonctionvehicule_id";
-	$place = " AND nbPlaces >= $min AND nbPlaces <= $max";
+	if ($finished >= $started && $started >= dateAjoute()) {
+		$typefonction = " AND typevehicule_id = $typevehicule_id AND fonctionvehicule_id = $fonctionvehicule_id";
+		$place = " AND nbPlaces >= $min AND nbPlaces <= $max";
 
-	$clim = "";
-	if ($climatisation != "a") {
-		$clim = " AND climatisation = $climatisation";
-	}
-
-	$energie = "";
-	if ($energie_id != 1) {
-		$energie = " AND energie_id = $energie_id";
-	}
-
-	$transmission = "";
-	if ($transmission_id != 1) {
-		$transmission = " AND transmission_id = $transmission_id";
-	}
-
-	$requette = "SELECT * FROM infovehicule WHERE 1 $typefonction $place $energie $transmission $clim ";
+		$clim = "";
+		if ($climatisation != "a") {
+			$clim = " AND climatisation = $climatisation";
+		}
+		$energie = "";
+		if ($energie_id != 1) {
+			$energie = " AND energie_id = $energie_id";
+		}
+		$transmission = "";
+		if ($transmission_id != 1) {
+			$transmission = " AND transmission_id = $transmission_id";
+		}
+		$requette = "SELECT * FROM infovehicule WHERE 1 $typefonction $place $energie $transmission $clim ";
 	//var_dump($requette);
 
-	if ($marques != "") {
-		$marques = explode(",", $marques);
-	}else{
-		$marques = [];
-	}
-	
-	if ($equipements != "") {
-		$equipements = explode(",", $equipements);
-	}else{
-		$equipements = [];
-	}
-
-	$datas = INFOVEHICULE::execute($requette, []);
-
-	foreach ($datas as $key => $info) {
-		$info->actualise();
-		if (count($marques) > 0 && !in_array($info->vehicule->marque_id, $marques)) {
-			unset($datas[$key]);
-			continue;
+		if ($marques != "") {
+			$marques = explode(",", $marques);
+		}else{
+			$marques = [];
 		}
 
-		foreach ($equipements as $key => $value) {
-			if (count($info->fourni("equipement_infovehicule", ["equipement_id ="=>$value])) == 0) {
+		if ($equipements != "") {
+			$equipements = explode(",", $equipements);
+		}else{
+			$equipements = [];
+		}
+
+		$datas = INFOVEHICULE::execute($requette, []);
+
+		foreach ($datas as $key => $info) {
+			$info->actualise();
+			if (count($marques) > 0 && !in_array($info->vehicule->marque_id, $marques)) {
 				unset($datas[$key]);
 				continue;
 			}
+
+			foreach ($equipements as $key => $value) {
+				if (count($info->fourni("equipement_infovehicule", ["equipement_id ="=>$value])) == 0) {
+					unset($datas[$key]);
+					continue;
+				}
+			}
 		}
+		$data->status = true;
+		$data->nb = count($datas);
+	}else{
+		$data->status = false;
+		$data->message = "Veuillez verifier les dates pour la reservation !";
 	}
 
-	$data->nb = count($datas);
 	echo json_encode($data);
 }
 
@@ -177,13 +180,32 @@ if ($action == "fiche") {
 		<h1 class="gras mp0 text-green"><?= money($montant) ?> <?= $params->devise  ?></h1><br>
 		<hr>
 		<div>
-			<button onclick="newReservation()" class="btn btn-default dim"><i class="fa fa-file-text-o"></i> Valider le devis</button>
+			<button onclick="newDevis()" class="btn btn-default dim"><i class="fa fa-file-text-o"></i> Valider le devis</button>
 
 			<button onclick="newReservation()" class="btn btn-primary dim"><i class="fa fa-check"></i> Valider la reservation</button>
 		</div>
 	</div>
-
-
 	<?php
+}
 
+
+
+
+if ($action == "newReservation") {
+	if ($finished >= $started && $started >= dateAjoute()) {
+		$data->status = true;
+		if ($client == TABLE::NON) {
+			$client = new CLIENT;
+			$client->hydrater($_POST);
+			$data = $client->enregistre();
+		}
+		if ($data->status) {
+	# code...
+		}
+	}else{
+		$data->status = false;
+		$data->message = "Veuillez verifier les dates pour la reservation !";
+	}
+
+	echo json_encode($data);
 }

@@ -5,6 +5,11 @@
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/metisMenu/jquery.metisMenu.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/slimscroll/jquery.slimscroll.min.js") ?>"></script>
 
+    <!-- Moment js -->
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/moment/moment.js") ?>"></script>
+    <!-- Date range picker -->
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/daterangepicker/daterangepicker.js") ?>"></script>
+
     <!-- Flot -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/flot/jquery.flot.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/flot/jquery.flot.tooltip.min.js") ?>"></script>
@@ -13,7 +18,6 @@
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/flot/jquery.flot.pie.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/flot/jquery.flot.symbol.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/flot/jquery.flot.time.js") ?>"></script>
-
 
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/inspinia.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/pace/pace.min.js") ?>"></script>
@@ -36,8 +40,6 @@
 
     <!-- Jquery Validate -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/validate/jquery.validate.min.js") ?>"></script>
-
-
     <!-- Data picker -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/datapicker/bootstrap-datepicker.js") ?>"></script>
     <!-- Tags Input -->

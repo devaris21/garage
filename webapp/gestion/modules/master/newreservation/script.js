@@ -76,17 +76,19 @@ $(function(){
 
 
 
-	$("form#formLocation").submit(function(event) {
-		alerty.confirm("Voulez-vous vraiment valider cette location de véhicule ?", {
-			title: "Locations de véhicules",
+	newReservation = function(){
+		alerty.confirm("Voulez-vous vraiment valider cette reservation de véhicule ?", {
+			title: "Nouvelle reservation",
 			cancelLabel : "Non",
 			okLabel : "OUI,  valider",
 		}, function(){
-			var url = "../../webapp/gestion/modules/master/locations/ajax.php";
-			var formData = new FormData($("form#formLocation")[0]);
-			formData.append('action', 'location');
+				Loader.start();
+			var url = "../../webapp/gestion/modules/master/newreservation/ajax.php";
+			var formData = new FormData($("#formReservation")[0]);
+			formData.append('equipements', $("#formReservation").find("select[name=equipement_id]").val());
+			formData.append('marques', $("#formReservation").find("select[name=marque_id]").val());
+			formData.append('action', 'newReservation');
 			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
-				Loader.stop();
 				if (data.status) {
 					location.reload();
 				}else{
@@ -94,8 +96,7 @@ $(function(){
 				}
 			}, 'json');
 		})
-		return false;
-	});
+	};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
