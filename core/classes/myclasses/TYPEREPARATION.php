@@ -3,7 +3,7 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class TRANSMISSION extends TABLE
+class TYPEREPARATION extends TABLE
 {
 
 	public static $tableName = __CLASS__;

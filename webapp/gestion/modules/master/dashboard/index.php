@@ -89,7 +89,7 @@
                                 </div>
                             </div>
 
-                            <button data-toggle="modal" data-target="#modal-newreparation" class="btn btn-success dim btn-block"><i class="fa fa-plus"></i> Nouvelle intervention</button>
+                            <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-success dim btn-block"><i class="fa fa-plus"></i> Nouvelle intervention</button>
                         </div>
                     </div>
 
@@ -244,7 +244,7 @@
 
     <?php include($this->rootPath("webapp/gestion/elements/templates/script.php")); ?>
 
-    <?php //include($this->rootPath("composants/assets/modals/modal-newreparation.php")); ?>  
+    <?php include($this->rootPath("composants/assets/modals/modal-newintervention.php")); ?>  
     <?php //include($this->rootPath("composants/assets/modals/modal-newexpertise.php")); ?>  
     <?php //include($this->rootPath("composants/assets/modals/modal-newvente.php")); ?>  
     <?php //include($this->rootPath("composants/assets/modals/modal-newlocation.php")); ?>  
