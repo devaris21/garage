@@ -17,7 +17,7 @@
 
           <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-3">
-                <h2>File Manager</h2>
+                <h2 class="text-uppercase">Planning de travail</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="index.html">Home</a>
@@ -33,114 +33,22 @@
 
             <div class="col-lg-9">
                 <ul class="sortable-list connectList agile-list row" id="todo">
-                    <div class="col-md-4">
-                        <li class="warning-element" id="task1">
-                            <span class="pull-right"><i class="fa fa-clock-o"></i> 5min</span>
-                            <h4 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> 7884 IG 01</h4>
-                            <span>Toyota Yaris 200 // Rouge</span><br>
-                            <div class="agile-detail">
-                                <a href="#" class="btn btn-xs btn-white">Tag</a>
-                                <a href="#" class="btn btn-xs btn-white">Tollerie</a>
-                                <a href="#" class="btn btn-xs btn-white">Lavage</a>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="col-md-4">
-                        <li class="warning-element" id="task1">
-                            <span class="pull-right"> <i class="fa fa-clock-o fa-2x"></i></span>
-                            <h4 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> 7884 IG 01</h4>
-                            <span>Toyota Yaris 200 // Rouge</span><br>
-                            <div class="agile-detail">
-                                <a href="#" class="btn btn-xs btn-white">Tag</a>
-                                <a href="#" class="btn btn-xs btn-white">Tollerie</a>
-                                <a href="#" class="btn btn-xs btn-white">Lavage</a>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="col-md-4">
-                        <li class="warning-element" id="task1">
-                            <span class="pull-right"> <i class="fa fa-clock-o fa-2x"></i></span>
-                            <h5 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> 7884 IG 01</h5>
-                            <span>Toyota Yaris 200 // Rouge</span><br>
-                            <div class="agile-detail">
-                                <a href="#" class="btn btn-xs btn-white">Tag</a>
-                                <a href="#" class="btn btn-xs btn-white">Tollerie</a>
-                                <a href="#" class="btn btn-xs btn-white">Lavage</a>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="col-md-4">
-                        <li class="warning-element" id="task1">
-                            <span class="pull-right"> <i class="fa fa-clock-o fa-2x"></i></span>
-                            <h4 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> 7884 IG 01</h4>
-                            <span>Toyota Yaris 200 // Rouge</span><br>
-                            <div class="agile-detail">
-                                <a href="#" class="btn btn-xs btn-white">Tag</a>
-                                <a href="#" class="btn btn-xs btn-white">Tollerie</a>
-                                <a href="#" class="btn btn-xs btn-white">Lavage</a>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="col-md-4">
-                        <li class="warning-element" id="task1">
-                            <span class="pull-right"> <i class="fa fa-clock-o fa-2x"></i></span>
-                            <h5 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> 7884 IG 01</h5>
-                            <span>Toyota Yaris 200 // Rouge</span><br>
-                            <div class="agile-detail">
-                                <a href="#" class="btn btn-xs btn-white">Tag</a>
-                                <a href="#" class="btn btn-xs btn-white">Tollerie</a>
-                                <a href="#" class="btn btn-xs btn-white">Lavage</a>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="col-md-4">
-                        <li class="warning-element" id="task1">
-                            <span class="pull-right"> <i class="fa fa-clock-o fa-2x"></i></span>
-                            <h4 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> 7884 IG 01</h4>
-                            <span>Toyota Yaris 200 // Rouge</span><br>
-                            <div class="agile-detail">
-                                <a href="#" class="btn btn-xs btn-white">Tag</a>
-                                <a href="#" class="btn btn-xs btn-white">Tollerie</a>
-                                <a href="#" class="btn btn-xs btn-white">Lavage</a>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="col-md-4">
-                        <li class="warning-element" id="task1">
-                            <span class="pull-right"> <i class="fa fa-clock-o fa-2x"></i></span>
-                            <h5 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> 7884 IG 01</h5>
-                            <span>Toyota Yaris 200 // Rouge</span><br>
-                            <div class="agile-detail">
-                                <a href="#" class="btn btn-xs btn-white">Tag</a>
-                                <a href="#" class="btn btn-xs btn-white">Tollerie</a>
-                                <a href="#" class="btn btn-xs btn-white">Lavage</a>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="col-md-4">
-                        <li class="warning-element" id="task1">
-                            <span class="pull-right"> <i class="fa fa-clock-o fa-2x"></i></span>
-                            <h4 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> 7884 IG 01</h4>
-                            <span>Toyota Yaris 200 // Rouge</span><br>
-                            <div class="agile-detail">
-                                <a href="#" class="btn btn-xs btn-white">Tag</a>
-                                <a href="#" class="btn btn-xs btn-white">Tollerie</a>
-                                <a href="#" class="btn btn-xs btn-white">Lavage</a>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="col-md-4">
-                        <li class="warning-element" id="task1">
-                            <span class="pull-right"> <i class="fa fa-clock-o fa-2x"></i></span>
-                            <h5 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> 7884 IG 01</h5>
-                            <span>Toyota Yaris 200 // Rouge</span><br>
-                            <div class="agile-detail">
-                                <a href="#" class="btn btn-xs btn-white">Tag</a>
-                                <a href="#" class="btn btn-xs btn-white">Tollerie</a>
-                                <a href="#" class="btn btn-xs btn-white">Lavage</a>
-                            </div>
-                        </li>
-                    </div>
+                    <?php foreach ($tickets as $key => $ticket) {
+                        $ticket->actualise(); ?>
+                        <div class="col-md-4">
+                            <li class="<?= $ticket->etatintervention->class ?>-element" id="task1">
+                                <span class="pull-right" title="<?= depuis($ticket->created) ?>"><i class="fa fa-clock-o fa-2x"></i></span>
+                                <h4 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> <?= $ticket->auto->immatriculation ?></h4>
+                                <span><?= $ticket->auto->marque->name() ?> <?= $ticket->auto->modele ?> // <?= $ticket->auto->couleur ?></span><br>
+                                <div class="agile-detail">
+                                    <?php foreach ($ticket->fourni("ticket_typereparation") as $key => $value) {
+                                        $value->actualise(); ?>
+                                        <label class="label"><?= $value->typereparation->name()  ?></label>
+                                    <?php } ?>
+                                </div>
+                            </li>
+                        </div>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
@@ -162,7 +70,7 @@
                                     <div class="panel-body">
 
                                       <div class="row slick_demo_2">
-                                               <div class="col-lg-4">
+                                         <div class="col-lg-4">
                                             <div class="ibox">
                                                 <div class="ibox-content">
                                                     <div class="row">

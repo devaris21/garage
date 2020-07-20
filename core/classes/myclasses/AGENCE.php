@@ -13,7 +13,6 @@ class AGENCE extends TABLE
 
 	public $name;
 	public $lieu;
-	public $comptebanque_id;
 
 	public function enregistre(){
 		$data = new RESPONSE;

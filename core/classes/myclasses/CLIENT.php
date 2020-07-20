@@ -15,11 +15,7 @@ class CLIENT extends PERSONNE
 
 
 	public $typeclient_id;
-	public $typepiece_id;
-	public $numero;
-	public $nomResponsable;
 	
-
 
 	public function enregistre(){
 		$data = new RESPONSE;

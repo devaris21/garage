@@ -51,13 +51,16 @@
                     <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Vue du garage</span> </a>
                 </li>
                 <li class="" id="essais_av">
-                    <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-home"></i> <span class="nav-label">En Essai</span> </a>
+                    <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-home"></i> <span class="nav-label">En Essai AV</span> </a>
                 </li>
                 <li class="" id="devis">
                     <a href="<?= $this->url($this->section, "master", "devis") ?>"><i class="fa fa-file-text-o"></i> <span class="nav-label">Devis en attente</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= count([]) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="essais_ap">
                     <a href="<?= $this->url($this->section, "master", "essais_ap") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Sous Intervention</span> </a>
+                </li>
+                  <li class="" id="essais_av">
+                    <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-home"></i> <span class="nav-label">En Essai AP</span> </a>
                 </li>
                 <li class="" id="essais_av">
                     <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-home"></i> <span class="nav-label">Au lavage</span> </a>

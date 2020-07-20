@@ -26,6 +26,9 @@
                     <h1 class="logo-name text-center" style="font-size: 90px; letter-spacing: 5px; margin: 0% !important; padding: 0% !important;">GRG</h1>
                     <form method="POST" class="m-t" role="form" id="formConnexion" >
                         <div class="form-group">
+                            <?php Native\BINDING::html('select', "agence") ?>
+                        </div>
+                        <div class="form-group">
                             <input type="text" name="login" class="form-control" placeholder="identifiant" required>
                         </div>
                         <div class="form-group">
@@ -47,17 +50,13 @@
                 &copy; DEVARIS 21, tous droits reservés
             </div>
             <div class="col-md-6 text-right">
-               <small>© 2019-2020</small>
-           </div>
-       </div>
+             <small>© 2019-2020</small>
+         </div>
+     </div>
 
-   </div>
+ </div>
 
-   <div style="position: absolute; bottom: 0; height: 250px; width: 100%; background-image: url(<?= $this->stockage("images", "societe", "fond.png") ?>) !important; background-size: 100%; background-repeat: no-repeat;">
-
-   </div>
-
-   <div class="modal inmodal" id="modal-newUser" tabindex="-1" role="dialog" aria-hidden="true">
+ <div class="modal inmodal" id="modal-newUser" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog ">
         <div class="modal-content animated bounceInRight">
             <div class="modal-header">

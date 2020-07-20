@@ -1,14 +1,12 @@
 <?php 
 namespace Home;
-//VEHICULE::etat();
 
-// if ($this->getId() != null && intval($this->getId()) > 0) {
-// 	$datas = VEHICULE::findBy(["id="=>$this->getId()]);
-// 	if (count($datas) == 1) {
-// 		session("vehicule_id", $this->getId());
-// 		$levehicule = $datas[0];
-// 		$levehicule->actualise();
-// 		$levehicule->etat();
+if ($this->getId() != null && intval($this->getId()) > 0) {
+	$datas = TICKET::findBy(["id="=>$this->getId()]);
+	if (count($datas) == 1) {
+		session("ticket_id", $this->getId());
+		$ticket = $datas[0];
+		$ticket->actualise();
 
 // 		$datas1 = $levehicule->fourni("piecevehicule");
 // 		$datas2 = $levehicule->fourni("assurance");
@@ -52,13 +50,13 @@ namespace Home;
 // 		$historiques = array_merge($datas, $datas5, $datas6, $historiques);
 // 		usort($historiques, "comparerDateCreated");
 
-// 		$title = "AMB | ".$levehicule->name();
+	$title = "AMB | Ticket N°".$ticket->reference;
 
-// 	}else{
-// 		header("Location: ../master/parcauto");
-// 	}
-// }else{
-// 	header("Location: ../master/parcauto");
-// }
+	}else{
+		header("Location: ../master/parcauto");
+	}
+}else{
+	header("Location: ../master/parcauto");
+}
 
 ?>

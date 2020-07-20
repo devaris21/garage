@@ -24,6 +24,8 @@ class ETATINTERVENTION extends TABLE
 	public $name;
 	public $class;
 
+	// danger, warning, info, blue, navy, default, "", primary, "success", "dark"
+
 	public function enregistre(){}
 
 

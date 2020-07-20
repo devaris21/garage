@@ -22,22 +22,22 @@
                             <small>You have 42 messages and 6 notifications.</small>
                             <ul class="list-group clear-list m-t">
                                 <li class="list-group-item fist-item">
-                                    <i class="fa fa-wrench"></i> Tickets en attente <span class="label label-success float-right">1</span>
+                                    <i class="fa fa-wrench"></i> Tickets en attente <span class="label label-success float-right"> <?= start0(count(Home\TICKET::etat(Home\ETATINTERVENTION::NOUVEAU)))  ?></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <i class="fa fa-wrench"></i> Véhicules en Essai AV. <span class="label label-success float-right">1</span>
+                                    <i class="fa fa-wrench"></i> Véhicules en Essai AV. <span class="label label-success float-right"><?= start0(count(Home\TICKET::etat(Home\ETATINTERVENTION::ESSAI_AVANT) + Home\TICKET::etat(Home\ETATINTERVENTION::ESSAI_AVANT_CHEF)))  ?></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <i class="fa fa-wrench"></i> Véhicules sous intervention <span class="label label-success float-right">1</span>
+                                    <i class="fa fa-wrench"></i> Véhicules sous intervention <span class="label label-success float-right"><?= start0(count(Home\TICKET::etat(Home\ETATINTERVENTION::INTERVENTION)))  ?></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <i class="fa fa-wrench"></i> Véhicules en Essai AP. <span class="label label-success float-right">1</span>
+                                    <i class="fa fa-wrench"></i> Véhicules en Essai AP. <span class="label label-success float-right"><?= start0(count(Home\TICKET::etat(Home\ETATINTERVENTION::ESSAI_APRES_CHEF)))  ?></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <i class="fa fa-wrench"></i> Véhicules au Lavage <span class="label label-success float-right">1</span>
+                                    <i class="fa fa-wrench"></i> Véhicules au Lavage <span class="label label-success float-right"><?= start0(count(Home\TICKET::etat(Home\ETATINTERVENTION::LAVAGE)))  ?></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <i class="fa fa-wrench"></i> Véhicules Prêt à être livrer <span class="label label-success float-right">1</span>
+                                    <i class="fa fa-wrench"></i> Véhicules Prêt à être livrer <span class="label label-success float-right"><?= start0(count(Home\TICKET::etat(Home\ETATINTERVENTION::LIVRAISON)))  ?></span>
                                 </li>
                             </ul>
                         </div>
@@ -114,7 +114,7 @@
                                         <div class="ibox-title">
                                             <h5>Nouvelle intervention</h5>
                                             <div class="ibox-tools">
-                                                <span class="label label-warning-light float-right">10 Messages</span>
+                                                <span class="label label-warning-light float-right"><?= count($nouveaux) ?> Nouveaux</span>
                                             </div>
                                         </div>
                                         <div class="ibox-content">
@@ -122,19 +122,26 @@
                                             <div>
                                                 <div class="feed-activity-list">
 
-
-                                                    <div class="feed-element">
-                                                        <div class="media-body ">
-                                                            <small class="float-right text-navy">5h ago</small>
-                                                            <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                                            <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                                            <div class="actions">
-                                                                <a href=""  class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a href=""  class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
+                                                    <?php foreach ($nouveaux as $key => $ticket) {
+                                                        $ticket->actualise(); ?>
+                                                        <div class="feed-element">
+                                                            <div class="media-body">
+                                                                <small class="float-right text-navy" title="<?= datelong($ticket->created)  ?>"><i class="fa fa-clock-o"></i> <?= depuis($ticket->created)  ?></small>
+                                                                <span class="text-uppercase gras"> TICKET N°<?= $ticket->reference ?></span><br>
+                                                                <small class="text-muted">Client : <?= $ticket->client->name()  ?></small><br>
+                                                                <strong><?= $ticket->auto->marque->name() ?> <?= $ticket->auto->modele  ?></strong> immatriculé <strong><?= $ticket->auto->immatriculation  ?></strong><br>
+                                                                <?php foreach ($ticket->fourni("ticket_typereparation") as $key => $value) {
+                                                                    $value->actualise(); ?>
+                                                                    <label class="label"><?= $value->typereparation->name()  ?></label>
+                                                                <?php } ?>
+                                                                <div class="">
+                                                                    <a href=""  class="btn btn-xs btn-white"><i class="fa fa-plus"></i> Aller en Essai </a>
+                                                                    <a href="" class="btn btn-xs btn-white pull-right"><i class="fa fa-close text-danger"></i></a>
+                                                                    <a href="<?= $this->url("gestion", "master", "ticket", $ticket->id)  ?>" class="btn btn-xs btn-white pull-right"><i class="fa fa-file-text-o"></i> Plus de détails</a>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-
+                                                    <?php } ?>
                                                 </div>
 
                                             </div>
@@ -145,7 +152,7 @@
                                 <div class="col-lg-4">
                                     <div class="ibox ">
                                         <div class="ibox-title">
-                                            <h5>Devis en attente</h5>
+                                            <h5>Devis en attente de validation</h5>
                                             <div class="ibox-tools">
                                                 <a class="collapse-link" href="">
                                                     <i class="fa fa-chevron-up"></i>

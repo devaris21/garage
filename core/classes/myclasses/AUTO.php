@@ -13,12 +13,8 @@ class AUTO extends TABLE
 	public $immatriculation;
 	public $marque_id;
 	public $modele;
+	public $vin;
 	public $couleur;
-	public $etatvehicule_id = ETATVEHICULE::RAS;
-
-	public $image1;
-	public $image2;
-	public $image3;
 
 
 	public function enregistre(){
@@ -28,9 +24,6 @@ class AUTO extends TABLE
 			if (count($datas) == 1) {
 				if ($this->immatriculation != "") {
 					$data = $this->save();
-					if ($data->status) {
-						$this->uploading($this->files);
-					}
 				}else{
 					$data->status = false;
 					$data->message = "Veuillez renseigner l'immatriculation du véhicule !";
@@ -48,27 +41,6 @@ class AUTO extends TABLE
 	
 
 
-	public function uploading(Array $files){
-		//les proprites d'images;
-		$tab = ["image1", "image2", "image3"];
-		if (is_array($files) && count($files) > 0) {
-			$i = 0;
-			foreach ($files as $key => $file) {
-				if ($file["tmp_name"] != "") {
-					$image = new FICHIER();
-					$image->hydrater($file);
-					if ($image->is_image()) {
-						$a = substr(uniqid(), 5);
-						$result = $image->upload("images", "vehicules", $a);
-						$name = $tab[$i];
-						$this->$name = $result->filename;
-						$this->save();
-					}
-				}	
-				$i++;			
-			}			
-		}
-	}
 
 	public function name(){
 		return $this->marque->name()." ".$this->modele." - ".$this->immatriculation;

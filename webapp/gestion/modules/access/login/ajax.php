@@ -12,13 +12,21 @@ if ($action == "connexion") {
 	$data = EMPLOYE::connect(["login = "=> $login, "password = "=>hasher($password)]);
 	if ($data->status) {
 		$user = $data->element;
-		if (!$data->new) {
-			$user->se_connecter();
-			session("employe_connecte_id", $user->getId());
-			$data->setUrl("gestion", "master", "dashboard", "1");
+		$datas = $user->fourni("employe_agence", ["agence_id ="=>$agence_id]);
+		if (count($datas) == 1) {
+			$agence = $datas[0];
+			session("agence_connecte_id", $agence->getId());
+			if (!$data->new) {
+				$user->se_connecter();
+				session("employe_connecte_id", $user->getId());
+				$data->setUrl("gestion", "master", "dashboard", "1");
+			}else{
+				session("temp_employe_id", $user->getId());	
+			}
 		}else{
-			session("temp_employe_id", $user->getId());	
-		}
+			$data->status = false;
+			$data->message = "Vous ne pouvez vous connecter à cette agence !";
+		}		
 	}		
 	echo json_encode($data);
 }
