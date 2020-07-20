@@ -1,5 +1,7 @@
     <!-- Mainly scripts -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/jquery-3.1.1.min.js") ?>"></script>
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/jquery-ui/jquery-ui.min.js") ?>"></script>
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/touchpunch/jquery.ui.touch-punch.min.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/popper.min.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/bootstrap.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/metisMenu/jquery.metisMenu.js") ?>"></script>
@@ -36,6 +38,9 @@
         <!-- Tags Input -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/clockpicker/clockpicker.js") ?>"></script>
+
+
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/slick/slick.min.js") ?>"></script>
 
     <!-- mansory -->
     <script src="<?= $this->rootPath("composants/dist/js/plugins/masonary/masonry.pkgd.min.js") ?>"></script>

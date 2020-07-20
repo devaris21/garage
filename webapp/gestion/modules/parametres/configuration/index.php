@@ -516,7 +516,7 @@
                                                 $item->actualise();  ?>
                                                 <tr>
                                                     <td>
-                                                        <?php if ($item->is_allowed == 1) { ?>
+                                                        <?php if ($item->isAllowed == 1) { ?>
                                                             <span class="label label-success">Actif</span>
                                                         <?php }else{ ?>
                                                             <span class="label label-danger">Bloqué</span>
@@ -529,7 +529,7 @@
                                                         <span> <?= $item->contact ?></span>
                                                     </td>
                                                     <td>
-                                                        <?php if ($item->is_new == 1) { ?>
+                                                        <?php if ($item->isNew == 1) { ?>
                                                             <span class="">Login: <?= $item->login ?></span><br>
                                                             <span class="">Pass: <?= $item->pass ?></span>
                                                         <?php } ?>
@@ -551,7 +551,7 @@
                                                            <td class="text-right">          
                                                             <button onclick="resetPassword('employe', <?= $item->getId() ?>)" class="btn btn-white btn-xs"><i class="fa fa-refresh text-blue"></i> Init. mot de passe</button><br>
 
-                                                            <?php if ($item->is_allowed == 1) { ?>
+                                                            <?php if ($item->isAllowed == 1) { ?>
                                                                 <button onclick="lock('employe', <?= $item->getId() ?>)" class="btn btn-white btn-xs"><i class="fa fa-lock text-orange"></i> Bloquer</button>
                                                             <?php }else{ ?>
                                                                 <button onclick="unlock('employe', <?= $item->getId() ?>)" class="btn btn-white btn-xs"><i class="fa fa-unlock text-green"></i> Débloquer</button>

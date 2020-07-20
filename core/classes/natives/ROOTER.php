@@ -86,7 +86,7 @@ class ROOTER extends PATH
                         $datas = EMPLOYE::findBy(["id = "=>getSession("employe_connecte_id")]);
                         if (count($datas) >0) {
                             $employe = $datas[0];
-                            if ($employe->is_allowed()) {
+                            if ($employe->isAllowed()) {
                                 $tableauDeRoles = [];
                                 foreach ($employe->fourni("role_employe") as $key => $value) {
                                     $tableauDeRoles[] = $value->role_id;
@@ -128,7 +128,7 @@ class ROOTER extends PATH
                         $datas = EMPLOYE::findBy(["id = "=>getSession("employe_connecte_id")]);
                         if (count($datas) >0) {
                             $employe = $datas[0];
-                            if ($employe->is_allowed()) {
+                            if ($employe->isAllowed()) {
                                 $employe->actualise();
                                 $boutique = $employe->boutique;
                             }else{
@@ -148,7 +148,7 @@ class ROOTER extends PATH
                         $datas = EMPLOYE::findBy(["id = "=>getSession("employe_connecte_id")]);
                         if (count($datas) >0) {
                             $employe = $datas[0];
-                            if ($employe->is_allowed()) {
+                            if ($employe->isAllowed()) {
                                 $employe->actualise();
                                 $entrepot = $employe->entrepot;
                             }else{

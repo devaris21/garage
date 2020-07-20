@@ -5,7 +5,7 @@ use Native\FICHIER;
 /**
  * 
  */
-class VEHICULE extends TABLE
+class AUTO extends TABLE
 {
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;

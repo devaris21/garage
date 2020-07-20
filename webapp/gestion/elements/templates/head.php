@@ -36,6 +36,9 @@
     <link href="<?= $this->rootPath("composants/dist/css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css") ?>" rel="stylesheet">
     <link href="<?= $this->rootPath("composants/dist/css/plugins/clockpicker/clockpicker.css") ?>" rel="stylesheet">
 
+    <link href="<?= $this->rootPath("composants/dist/css/plugins/slick/slick.css") ?>" rel="stylesheet">
+    <link href="<?= $this->rootPath("composants/dist/css/plugins/slick/slick-theme.css") ?>" rel="stylesheet">
+
 
     <!-- FooTable -->
     <link href="<?= $this->rootPath("composants/dist/css/plugins/footable/footable.core.css") ?>" rel="stylesheet">
