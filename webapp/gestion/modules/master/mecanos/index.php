@@ -28,7 +28,7 @@
             </div>
             <div class="col-sm-8">
                 <div class="title-action">
-                    <a href="" class="btn btn-primary">This is action area</a>
+                    <a href="#" data-toggle="modal" data-target="#modal-mecanicien" class="btn btn-primary"><i class="fa fa-plus"></i> Nouveau mecano</a>
                 </div>
             </div>
         </div>
@@ -46,17 +46,17 @@
                             <div class="tab-content">
                                 <div role="tabpanel" id="tab-1" class="tab-pane active">
                                     <div class="bg-light">
-                                     <div>
+                                       <div>
 
-                                     </div><br>
+                                       </div><br>
 
-                                     <div class="row">
+                                       <div class="row">
                                         <?php foreach ($mecanos as $key => $mecano) {
                                             $mecano->actualise(); ?>
                                             <div class="col-lg-3 col-md-4 col-sm-6 hoverable" style="margin-bottom: 1%">
                                                 <div class="contact-box mp3">
                                                     <a href="#">
-                                                     <div class="row">
+                                                       <div class="row">
                                                         <div class="col-3">
                                                             <div class="text-center">
                                                                 <img alt="image" class="rounded-circle m-t-xs img-fluid" src="<?= $this->stockage("images", "mecaniciens", $mecano->image)  ?>">
@@ -86,7 +86,7 @@
                                 </div><br>
 
                                 <div class="row">
-                                 <?php foreach ($groupes as $key => $groupe) {
+                                   <?php foreach ($groupes as $key => $groupe) {
                                     $groupe->actualise();
                                     $datas = $groupe->fourni("mecanicien"); ?>
                                     <div class="col-md-4 col-sm-6">
@@ -153,6 +153,7 @@
 
 
 <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
+<?php include($this->rootPath("composants/assets/modals/modal-mecanicien.php")); ?>  
 
 
 </div>

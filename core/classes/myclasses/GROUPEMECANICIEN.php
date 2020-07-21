@@ -12,11 +12,13 @@ class GROUPEMECANICIEN extends TABLE
 	const STANDART = 1;
 
 	public $name;
+	public $agence_id;
 	public $description;
 
 	public function enregistre(){
 		$data = new RESPONSE;
 		if ($this->name != "") {
+			$this->agence_id = getSession("agence_connecte_id");
 			$data = $this->save();
 		}else{
 			$data->status = false;

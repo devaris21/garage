@@ -10,16 +10,6 @@ $item->setProtected(1);
 $item->save();
 
 
-$datas = ["Voiture", "Moto", "Car / Bus", "Tricycle"];
-foreach ($datas as $key => $value) {
-	$item = new TYPEVEHICULE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
-
-
-
 $datas = ["Mecanique", "Tollerie", "peinture", "Carrosserie", "Vente de pièces détachées", "Devis", "Expertise"];
 foreach ($datas as $key => $value) {
 	$item = new TYPEREPARATION();
@@ -65,19 +55,6 @@ foreach ($datas as $key => $value) {
 }
 
 
-$item = new SEXE();
-$item->name = "Homme";
-$item->abreviation = "H";
-$item->setProtected(1);
-$item->save();
-
-$item = new SEXE();
-$item->name = "Femme";
-$item->abreviation = "F";
-$item->setProtected(1);
-$item->save();
-
-
 $datas = ["master", "caisse", "parametres", "modifier-supprimer", "archives"];
 foreach ($datas as $key => $value) {
 	$item = new ROLE();
@@ -110,7 +87,7 @@ $item = new CLIENT();
 $item->name = "Monsieur Tout le Monde";
 $item->adresse = "...";
 $item->contact = "...";
-$item->visibility = 0;
+$item->typeclient_id = TYPECLIENT::PARTICULIER;
 $item->setProtected(1);
 $item->save();
 
@@ -242,27 +219,6 @@ $item->save();
 
 
 
-$item = new DISPONIBILITE();
-$item->name = "Indisponible";
-$item->class = "danger";
-$item->setProtected(1);
-$item->save();
-
-$item = new DISPONIBILITE();
-$item->name = "Libre";
-$item->class = "warning";
-$item->setProtected(1);
-$item->save();
-
-$item = new DISPONIBILITE();
-$item->name = "En mission";
-$item->class = "info";
-$item->setProtected(1);
-$item->save();
-
-
-
-
 $item = new EMPLOYE();
 $item->name = "Super Administrateur";
 $item->email = "info@devaris21.com";
@@ -346,35 +302,16 @@ foreach ($datas as $key => $value) {
 
 $datas = ["standart"];
 foreach ($datas as $key => $value) {
-	$item = new TYPEVEHICULE();
+
+	$item = new GROUPEMECANICIEN();
 	$item->name = $value;
 	$item->setProtected(1);
 	$item->save();
 
-	$item = new TYPETRANSMISSION();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-
-	$item = new TYPEPRESTATAIRE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-
-	$item = new ENERGIE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-
-	$item = new GROUPEMANOEUVRE();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-
-	$item = new TYPESUGGESTION();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
+	// $item = new TYPESUGGESTION();
+	// $item->name = $value;
+	// $item->setProtected(1);
+	// $item->save();
 }
 
 ?>

@@ -9,6 +9,10 @@ class TYPECLIENT extends TABLE
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
+	const PARTICULIER = 1;
+	const ENTREPRISE = 2;
+	const PARTENAIRE = 3;
+
 	public $name;
 
 	public function enregistre(){
