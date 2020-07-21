@@ -76,7 +76,7 @@
                     <a href="<?= $this->url($this->section, "master", "clients") ?>"><i class="fa fa-male"></i> <span class="nav-label">Liste des clients</span></a>
                 </li>
                 <li class="" id="mecaniciens">
-                    <a href="<?= $this->url($this->section, "master", "mecaniciens") ?>"><i class="fa fa-users"></i> <span class="nav-label">Liste des mécaniciens</span></a>
+                    <a href="<?= $this->url($this->section, "master", "mecanos") ?>"><i class="fa fa-users"></i> <span class="nav-label">Liste des mécaniciens</span></a>
                 </li>
 
 

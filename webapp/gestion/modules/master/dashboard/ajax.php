@@ -75,3 +75,25 @@ if ($action == "newTicket") {
 
 	echo json_encode($data);
 }
+
+
+
+if ($action == "newEssai") {
+	$datas = TICKET::findBy(["id ="=>$ticket_id]);
+	if (count($datas) == 1) {
+		$ticket = $datas[0];
+
+		$essai = new ESSAI;
+		$essai->hydrater($_POST);
+		$essai->ticket_id = $ticket->id;
+		$data = $essai->enregistre();
+		if ($data->status) {
+			$data = $ticket->next();
+		}
+	}else{
+		$data->status = false;
+		$data->message = "Veuillez renseigner le nom complet du client !";
+	}
+
+	echo json_encode($data);
+}

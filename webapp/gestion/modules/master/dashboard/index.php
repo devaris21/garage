@@ -135,7 +135,7 @@
                                                                     <label class="label"><?= $value->typereparation->name()  ?></label>
                                                                 <?php } ?>
                                                                 <div class="">
-                                                                    <a href=""  class="btn btn-xs btn-white"><i class="fa fa-plus"></i> Aller en Essai </a>
+                                                                    <a href="#" data-toggle="modal" data-target="#modal-essai_av-<?= $ticket->id  ?>" class="btn btn-xs btn-white"><i class="fa fa-plus"></i> Aller en Essai </a>
                                                                     <a href="" class="btn btn-xs btn-white pull-right"><i class="fa fa-close text-danger"></i></a>
                                                                     <a href="<?= $this->url("gestion", "master", "ticket", $ticket->id)  ?>" class="btn btn-xs btn-white pull-right"><i class="fa fa-file-text-o"></i> Plus de détails</a>
                                                                 </div>
@@ -251,8 +251,12 @@
 
     <?php include($this->rootPath("webapp/gestion/elements/templates/script.php")); ?>
 
-    <?php include($this->rootPath("composants/assets/modals/modal-newintervention.php")); ?>  
-    <?php //include($this->rootPath("composants/assets/modals/modal-newexpertise.php")); ?>  
+
+    <?php foreach ($nouveaux as $key => $ticket) {
+        include($this->rootPath("composants/assets/modals/modal-essai_av.php"));
+    }
+    ?>  
+    <?php include($this->rootPath("composants/assets/modals/modal-newintervention.php")); ?>
     <?php //include($this->rootPath("composants/assets/modals/modal-newvente.php")); ?>  
     <?php //include($this->rootPath("composants/assets/modals/modal-newlocation.php")); ?>  
     <?php //include($this->rootPath("composants/assets/modals/modal-newdevis.php")); ?>  

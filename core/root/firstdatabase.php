@@ -55,6 +55,16 @@ foreach ($datas as $key => $value) {
 	$item->save();
 }
 
+
+$datas = ["Essai avant travaux", "Essai avant travaux (chef)", "Essai apres travaux"];
+foreach ($datas as $key => $value) {
+	$item = new TYPEESSAI();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
+
+
 $item = new SEXE();
 $item->name = "Homme";
 $item->abreviation = "H";

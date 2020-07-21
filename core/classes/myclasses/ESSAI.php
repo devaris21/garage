@@ -3,35 +3,35 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class TICKET extends TABLE
+class ESSAI extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $agence_id;
 	public $reference;
-	public $auto_id;
-	public $vin;
-	public $client_id;
-	public $constat;
-	public $autreremarque;
-	public $kilometrage;
-	public $niveaucarburant_id;
-	public $etatintervention_id = ETATINTERVENTION::NOUVEAU;
+	public $ticket_id;
+	public $typeessai_id;
+	public $mecanicien_id;
 	public $etat_id = ETAT::ENCOURS;
 	public $employe_id;
 
+
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = AUTO::findBy(["id ="=>$this->auto_id]);
+		$datas = TICKET::findBy(["id ="=>$this->ticket_id]);
 		if (count($datas) == 1) {
-			$datas = CLIENT::findBy(["id ="=>$this->client_id]);
+			$datas = TYPEESSAI::findBy(["id ="=>$this->typeessai_id]);
 			if (count($datas) == 1) {
-				$this->reference = strtoupper(substr(uniqid(), 7, 8));
-				$this->agence_id = getSession("agence_connecte_id");
-				$this->employe_id = getSession("employe_connecte_id");
-				$data = $this->save();
+				$datas = MECANICIEN::findBy(["id ="=>$this->mecanicien_id]);
+				if (count($datas) == 1) {
+					$this->reference = strtoupper("ESSAI-".substr(uniqid(), 7, 8));
+					$this->employe_id = getSession("employe_connecte_id");
+					$data = $this->save();
+				}else{
+					$data->status = false;
+					$data->status = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";
+				}
 			}else{
 				$data->status = false;
 				$data->status = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";
@@ -44,31 +44,10 @@ class TICKET extends TABLE
 	}
 
 
+
 	public static function etat (int $type){
 		return static::findBy(["etatintervention_id = "=>$type, "etat_id != "=>ETAT::ANNULEE]);
 	}
-
-
-	public function next(int $next = null){
-		if ($this->etatintervention_id < ETATINTERVENTION::TERMINE) {
-			if ($this->etatintervention_id == ETATINTERVENTION::LIVRAISON) {
-				if ($next != null) {
-					$this->etatintervention_id = $next; 
-					if ($next == ETATINTERVENTION::TERMINE) {
-						$this->etat_id = ETAT::VALIDEE;
-					}
-				}else{
-					$this->etatintervention_id++; 
-				}
-			}else{
-				$this->etatintervention_id++;
-				$this->etat_id = ETAT::VALIDEE;
-			}
-		}
-		return $this->save();
-	}
-
-
 
 	public function sentenseCreate(){
 		return $this->sentense = "Creation d'un nouveau ticket: $this->reference ";

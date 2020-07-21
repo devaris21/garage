@@ -3,18 +3,18 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class LISTECONSTAT extends TABLE
+class LISTECONSTATESSAI extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $inspection_id;
+	public $essai_id;
 	public $constat;
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = INSPECTION::findBy(["id ="=>$inspection_id]);
+		$datas = ESSAI::findBy(["id ="=>$essai_id]);
 		if (count($datas) == 1) {
 			if ($this->constat != "") {
 				$data = $this->save();

@@ -18,7 +18,7 @@ class ETATINTERVENTION extends TABLE
 	const ESSAI_APRES_CHEF = 7;
 	const LAVAGE           = 8;
 	const LIVRAISON        = 9;
-	const VALIDEE          = 10;
+	const TERMINE          = 10;
 
 
 	public $name;

@@ -56,4 +56,21 @@ $(function(){
 			}, 'json');
 		})
 	};
+
+
+	$("#formEssai_av").submit(function(){
+		alert(";bjsj");
+		Loader.start();
+		var url = "../../webapp/gestion/modules/master/dashboard/ajax.php";
+		var formData = new FormData($(this)[0]);
+		formData.append('action', 'newEssai');
+		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
+			if (data.status) {
+				location.reload();
+			}else{
+				Alerter.error('Erreur !', data.message);
+			}
+		}, 'json');
+		return false;
+	})
 })

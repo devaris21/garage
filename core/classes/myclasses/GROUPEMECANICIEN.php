@@ -9,7 +9,10 @@ class GROUPEMECANICIEN extends TABLE
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
+	const STANDART = 1;
+
 	public $name;
+	public $description;
 
 	public function enregistre(){
 		$data = new RESPONSE;
