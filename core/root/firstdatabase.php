@@ -240,7 +240,7 @@ foreach (ROLE::getAll() as $key => $value) {
 $datas = ["Vide", "1/4", "1/3", "1/2", "3/4", "Plein"];
 foreach ($datas as $key => $value) {
 	$item = new NIVEAUCARBURANT();
-	$item->price = $value;
+	$item->name = $value;
 	$item->setProtected(1);
 	$item->enregistre();
 }

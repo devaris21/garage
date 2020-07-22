@@ -49,6 +49,14 @@ if ($action == "newTicket") {
 										$item->quantite = $_POST[$name];
 										$item->enregistre();
 									}
+
+									$enjoliveurs = explode(",", $enjoliveurs);
+									foreach ($enjoliveurs as $key => $value) {
+										$item = new LISTETYPEENJOLIVEUR;
+										$item->ticket_id = $ticket->id;
+										$item->typeenjoliveur_id = $value;
+										$item->enregistre();
+									}
 								}
 							}
 						}

@@ -1,5 +1,6 @@
 <?php 
 namespace Home;
+unset_session("tableau");
 
 $essais = ESSAI::findBy(["typeessai_id != "=>TYPEESSAI::APRES, "etat_id ="=>ETAT::ENCOURS]);
 foreach ($essais as $key => $value) {

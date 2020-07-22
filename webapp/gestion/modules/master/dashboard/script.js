@@ -46,6 +46,14 @@ $(function(){
 			})
 			formData.append('equipementautos', tab);
 
+			tab = new Array();
+			$("input[name=enjoliveurs]").each(function(){
+				if ($(this).is(":checked")){
+					tab.push($(this).attr('id'));
+				}
+			})
+			formData.append('enjoliveurs', tab);
+
 			formData.append('action', 'newTicket');
 			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
 				if (data.status) {
@@ -59,7 +67,6 @@ $(function(){
 
 
 	$("#formEssai_av").submit(function(){
-		alert(";bjsj");
 		Loader.start();
 		var url = "../../webapp/gestion/modules/master/dashboard/ajax.php";
 		var formData = new FormData($(this)[0]);

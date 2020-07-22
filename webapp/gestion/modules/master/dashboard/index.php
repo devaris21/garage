@@ -258,7 +258,6 @@
     ?>  
     <?php include($this->rootPath("composants/assets/modals/modal-newintervention.php")); ?>
     <?php //include($this->rootPath("composants/assets/modals/modal-newvente.php")); ?>  
-    <?php //include($this->rootPath("composants/assets/modals/modal-newlocation.php")); ?>  
     <?php //include($this->rootPath("composants/assets/modals/modal-newdevis.php")); ?>  
 
 

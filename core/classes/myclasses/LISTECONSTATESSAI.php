@@ -14,7 +14,7 @@ class LISTECONSTATESSAI extends TABLE
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = ESSAI::findBy(["id ="=>$essai_id]);
+		$datas = ESSAI::findBy(["id ="=>$this->essai_id]);
 		if (count($datas) == 1) {
 			if ($this->constat != "") {
 				$data = $this->save();
@@ -30,14 +30,5 @@ class LISTECONSTATESSAI extends TABLE
 	}
 
 
-	public function sentenseCreate(){
-		return $this->sentense = "Ajout d'une nouvel accessoire: $this->name dans les paramétrages";
-	}
-	public function sentenseUpdate(){
-		return $this->sentense = "Modification des informations de l'accessoire $this->id : $this->name ";
-	}
-	public function sentenseDelete(){
-		return $this->sentense = "Suppression definitive de l'accessoire $this->id : $this->name";
-	}
 }
 ?>

@@ -42,11 +42,11 @@
                                             <label><input type="checkbox" class="i-checks" name="typereparation" id="<?= $value->getId() ?>"> <?= $value->name  ?></label>
                                         </div>
                                     <?php }  ?>
-                                </div>
+                                </div><br>
 
                                 <div class="">
                                     <div class="form-group">
-                                        <label class="col-form-label" for="order_id">Constat du client</label>
+                                        <label class="col-form-label" for="order_id">Constat fait par le client</label>
                                         <textarea class="form-control" name="constat" rows="5" required></textarea>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                         </div>
 
 
-                        <div class="col-sm-4 border-right">
+                        <div class="col-sm-4">
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label class="col-form-label" for="status">Marque du véhicule</label>
@@ -72,6 +72,11 @@
                                 <input type="text" class="form-control" name="immatriculation" uppercase required>
                             </div>
 
+                            <div class="form-group">
+                                <label class="col-form-label">Vehicule Identification Number (VIN)</label>
+                                <input type="text" class="form-control" name="vin" uppercase >
+                            </div>
+
                             <div class="row">
                                 <div class="form-group col-7">
                                     <label class="col-form-label">Couleur</label>
@@ -82,8 +87,22 @@
                                     <label class="col-form-label">Kilometrage</label>
                                     <input type="number" class="form-control" name="kilometrage" required>
                                 </div>
-                            </div><br>
+                            </div>
 
+                            <label class="gras">Niveau de carburant</label><br>
+                            <?php Native\BINDING::html("radio", "niveaucarburant") ?><br>
+
+
+                            <div class="">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="order_id">Autres remarques éventuelles </label>
+                                    <textarea class="form-control" name="autreremarque" rows="4" required></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-4">
                             <label class="gras">Equipements du véhicule</label>
                             <?php foreach (Home\EQUIPEMENTAUTO::getall() as $key => $value) { ?>
                                 <div class="row">
@@ -94,29 +113,28 @@
                                         <input type="number" min="1" value="1" class="form-control" name="equipementauto-<?= $value->getId() ?>" disabled >
                                     </div>
                                 </div>
-                            <?php }  ?>
-                        </div>
+                                <?php }  ?><br>
 
-                        <div class="col-sm-4">
-                            <div class="row">
-                                <?php foreach (Home\OPTIONREPARATION::getall() as $key => $value) { ?>
-                                    <div class="col-sm-6">
-                                        <label><input type="checkbox" class="i-checks" name=""> <?= $value->name  ?></label>
-                                    </div>
-                                <?php }  ?>
+                                <label class="gras">Enjoliveurs sur le véhicule</label>
+                                <div class="row">
+                                    <?php foreach (Home\TYPEENJOLIVEUR::getall() as $key => $value) { ?>
+                                        <div class="col-sm-6">
+                                            <label><input type="checkbox" class="i-checks" name="enjoliveurs" id="<?= $value->getId() ?>" > <?= $value->name()  ?></label>
+                                        </div>
+                                    <?php }  ?>
+                                </div>
                             </div>
+                        </div><hr>
+                        <div class="container">
+                            <input type="hidden" name="id">
+                            <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
+                            <button type="button" onclick="newTicket()" class="btn dim btn-primary pull-right"><i class="fa fa-refresh"></i> Valider le formulaire</button>
                         </div>
-                    </div><hr>
-                    <div class="container">
-                        <input type="hidden" name="id">
-                        <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
-                        <button type="button" onclick="newTicket()" class="btn dim btn-primary pull-right"><i class="fa fa-refresh"></i> Valider le formulaire</button>
-                    </div>
-                </form>
+                    </form>
 
 
+                </div>
             </div>
         </div>
-    </div>
 
 

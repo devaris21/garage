@@ -39,7 +39,7 @@
                             <div class="panel-body">
                                 <div class="row">
 
-                                    <div class="col-md-6 border-right">
+                                    <div class="col-md-5 border-right">
                                         <div class="row">
                                             <div class="col-3">
                                                 <div class="text-center" data-toggle="tooltip">
@@ -48,7 +48,7 @@
                                             </div>
                                             <div class="col-9">
                                                 <h2 class="gras text-navy" style="margin: 0"><strong><?= $ticket->client->name() ?></strong> 
-                                                    <span  data-toggle=modal data-target="#modal-client" class="cursor" onclick="modification('ticket', <?= $ticket->id ?>)"><i data-toggle='tooltip' title="Modiifer les infos du client" class="fa fa-pencil cursor"></i></span>
+                                                    <span  data-toggle=modal data-target="#modal-client" class="cursor pull-right" onclick="modification('ticket', <?= $ticket->id ?>)"><i data-toggle='tooltip' title="Modiifer les infos du client" class="fa fa-pencil cursor"></i></span>
                                                 </h2>
                                                 <address>
                                                     <h3 style="margin-top: 6px;"><strong><?= $ticket->client->typeclient->name() ?></strong></h3>
@@ -65,7 +65,7 @@
                                         </div><br>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <div class="row">
                                             <div class="col-4">
                                                 <div class="text-center" data-toggle="tooltip">
@@ -74,10 +74,11 @@
                                             </div>
                                             <div class="col-8">
                                                 <h1 class="gras text-navy" style="margin: 0"><strong><?= $ticket->auto->immatriculation ?></strong> 
-                                                    <span  data-toggle=modal data-target="#modal-vehicule" class="cursor" onclick="modification('ticket', <?= $ticket->id ?>)"><i data-toggle='tooltip' title="Modiifer les infos du vehiucle" class="fa fa-pencil cursor"></i></span>
+                                                    <span  data-toggle=modal data-target="#modal-vehicule" class="cursor pull-right" onclick="modification('ticket', <?= $ticket->id ?>)"><i data-toggle='tooltip' title="Modiifer les infos du vehiucle" class="fa fa-pencil cursor"></i></span>
                                                 </h1>
                                                 <address>
                                                     <h3 style="margin-top: 6px;"><strong><?= $ticket->auto->marque->name() ?> <?= $ticket->auto->modele ?></strong></h3>
+                                                    <h4 style="margin-top: 6px;">VIN: <strong><?= $ticket->auto->vin ?></strong></h4>
                                                     <h5>Couleur <?= $ticket->auto->couleur ?></h5> <br>
                                                 </address>
                                             </div>
@@ -96,9 +97,20 @@
                                                     <?php foreach ($ticket->fourni("listeequipementauto") as $key => $value) {
                                                         $value->actualise(); ?>
                                                         <div class="col-6">
-                                                            <label >- <?= $value->equipementauto->name()  ?></label>
+                                                            <label >- <?= $value->equipementauto->name()  ?> (<?= $value->quantite ?>)</label>
                                                         </div>
                                                     <?php } ?>
+                                                </div>
+
+                                                <div>
+                                                    Enjoliveurs <div class="row">
+                                                    <?php foreach ($ticket->fourni("listetypeenjoliveur") as $key => $value) {
+                                                        $value->actualise(); ?>
+                                                        <div class="col-6">
+                                                            <label >- <?= $value->typeenjoliveur->name()  ?></label>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-5">

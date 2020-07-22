@@ -13,6 +13,7 @@ class ESSAI extends TABLE
 	public $ticket_id;
 	public $typeessai_id;
 	public $mecanicien_id;
+	public $dateFin;
 	public $etat_id = ETAT::ENCOURS;
 	public $employe_id;
 
@@ -43,6 +44,19 @@ class ESSAI extends TABLE
 		return $data;
 	}
 
+
+	public function valider(){
+		$data = new RESPONSE;
+		if ($this->etat_id ==  ETAT::ENCOURS) {
+			$this->dateFin = date("Y-m-d H:i:s");
+			$this->etat_id = ETAT::VALIDEE;
+			$data = $this->save();
+		}else{
+			$data->status = false;
+			$data->message = "Vous ne pouvez plus effectuer cette action sur cet essai !";
+		}
+		return $data;
+	}
 
 
 	public static function etat (int $type){
