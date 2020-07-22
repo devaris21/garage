@@ -37,7 +37,7 @@
         <div class="wrapper wrapper-content">
             <div class="animated fadeInRightBig">
 
-                <div class="scrolLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate" style="width: inherit; overflow-x: scroll;">
+                <div class="scroll" style="width: inherit; overflow-x: scroll;">
                     <div class="" style="width: 3700px">
                         <?php foreach (Home\ETATINTERVENTION::getAll() as $key => $etat) {
                             $datas = $etat->fourni("ticket"); ?>
