@@ -3,21 +3,20 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class LISTETYPEENJOLIVEUR extends TABLE
+class LISTECONSTATDIAGNOSTIC extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	public $ticket_id;
-	public $typeenjoliveur_id;
+	public $diagnostic_id;
+	public $constat;
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		$datas = TICKET::findBy(["id ="=>$this->ticket_id]);
+		$datas = DIAGNOSTIC::findBy(["id ="=>$this->diagnostic_id]);
 		if (count($datas) == 1) {
-			$datas = TYPEENJOLIVEUR::findBy(["id ="=>$this->typeenjoliveur_id]);
-			if (count($datas) == 1) {
+			if ($this->constat != "") {
 				$data = $this->save();
 			}else{
 				$data->status = false;

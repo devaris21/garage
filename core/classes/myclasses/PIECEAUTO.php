@@ -3,33 +3,26 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class INTERVENTION extends TABLE
+class PIECEAUTO extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
 	public $reference;
-	public $ticket_id;
-	public $mecanicien_id;
-	public $dateFin;
-	public $etat_id = ETAT::ENCOURS;
-	public $employe_id;
+	public $name;
+	public $marque_id;
+	public $modele;
+	public $montant;
 
 
 	public function enregistre(){
 		$data = new RESPONSE;
 		$datas = TICKET::findBy(["id ="=>$this->ticket_id]);
 		if (count($datas) == 1) {
-			$datas = MECANICIEN::findBy(["id ="=>$this->mecanicien_id]);
-			if (count($datas) == 1) {
-				$this->reference = strtoupper("INTV-".substr(uniqid(), 7, 8));
-				$this->employe_id = getSession("employe_connecte_id");
-				$data = $this->save();
-			}else{
-				$data->status = false;
-				$data->status = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";
-			}
+			$this->reference = strtoupper("DEVIS-".substr(uniqid(), 7, 8));
+			$this->employe_id = getSession("employe_connecte_id");
+			$data = $this->save();
 		}else{
 			$data->status = false;
 			$data->status = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";

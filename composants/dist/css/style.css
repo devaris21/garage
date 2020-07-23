@@ -6496,6 +6496,36 @@ table.issue-tracker tbody tr td {
 }
 
 
+
+.text-default {
+ color: #dadada;
+}
+.text-dark {
+ color: #111;
+}
+.text-warning {
+ color: #f8ac59;
+}
+.text-success {
+ color: #1affaa;
+}
+.text-danger {
+ color: #ed5565;
+}
+.text-primary {
+ color: #dfe456;
+}
+.text-info {
+ color: #1c84c6;
+}
+.text-blue {
+ color: #3333ff;
+}
+.text-navy {
+ color: #a45fde;
+}
+
+
 .agile-detail {
   margin-top: 5px;
   font-size: 12px;

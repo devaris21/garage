@@ -174,7 +174,7 @@ $item->setProtected(1);
 $item->save();
 
 $item = new ETATINTERVENTION();
-$item->name = "Diagnostic technicien";
+$item->name = "Diagnostic Technicien";
 $item->class = "warning";
 $item->setProtected(1);
 $item->save();

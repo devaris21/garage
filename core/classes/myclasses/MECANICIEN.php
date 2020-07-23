@@ -57,6 +57,37 @@ class MECANICIEN extends PERSONNE
 	}
 
 
+
+
+	public function tickets (){
+		$datas = TICKET::encours();
+		foreach ($datas as $key => $ticket) {
+
+			$lots = $ticket->fourni("essai", ["etat_id ="=>ETAT::ENCOURS, "mecanicien_id ="=>$this->id]);
+			if (count($lots) > 0) {
+				continue;
+			}
+
+
+			$lots = $ticket->fourni("diagnostic", ["etat_id ="=>ETAT::ENCOURS, "mecanicien_id ="=>$this->id]);
+			if (count($lots) > 0) {
+				continue;
+			}
+
+
+			$lots = $ticket->fourni("intervention", ["etat_id ="=>ETAT::ENCOURS, "mecanicien_id ="=>$this->id]);
+			if (count($lots) > 0) {
+				continue;
+			}
+
+			unset($datas[$key]);
+		}
+		return $datas;
+	}
+
+
+
+
 	public function sentenseCreate(){
 		return $this->sentense = "Ajout d'un nouvel employé dans votre gestion : $this->name $this->lastname";
 	}

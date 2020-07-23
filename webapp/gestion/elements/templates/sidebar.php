@@ -41,29 +41,29 @@
                 <li class="" id="planning">
                     <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Planning Travail</span></a>
                 </li>
-                <li class="">
-                    <a href="#"><i class="fa fa-plus"></i> <span class="nav-label">Nouvelle intervention</span></a>
+                <li class="" id="garage">
+                    <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Vue du garage</span> </a>
                 </li>
                 <li><hr class="" style="background-color: transparent; "></li>
 
 
-                <li class="" id="garage">
-                    <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Vue du garage</span> </a>
-                </li>
                 <li class="" id="essais_av">
                     <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-home"></i> <span class="nav-label">En Essai AV</span> </a>
+                </li>
+                    <li class="" id="diagnostics">
+                    <a href="<?= $this->url($this->section, "master", "diagnostics") ?>"><i class="fa fa-home"></i> <span class="nav-label">Sous diagnostic TK.</span> </a>
                 </li>
                 <li class="" id="devis">
                     <a href="<?= $this->url($this->section, "master", "devis") ?>"><i class="fa fa-file-text-o"></i> <span class="nav-label">Devis en attente</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= count([]) ?></span> <?php } ?></a>
                 </li>
+                <li class="" id="interventions">
+                    <a href="<?= $this->url($this->section, "master", "interventions") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Sous Intervention</span> </a>
+                </li>
                 <li class="" id="essais_ap">
-                    <a href="<?= $this->url($this->section, "master", "essais_ap") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Sous Intervention</span> </a>
+                    <a href="<?= $this->url($this->section, "master", "essais_ap") ?>"><i class="fa fa-home"></i> <span class="nav-label">En Essai AP</span> </a>
                 </li>
-                  <li class="" id="essais_av">
-                    <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-home"></i> <span class="nav-label">En Essai AP</span> </a>
-                </li>
-                <li class="" id="essais_av">
-                    <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-home"></i> <span class="nav-label">Au lavage</span> </a>
+                <li class="" id="lavages">
+                    <a href="<?= $this->url($this->section, "master", "lavages") ?>"><i class="fa fa-home"></i> <span class="nav-label">Au lavage</span> </a>
                 </li>
 
 
@@ -89,6 +89,6 @@
 
 <style type="text/css">
     li.dropdown-divider{
-       !important;
-   }
+     !important;
+ }
 </style>

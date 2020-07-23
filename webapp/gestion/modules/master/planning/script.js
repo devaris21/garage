@@ -1,47 +1,36 @@
 $(document).ready(function(){
+    $(".hoverable").fadeOut();
 
-    $("#todo, #inprogress, #completed").sortable({
-        connectWith: ".connectList",
-        update: function( event, ui ) {
 
-            var todo = $( "#todo" ).sortable( "toArray" );
-            var inprogress = $( "#inprogress" ).sortable( "toArray" );
-            var completed = $( "#completed" ).sortable( "toArray" );
-            $('.output').html("ToDo: " + window.JSON.stringify(todo) + "<br/>" + "In Progress: " + window.JSON.stringify(inprogress) + "<br/>" + "Completed: " + window.JSON.stringify(completed));
+    $(".connectList").each(function(){
+        $(this).sortable({
+            connectWith: ".connectList",
+            receive: function( event, ui ) {
+                var url = "../../webapp/gestion/modules/master/planning/ajax.php";
+                var formdata = new FormData();
+                formdata.append('ticket', $(ui.item).attr("data-id"));
+                formdata.append('cible', $(event.target).attr("data-id"));
+                formdata.append('action', "planning");
+                $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
+                    if (data.status) {
+                        Alerter.success('Erreur !', data.message);
+                    }else{
+                        Alerter.error('Erreur !', data.message);
+                    }
+                }, 'json')
+            }
+        }).disableSelection();
+    })
+
+
+
+    $(".element").hover(
+        function() {
+            $( this ).find(".hoverable").fadeIn();
+        }, function() {
+            $( this ).find(".hoverable").hide(0);
         }
-    }).disableSelection();
+        );
 
-
-    $('.slick_demo_2').slick({
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        centerMode: true,
-        responsive: [
-        {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true,
-                dots: true
-            }
-        },
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2
-            }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        }
-        ]
-    });
 
 });

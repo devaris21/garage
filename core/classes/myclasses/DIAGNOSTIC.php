@@ -3,7 +3,7 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class INTERVENTION extends TABLE
+class DIAGNOSTIC extends TABLE
 {
 
 	public static $tableName = __CLASS__;
@@ -23,7 +23,7 @@ class INTERVENTION extends TABLE
 		if (count($datas) == 1) {
 			$datas = MECANICIEN::findBy(["id ="=>$this->mecanicien_id]);
 			if (count($datas) == 1) {
-				$this->reference = strtoupper("INTV-".substr(uniqid(), 7, 8));
+				$this->reference = strtoupper("DIA-".substr(uniqid(), 7, 8));
 				$this->employe_id = getSession("employe_connecte_id");
 				$data = $this->save();
 			}else{
