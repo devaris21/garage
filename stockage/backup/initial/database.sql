@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 21 juil. 2020 à 12:53
+-- Généré le : ven. 24 juil. 2020 à 13:43
 -- Version du serveur :  5.7.24
 -- Version de PHP : 7.3.2
 
@@ -99,6 +99,7 @@ CREATE TABLE `auto` (
   `modele` varchar(50) NOT NULL,
   `marque_id` int(11) NOT NULL,
   `couleur` varchar(20) DEFAULT NULL,
+  `vin` varchar(30) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',
@@ -221,6 +222,47 @@ CREATE TABLE `contractpartenaire` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `devis`
+--
+
+CREATE TABLE `devis` (
+  `id` int(11) NOT NULL,
+  `reference` varchar(20) NOT NULL,
+  `ticket_id` int(11) NOT NULL,
+  `employe_id` int(11) DEFAULT NULL,
+  `mecanicien_id` int(11) DEFAULT NULL,
+  `employe_id_devis` int(11) DEFAULT NULL,
+  `etat_id` int(11) DEFAULT NULL,
+  `dateFin` datetime DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `diagnostic`
+--
+
+CREATE TABLE `diagnostic` (
+  `id` int(11) NOT NULL,
+  `reference` varchar(20) NOT NULL,
+  `ticket_id` int(11) NOT NULL,
+  `mecanicien_id` int(11) DEFAULT NULL,
+  `employe_id` int(11) DEFAULT NULL,
+  `etat_id` int(11) DEFAULT NULL,
+  `dateFin` datetime DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `employe`
 --
 
@@ -319,6 +361,7 @@ CREATE TABLE `essai` (
   `mecanicien_id` int(11) DEFAULT NULL,
   `employe_id` int(11) DEFAULT NULL,
   `etat_id` int(11) DEFAULT NULL,
+  `dateFin` datetime DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',
@@ -409,7 +452,7 @@ CREATE TABLE `garage` (
 CREATE TABLE `groupemecanicien` (
   `id` int(11) NOT NULL,
   `name` varchar(200) COLLATE utf8_bin NOT NULL,
-  `description` varchar(200) COLLATE utf8_bin NOT NULL,
+  `description` varchar(200) COLLATE utf8_bin DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',
@@ -509,6 +552,83 @@ CREATE TABLE `inspection` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `intervention`
+--
+
+CREATE TABLE `intervention` (
+  `id` int(11) NOT NULL,
+  `reference` varchar(20) NOT NULL,
+  `ticket_id` int(11) NOT NULL,
+  `mecanicien_id` int(11) DEFAULT NULL,
+  `employe_id` int(11) DEFAULT NULL,
+  `etat_id` int(11) DEFAULT NULL,
+  `dateFin` datetime DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `lavage`
+--
+
+CREATE TABLE `lavage` (
+  `id` int(11) NOT NULL,
+  `reference` varchar(20) NOT NULL,
+  `ticket_id` int(11) NOT NULL,
+  `mecanicien_id` int(11) DEFAULT NULL,
+  `employe_id` int(11) DEFAULT NULL,
+  `etat_id` int(11) DEFAULT NULL,
+  `dateFin` datetime DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `lignededevis`
+--
+
+CREATE TABLE `lignededevis` (
+  `id` int(11) NOT NULL,
+  `devis_id` int(11) NOT NULL,
+  `pieceauto_id` int(11) DEFAULT NULL,
+  `montant` int(11) NOT NULL,
+  `quantite` int(11) DEFAULT NULL,
+  `remise` int(11) DEFAULT NULL,
+  `typeremise_id` int(11) DEFAULT NULL,
+  `etat_id` int(11) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `listeconstatdiagnostic`
+--
+
+CREATE TABLE `listeconstatdiagnostic` (
+  `id` int(11) NOT NULL,
+  `diagnostic_id` int(11) NOT NULL,
+  `constat` varchar(200) NOT NULL DEFAULT '',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `listeconstatessai`
 --
 
@@ -541,6 +661,23 @@ CREATE TABLE `listeequipementauto` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `listepiecediagnostic`
+--
+
+CREATE TABLE `listepiecediagnostic` (
+  `id` int(11) NOT NULL,
+  `diagnostic_id` int(11) NOT NULL,
+  `piece` varchar(200) NOT NULL DEFAULT '',
+  `quantite` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `listetypeenjoliveur`
 --
 
@@ -548,7 +685,7 @@ CREATE TABLE `listetypeenjoliveur` (
   `id` int(11) NOT NULL,
   `ticket_id` int(11) NOT NULL,
   `typeenjoliveur_id` int(11) NOT NULL,
-  `quantite` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',
   `valide` int(11) NOT NULL DEFAULT '1'
@@ -793,6 +930,25 @@ CREATE TABLE `partenaire` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `pieceauto`
+--
+
+CREATE TABLE `pieceauto` (
+  `id` int(11) NOT NULL,
+  `reference` varchar(20) NOT NULL,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `marque_id` int(11) DEFAULT NULL,
+  `modele` varchar(50) NOT NULL DEFAULT '',
+  `montant` int(11) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `reservation`
 --
 
@@ -908,6 +1064,7 @@ CREATE TABLE `ticket` (
   `agence_id` int(11) NOT NULL,
   `auto_id` int(11) NOT NULL,
   `client_id` int(11) DEFAULT NULL,
+  `niveaucarburant_id` int(11) DEFAULT NULL,
   `kilometrage` int(11) DEFAULT NULL,
   `constat` longtext,
   `autreremarque` longtext,
@@ -1173,6 +1330,18 @@ ALTER TABLE `contractpartenaire`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `devis`
+--
+ALTER TABLE `devis`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `diagnostic`
+--
+ALTER TABLE `diagnostic`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `employe`
 --
 ALTER TABLE `employe`
@@ -1269,6 +1438,30 @@ ALTER TABLE `inspection`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `intervention`
+--
+ALTER TABLE `intervention`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `lavage`
+--
+ALTER TABLE `lavage`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `lignededevis`
+--
+ALTER TABLE `lignededevis`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `listeconstatdiagnostic`
+--
+ALTER TABLE `listeconstatdiagnostic`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `listeconstatessai`
 --
 ALTER TABLE `listeconstatessai`
@@ -1278,6 +1471,12 @@ ALTER TABLE `listeconstatessai`
 -- Index pour la table `listeequipementauto`
 --
 ALTER TABLE `listeequipementauto`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `listepiecediagnostic`
+--
+ALTER TABLE `listepiecediagnostic`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1362,6 +1561,12 @@ ALTER TABLE `params`
 -- Index pour la table `partenaire`
 --
 ALTER TABLE `partenaire`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `pieceauto`
+--
+ALTER TABLE `pieceauto`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1549,6 +1754,18 @@ ALTER TABLE `contractpartenaire`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `devis`
+--
+ALTER TABLE `devis`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `diagnostic`
+--
+ALTER TABLE `diagnostic`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `employe`
 --
 ALTER TABLE `employe`
@@ -1645,6 +1862,30 @@ ALTER TABLE `inspection`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `intervention`
+--
+ALTER TABLE `intervention`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `lavage`
+--
+ALTER TABLE `lavage`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `lignededevis`
+--
+ALTER TABLE `lignededevis`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `listeconstatdiagnostic`
+--
+ALTER TABLE `listeconstatdiagnostic`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `listeconstatessai`
 --
 ALTER TABLE `listeconstatessai`
@@ -1654,6 +1895,12 @@ ALTER TABLE `listeconstatessai`
 -- AUTO_INCREMENT pour la table `listeequipementauto`
 --
 ALTER TABLE `listeequipementauto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `listepiecediagnostic`
+--
+ALTER TABLE `listepiecediagnostic`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1738,6 +1985,12 @@ ALTER TABLE `params`
 -- AUTO_INCREMENT pour la table `partenaire`
 --
 ALTER TABLE `partenaire`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `pieceauto`
+--
+ALTER TABLE `pieceauto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
