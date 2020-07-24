@@ -19,6 +19,9 @@ if ($action == "planning") {
 			$datas = MECANICIEN::findBy(["id ="=> $cible]);
 			if (count($datas) == 1) {
 				$mecanicien = $datas[0];
+				if ($ticket->isEnAttente()) {
+					$data = $ticket->back();
+				}
 				$data = $ticket->next(null, $mecanicien->id);
 			}else{
 				$data->status = false;

@@ -56,9 +56,9 @@
                                         <td>
                                             <span class="label label-<?= $devi->etat->class ?>"><?= $devi->etat->name() ?></span>
                                         </td>
-                                        <td width="350px">
-                                            <h4 class=""><span class="text-uppercase">Devis en attente d'approbation</span></h4>
-                                            <span>Ticket N°<?= $devi->reference ?></span><br>
+                                        <td class="issue-info" width="300px">
+                                            <a class="text-uppercase" href="#">Devis en attente d'approbation</a>
+                                            <small>Ticket N°<?= $devi->reference ?></small>
                                         </td>
                                         <td>
                                             <h4 class="mp0"><?= $devi->ticket->client->name() ?> </h4>

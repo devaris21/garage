@@ -36,63 +36,63 @@
         <div class="wrapper wrapper-content">
             <div class=" animated fadeInRightBig">
 
-             <div class="ibox">
-                 <div class="ibox-content">
+               <div class="ibox">
+                   <div class="ibox-content">
 
-                  <div class="table-responsive">
-                    <table class="table table-hover issue-tracker">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Informations</th>
-                                <th>Client</th>
-                                <th>Véhicule</th>
-                                <th>Essayeur</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($lavages as $key => $lavage) { ?>
+                      <div class="table-responsive">
+                        <table class="table table-hover issue-tracker">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <span class="label label-<?= $lavage->etat->class ?>"><?= $lavage->etat->name() ?></span>
-                                    </td>
-                                    <td width="300px">
-                                        <h4 class=""><span class="text-uppercase">Au lavage</span></h4>
-                                        <span>Ticket N°<?= $lavage->reference ?></span><br>
-                                    </td>
-                                    <td>
-                                        <h4 class="mp0"><?= $lavage->ticket->client->name() ?> </h4>
-                                        <?= $lavage->ticket->client->typeclient->name() ?><br>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-sm-2">
-                                               <img src="<?= $this->stockage("images", "vehicules", "default.jpg")  ?>" style="width: 50px">
-                                           </div>
-                                           <div class="col-sm-10">
-                                            <h4 class="mp0"><?= $lavage->ticket->auto->immatriculation ?> </h4>
-                                            <?= $lavage->ticket->auto->marque->name() ?> <?= $lavage->ticket->auto->modele ?><br>
+                                    <th></th>
+                                    <th>Informations</th>
+                                    <th>Client</th>
+                                    <th>Véhicule</th>
+                                    <th>Essayeur</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($lavages as $key => $lavage) { ?>
+                                    <tr>
+                                        <td>
+                                            <span class="label label-<?= $lavage->etat->class ?>"><?= $lavage->etat->name() ?></span>
+                                        </td>
+                                        <td class="issue-info" width="300px">
+                                            <a class="text-uppercase" href="#">Au lavage</a>
+                                            <small>Ticket N°<?= $lavage->reference ?></small>
+                                        </td>
+                                        <td>
+                                            <h4 class="mp0"><?= $lavage->ticket->client->name() ?> </h4>
+                                            <?= $lavage->ticket->client->typeclient->name() ?><br>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                 <img src="<?= $this->stockage("images", "vehicules", "default.jpg")  ?>" style="width: 50px">
+                                             </div>
+                                             <div class="col-sm-10">
+                                                <h4 class="mp0"><?= $lavage->ticket->auto->immatriculation ?> </h4>
+                                                <?= $lavage->ticket->auto->marque->name() ?> <?= $lavage->ticket->auto->modele ?><br>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <?= $lavage->mecanicien->name() ?><br>
-                                    <small><?= depuis($lavage->created)  ?></small>
-                                </td>
-                                <td class="text-right">
-                                    <button data-toggle="modal" data-target="#modal-valider_essai-<?= $lavage->id ?>" class="btn btn-white btn-xs"><i class="fa fa-check text-green"></i> Valider</button>
-                                    <button class="btn btn-white btn-xs"><i class="fa fa-file-text-o text-blue"></i></button>
-                                    <button class="btn btn-white btn-xs"><i class="fa fa-close text-danger"></i></button>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>
+                                    </td>
+                                    <td>
+                                        <?= $lavage->mecanicien->name() ?><br>
+                                        <small><?= depuis($lavage->created)  ?></small>
+                                    </td>
+                                    <td class="text-right">
+                                        <button data-toggle="modal" data-target="#modal-valider_essai-<?= $lavage->id ?>" class="btn btn-white btn-xs"><i class="fa fa-check text-green"></i> Valider</button>
+                                        <button class="btn btn-white btn-xs"><i class="fa fa-file-text-o text-blue"></i></button>
+                                        <button class="btn btn-white btn-xs"><i class="fa fa-close text-danger"></i></button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
 
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 

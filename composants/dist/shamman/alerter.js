@@ -2,6 +2,7 @@
 class Alerter {
 
 	static success(title, message){
+		Loader.stop();
 		toastr.options = {
 			closeButton: true,
 			progressBar: true,
@@ -12,6 +13,7 @@ class Alerter {
 	}
 
 	static warning(title, message){
+		Loader.stop();
 		toastr.options = {
 			closeButton: true,
 			progressBar: true,
@@ -23,7 +25,7 @@ class Alerter {
 
 
 	static error(title, message){
-		 Loader.stop();
+		Loader.stop();
 		toastr.options = {
 			closeButton: true,
 			progressBar: true,

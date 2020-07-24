@@ -26,9 +26,14 @@
             </li>
 
             <?php 
-            // $groupes__ = Home\GROUPECOMMANDE::encours();
-            // $prospections__ = Home\PROSPECTION::encours();
-            // $ventecaves__ = Home\PROSPECTION::findBy(["etat_id ="=>Home\ETAT::ENCOURS, "typeprospection_id ="=>Home\TYPEPROSPECTION::VENTECAVE]);
+            $__essais_av = Home\ESSAI::findBy(["typeessai_id != "=>Home\TYPEESSAI::APRES, "etat_id ="=>Home\ETAT::ENCOURS]);
+            $__essais_ap = Home\ESSAI::findBy(["typeessai_id = "=>Home\TYPEESSAI::APRES, "etat_id ="=>Home\ETAT::ENCOURS]);
+            $__diagnostics = Home\DIAGNOSTIC::encours();
+            $__devis = Home\DEVIS::encours();
+            $__interventions = Home\INTERVENTION::encours();
+            $__lavages = Home\LAVAGE::encours();
+            $__attentes = Home\TICKET::enAttente();
+            // $__devis = Home\PROSPECTION::findBy(["etat_id ="=>Home\ETAT::ENCOURS, "typeprospection_id ="=>Home\TYPEPROSPECTION::VENTECAVE]);
             // $livraisons__ = Home\PROSPECTION::findBy(["etat_id ="=>Home\ETAT::ENCOURS, "typeprospection_id ="=>Home\TYPEPROSPECTION::LIVRAISON]);
             // $approvisionnements__ = Home\APPROVISIONNEMENT::encours();
             // $datas1__ = array_merge(Home\PANNE::encours(), Home\DEMANDEENTRETIEN::encours(), Home\ENTRETIENVEHICULE::encours(), Home\ENTRETIENMACHINE::encours());
@@ -39,7 +44,7 @@
                     <a href="<?= $this->url($this->section, "master", "dashboard") ?>"><i class="fa fa-tachometer"></i> <span class="nav-label">Tableau de bord</span></a>
                 </li>
                 <li class="" id="planning">
-                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Planning Travail</span></a>
+                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Planning Travail</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="garage">
                     <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Vue du garage</span> </a>
@@ -48,22 +53,22 @@
 
 
                 <li class="" id="essais_av">
-                    <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-home"></i> <span class="nav-label">En Essai AV</span> </a>
+                    <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-wheelchair"></i> <span class="nav-label">En Essai AV</span> <?php if (count($__essais_av) > 0) { ?> <span class="label label-warning float-right"><?= count($__essais_av) ?></span> <?php } ?></a>
                 </li>
-                    <li class="" id="diagnostics">
-                    <a href="<?= $this->url($this->section, "master", "diagnostics") ?>"><i class="fa fa-home"></i> <span class="nav-label">Sous diagnostic TK.</span> </a>
+                <li class="" id="diagnostics">
+                    <a href="<?= $this->url($this->section, "master", "diagnostics") ?>"><i class="fa fa-steam"></i> <span class="nav-label">Sous diagnostic TK.</span> <?php if (count($__diagnostics) > 0) { ?> <span class="label label-warning float-right"><?= count($__diagnostics) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="devis">
-                    <a href="<?= $this->url($this->section, "master", "devis") ?>"><i class="fa fa-file-text-o"></i> <span class="nav-label">Devis en attente</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= count([]) ?></span> <?php } ?></a>
+                    <a href="<?= $this->url($this->section, "master", "devis") ?>"><i class="fa fa-file-text-o"></i> <span class="nav-label">Devis en attente</span> <?php if (count($__devis) > 0) { ?> <span class="label label-warning float-right"><?= count($__devis) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="interventions">
-                    <a href="<?= $this->url($this->section, "master", "interventions") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Sous Intervention</span> </a>
+                    <a href="<?= $this->url($this->section, "master", "interventions") ?>"><i class="fa fa-pied-piper-alt"></i> <span class="nav-label">Sous Intervention</span> <?php if (count($__interventions) > 0) { ?> <span class="label label-warning float-right"><?= count($__interventions) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="essais_ap">
-                    <a href="<?= $this->url($this->section, "master", "essais_ap") ?>"><i class="fa fa-home"></i> <span class="nav-label">En Essai AP</span> </a>
+                    <a href="<?= $this->url($this->section, "master", "essais_ap") ?>"><i class="fa fa-wheelchair"></i> <span class="nav-label">En Essai AP</span> <?php if (count($__essais_ap) > 0) { ?> <span class="label label-warning float-right"><?= count($__essais_ap) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="lavages">
-                    <a href="<?= $this->url($this->section, "master", "lavages") ?>"><i class="fa fa-home"></i> <span class="nav-label">Au lavage</span> </a>
+                    <a href="<?= $this->url($this->section, "master", "lavages") ?>"><i class="fa fa-shower"></i> <span class="nav-label">Au lavage</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
                 </li>
 
 
@@ -71,9 +76,6 @@
                 <li><hr class="" style="background-color: transparent; "></li>
                 <li class="" id="dossiers">
                     <a href="<?= $this->url($this->section, "master", "dossiers") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Archives Dossiers</span></a>
-                </li>
-                <li class="" id="clients">
-                    <a href="<?= $this->url($this->section, "master", "clients") ?>"><i class="fa fa-male"></i> <span class="nav-label">Liste des clients</span></a>
                 </li>
                 <li class="" id="mecaniciens">
                     <a href="<?= $this->url($this->section, "master", "mecanos") ?>"><i class="fa fa-users"></i> <span class="nav-label">Liste des mécaniciens</span></a>

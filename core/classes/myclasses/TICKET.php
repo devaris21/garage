@@ -93,12 +93,12 @@ class TICKET extends TABLE
 
 
 
-	public static function isEnAttente (){
-		$test = true;
+	public function isEnAttente (){
+		$test = false;
 		if (in_array($this->etatintervention_id, [ETATINTERVENTION::ESSAI_AVANT, ETATINTERVENTION::ESSAI_AVANT_CHEF, ETATINTERVENTION::ESSAI_APRES_CHEF])) {
 			$lots = $this->fourni("essai", ["etat_id ="=>ETAT::ENCOURS]);
 			if (count($lots) > 0) {
-				return false;
+				return true;
 			}
 		}
 
@@ -106,7 +106,7 @@ class TICKET extends TABLE
 		if (in_array($this->etatintervention_id, [ETATINTERVENTION::DEVIS])) {
 			$lots = $this->fourni("devis", ["etat_id ="=>ETAT::ENCOURS]);
 			if (count($lots) > 0) {
-				return false;
+				return true;
 			}
 		}
 
@@ -114,7 +114,7 @@ class TICKET extends TABLE
 		if (in_array($this->etatintervention_id, [ETATINTERVENTION::DIAGNOSTIC])) {
 			$lots = $this->fourni("diagnostic", ["etat_id ="=>ETAT::ENCOURS]);
 			if (count($lots) > 0) {
-				return false;
+				return true;
 			}
 		}
 
@@ -122,13 +122,10 @@ class TICKET extends TABLE
 		if (in_array($this->etatintervention_id, [ETATINTERVENTION::INTERVENTION])) {
 			$lots = $this->fourni("intervention", ["etat_id ="=>ETAT::ENCOURS]);
 			if (count($lots) > 0) {
-				return false;
+				return true;
 			}
 		}
 
-		if ($this->etatintervention_id == ETATINTERVENTION::LIVRAISON) {
-			return false;
-		}
 		return $test;
 	}
 
@@ -247,6 +244,75 @@ class TICKET extends TABLE
 		}
 		return $data;
 	}
+
+
+
+	public function back(){
+		$data = new RESPONSE;
+		$data->status = true;
+
+		if ($this->etatintervention_id > ETATINTERVENTION::NOUVEAU) {
+			if (in_array($this->etatintervention_id, [ETATINTERVENTION::ESSAI_AVANT, ETATINTERVENTION::ESSAI_AVANT_CHEF])) {
+				$a = $this->etatintervention_id - 1;
+				$lots = $this->fourni("essai", ["etat_id ="=>ETAT::ENCOURS, "typeessai_id ="=>$a]);
+				foreach ($lots as $key => $value) {
+					$value->etat_id = ETAT::ANNULEE;
+					$value->dateFin = date("Y-m-d H:i:s");
+					$data = $value->save();
+				}
+
+			}elseif ($this->etatintervention_id == ETATINTERVENTION::DIAGNOSTIC) {
+				$lots = $this->fourni("diagnostic", ["etat_id ="=>ETAT::ENCOURS]);
+				foreach ($lots as $key => $value) {
+					$value->etat_id = ETAT::ANNULEE;
+					$value->dateFin = date("Y-m-d H:i:s");
+					$data = $value->save();
+				}
+
+			}elseif ($this->etatintervention_id == ETATINTERVENTION::DEVIS) {
+				$lots = $this->fourni("devis", ["etat_id ="=>ETAT::ENCOURS]);
+				foreach ($lots as $key => $value) {
+					$value->etat_id = ETAT::ANNULEE;
+					$value->dateFin = date("Y-m-d H:i:s");
+					$data = $value->save();
+				}
+
+			}elseif ($this->etatintervention_id == ETATINTERVENTION::INTERVENTION) {
+				$lots = $this->fourni("intervention", ["etat_id ="=>ETAT::ENCOURS]);
+				foreach ($lots as $key => $value) {
+					$value->etat_id = ETAT::ANNULEE;
+					$value->dateFin = date("Y-m-d H:i:s");
+					$data = $value->save();
+				}
+
+			}elseif ($this->etatintervention_id == ETATINTERVENTION::ESSAI_APRES_CHEF) {
+				$lots = $this->fourni("essai", ["etat_id ="=>ETAT::ENCOURS, "typeessai_id ="=>TYPEESSAI::APRES]);
+				foreach ($lots as $key => $value) {
+					$value->etat_id = ETAT::ANNULEE;
+					$value->dateFin = date("Y-m-d H:i:s");
+					$data = $value->save();
+				}
+
+			}elseif ($this->etatintervention_id == ETATINTERVENTION::LAVAGE) {
+				$lots = $this->fourni("lavage", ["etat_id ="=>ETAT::ENCOURS]);
+				foreach ($lots as $key => $value) {
+					$value->etat_id = ETAT::ANNULEE;
+					$value->dateFin = date("Y-m-d H:i:s");
+					$data = $value->save();
+				}
+			}
+		}else{
+			$this->etatintervention_id = ETATINTERVENTION::NOUVEAU;
+			$this->etat_id = ETAT::ENCOURS;
+		}
+
+		if ($data->status) {
+			$this->etatintervention_id--; 
+			return $this->save();
+		}
+		return $data;
+	}
+
 
 
 

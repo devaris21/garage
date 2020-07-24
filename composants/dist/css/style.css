@@ -6400,7 +6400,7 @@ table.issue-tracker tbody tr td {
   height: 50px;
 }
 .issue-info {
-  width: 50%;
+  max-width: 50%;
 }
 .issue-info a {
   font-weight: 600;

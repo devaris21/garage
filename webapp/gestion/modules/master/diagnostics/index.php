@@ -36,40 +36,40 @@
         <div class="wrapper wrapper-content">
             <div class=" animated fadeInRightBig">
 
-             <div class="ibox">
-                 <div class="ibox-content">
+               <div class="ibox">
+                   <div class="ibox-content">
 
-                  <div class="table-responsive">
-                    <table class="table table-hover issue-tracker">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Informations</th>
-                                <th>Client</th>
-                                <th>Véhicule</th>
-                                <th>Technicien</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($diagnostics as $key => $diagnostic) { ?>
+                      <div class="table-responsive">
+                        <table class="table table-hover issue-tracker">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <span class="label label-<?= $diagnostic->etat->class ?>"><?= $diagnostic->etat->name() ?></span>
-                                    </td>
-                                    <td width="300px">
-                                        <h4 class=""><span class="text-uppercase">Diagnostic N°<?= $diagnostic->reference ?></span></h4>
-                                        <span>Ticket N°<?= $diagnostic->ticket->reference ?></span><br>
-                                    </td>
-                                         <td>
+                                    <th></th>
+                                    <th>Informations</th>
+                                    <th>Client</th>
+                                    <th>Véhicule</th>
+                                    <th>Technicien</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($diagnostics as $key => $diagnostic) { ?>
+                                    <tr>
+                                        <td>
+                                            <span class="label label-<?= $diagnostic->etat->class ?>"><?= $diagnostic->etat->name() ?></span>
+                                        </td>
+                                        <td class="issue-info" width="300px">
+                                            <a class="text-uppercase" href="#">Sous Diagnostic technicien</a>
+                                            <small>Ticket N°<?= $diagnostic->reference ?></small>
+                                        </td>
+                                        <td>
                                             <h4 class="mp0"><?= $diagnostic->ticket->client->name() ?> </h4>
                                             <?= $diagnostic->ticket->client->typeclient->name() ?><br>
                                         </td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-sm-2">
-                                                 <img src="<?= $this->stockage("images", "vehicules", "default.jpg")  ?>" style="width: 50px">
-                                             </div>
-                                             <div class="col-sm-10">
+                                                   <img src="<?= $this->stockage("images", "vehicules", "default.jpg")  ?>" style="width: 50px">
+                                               </div>
+                                               <div class="col-sm-10">
                                                 <h4 class="mp0"><?= $diagnostic->ticket->auto->immatriculation ?> </h4>
                                                 <?= $diagnostic->ticket->auto->marque->name() ?> <?= $diagnostic->ticket->auto->modele ?><br>
                                             </div>

@@ -29,7 +29,7 @@
                     <?php foreach ($tickets as $key => $ticket) {
                         $ticket->actualise();
                         $etatsuivant = $ticket->etatSuivant(); ?>
-                        <div class="col-md-3 elements" id="ticket-<?= $ticket->id ?>" data-id="<?= $ticket->id ?>">
+                        <div class="col-md-3 element" id="ticket-<?= $ticket->id ?>" data-id="<?= $ticket->id ?>">
                             <li class="<?= $ticket->etatintervention->class ?>-element" >
                                 <span class="pull-right" title="<?= depuis($ticket->created) ?>"><i class="fa fa-clock-o"></i></span>
                                 <h5 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> <?= $ticket->auto->immatriculation ?></h5>
@@ -71,7 +71,7 @@
                                                 <div class="scroll" style="width: inherit; overflow-x: scroll; padding-bottom: 10px;">
                                                     <div class="" style="width: <?= 370 * count($datas)  ?>px">
                                                         <?php foreach ($datas as $key => $mecanicien) { ?>
-                                                            <div class="element" style="width: 350px; border-right: dashed 1px black; display: inline-block; vertical-align: top;">
+                                                            <div style="width: 350px; border-right: dashed 1px black; display: inline-block; vertical-align: top;">
                                                                 <div class="ibox">
                                                                     <div class="ibox-content" style="padding-top: 2px;">
                                                                         <div class="row">
@@ -80,7 +80,7 @@
                                                                             </div>
                                                                             <div class="col-9">
                                                                                 <h4 class="mp0 text-capitalize"><?= $mecanicien->name() ?></h4>
-                                                                                <small><i class="fa fa-hand-o-up"></i> Drag task between list</small>
+                                                                                <small><i class="fa fa-hand-o-up"></i> Glisser-déposer pour attribuer la tache</small>
                                                                             </div>
                                                                         </div><hr class="mp0"><br>
 
@@ -89,7 +89,7 @@
                                                                                 $ticket->actualise();
                                                                                 $item = $ticket->etatIntervention();
                                                                                 $item->actualise(); ?>
-                                                                                <li class="<?= $ticket->etatintervention->class ?>-element" id="ticket-<?= $ticket->id ?>" data-id="<?= $ticket->id ?>">
+                                                                                <li class="<?= $ticket->etatintervention->class ?>-element element" id="ticket-<?= $ticket->id ?>" data-id="<?= $ticket->id ?>">
                                                                                     <span class="pull-right" title="<?= depuis($item->created) ?>"><i class="fa fa-clock-o"></i></span>
                                                                                     <h5 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> <?= $ticket->auto->immatriculation ?></h5>
                                                                                     <span><?= $ticket->auto->marque->name() ?> <?= $ticket->auto->modele ?> // <?= $ticket->auto->couleur ?></span>

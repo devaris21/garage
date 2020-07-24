@@ -68,12 +68,10 @@ class MECANICIEN extends PERSONNE
 				continue;
 			}
 
-
 			$lots = $ticket->fourni("diagnostic", ["etat_id ="=>ETAT::ENCOURS, "mecanicien_id ="=>$this->id]);
 			if (count($lots) > 0) {
 				continue;
 			}
-
 
 			$lots = $ticket->fourni("intervention", ["etat_id ="=>ETAT::ENCOURS, "mecanicien_id ="=>$this->id]);
 			if (count($lots) > 0) {

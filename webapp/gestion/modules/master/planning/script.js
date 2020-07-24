@@ -10,6 +10,7 @@ $(document).ready(function(){
         $(this).sortable({
             connectWith: ".connectList",
             receive: function( event, ui ) {
+                Loader.start()
                 var url = "../../webapp/gestion/modules/master/planning/ajax.php";
                 var formdata = new FormData();
                 formdata.append('ticket', $(ui.item).attr("data-id"));
@@ -22,6 +23,9 @@ $(document).ready(function(){
                         Alerter.error('Erreur !', data.message);
                     }
                 }, 'json')
+
+                $(".tab-content .element.col-md-3").removeClass("col-md-3")
+                $("#attente .element").addClass("col-md-3")
             }
         }).disableSelection();
     })

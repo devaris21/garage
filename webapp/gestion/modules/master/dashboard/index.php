@@ -22,10 +22,13 @@
                             <small>You have 42 messages and 6 notifications.</small>
                             <ul class="list-group clear-list m-t">
                                 <li class="list-group-item fist-item">
-                                    <i class="fa fa-wrench"></i> Tickets en attente <span class="label label-success float-right"> <?= start0(count(Home\TICKET::etat(Home\ETATINTERVENTION::NOUVEAU)))  ?></span>
+                                    <i class="fa fa-wrench"></i> Nouveau Ticket <span class="label label-success float-right"> <?= start0(count(Home\TICKET::etat(Home\ETATINTERVENTION::NOUVEAU)))  ?></span>
                                 </li>
                                 <li class="list-group-item">
                                     <i class="fa fa-wrench"></i> Véhicules en Essai AV. <span class="label label-success float-right"><?= start0(count(Home\TICKET::etat(Home\ETATINTERVENTION::ESSAI_AVANT) + Home\TICKET::etat(Home\ETATINTERVENTION::ESSAI_AVANT_CHEF)))  ?></span>
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fa fa-wrench"></i> Véhicules sous diagnostic <span class="label label-success float-right"><?= start0(count(Home\TICKET::etat(Home\ETATINTERVENTION::INTERVENTION)))  ?></span>
                                 </li>
                                 <li class="list-group-item">
                                     <i class="fa fa-wrench"></i> Véhicules sous intervention <span class="label label-success float-right"><?= start0(count(Home\TICKET::etat(Home\ETATINTERVENTION::INTERVENTION)))  ?></span>
@@ -109,135 +112,40 @@
                     <div class="col-lg-12">
                         <div class="wrapper wrapper-content">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-12">
                                     <div class="ibox ">
                                         <div class="ibox-title">
-                                            <h5>Nouvelle intervention</h5>
+                                            <h5 class="text-uppercase gras">Nouvelle intervention</h5>
                                             <div class="ibox-tools">
                                                 <span class="label label-warning-light float-right"><?= count($nouveaux) ?> Nouveaux</span>
                                             </div>
                                         </div>
                                         <div class="ibox-content">
-
-                                            <div>
-                                                <div class="feed-activity-list">
-
-                                                    <?php foreach ($nouveaux as $key => $ticket) {
-                                                        $ticket->actualise(); ?>
-                                                        <div class="feed-element">
-                                                            <div class="media-body">
-                                                                <small class="float-right text-navy" title="<?= datelong($ticket->created)  ?>"><i class="fa fa-clock-o"></i> <?= depuis($ticket->created)  ?></small>
-                                                                <span class="text-uppercase gras"> TICKET N°<?= $ticket->reference ?></span><br>
-                                                                <small class="text-muted">Client : <?= $ticket->client->name()  ?></small><br>
-                                                                <strong><?= $ticket->auto->marque->name() ?> <?= $ticket->auto->modele  ?></strong> immatriculé <strong><?= $ticket->auto->immatriculation  ?></strong><br>
-                                                                <?php foreach ($ticket->fourni("ticket_typereparation") as $key => $value) {
-                                                                    $value->actualise(); ?>
-                                                                    <label class="label"><?= $value->typereparation->name()  ?></label>
-                                                                <?php } ?>
-                                                                <div class="">
-                                                                    <a href="#" data-toggle="modal" data-target="#modal-essai_av-<?= $ticket->id  ?>" class="btn btn-xs btn-white"><i class="fa fa-plus"></i> Aller en Essai </a>
-                                                                    <a href="" class="btn btn-xs btn-white pull-right"><i class="fa fa-close text-danger"></i></a>
-                                                                    <a href="<?= $this->url("gestion", "master", "ticket", $ticket->id)  ?>" class="btn btn-xs btn-white pull-right"><i class="fa fa-file-text-o"></i> Plus de détails</a>
-                                                                </div>
+                                            <div class="feed-activity-list row">
+                                                <?php foreach ($nouveaux as $key => $ticket) {
+                                                    $ticket->actualise(); ?>
+                                                    <div class="col-sm-6 col-md-4 col-lg-3 feed-element border-right">
+                                                        <div class="media-body">
+                                                            <small class="float-right text-navy" title="<?= datelong($ticket->created)  ?>"><i class="fa fa-clock-o"></i> <?= depuis($ticket->created)  ?></small>
+                                                            <span class="text-uppercase gras"> TICKET N°<?= $ticket->reference ?></span><br>
+                                                            <small class="text-muted">Client : <?= $ticket->client->name()  ?></small><br>
+                                                            <strong><?= $ticket->auto->marque->name() ?> <?= $ticket->auto->modele  ?></strong> immatriculé <strong><?= $ticket->auto->immatriculation  ?></strong><br>
+                                                            <?php foreach ($ticket->fourni("ticket_typereparation") as $key => $value) {
+                                                                $value->actualise(); ?>
+                                                                <label class="label"><?= $value->typereparation->name()  ?></label>
+                                                            <?php } ?>
+                                                            <div class="">
+                                                                <a href="#" data-toggle="modal" data-target="#modal-essai_av-<?= $ticket->id  ?>" class="btn btn-xs btn-white"><i class="fa fa-plus"></i> Aller en Essai </a>
+                                                                <a href="" class="btn btn-xs btn-white pull-right"><i class="fa fa-close text-danger"></i></a>
+                                                                <a href="<?= $this->url("gestion", "master", "ticket", $ticket->id)  ?>" class="btn btn-xs btn-white pull-right"><i class="fa fa-file-text-o"></i> Plus de détails</a>
                                                             </div>
                                                         </div>
-                                                    <?php } ?>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="ibox ">
-                                        <div class="ibox-title">
-                                            <h5>Devis en attente de validation</h5>
-                                            <div class="ibox-tools">
-                                                <a class="collapse-link" href="">
-                                                    <i class="fa fa-chevron-up"></i>
-                                                </a>
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    <i class="fa fa-wrench"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-user">
-                                                    <li><a href="#" class="dropdown-item">Config option 1</a>
-                                                    </li>
-                                                    <li><a href="#" class="dropdown-item">Config option 2</a>
-                                                    </li>
-                                                </ul>
-                                                <a class="close-link" href="">
-                                                    <i class="fa fa-times"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="ibox-content">
-                                            <div class="feed-activity-list">
-                                                <div class="feed-element">
-                                                    <div class="media-body ">
-                                                        <small class="float-right">5m ago</small>
-                                                        <strong>Monica Smith</strong> posted a new blog. <br>
-                                                        <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
                                                     </div>
-                                                </div>
-
-                                                <div class="feed-element">
-                                                    <div class="media-body ">
-                                                        <small class="float-right">5m ago</small>
-                                                        <strong>Monica Smith</strong> posted a new blog. <br>
-                                                        <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
-                                                    </div>
-                                                </div>
-
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="ibox ">
-                                        <div class="ibox-title">
-                                            <h5>Prêt à être livrer</h5>
-                                            <div class="ibox-tools">
-                                                <a class="collapse-link" href="">
-                                                    <i class="fa fa-chevron-up"></i>
-                                                </a>
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                                    <i class="fa fa-wrench"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-user">
-                                                    <li><a href="#" class="dropdown-item">Config option 1</a>
-                                                    </li>
-                                                    <li><a href="#" class="dropdown-item">Config option 2</a>
-                                                    </li>
-                                                </ul>
-                                                <a class="close-link" href="">
-                                                    <i class="fa fa-times"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="ibox-content">
-                                            <div class="feed-activity-list">
-                                                <div class="feed-element">
-                                                    <div class="media-body ">
-                                                        <small class="float-right">5m ago</small>
-                                                        <strong>Monica Smith</strong> posted a new blog. <br>
-                                                        <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
-                                                    </div>
-                                                </div>
-
-                                                <div class="feed-element">
-                                                    <div class="media-body ">
-                                                        <small class="float-right">5m ago</small>
-                                                        <strong>Monica Smith</strong> posted a new blog. <br>
-                                                        <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
 
