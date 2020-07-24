@@ -51,18 +51,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($essais as $key => $essai) { ?>
+                            <?php foreach ($lavages as $key => $lavage) { ?>
                                 <tr>
                                     <td>
-                                        <span class="label label-<?= $essai->etat->class ?>"><?= $essai->etat->name() ?></span>
+                                        <span class="label label-<?= $lavage->etat->class ?>"><?= $lavage->etat->name() ?></span>
                                     </td>
                                     <td width="300px">
-                                        <h4 class=""><span class="text-uppercase"><?= $essai->typeessai->name() ?></span></h4>
-                                        <span>Ticket N°<?= $essai->reference ?></span><br>
+                                        <h4 class=""><span class="text-uppercase">Au lavage</span></h4>
+                                        <span>Ticket N°<?= $lavage->reference ?></span><br>
                                     </td>
                                     <td>
-                                        <h4 class="mp0"><?= $essai->ticket->client->name() ?> </h4>
-                                        <?= $essai->ticket->client->typeclient->name() ?><br>
+                                        <h4 class="mp0"><?= $lavage->ticket->client->name() ?> </h4>
+                                        <?= $lavage->ticket->client->typeclient->name() ?><br>
                                     </td>
                                     <td>
                                         <div class="row">
@@ -70,17 +70,17 @@
                                                <img src="<?= $this->stockage("images", "vehicules", "default.jpg")  ?>" style="width: 50px">
                                            </div>
                                            <div class="col-sm-10">
-                                            <h4 class="mp0"><?= $essai->ticket->auto->immatriculation ?> </h4>
-                                            <?= $essai->ticket->auto->marque->name() ?> <?= $essai->ticket->auto->modele ?><br>
+                                            <h4 class="mp0"><?= $lavage->ticket->auto->immatriculation ?> </h4>
+                                            <?= $lavage->ticket->auto->marque->name() ?> <?= $lavage->ticket->auto->modele ?><br>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <?= $essai->mecanicien->name() ?><br>
-                                    <small><?= depuis($essai->created)  ?></small>
+                                    <?= $lavage->mecanicien->name() ?><br>
+                                    <small><?= depuis($lavage->created)  ?></small>
                                 </td>
                                 <td class="text-right">
-                                    <button data-toggle="modal" data-target="#modal-valider_essai-<?= $essai->id ?>" class="btn btn-white btn-xs"><i class="fa fa-check text-green"></i> Valider</button>
+                                    <button data-toggle="modal" data-target="#modal-valider_essai-<?= $lavage->id ?>" class="btn btn-white btn-xs"><i class="fa fa-check text-green"></i> Valider</button>
                                     <button class="btn btn-white btn-xs"><i class="fa fa-file-text-o text-blue"></i></button>
                                     <button class="btn btn-white btn-xs"><i class="fa fa-close text-danger"></i></button>
                                 </td>
@@ -99,8 +99,8 @@
 <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
 
 
-<?php foreach ($essais as $key => $essai) {
-    $ticket = $essai->ticket;
+<?php foreach ($lavages as $key => $lavage) {
+    $ticket = $lavage->ticket;
     include($this->rootPath("composants/assets/modals/modal-valider_essai.php"));
 }
 ?> 

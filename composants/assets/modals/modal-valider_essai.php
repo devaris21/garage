@@ -106,7 +106,8 @@
                 </div><hr>
 
                 <div class="container">
-                    <input type="hidden" name="essai_id" value="<?= $essai->getId() ?>">
+                    <input type="hidden" name="essai_id" value="<?= $essai->id ?>">
+                    <input type="hidden" name="typeessai_id" value="<?= $essai->typeessai->id ?>">
                     <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
                     <button type="button" class="btn btn-sm dim btn-primary pull-right" onclick="validerEssai('<?= $essai->getId() ?>')"><i class="fa fa-check"></i> Valider l'essai</button>
                 </div>

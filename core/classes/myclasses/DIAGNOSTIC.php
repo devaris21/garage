@@ -44,6 +44,8 @@ class DIAGNOSTIC extends TABLE
 			$this->dateFin = date("Y-m-d H:i:s");
 			$this->etat_id = ETAT::VALIDEE;
 			$data = $this->save();
+			$this->actualise();
+			$data = $this->ticket->next(null, $this->mecanicien_id);
 		}else{
 			$data->status = false;
 			$data->message = "Vous ne pouvez plus effectuer cette action sur cet essai !";

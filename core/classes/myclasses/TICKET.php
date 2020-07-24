@@ -60,7 +60,6 @@ class TICKET extends TABLE
 				}
 			}
 
-
 			if (in_array($ticket->etatintervention_id, [ETATINTERVENTION::DEVIS])) {
 				$lots = $ticket->fourni("devis", ["etat_id ="=>ETAT::ENCOURS]);
 				if (count($lots) > 0) {
@@ -69,7 +68,6 @@ class TICKET extends TABLE
 				}
 			}
 
-
 			if (in_array($ticket->etatintervention_id, [ETATINTERVENTION::DIAGNOSTIC])) {
 				$lots = $ticket->fourni("diagnostic", ["etat_id ="=>ETAT::ENCOURS]);
 				if (count($lots) > 0) {
@@ -77,7 +75,6 @@ class TICKET extends TABLE
 					continue;
 				}
 			}
-
 
 			if (in_array($ticket->etatintervention_id, [ETATINTERVENTION::INTERVENTION])) {
 				$lots = $ticket->fourni("intervention", ["etat_id ="=>ETAT::ENCOURS]);
@@ -202,38 +199,39 @@ class TICKET extends TABLE
 			if (in_array($this->etatintervention_id, [ETATINTERVENTION::ESSAI_AVANT, ETATINTERVENTION::ESSAI_AVANT_CHEF])) {
 				$essai = new ESSAI;
 				$essai->ticket_id = $this->id;
-				$essai->mecanicien = $mecanicien_id;
+				$essai->mecanicien_id = $mecanicien_id;
 				$essai->typeessai_id = $this->etatintervention_id - 1;
 				$data = $essai->enregistre();
 
 			}elseif ($this->etatintervention_id == ETATINTERVENTION::DIAGNOSTIC) {
 				$diagnostic = new DIAGNOSTIC;
 				$diagnostic->ticket_id = $this->id;
-				$diagnostic->mecanicien = $mecanicien_id;
+				$diagnostic->mecanicien_id = $mecanicien_id;
 				$data = $diagnostic->enregistre();
 
 			}elseif ($this->etatintervention_id == ETATINTERVENTION::DEVIS) {
 				$devis = new DEVIS;
 				$devis->ticket_id = $this->id;
+				$devis->mecanicien_id = $mecanicien_id;
 				$data = $devis->enregistre();
 
 			}elseif ($this->etatintervention_id == ETATINTERVENTION::INTERVENTION) {
 				$devis = new INTERVENTION;
 				$devis->ticket_id = $this->id;
-				$devis->mecanicien = $mecanicien_id;
+				$devis->mecanicien_id = $mecanicien_id;
 				$data = $devis->enregistre();
 
 			}elseif ($this->etatintervention_id == ETATINTERVENTION::ESSAI_APRES_CHEF) {
 				$essai = new ESSAI;
 				$essai->ticket_id = $this->id;
-				$essai->mecanicien = $mecanicien_id;
+				$essai->mecanicien_id = $mecanicien_id;
 				$essai->typeessai_id = TYPEESSAI::APRES;
 				$data = $essai->enregistre();
 
 			}elseif ($this->etatintervention_id == ETATINTERVENTION::LAVAGE) {
 				$essai = new LAVAGE;
 				$essai->ticket_id = $this->id;
-				$essai->mecanicien = $mecanicien_id;
+				$essai->mecanicien_id = $mecanicien_id;
 				$data = $essai->enregistre();
 
 			}elseif ($this->etatintervention_id == ETATINTERVENTION::LIVRAISON) {
@@ -250,6 +248,31 @@ class TICKET extends TABLE
 		return $data;
 	}
 
+
+
+	public function getEssai(){
+		$datas = $this->fourni("essai", ["typeessai_id ="=>TYPEESSAI::AVANT, "etat_id !="=>ETAT::ANNULEE]);
+		if (count($datas) > 0) {
+			return $datas[0];
+		}
+		return new ESSAI;
+	}
+
+	public function getEssaiChef(){
+		$datas = $this->fourni("essai", ["typeessai_id ="=>TYPEESSAI::AVANT_CHEF, "etat_id !="=>ETAT::ANNULEE]);
+		if (count($datas) > 0) {
+			return $datas[0];
+		}
+		return new ESSAI;
+	}
+
+	public function getEssaiApres(){
+		$datas = $this->fourni("essai", ["typeessai_id ="=>TYPEESSAI::APRES, "etat_id !="=>ETAT::ANNULEE]);
+		if (count($datas) > 0) {
+			return $datas[0];
+		}
+		return new ESSAI;
+	}
 
 
 	public function sentenseCreate(){

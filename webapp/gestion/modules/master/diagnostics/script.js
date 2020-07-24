@@ -1,44 +1,78 @@
 $(function(){
-	
-	$('input.liste').keyup(function(e) {   
+
+	$('input.tache').keyup(function(e) {   
 		if(e.keyCode == 13) {
-			var url = "../../webapp/gestion/modules/master/essais_av/ajax.php";
+			var url = "../../webapp/gestion/modules/master/diagnostics/ajax.php";
 			val = $(this).val();
 			var formData = new FormData();
-			formData.append('remarque', val);
-			formData.append('action', 'remarque');
+			formData.append('tache', val);
+			formData.append('action', 'tache');
 			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
-				$("tbody.liste").html("")
-				$("tbody.liste").append(data)
+				$("tbody.listetache").html("")
+				$("tbody.listetache").append(data)
 			}, 'html');
-			$("input.liste").val("")
+			$("input.tache").val("")
 			return false;
 		}
 	});
 
-
-	supprimerRemarque = function(id){
-		var url = "../../webapp/gestion/modules/master/essais_av/ajax.php";
+	supprimerTache = function(id){
+		var url = "../../webapp/gestion/modules/master/diagnostics/ajax.php";
 		var formData = new FormData();
 		formData.append('key', id);
-		formData.append('action', 'supprimerRemarque');
+		formData.append('action', 'supprimerTache');
 		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
-			$("tbody.liste").html("")
-			$("tbody.liste").append(data)
+			$("tbody.listetache").html("")
+			$("tbody.listetache").append(data)
 		}, 'html');
 	}
 
 
 
-	validerEssai = function(id){
-		var url = "../../webapp/gestion/modules/master/essais_av/ajax.php";
-		alerty.confirm("Voulez-vous vraiment valider l'essai ?", {
-			title: "Validation de l'essai",
+	$('input.piece, input.qte').keyup(function(e) {   
+		if(e.keyCode == 13) {
+			var url = "../../webapp/gestion/modules/master/diagnostics/ajax.php";
+			val = $(this).parent("div").parent("div").find("input.piece").val();
+			qte = $(this).parent("div").parent("div").find("input.qte").val();
+			var formData = new FormData();
+			formData.append('piece', val);
+			formData.append('qte', qte);
+			formData.append('action', 'piece');
+			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
+				$("tbody.listepiece").html("")
+				$("tbody.listepiece").append(data)
+			}, 'html');
+			$("input.piece").val("")
+			$("input.qte").val(1)
+			return false;
+		}
+	});
+
+	supprimerPiece = function(id){
+		var url = "../../webapp/gestion/modules/master/diagnostics/ajax.php";
+		var formData = new FormData();
+		formData.append('key', id);
+		formData.append('action', 'supprimerPiece');
+		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
+			$("tbody.listepiece").html("")
+			$("tbody.listepiece").append(data)
+		}, 'html');
+	}
+
+
+
+
+
+
+	validerDiagnostic = function(id){
+		var url = "../../webapp/gestion/modules/master/diagnostics/ajax.php";
+		alerty.confirm("Voulez-vous vraiment valider le diagnostic ?", {
+			title: "Validation de le diagnostic",
 			cancelLabel : "Non",
 			okLabel : "OUI, valider",
 		}, function(){
-			var formData = new FormData($("#modal-valider_essai-"+id).find("form")[0]);
-			formData.append('action', 'validerEssai');
+			var formData = new FormData($("#modal-valider_diagnostic-"+id).find("form")[0]);
+			formData.append('action', 'validerDiagnostic');
 			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
 				if (data.status) {
 					window.location.reload()
@@ -54,7 +88,7 @@ $(function(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-$("form#formValiderEssai").submit(function(){
+$("form#formValiderDiagnostic").submit(function(){
 	return false;
 })
 

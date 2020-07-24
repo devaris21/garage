@@ -2,8 +2,8 @@
 namespace Home;
 unset_session("tableau");
 
-$interventions = INTERVENTION::findBy(["etat_id ="=>ETAT::ENCOURS]);
-foreach ($interventions as $key => $value) {
+$essais = ESSAI::findBy(["typeessai_id = "=>TYPEESSAI::APRES, "etat_id ="=>ETAT::ENCOURS]);
+foreach ($essais as $key => $value) {
 	$value->actualise();
 	if ($value->ticket->etat_id != ETAT::ENCOURS) {
 		unset($datas[$key]);

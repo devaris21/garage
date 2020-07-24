@@ -11,6 +11,7 @@ class DEVIS extends TABLE
 
 	public $reference;
 	public $ticket_id;
+	public $mecanicien_id;
 	public $dateFin;
 	public $etat_id = ETAT::ENCOURS;
 	public $employe_id;
@@ -21,9 +22,15 @@ class DEVIS extends TABLE
 		$data = new RESPONSE;
 		$datas = TICKET::findBy(["id ="=>$this->ticket_id]);
 		if (count($datas) == 1) {
-			$this->reference = strtoupper("DEVIS-".substr(uniqid(), 7, 8));
-			$this->employe_id = getSession("employe_connecte_id");
-			$data = $this->save();
+			$datas = MECANICIEN::findBy(["id ="=>$this->mecanicien_id]);
+			if (count($datas) == 1) {
+				$this->reference = strtoupper("DEVIS-".substr(uniqid(), 7, 8));
+				$this->employe_id = getSession("employe_connecte_id");
+				$data = $this->save();
+			}else{
+				$data->status = false;
+				$data->status = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";
+			}
 		}else{
 			$data->status = false;
 			$data->status = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";

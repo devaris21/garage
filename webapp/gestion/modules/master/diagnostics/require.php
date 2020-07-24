@@ -1,9 +1,10 @@
 <?php 
 namespace Home;
-unset_session("tableau");
+unset_session("taches");
+unset_session("pieces");
 
-$essais = ESSAI::findBy(["typeessai_id != "=>TYPEESSAI::APRES, "etat_id ="=>ETAT::ENCOURS]);
-foreach ($essais as $key => $value) {
+$diagnostics = DIAGNOSTIC::findBy(["etat_id ="=>ETAT::ENCOURS]);
+foreach ($diagnostics as $key => $value) {
 	$value->actualise();
 	if ($value->ticket->etat_id != ETAT::ENCOURS) {
 		unset($datas[$key]);

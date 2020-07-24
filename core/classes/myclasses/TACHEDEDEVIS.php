@@ -3,16 +3,15 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class LIGNEDEDEVIS extends TABLE
+class TACHEDEDEVIS extends TABLE
 {
 
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
 	public $devis_id;
-	public $pieceauto_id;
+	public $tache;
 	public $montant;
-	public $quantite;
 	public $remise;
 	public $typeremise_id;
 	public $etat_id = ETAT::ENCOURS;

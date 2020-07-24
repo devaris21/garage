@@ -63,7 +63,7 @@
                                         <li><a class="nav-link" data-toggle="tab" href="#tab-<?= $value->id ?>"><i class="fa fa-users"></i> <?= $value->name() ?></a></li>
                                     <?php } ?>
                                 </ul>
-                                <div class="tab-content">
+                                <div class="tab-content" id="produits">
                                     <?php foreach ($groupes as $key => $value) {
                                         $datas = $value->fourni("mecanicien"); ?>
                                         <div role="tabpanel" id="tab-<?= $value->id ?>" class="tab-pane"><br>
