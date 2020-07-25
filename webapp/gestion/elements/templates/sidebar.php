@@ -29,7 +29,7 @@
             $__essais_av = Home\ESSAI::findBy(["typeessai_id != "=>Home\TYPEESSAI::APRES, "etat_id ="=>Home\ETAT::ENCOURS]);
             $__essais_ap = Home\ESSAI::findBy(["typeessai_id = "=>Home\TYPEESSAI::APRES, "etat_id ="=>Home\ETAT::ENCOURS]);
             $__diagnostics = Home\DIAGNOSTIC::encours();
-            $__devis = Home\DEVIS::encours();
+            $__devis = Home\DEVIS::findBy(["etat_id ="=>Home\ETAT::PARTIEL]);
             $__interventions = Home\INTERVENTION::encours();
             $__lavages = Home\LAVAGE::encours();
             $__attentes = Home\TICKET::enAttente();

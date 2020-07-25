@@ -2,8 +2,6 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><br>
-                <hr class="mp3">
                 <div class="row">
                     <div class="col-sm-5">
                         <div class="row">
@@ -109,7 +107,7 @@
 
                     <div class="row">
                         <div class="col-sm-5">
-                            <h3>Liste des travaux à effectuer</h3>
+                            <h3 class="text-uppercase">Liste des travaux à effectuer</h3>
                             <div>
                                 <label class="">Libéllé de la tache</label>
                                 <input type="text" class="form-control tache">
@@ -122,7 +120,7 @@
 
                         <div class="offset-sm-1 col-sm-6 border-left">
                             <div>
-                                <h3>Liste des pièces à utiliser</h3>
+                                <h3 class="text-uppercase">Liste des pièces à utiliser</h3>
                                 <div class="row">
                                     <div class="col-9">
                                         <label class="">Libéllé de la pièce</label>

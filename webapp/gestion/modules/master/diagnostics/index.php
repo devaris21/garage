@@ -66,10 +66,10 @@
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-3">
                                                    <img src="<?= $this->stockage("images", "vehicules", "default.jpg")  ?>" style="width: 50px">
                                                </div>
-                                               <div class="col-sm-10">
+                                               <div class="col-sm-9">
                                                 <h4 class="mp0"><?= $diagnostic->ticket->auto->immatriculation ?> </h4>
                                                 <?= $diagnostic->ticket->auto->marque->name() ?> <?= $diagnostic->ticket->auto->modele ?><br>
                                             </div>
