@@ -46,11 +46,17 @@
                 <li class="" id="planning">
                     <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Planning Travail</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="garage">
-                    <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Vue du garage</span> </a>
+                <li class="" id="planning">
+                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Nouveau</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
                 </li>
-                <li><hr class="" style="background-color: transparent; "></li>
-
+                <li>
+                    <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Garage</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="<?= $this->url($this->section, "master", "garage") ?>">Vue générale actuelle</a></li>
+                        <li><a href="<?= $this->url($this->section, "master", "garage") ?>">Tous les véhicules</a></li>
+                    </ul>
+                </li>
+                <li><hr class="mp3" style="background-color: transparent; "></li>
 
                 <li class="" id="essais_av">
                     <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-wheelchair"></i> <span class="nav-label">En Essai AV</span> <?php if (count($__essais_av) > 0) { ?> <span class="label label-warning float-right"><?= count($__essais_av) ?></span> <?php } ?></a>
@@ -73,7 +79,7 @@
 
 
 
-                <li><hr class="" style="background-color: transparent; "></li>
+                <li><hr class="mp3" style="background-color: transparent; "></li>
                 <li class="" id="dossiers">
                     <a href="<?= $this->url($this->section, "master", "dossiers") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Archives Dossiers</span></a>
                 </li>
