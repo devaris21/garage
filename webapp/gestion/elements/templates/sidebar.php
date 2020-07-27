@@ -52,11 +52,14 @@
                 <li><hr class="mp3" style="background-color: transparent; "></li>
 
 
-                <li class="" id="essais_av">
-                    <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-wheelchair"></i> <span class="nav-label">Stock d'articles</span> <?php if (count($__essais_av) > 0) { ?> <span class="label label-warning float-right"><?= count($__essais_av) ?></span> <?php } ?></a>
+                <li class="" id="articles">
+                    <a href="<?= $this->url($this->section, "master", "articles") ?>"><i class="fa fa-wheelchair"></i> <span class="nav-label">Stock d'articles</span> <?php if (count($__essais_av) > 0) { ?> <span class="label label-warning float-right"><?= count($__essais_av) ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="diagnostics">
-                    <a href="<?= $this->url($this->section, "master", "diagnostics") ?>"><i class="fa fa-steam"></i> <span class="nav-label">Stock Pneumatique</span> <?php if (count($__diagnostics) > 0) { ?> <span class="label label-warning float-right"><?= count($__diagnostics) ?></span> <?php } ?></a>
+                <li class="" id="pneumatique">
+                    <a href="<?= $this->url($this->section, "master", "pneumatique") ?>"><i class="fa fa-steam"></i> <span class="nav-label">Stock Pneumatique</span> <?php if (count($__diagnostics) > 0) { ?> <span class="label label-warning float-right"><?= count($__diagnostics) ?></span> <?php } ?></a>
+                </li>
+                <li class="" id="articles">
+                    <a href="<?= $this->url($this->section, "master", "articles") ?>"><i class="fa fa-wheelchair"></i> <span class="nav-label">Stock autres</span> <?php if (count($__essais_av) > 0) { ?> <span class="label label-warning float-right"><?= count($__essais_av) ?></span> <?php } ?></a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Rechercher TecDoc</span><span class="fa arrow"></span></a>

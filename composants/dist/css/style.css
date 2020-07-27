@@ -6552,7 +6552,7 @@ del {
 }
 .product-imitation {
   text-align: center;
-  padding: 90px 0;
+  padding: 70px 0;
   background-color: #f8f8f9;
   color: #bebec3;
   font-weight: 600;
@@ -6568,7 +6568,7 @@ del {
   padding: 120px 0;
 }
 .product-desc {
-  padding: 20px;
+  padding: 10px;
   position: relative;
 }
 .ecommerce .tag-list {
@@ -6609,13 +6609,13 @@ table.shoping-cart-table tr td:last-child {
   color: #1ab394;
 }
 .product-price {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: #ffffff;
   background-color: #1ab394;
-  padding: 6px 12px;
+  padding: 3px 6px;
   position: absolute;
-  top: -32px;
+  top: -25px;
   right: 0;
 }
 .product-detail .ibox-content {

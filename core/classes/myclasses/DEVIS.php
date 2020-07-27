@@ -39,6 +39,11 @@ class DEVIS extends TABLE
 	}
 
 
+	public function name(){
+		return $this->reference;
+	}
+
+
 	public function valider(){
 		$data = new RESPONSE;
 		if ($this->etat_id ==  ETAT::ENCOURS) {

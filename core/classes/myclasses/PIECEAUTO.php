@@ -13,6 +13,7 @@ class PIECEAUTO extends TABLE
 	public $name;
 	public $marque_id;
 	public $modele;
+	public $stock;
 	public $montant;
 
 
