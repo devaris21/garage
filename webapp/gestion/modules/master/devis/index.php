@@ -80,7 +80,7 @@
                                         <small><?= depuis($devi->created)  ?></small>
                                     </td>
                                     <td class="text-right">
-                                        <button class="btn btn-white btn-xs"><i class="fa fa-file-text-o text-blue"></i> Voir</button>
+                                        <a href="<?= $this->url($this->section, "master", "ledevis", $devi->id) ?>" class="btn btn-white btn-xs"><i class="fa fa-file-text-o text-blue"></i> Voir</a>
                                         <button class="btn btn-white btn-xs"><i class="fa fa-close text-danger"></i></button>
                                     </td>
                                 </tr>

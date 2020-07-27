@@ -315,6 +315,62 @@ class TICKET extends TABLE
 
 
 
+	public function fiche (int $id){
+		$this->actualise();
+
+		if ($id == ETATINTERVENTION::ESSAI_AVANT) {
+			$lots = $this->fourni("essai", ["etat_id ="=>ETAT::VALIDEE, "typeessai_id ="=>TYPEESSAI::AVANT]);
+			if (count($lots) > 0) {
+				return end($lots);
+			}
+		}
+
+		if ($id == ETATINTERVENTION::ESSAI_AVANT_CHEF) {
+			$lots = $this->fourni("essai", ["etat_id ="=>ETAT::VALIDEE, "typeessai_id ="=>TYPEESSAI::AVANT_CHEF]);
+			if (count($lots) > 0) {
+				return end($lots);
+			}
+		}
+
+		if ($id == ETATINTERVENTION::ESSAI_APRES_CHEF) {
+			$lots = $this->fourni("essai", ["etat_id ="=>ETAT::VALIDEE, "typeessai_id ="=>TYPEESSAI::APRES]);
+			if (count($lots) > 0) {
+				return end($lots);
+			}
+		}
+
+		if ($id == ETATINTERVENTION::DEVIS) {
+			$lots = $this->fourni("devis", ["etat_id ="=>ETAT::VALIDEE]);
+			if (count($lots) > 0) {
+				return end($lots);
+			}
+		}
+
+		if ($id == ETATINTERVENTION::DIAGNOSTIC) {
+			$lots = $this->fourni("diagnostic", ["etat_id ="=>ETAT::VALIDEE]);
+			if (count($lots) > 0) {
+				return end($lots);
+			}
+		}
+
+		if ($id == ETATINTERVENTION::INTERVENTION) {
+			$lots = $this->fourni("intervention", ["etat_id ="=>ETAT::VALIDEE]);
+			if (count($lots) > 0) {
+				return end($lots);
+			}
+		}
+
+		if ($id == ETATINTERVENTION::LAVAGE) {
+			$lots = $this->fourni("lavage", ["etat_id ="=>ETAT::VALIDEE]);
+			if (count($lots) > 0) {
+				return end($lots);
+			}
+		}
+
+		return new \stdClass();
+	}
+
+
 
 	public function getEssai(){
 		$datas = $this->fourni("essai", ["typeessai_id ="=>TYPEESSAI::AVANT, "etat_id !="=>ETAT::ANNULEE]);
