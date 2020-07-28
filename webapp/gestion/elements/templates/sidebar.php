@@ -43,50 +43,36 @@
                 <li class="" id="dashboard">
                     <a href="<?= $this->url($this->section, "master", "dashboard") ?>"><i class="fa fa-tachometer"></i> <span class="nav-label">Tableau de bord</span></a>
                 </li>
-                <li class="" id="planning">
-                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Planning Travail</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
+                <li class="" id="garage">
+                    <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Vue générale du Garage</span></a>
                 </li>
-                <li class="" id="planning">
-                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Nouveau</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
+                <li class="" id="tickets">
+                    <a href="<?= $this->url($this->section, "master", "tickets") ?>"><i class="fa fa-ticket"></i> <span class="nav-label">Tous les tickets</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Garage</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="<?= $this->url($this->section, "master", "garage") ?>">Vue générale actuelle</a></li>
-                        <li><a href="<?= $this->url($this->section, "master", "garage") ?>">Tous les véhicules</a></li>
-                    </ul>
-                </li>
-                <li><hr class="mp3" style="background-color: transparent; "></li>
+                <li><hr class="" style="background-color: transparent; "></li>
 
-                <li class="" id="essais_av">
-                    <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-wheelchair"></i> <span class="nav-label">En Essai AV</span> <?php if (count($__essais_av) > 0) { ?> <span class="label label-warning float-right"><?= count($__essais_av) ?></span> <?php } ?></a>
+                <li class="" id="clients">
+                    <a href="<?= $this->url($this->section, "master", "clients") ?>"><i class="fa fa-user"></i> <span class="nav-label">Clients</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="diagnostics">
-                    <a href="<?= $this->url($this->section, "master", "diagnostics") ?>"><i class="fa fa-steam"></i> <span class="nav-label">Sous diagnostic TK.</span> <?php if (count($__diagnostics) > 0) { ?> <span class="label label-warning float-right"><?= count($__diagnostics) ?></span> <?php } ?></a>
+
+                <li class="" id="vehicules">
+                    <a href="<?= $this->url($this->section, "master", "vehicules") ?>"><i class="fa fa-car"></i> <span class="nav-label">Véhicules</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="devis">
-                    <a href="<?= $this->url($this->section, "master", "devis") ?>"><i class="fa fa-file-text-o"></i> <span class="nav-label">Devis en attente</span> <?php if (count($__devis) > 0) { ?> <span class="label label-warning float-right"><?= count($__devis) ?></span> <?php } ?></a>
+                <li class="" id="livraisons">
+                    <a href="<?= $this->url($this->section, "master", "livraisons") ?>"><i class="fa fa-check"></i> <span class="nav-label">Prêt pour livraison</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="interventions">
-                    <a href="<?= $this->url($this->section, "master", "interventions") ?>"><i class="fa fa-pied-piper-alt"></i> <span class="nav-label">Sous Intervention</span> <?php if (count($__interventions) > 0) { ?> <span class="label label-warning float-right"><?= count($__interventions) ?></span> <?php } ?></a>
-                </li>
-                <li class="" id="essais_ap">
-                    <a href="<?= $this->url($this->section, "master", "essais_ap") ?>"><i class="fa fa-wheelchair"></i> <span class="nav-label">En Essai AP</span> <?php if (count($__essais_ap) > 0) { ?> <span class="label label-warning float-right"><?= count($__essais_ap) ?></span> <?php } ?></a>
-                </li>
+
+                <li><hr class="" style="background-color: transparent; "></li>
+
                 <li class="" id="lavages">
                     <a href="<?= $this->url($this->section, "master", "lavages") ?>"><i class="fa fa-shower"></i> <span class="nav-label">Au lavage</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
                 </li>
 
 
-
-                <li><hr class="mp3" style="background-color: transparent; "></li>
+                <li><hr class="" style="background-color: transparent; "></li>
                 <li class="" id="dossiers">
                     <a href="<?= $this->url($this->section, "master", "dossiers") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Archives Dossiers</span></a>
                 </li>
-                <li class="" id="mecaniciens">
-                    <a href="<?= $this->url($this->section, "master", "mecanos") ?>"><i class="fa fa-users"></i> <span class="nav-label">Liste des mécaniciens</span></a>
-                </li>
-
 
             </ul>
 
@@ -97,6 +83,6 @@
 
 <style type="text/css">
     li.dropdown-divider{
-     !important;
- }
+       !important;
+   }
 </style>

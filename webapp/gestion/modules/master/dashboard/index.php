@@ -94,9 +94,9 @@
 
                             <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-success dim btn-block"><i class="fa fa-plus"></i> Nouvelle intervention</button>
                         </div>
-                    </div>
+                    </div><hr>
 
-              <!--       <div class="text-center">
+                    <div class="text-center">
                         <div class="row" style="font-size: 11px">
                             <div class="col-sm"><button data-toggle="modal" data-target="#modal-newreparation" class="btn btn-success dim"><i class="fa fa-wrench"></i> Nouvelle intervention</button></div>
                             <div class="col-sm"><button data-toggle="modal" data-target="#modal-newreparation" class="btn btn-info dim"><i class="fa fa-wrench"></i> Rémorque / Fourrière </button></div>
@@ -104,51 +104,6 @@
                             <div class="col-sm"><button data-toggle="modal" data-target="#modal-newlocation" class="btn btn-danger dim"><i class="fa fa-cab"></i> Location de véhicule</button></div>
                             <div class="col-sm"><button data-toggle="modal" data-target="#modal-newdevis" class="btn btn-warning dim"><i class="fa fa-file-text-o"></i> Devis / proforma</button></div>
                         </div>
-                    </div> -->
-                </div>
-
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="wrapper wrapper-content">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="ibox ">
-                                        <div class="ibox-title">
-                                            <h5 class="text-uppercase gras">Nouvelle intervention</h5>
-                                            <div class="ibox-tools">
-                                                <span class="label label-warning-light float-right"><?= count($nouveaux) ?> Nouveaux</span>
-                                            </div>
-                                        </div>
-                                        <div class="ibox-content">
-                                            <div class="feed-activity-list row">
-                                                <?php foreach ($nouveaux as $key => $ticket) {
-                                                    $ticket->actualise(); ?>
-                                                    <div class="col-sm-6 col-md-4 col-lg-3 feed-element border-right">
-                                                        <div class="media-body">
-                                                            <small class="float-right text-navy" title="<?= datelong($ticket->created)  ?>"><i class="fa fa-clock-o"></i> <?= depuis($ticket->created)  ?></small>
-                                                            <span class="text-uppercase gras"> TICKET N°<?= $ticket->reference ?></span><br>
-                                                            <small class="text-muted">Client : <?= $ticket->client->name()  ?></small><br>
-                                                            <strong><?= $ticket->auto->marque->name() ?> <?= $ticket->auto->modele  ?></strong> immatriculé <strong><?= $ticket->auto->immatriculation  ?></strong><br>
-                                                            <?php foreach ($ticket->fourni("ticket_typereparation") as $key => $value) {
-                                                                $value->actualise(); ?>
-                                                                <label class="label"><?= $value->typereparation->name()  ?></label>
-                                                            <?php } ?>
-                                                            <div class="">
-                                                                <a href="#" data-toggle="modal" data-target="#modal-essai_av-<?= $ticket->id  ?>" class="btn btn-xs btn-white"><i class="fa fa-plus"></i> Aller en Essai </a>
-                                                                <a href="" class="btn btn-xs btn-white pull-right"><i class="fa fa-close text-danger"></i></a>
-                                                                <a href="<?= $this->url("gestion", "master", "ticket", $ticket->id)  ?>" class="btn btn-xs btn-white pull-right"><i class="fa fa-file-text-o"></i> Plus de détails</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                <?php } ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
