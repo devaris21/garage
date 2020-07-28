@@ -43,7 +43,7 @@
                 <li class="" id="dashboard">
                     <a href="<?= $this->url($this->section, "master", "dashboard") ?>"><i class="fa fa-tachometer"></i> <span class="nav-label">Tableau de bord</span></a>
                 </li>
-                <li><hr class="mp3" style="background-color: transparent; "></li>
+                <li><hr class="" style="background-color: transparent; "></li>
 
 
                 <li class="" id="planning">
@@ -55,7 +55,7 @@
                 <li class="" id="garage">
                     <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Toutes les commandes</span> </a>
                 </li>
-                <li><hr class="mp3" style="background-color: transparent; "></li>
+                <li><hr class="" style="background-color: transparent; "></li>
 
                 <li class="" id="garage">
                     <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Bons de sortie</span> </a>
@@ -63,7 +63,7 @@
                 <li class="" id="garage">
                     <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Usure/perte</span> </a>
                 </li>
-                <li><hr class="mp3" style="background-color: transparent; "></li>
+                <li><hr class="" style="background-color: transparent; "></li>
 
                 <li class="" id="essais_av">
                     <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-wheelchair"></i> <span class="nav-label">Stock d'articles</span> <?php if (count($__essais_av) > 0) { ?> <span class="label label-warning float-right"><?= count($__essais_av) ?></span> <?php } ?></a>
