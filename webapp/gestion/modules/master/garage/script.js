@@ -1,47 +1,59 @@
 $(document).ready(function(){
 
-    $("#todo, #inprogress, #completed").sortable({
+   $(".connectList").each(function(){
+    $(this).sortable({
         connectWith: ".connectList",
-        update: function( event, ui ) {
+        receive: function( event, ui ) {
+            Loader.start()
+            var url = "../../webapp/gestion/modules/master/garage/ajax.php";
+            var formdata = new FormData();
+            formdata.append('ticket', $(ui.item).attr("data-id"));
+            formdata.append('cible', $(event.target).attr("data-id"));
+            formdata.append('action', "verification");
+            $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
+                Loader.stop()
+                if (data.status) {
 
-            var todo = $( "#todo" ).sortable( "toArray" );
-            var inprogress = $( "#inprogress" ).sortable( "toArray" );
-            var completed = $( "#completed" ).sortable( "toArray" );
-            $('.output').html("ToDo: " + window.JSON.stringify(todo) + "<br/>" + "In Progress: " + window.JSON.stringify(inprogress) + "<br/>" + "Completed: " + window.JSON.stringify(completed));
-        }
-    }).disableSelection();
+                }else{
+                    alerty.confirm(data.message, {
+                        title: "Attention !",
+                        cancelLabel : "Non",
+                        okLabel : "OUI, continuer",
+                    }, function(){
+                        if (data.id == 1) {
+                            formdata.append('action', "garage");
+                            $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
+                                if (data.status) {
+                                    window.location.reload()
+                                }else{
+                                    Alerter.error('Erreur !', data.message);
+                                }
+                            },"json");
+                        }else{
+                            formdata.append('action', "garage");
+                            $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
+                                if (data.status) {
+                                    window.location.reload()
+                                }else{
+                                    Alerter.error('Erreur !', data.message);
+                                }
+                            },"json");formdata.append('action', "garage");
+                            $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
+                                if (data.status) {
+                                    window.location.reload()
+                                }else{
+                                    Alerter.error('Erreur !', data.message);
+                                }
+                            },"json");
+                        }
+                    })
+                }
+            }, 'json')
 
-
-    $('.slick_demo_2').slick({
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        centerMode: true,
-        responsive: [
-        {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true,
-                dots: true
+                // $(".tab-content .element.col-md-3").removeClass("col-md-3")
+                // $("#attente .element").addClass("col-md-3")
             }
-        },
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2
-            }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        }
-        ]
-    });
+        }).disableSelection();
+})
 
 });

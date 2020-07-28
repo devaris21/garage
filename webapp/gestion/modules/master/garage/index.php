@@ -49,16 +49,16 @@
                                                 <div class="bg-<?= $etat->class ?>" style="width: 40px; height: 40px"></div>
                                             </div>
                                             <div class="col-10">
-                                                <h3 class="mp0 text-uppercase gras"><?= $etat->name() ?></h3>
-                                                <span><i class="fa fa-hand-o-up"></i> Drag task between list</span>
+                                                <h5 class="mp0 text-uppercase gras"><?= $etat->name() ?></h5>
+                                                <small><i class="fa fa-hand-o-up"></i> Drag task between list</small>
                                                 <span class="badge pull-right bagde-<?= $etat->class ?>"><?= start0(count($datas))  ?></span>
                                             </div>
                                         </div><hr class="mp3">
 
-                                        <ul class="sortable-list connectList agile-list" id="todo" style="min-height: 400px;">
+                                        <ul class="sortable-list connectList agile-list" id="tab-<?= $etat->id  ?>" data-id="<?= $etat->id ?>" style="min-height: 450px;">
                                             <?php foreach ($datas as $key => $ticket) {
                                                 $ticket->actualise(); ?>
-                                                <li class="<?= $ticket->etatintervention->class ?>-element" id="task1">
+                                                <li class="<?= $ticket->etatintervention->class ?>-element" data-id="<?= $ticket->id ?>">
                                                     <a href="<?= $this->url("gestion", "master", "ticket", $ticket->id)  ?>" style="color: #111;">
                                                         <span class="pull-right" title="<?= depuis($ticket->created) ?>"><i class="fa fa-clock-o fa-2x"></i></span>
                                                         <h4 class="mp0 text-uppercase" style="margin-bottom: 3px;"><i class=" fa fa-car"></i> <?= $ticket->auto->immatriculation ?></h4>
