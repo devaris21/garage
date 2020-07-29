@@ -84,6 +84,22 @@ class MECANICIEN extends PERSONNE
 	}
 
 
+	public function taches (){
+		$datas = TICKET::encours();
+		$total = 0;
+		foreach ($datas as $key => $ticket) {
+			$lots = $ticket->fourni("essai", ["etat_id ="=>ETAT::ENCOURS, "mecanicien_id ="=>$this->id]);
+			$total += count($lots);
+
+			$lots = $ticket->fourni("diagnostic", ["etat_id ="=>ETAT::ENCOURS, "mecanicien_id ="=>$this->id]);
+			$total += count($lots);
+
+			$lots = $ticket->fourni("intervention", ["etat_id ="=>ETAT::ENCOURS, "mecanicien_id ="=>$this->id]);
+			$total += count($lots);
+		}
+		return $total;
+	}
+
 
 
 	public function sentenseCreate(){

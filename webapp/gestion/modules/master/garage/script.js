@@ -1,9 +1,10 @@
 $(document).ready(function(){
 
    $(".connectList").each(function(){
+    var my = $(this);
     $(this).sortable({
         connectWith: ".connectList",
-        receive: function( event, ui ) {
+        update: function( event, ui ) {
             Loader.start()
             var url = "../../webapp/gestion/modules/master/garage/ajax.php";
             var formdata = new FormData();
@@ -13,47 +14,58 @@ $(document).ready(function(){
             $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
                 Loader.stop()
                 if (data.status) {
-
+                    if (data.modal) {
+                        $("#modal-choisir_meca").modal("show");
+                    }
                 }else{
-                    alerty.confirm(data.message, {
-                        title: "Attention !",
-                        cancelLabel : "Non",
-                        okLabel : "OUI, continuer",
-                    }, function(){
-                        if (data.id == 1) {
-                            formdata.append('action', "garage");
-                            $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
-                                if (data.status) {
-                                    window.location.reload()
-                                }else{
-                                    Alerter.error('Erreur !', data.message);
+                    if (data.id != null) {
+                        alerty.confirm(data.message, {
+                            title: "Attention !",
+                            cancelLabel : "Non",
+                            okLabel : "OUI, continuer",
+                        }, function(){
+                            if (data.id == 1) {
+                                //retrograde
+                                formdata.append('action', "retrograde");
+                                $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
+                                    if (data.status) {
+                                        window.location.reload()
+                                    }else{
+                                        my.sortable('cancel');
+                                        Alerter.error('Erreur !', data.message);
+                                    }
+                                },"json");
+                            }else{
+                                //avance++
+                                if (data.modal) {
+                                    $("#modal-choisir_meca").modal("show");
                                 }
-                            },"json");
-                        }else{
-                            formdata.append('action', "garage");
-                            $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
-                                if (data.status) {
-                                    window.location.reload()
-                                }else{
-                                    Alerter.error('Erreur !', data.message);
-                                }
-                            },"json");formdata.append('action', "garage");
-                            $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
-                                if (data.status) {
-                                    window.location.reload()
-                                }else{
-                                    Alerter.error('Erreur !', data.message);
-                                }
-                            },"json");
-                        }
-                    })
+                            }
+                        })
+                    }else{
+                        my.sortable('cancel');
+                        Alerter.error('Erreur !', data.message); 
+                    }
                 }
             }, 'json')
-
-                // $(".tab-content .element.col-md-3").removeClass("col-md-3")
-                // $("#attente .element").addClass("col-md-3")
-            }
-        }).disableSelection();
+        }
+    }).disableSelection();
 })
 
+
+
+   validerTache =  function(id){
+    Loader.start()
+    var url = "../../webapp/gestion/modules/master/garage/ajax.php";
+    var formdata = new FormData();
+    formdata.append('mecanicien', id);
+    formdata.append('action', "validerTache");
+    $.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
+        if (data.status) {
+            window.location.reload()
+        }else{
+            Alerter.error('Erreur !', data.message);
+        }
+    },"json");
+}
 });

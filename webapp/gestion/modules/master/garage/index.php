@@ -87,6 +87,7 @@
 
         <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
 
+        <?php  include($this->rootPath("composants/assets/modals/modal-choisir_meca.php"));  ?>
 
     </div>
 </div>

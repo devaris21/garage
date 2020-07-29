@@ -96,19 +96,25 @@
                         </div>
                     </div>
 
-              <!--       <div class="text-center">
+                <!--  
+                    <div class="text-center">
                         <div class="row" style="font-size: 11px">
-                            <div class="col-sm"><button data-toggle="modal" data-target="#modal-newreparation" class="btn btn-success dim"><i class="fa fa-wrench"></i> Nouvelle intervention</button></div>
-                            <div class="col-sm"><button data-toggle="modal" data-target="#modal-newreparation" class="btn btn-info dim"><i class="fa fa-wrench"></i> Rémorque / Fourrière </button></div>
+                            <div class="col-sm">
+                                <button data-toggle="modal" data-target="#modal-newreparation" class="btn btn-success dim"><i class="fa fa-wrench"></i> Nouvelle intervention</button>
+                            </div>
+                            <div class="col-sm">
+                                <button data-toggle="modal" data-target="#modal-newreparation" class="btn btn-info dim"><i class="fa fa-wrench"></i> Rémorque / Fourrière </button>
+                            </div>
                             <div class="col-sm"><button data-toggle="modal" data-target="#modal-newvente" class="btn btn-primary dim"><i class="fa fa-cubes"></i> Vente de pièces</button></div>
                             <div class="col-sm"><button data-toggle="modal" data-target="#modal-newlocation" class="btn btn-danger dim"><i class="fa fa-cab"></i> Location de véhicule</button></div>
                             <div class="col-sm"><button data-toggle="modal" data-target="#modal-newdevis" class="btn btn-warning dim"><i class="fa fa-file-text-o"></i> Devis / proforma</button></div>
                         </div>
-                    </div> -->
+                    </div>
+                -->
                 </div>
 
 
-                <div class="row">
+         <!--        <div class="row">
                     <div class="col-lg-12">
                         <div class="wrapper wrapper-content">
                             <div class="row">
@@ -150,7 +156,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
