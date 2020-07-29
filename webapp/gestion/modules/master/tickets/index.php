@@ -88,7 +88,7 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <div class="btn-group">
-                                                        <button class="btn-white btn btn-xs"><i class="fa fa-eye"></i> Voir</button>
+                                                        <a class="btn-white btn btn-xs" href="<?= $this->url("gestion", "master", "ticket", $ticket->id)  ?>"><i class="fa fa-eye"></i> Voir</a>
                                                         <button class="btn-white btn btn-xs"><i class="fa fa-pencil text-blue"></i> Modifier</button>
                                                         <button class="btn-white btn btn-xs"><i class="fa fa-trash text-danger"></i></button>
                                                     </div>

@@ -2,14 +2,14 @@
 
 $(function(){
 
-			alert('Hey ! Tu as appuyé sur la touche entrée !!'); 
+	// 		alert('Hey ! Tu as appuyé sur la touche entrée !!'); 
 
-	$('.liste').keyup(function(e) {    
-		if(e.keyCode == 13) {
-			alert('Hey ! Tu as appuyé sur la touche entrée !!'); 
-			return false;
-		}
-	});
+	// $('.liste').keyup(function(e) {    
+	// 	if(e.keyCode == 13) {
+	// 		alert('Hey ! Tu as appuyé sur la touche entrée !!'); 
+	// 		return false;
+	// 	}
+	// });
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

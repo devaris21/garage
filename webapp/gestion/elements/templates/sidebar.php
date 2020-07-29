@@ -43,64 +43,54 @@
                 <li class="" id="dashboard">
                     <a href="<?= $this->url($this->section, "master", "dashboard") ?>"><i class="fa fa-tachometer"></i> <span class="nav-label">Tableau de bord</span></a>
                 </li>
-<<<<<<< HEAD
+                <li class="" id="vehicules">
+                    <a href="<?= $this->url($this->section, "master", "vehicules") ?>"><i class="fa fa-car"></i> <span class="nav-label">Véhicules</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
+                </li>
+                <li class="" id="clients">
+                    <a href="<?= $this->url($this->section, "master", "clients") ?>"><i class="fa fa-user"></i> <span class="nav-label">Clients</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
+                </li>
+                <li><hr class="mp3" style="background-color: transparent; "></li>
+
+
+
                 <li class="" id="planning">
                     <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Planning Travail</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="planning">
-                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Tous les véhicules</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
-                </li>
-                <li class="" id="planning">
-                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Nouveau</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
-                </li>
-                <li class="" id="planning">
-                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Nouveau</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Garage</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="<?= $this->url($this->section, "master", "garage") ?>">Vue générale actuelle</a></li>
-                        <li><a href="<?= $this->url($this->section, "master", "garage") ?>">Tous les véhicules</a></li>
-                    </ul>
+                <li class="" id="garage">
+                    <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-bank"></i> <span class="nav-label">Vue du garage</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
                 </li>
                 <li><hr class="mp3" style="background-color: transparent; "></li>
-=======
-                <li><hr class="" style="background-color: transparent; "></li>
->>>>>>> reception
+
 
 
                 <li class="" id="tickets">
                     <a href="<?= $this->url($this->section, "master", "tickets") ?>"><i class="fa fa-ticket"></i> <span class="nav-label">Tous les tickets</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="livraisons">
+                    <a href="<?= $this->url($this->section, "master", "livraisons") ?>"><i class="fa fa-wrench"></i> <span class="nav-label">En essais</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
+                </li>
+                <li class="" id="livraisons">
+                    <a href="<?= $this->url($this->section, "master", "livraisons") ?>"><i class="fa fa-wrench"></i> <span class="nav-label">Sous diagnostic TK</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
+                </li>
+                <li class="" id="livraisons">
+                    <a href="<?= $this->url($this->section, "master", "livraisons") ?>"><i class="fa fa-file-text-o"></i> <span class="nav-label">Devis en Attente</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
+                </li>
+                <li class="" id="livraisons">
                     <a href="<?= $this->url($this->section, "master", "livraisons") ?>"><i class="fa fa-check"></i> <span class="nav-label">Prêt pour livraison</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
                 </li>
-                <li><hr class="" style="background-color: transparent; "></li>
-
-
-                <li class="" id="garage">
-                    <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Vue du Garage</span></a>
-                </li>
-                <li class="" id="clients">
-                    <a href="<?= $this->url($this->section, "master", "clients") ?>"><i class="fa fa-user"></i> <span class="nav-label">Clients</span> </a>
-                </li>
-                <li class="" id="vehicules">
-                    <a href="<?= $this->url($this->section, "master", "vehicules") ?>"><i class="fa fa-car"></i> <span class="nav-label">Véhicules</span> </a>
-                </li>
-                <li><hr class="" style="background-color: transparent; "></li>
+                <li><hr class="mp3" style="background-color: transparent; "></li>
 
 
                 <li>
-                    <a href="#"><i class="fa fa-search"></i> <span class="nav-label">Rechercher TecDoc</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-search"></i> <span class="nav-label">Recherche TecDoc</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="search_results.html">Pieces autos</a></li>
-                        <li><a href="lockscreen.html">Pneumatiques</a></li>
-                        <li><a href="lockscreen.html">Schemas de montages</a></li>
+                        <li><a href="<?= $this->url($this->section, "master", "tec") ?>">Pieces autos/Shecmas</a></li>
+                        <li><a href="<?= $this->url($this->section, "master", "tec") ?>">Pneumatiques</a></li>
                     </ul>
                 </li>
 
 
-                <li><hr class="" style="background-color: transparent; "></li>
+                <li><hr class="mp3" style="background-color: transparent; "></li>
                 <li class="" id="dossiers">
                     <a href="<?= $this->url($this->section, "master", "dossiers") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Archives Dossiers</span></a>
                 </li>

@@ -15,309 +15,288 @@
             <?php include($this->rootPath("webapp/gestion/elements/templates/header.php")); ?>  
 
 
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-6">
-                    <h2 class="text-uppercase gras">Ticket N°<?= $ticket->reference ?></h2>
-                    <ol class="breadcrumb">
-                        Ouvert <?= depuis($ticket->created) ?>
-                    </ol>
-                </div>
-            </div><br>
-
-            <div class="row wrappe">
-                <div class="tabs-container white-bg">
-                    <ul class="nav nav-tabs text-uppercase" role="tablist">
-                        <li><a class="nav-link active" data-toggle="tab" href="#menu-1"><i class="fa fa-information"></i> Infos Générale</a></li>
-                        <li><a class="nav-link" data-toggle="tab" href="#menu-2"><i class="fa fa-file-text-o"></i> Essais avant-apres travaux</a></li>
-                        <li><a class="nav-link" data-toggle="tab" href="#menu-3"><i class="fa fa-wrench"></i> Diagnostics</a></li>
-                        <li><a class="nav-link" data-toggle="tab" href="#menu-4"><i class="fa fa-file-text-o"></i> Devis</a></li>
-                        <li><a class="nav-link" data-toggle="tab" href="#menu-4"><i class="fa fa-history"></i> Historique</a></li>
-                    </ul>
-                    <div class="tab-content"><br>
-
-                        <div role="tabpanel" id="menu-1" class="tab-pane active">
-                            <div class="panel-body">
+            <div class="wrapper-content">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <h5>Lorem ipsum dolor sit amet.</h5>
+                            </div>
+                            <div class="ibox-content">
                                 <div class="row">
+                                    <div class="col-md-6 ">
+                                        <h2 class="text-uppercase gras mp0 text-blue">Ticket N°<?= $ticket->reference ?></h2>
+                                        <span>par <i><?= $ticket->employe->name() ?></i></span><br>
+                                        <small>Ouvert <?= depuis($ticket->created) ?></small><br><br>
 
-                                    <div class="col-md-5 border-right">
+                                        <?php foreach ($ticket->fourni("ticket_typereparation") as $key => $value) {
+                                            $value->actualise(); ?>
+                                            <label class="label"><?= $value->typereparation->name()  ?></label>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-3">
                                                 <div class="text-center" data-toggle="tooltip">
-                                                    <img class="cursor" data-toggle="modal" data-target="#modal-image" src="<?= $this->stockage("images", "clients", "default.png") ?>" class="img-thumbnail cursor" style="height: 110px;">
+                                                    <img class="cursor" data-toggle="modal" data-target="#modal-image" src="<?= $this->stockage("images", "clients", "default.png") ?>" class="img-thumbnail cursor" style="height: 70px;">
                                                 </div>
                                             </div>
                                             <div class="col-9">
-                                                <h2 class="gras text-navy" style="margin: 0"><strong><?= $ticket->client->name() ?></strong> 
-                                                    <span  data-toggle=modal data-target="#modal-client" class="cursor pull-right" onclick="modification('ticket', <?= $ticket->id ?>)"><i data-toggle='tooltip' title="Modiifer les infos du client" class="fa fa-pencil cursor"></i></span>
-                                                </h2>
+                                                <h4 class="gras text-navy" style="margin: 0"><strong><?= $ticket->client->name() ?></strong> 
+                                                    <span  data-toggle=modal data-target="#modal-client" class="cursor pull-right" onclick="modification('ticket', <?= $ticket->id ?>)"><i data-toggle='tooltip' title="Modiifer les infos du client" class="fa fa-pencil fa-2x cursor"></i></span>
+                                                </h4>
                                                 <address>
-                                                    <h3 style="margin-top: 6px;"><strong><?= $ticket->client->typeclient->name() ?></strong></h3>
+                                                    <h5 style="margin-top: 6px;"><strong><?= $ticket->client->typeclient->name() ?></strong></h5>
                                                     <span><i class="fa fa-envelope"></i> <?= $ticket->client->email ?></span> <br>
                                                     <span><i class="fa fa-map-marker"></i> <?= $ticket->client->adresse ?></span> <br>
-                                                    <span><i class="fa fa-phone"></i> <?= $ticket->client->contact ?></span> <br>
-                                                    <span><i class="fa fa-telephone"></i> <?= $ticket->client->contact ?></span> <br>
+                                                    <span><i class="fa fa-phone"></i> <?= $ticket->client->contact ?></span>
                                                 </address>
-                                            </div>
-                                        </div><br>
-                                        <div>
-                                            <label class="gras">Description de la panne (Client)</label><br>
-                                            <p><?= $ticket->constat  ?></p>
-                                        </div><br>
-                                    </div>
-
-                                    <div class="col-md-7">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <div class="text-center" data-toggle="tooltip">
-                                                    <img class="cursor" data-toggle="modal" data-target="#modal-image" src="<?= $this->stockage("images", "vehicules", "default.jpg") ?>" class="img-thumbnail cursor" style="height: 110px;">
-                                                </div>
-                                            </div>
-                                            <div class="col-8">
-                                                <h1 class="gras text-navy" style="margin: 0"><strong><?= $ticket->auto->immatriculation ?></strong> 
-                                                    <span  data-toggle=modal data-target="#modal-vehicule" class="cursor pull-right" onclick="modification('ticket', <?= $ticket->id ?>)"><i data-toggle='tooltip' title="Modiifer les infos du vehiucle" class="fa fa-pencil cursor"></i></span>
-                                                </h1>
-                                                <address>
-                                                    <h3 style="margin-top: 6px;"><strong><?= $ticket->auto->marque->name() ?> <?= $ticket->auto->modele ?></strong></h3>
-                                                    <h4 style="margin-top: 6px;">VIN: <strong><?= $ticket->auto->vin ?></strong></h4>
-                                                    <h5>Couleur <?= $ticket->auto->couleur ?></h5> <br>
-                                                </address>
-                                            </div>
-                                        </div><hr class="mp0">
-                                        <div>
-                                            <label class="gras">Type de réparation à faire</label><br>
-                                            <?php foreach ($ticket->fourni("ticket_typereparation") as $key => $value) {
-                                                $value->actualise(); ?>
-                                                <label class="label"><?= $value->typereparation->name()  ?></label>
-                                            <?php } ?>
-                                        </div><br>
-                                        <div class="row">
-                                            <div class="col-sm-7">
-                                                <label class="gras">Equipements presents sur le véhicule</label><br>
-                                                <div class="row">
-                                                    <?php foreach ($ticket->fourni("listeequipementauto") as $key => $value) {
-                                                        $value->actualise(); ?>
-                                                        <div class="col-6">
-                                                            <label >- <?= $value->equipementauto->name()  ?> (<?= $value->quantite ?>)</label>
-                                                        </div>
-                                                    <?php } ?>
-                                                </div>
-
-                                                <div>
-                                                    Enjoliveurs <div class="row">
-                                                    <?php foreach ($ticket->fourni("listetypeenjoliveur") as $key => $value) {
-                                                        $value->actualise(); ?>
-                                                        <div class="col-6">
-                                                            <label >- <?= $value->typeenjoliveur->name()  ?></label>
-                                                        </div>
-                                                    <?php } ?>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <label class="gras">Autres infos</label><br>
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Kilometrage</td>
-                                                            <td><?= $ticket->kilometrage ?> Kms</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Niveau de carburant</td>
-                                                            <td><?= $ticket->niveaucarburant->name() ?> </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div><br>
-                                        <div>
-                                            <label class="gras">Autres remarques importantes</label><br>
-                                            <p><?= $ticket->autreremarque  ?></p>
-                                        </div><br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div role="tabpanel" id="menu-2" class="tab-pane">
-                            <div class="panel-body">
-                                <div class="row">
-                                  <div class="col-md-4 border-right">
-                                    <div class="ibox">
-                                        <div class="ibox-content">
-                                          <h3 class="mp0 text-uppercase gras">ESSAI AVANT TRAVAUX</h3>
-                                          <span><i class="fa fa-user"></i> Drag task between list</span><hr class="mp3">
-
-                                          <ol style="min-height: 400px;">
-                                            <li>Lorem ipsum dolor sit amet.</li>
-                                            <li>Lorem ipsum dolor sit amet.</li>
-                                            <li>Lorem ipsum dolor sit amet.</li>
-                                            <li>Lorem ipsum dolor sit amet.</li>
-                                            <li>Lorem ipsum dolor sit amet.</li>
-                                            <li>Lorem ipsum dolor sit amet.</li>
-                                            <li>Lorem ipsum dolor sit amet.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 border-right">
-                                <div class="ibox">
-                                    <div class="ibox-content">
-                                        <h3 class="mp0 text-uppercase gras">ESSAI AVANT TRAVAUX (chef)</h3>
-                                        <span><i class="fa fa-user"></i> Drag task between list</span><hr class="mp3">
-
-                                        <ul class="sortable-list connectList agile-list" id="todo" style="min-height: 400px;">
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="ibox">
-                                    <div class="ibox-content">
-                                        <h3 class="mp0 text-uppercase gras">ESSAI APRES TRAVAUX (chef)</h3>
-                                        <span><i class="fa fa-user"></i> Drag task between list</span><hr class="mp3">
-
-                                        <div class="ibox-content">
-                                            <div class="feed-activity-list">
-
-                                                <div class="feed-element">
-                                                    <div>
-                                                        <small class="float-right text-navy">1m ago</small>
-                                                        <strong>Monica Smith</strong><br>
-                                                        <span>- Lorem Ipsum is simply dummytting industry. Lorem Ipsum</span><br>
-                                                        <span>- Lorem Ipsum is simply dummytting industry. Lorem Ipsum</span><br>
-                                                        <span>- Lorem Ipsum is simply dummytting industry. Lorem Ipsum</span><br>
-                                                        <span>- Lorem Ipsum is simply dummytting industry. Lorem Ipsum</span>
-                                                        <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
-                                                    </div>
-                                                </div>
-
-                                                <div class="feed-element">
-                                                    <div>
-                                                        <small class="float-right">2m ago</small>
-                                                        <strong>Jogn Angel</strong>
-                                                        <div>There are many variations of passages of Lorem Ipsum available</div>
-                                                        <small class="text-muted">Today 2:23 pm - 11.06.2014</small>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
 
+                                        <div>
+                                            <label class="gras text-danger">Description de la panne (Client)</label><br>
+                                            <p><?= $ticket->constat  ?></p>
+                                        </div><br>
+                                    </div>
+                                </div><hr>
+
+
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="text-center" data-toggle="tooltip">
+                                            <img class="cursor" data-toggle="modal" data-target="#modal-image" src="<?= $this->stockage("images", "vehicules", "default.jpg") ?>" class="img-thumbnail cursor" style="height: 70px;">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <h4 class="gras text-navy" style="margin: 0"><strong><?= $ticket->auto->immatriculation ?></strong> 
+                                            <span  data-toggle=modal data-target="#modal-vehicule" class="cursor pull-right" onclick="modification('ticket', <?= $ticket->id ?>)"><i data-toggle='tooltip' title="Modiifer les infos du vehiucle" class="fa fa-2x fa-pencil cursor"></i></span>
+                                        </h4>
+                                        <address>
+                                            <h5 style="margin-top: 6px;"><strong><?= $ticket->auto->marque->name() ?> <?= $ticket->auto->modele ?></strong></h5>
+                                            <h4 style="margin-top: 6px;">VIN: <strong><?= $ticket->auto->vin ?></strong></h4>
+                                            <h5>Couleur <?= $ticket->auto->couleur ?></h5> <br>
+                                        </address>
+                                    </div>
+                                    <div class="offset-sm-1 col-sm-5">
+                                        <label class="gras">Autres infos</label><br>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Kilometrage</td>
+                                                    <td><?= $ticket->kilometrage ?> Kms</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Niveau de carburant</td>
+                                                    <td><?= $ticket->niveaucarburant->name() ?> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <label class="gras text-warning">Equipements presents sur le véhicule</label><br>
+                                        <div class="row">
+                                            <?php foreach ($ticket->fourni("listeequipementauto") as $key => $value) {
+                                                $value->actualise(); ?>
+                                                <div class="col-6">
+                                                    <label >- <?= $value->equipementauto->name()  ?> (<?= $value->quantite ?>)</label>
+                                                </div>
+                                            <?php } ?>
+                                            <?php foreach ($ticket->fourni("listetypeenjoliveur") as $key => $value) {
+                                                $value->actualise(); ?>
+                                                <div class="col-6">
+                                                    <label >- Enjoliveur <i><?= $value->typeenjoliveur->name()  ?></i></label>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label class="gras text-warning">Autres remarques importantes</label><br>
+                                        <p><?= $ticket->autreremarque  ?></p>
+                                    </div>
+                                </div>
+                            </div>   
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="ibox">
+                          <div class="ibox-title">
+                            <h5>Lorem ipsum dolor sit amet.</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div>
+                                <div class="feed-activity-list bg-white">
+
+                                    <div class="feed-element">
+                                        <a class="float-left" href="profile.html">
+                                            <img alt="image" class="rounded-circle" src="<?= $this->stockage("images", "employes", $ticket->employe->image)  ?>">
+                                        </a>
+                                        <div class="media-body ">
+                                            <strong>Ce ticket </strong> a été ouvert par <span class="text-muted"><i><?= $ticket->employe->name() ?></i></span>. <br>
+                                            <small class="text-muted"><?= depuis($ticket->created) ?></small>
+                                        </div>
+                                    </div>
+
+                                    <?php foreach ($ticket->fourni("essai", ["typeessai_id !="=>Home\TYPEESSAI::APRES]) as $key => $essai) {
+                                        $essai->actualise(); ?>
+                                        <div class="feed-element">
+                                            <a class="float-left" href="profile.html">
+                                                <img class="rounded-circle" src="<?= $this->stockage("images", "mecaniciens", $essai->mecanicien->image)  ?>">
+                                            </a>
+                                            <div class="media-body ">
+                                                <strong><?= $essai->typeessai->name() ?></strong> effectué par <span class="text-muted"><i><?= $essai->mecanicien->name() ?></i></span>. <br>
+                                                <small class="text-muted"><?= depuis($essai->created) ?></small>
+                                                <div class="well mp0">
+                                                    <?php foreach ($essai->fourni("listeconstatessai") as $key => $value) { ?>
+                                                        <i>- <?= $value->constat ?></i><br>
+                                                    <?php } ?>
+                                                </div>
+                                                <div class="float-right">
+                                                    <a href=""  class="btn btn-xs btn-white"><i class="fa fa-file-text-o"></i> Voir la fiche </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+
+                                    <?php foreach ($ticket->fourni("diagnostic") as $key => $diagnostic) {
+                                        $diagnostic->actualise(); ?>
+                                        <div class="feed-element">
+                                            <a class="float-left" href="profile.html">
+                                                <img class="rounded-circle" src="<?= $this->stockage("images", "mecaniciens", $diagnostic->mecanicien->image)  ?>">
+                                            </a>
+                                            <div class="media-body ">
+                                                <strong>Diagnostic Technicien</strong> effectué par <span class="text-muted"><i><?= $diagnostic->mecanicien->name() ?></i></span>. <br>
+                                                <small class="text-muted"><?= depuis($diagnostic->created) ?></small>
+                                                <div class="well mp0">
+                                                    <b>Travail à effectuer</b><br>
+                                                    <?php foreach ($diagnostic->fourni("listeconstatdiagnostic") as $key => $value) { ?>
+                                                        <i>- <?= $value->constat ?></i><br>
+                                                        <?php } ?><br>
+
+                                                        <b>Liste des pièces à utiliser</b><br>
+                                                        <table class="table table-stripped">
+                                                            <tbody>
+                                                             <?php foreach ($diagnostic->fourni("listepiecediagnostic") as $key => $value) { ?>
+                                                                <tr class="mp3">
+                                                                    <td><?= $value->piece ?></td>
+                                                                    <td>x <?= $value->quantite ?></td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="float-right">
+                                                    <a href=""  class="btn btn-xs btn-white"><i class="fa fa-file-text-o"></i> Voir la fiche </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+
+                                    <?php $i=0; foreach ($ticket->fourni("devis") as $key => $devis) {
+                                        $i++;
+                                        $devis->actualise(); ?>
+                                        <div class="feed-element">
+                                            <a class="float-left" href="profile.html">
+                                                <img alt="image" class="rounded-circle" src="<?= $this->stockage("images", "mecaniciens", $devis->mecanicien->image)  ?>">
+                                            </a>
+                                            <div class="media-body ">
+                                                <strong>Devis N°<?= $i ?></strong> édité par <span class="text-muted"><i><?= $devis->mecanicien->name() ?></i></span>. <br>
+                                                <small class="text-muted"><?= depuis($devis->created) ?></small>
+                                            </div>
+                                            <div class="float-right">
+                                                <a href=""  class="btn btn-xs btn-white"><i class="fa fa-file-text-o"></i> Voir le devis </a>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+
+
+                                    <?php foreach ($ticket->fourni("intervention") as $key => $intervention) {
+                                        $intervention->actualise(); ?>
+                                        <div class="feed-element">
+                                            <a class="float-left" href="profile.html">
+                                                <img alt="image" class="rounded-circle" src="<?= $this->stockage("images", "mecaniciens", $intervention->mecanicien->image)  ?>">
+                                            </a>
+                                            <div class="media-body ">
+                                                <strong>Intervention </strong> a effectuée par <span class="text-muted"><i><?= $intervention->mecanicien->name() ?></i></span>. <br>
+                                                <small class="text-muted"><?= depuis($intervention->created) ?></small>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+
+
+                                    <?php foreach ($ticket->fourni("essai", ["typeessai_id ="=>Home\TYPEESSAI::APRES]) as $key => $essai) {
+                                        $essai->actualise(); ?>
+                                        <div class="feed-element">
+                                            <a class="float-left" href="profile.html">
+                                                <img class="rounded-circle" src="<?= $this->stockage("images", "mecaniciens", $essai->mecanicien->image)  ?>">
+                                            </a>
+                                            <div class="media-body ">
+                                                <strong><?= $essai->typeessai->name() ?></strong> effectué par <span class="text-muted"><i><?= $essai->mecanicien->name() ?></i></span>. <br>
+                                                <small class="text-muted"><?= depuis($essai->created) ?></small>
+                                                <div class="well mp0">
+                                                    <?php foreach ($essai->fourni("listeconstatessai") as $key => $value) { ?>
+                                                        <i>- <?= $value->constat ?></i><br>
+                                                    <?php } ?>
+                                                </div>
+                                                <div class="float-right">
+                                                    <a href=""  class="btn btn-xs btn-white"><i class="fa fa-file-text-o"></i> Voir la fiche </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+
+                                    <?php foreach ($ticket->fourni("lavage") as $key => $lavage) {
+                                        $lavage->actualise(); ?>
+                                        <div class="feed-element">
+                                            <a class="float-left" href="profile.html">
+                                                <img alt="image" class="rounded-circle" src="<?= $this->stockage("images", "mecaniciens", $lavage->mecanicien->image)  ?>">
+                                            </a>
+                                            <div class="media-body ">
+                                                <strong>lavage </strong> a effectuée par <span class="text-muted"><i><?= $lavage->mecanicien->name() ?></i></span>. <br>
+                                                <small class="text-muted"><?= depuis($lavage->created) ?></small>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+
+
+                                    <div class="feed-element">
+                                        <a class="float-left" href="profile.html">
+                                            <img alt="image" class="rounded-circle" src="img/a4.jpg">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="float-right text-navy">5h ago</small>
+                                            <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                            <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                            <div class="actions">
+                                                <a href=""  class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                                <a href=""  class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 </div>
 
-
-
             </div>
         </div>
+
+        <br><br>
+
+
+        <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
+
+
+
+        <?php //include($this->rootPath("composants/assets/modals/modal-cartegrise.php")); ?> 
+
+
     </div>
-
-
-
-    <br><br>
-    <br><br>
-
-
-    <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
-
-
-
-    <div class="modal fade inmodal" id="modal-image">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Changer l'image</h4>
-                </div>
-                <form method="POST" id="formImage">
-                    <div class="modal-body">
-                        <div class="">
-                            <label>Image de la voiture</label>
-                            <div class="">
-                                <img style="width: 80px;" src="" class="img-thumbnail cursor logo">
-                                <input class="hide" type="file" name="image">
-                                <button type="button" class="btn btn-sm bg-red pull-right btn_image"><i class="fa fa-image"></i> Ajouter une image</button>
-                            </div>
-                        </div>
-                    </div><hr class="">
-                    <div class="container">
-                        <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
-                        <button class="btn btn-sm btn-success pull-right"><i class="fa fa-check"></i>Changer l'image</button>
-                    </div>
-                    <br>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade inmodal" id="modal-vehicule">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Choisir le chauffeur</h4>
-                </div>
-                <form method="POST" class="formShamman" classname="chauffeur_vehicule">
-                    <div class="modal-body">
-                        <div class="">
-                            <label>Personnel roulant</label>
-                            <?php Native\BINDING::html("select", "client")  ?>
-                        </div>
-                    </div><hr class="">
-                    <div class="container">
-                        <input type="hidden" name="vehicule_id" value="<?= $ticket->auto->getId() ?>">
-                        <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
-                        <button class="btn btn-sm btn-success pull-right"><i class="fa fa-check"></i> Valider</button>
-                    </div>
-                    <br>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade inmodal" id="modal-equipement-vehicule">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Choisir l'equipement</h4>
-                </div>
-                <form method="POST" class="formShamman" classname="equipement_vehicule">
-                    <div class="modal-body">
-                        <div class="">
-                            <label>Equipement</label>
-                            <?php Native\BINDING::html("select", "client")  ?>
-                        </div><br>
-                        <div class="">
-                            <label>quantité</label>
-                            <input type="number" class="form-control" name="quantite" required>
-                        </div>
-                    </div><hr class="">
-                    <div class="container">
-                        <input type="hidden" name="vehicule_id" value="<?= $ticket->auto->getId() ?>">
-                        <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
-                        <button class="btn btn-sm btn-success pull-right"><i class="fa fa-check"></i> Valider</button>
-                    </div>
-                    <br>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <?php //include($this->rootPath("composants/assets/modals/modal-cartegrise.php")); ?> 
-
-
-</div>
 </div>
 
 
