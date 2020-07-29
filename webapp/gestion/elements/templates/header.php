@@ -1,4 +1,4 @@
-      <div class="row border-bottom white-bg header" style="margin-bottom: 6%;">
+      <div class="row border-bottom white-bg header" style="margin-bottom: 5%;">
         <nav class="navbar navbar-wrapper navbar-fixed-top" role="navigation">
             <div class="navbar-header">
                 <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
@@ -9,9 +9,7 @@
                 </form>
             </div>
             <ul class="nav navbar-top-links navbar-right">
-                 <li class="">
-                    <img src="<?= $this->stockage("images", "societe", $params->image) ?>" style="height: 60px; padding-right: 15%" alt="">
-                </li>
+
 
                 <li class="border-right gras <?= (isJourFerie(dateAjoute(1)))?"text-red":"text-muted" ?>">
                     <span class="m-r-sm welcome-message text-uppercase" id="date_actu"></span> 
@@ -22,18 +20,17 @@
                         <i class="fa fa-eye"></i> Prix par zone
                     </a>
                 </li> -->
-                <?php if ($employe->isAutoriser("production")) { ?>
-                    <li class="border-right">
-                        <a  data-toggle="modal" data-target="#modal-productionjour" onclick=" modification('productionjour', 1) ">
-                            <i class="fa fa-file-text-o"></i> Nouvelle Production
-                        </a>
-                    </li>
-                <?php } ?>
                 
-                <li class="" style="height: 30px">
-                    <a href="#" id="btn-deconnexion" style="display: inline-block; margin-top: -37%">
-                        <i class="fa fa-sign-out fa-2x text-red" ></i>
-                    </a>
+                <div>
+                    <a class="btn btn-xs btn-white" style="font-size: 12px;"><i class="fa fa-home"></i> Atelier</a>
+                    <a class="btn btn-xs btn-white" style="font-size: 12px;"><i class="fa fa-car"></i> Location</a>
+                    <a class="btn btn-xs btn-white" style="font-size: 12px;"><i class="fa fa-file-text-o"></i> Compta /Facturat.</a>
+                    <a class="btn btn-xs btn-white" style="font-size: 12px;"><i class="fa fa-cubes"></i> Entrepôt</a>
+                    <a class="btn btn-xs btn-white" style="font-size: 12px;"><i class="fa fa-gears"></i> Manager</a>
+                </div>
+
+                <li class="border-right border-left">
+
                 </li>
             </ul>
 
