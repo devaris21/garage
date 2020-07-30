@@ -236,6 +236,10 @@ class ROOTER extends PATH
         return $this->module;
     }
 
+     public function getSection(){
+        return $this->section;
+    }
+
     public function getPage(){
         return $this->page;
     }

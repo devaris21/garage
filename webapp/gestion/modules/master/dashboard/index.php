@@ -47,17 +47,17 @@
                             <div class="row text-center">
                                 <div class="col">
                                     <div class=" m-l-md">
-                                        <span class="h5 font-bold block">$ 406,100</span>
-                                        <small class="text-muted block">Sales marketing report</small>
+                                        <span class="h5 font-bold block">05</span>
+                                        <small class="text-muted block">tickets du jour</small>
                                     </div>
                                 </div>
                                 <div class="col border-right border-left">
-                                    <span class="h5 font-bold block">$ 150,401</span>
-                                    <small class="text-muted block">Annual sales revenue</small>
+                                    <span class="h5 font-bold block">24</span>
+                                    <small class="text-muted block">Véhicules au garage</small>
                                 </div>
                                 <div class="col">
-                                    <span class="h5 font-bold block">$ 16,822</span>
-                                    <small class="text-muted block">Half-year revenue margin</small>
+                                    <span class="h5 font-bold block">14</span>
+                                    <small class="text-muted block">Tâches en cours</small>
                                 </div>
 
                             </div>

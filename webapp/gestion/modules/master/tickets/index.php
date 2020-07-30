@@ -80,6 +80,12 @@
                                                         </div>
                                                     </div>
                                                 </td>
+                                                <td class="project-completion">
+                                                                <small>Completion with: 28%</small>
+                                                                <div class="progress progress-mini">
+                                                                    <div style="width: 28%;" class="progress-bar"></div>
+                                                                </div>
+                                                            </td>
                                                 <td>
                                                     <?php foreach ($ticket->fourni("ticket_typereparation") as $key => $value) {
                                                         $value->actualise(); ?>

@@ -66,14 +66,14 @@
                 <li class="" id="tickets">
                     <a href="<?= $this->url($this->section, "master", "tickets") ?>"><i class="fa fa-ticket"></i> <span class="nav-label">Tous les tickets</span> <?php if (count($__attentes) > 0) { ?> <span class="label label-warning float-right"><?= count($__attentes) ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="livraisons">
-                    <a href="<?= $this->url($this->section, "master", "livraisons") ?>"><i class="fa fa-wrench"></i> <span class="nav-label">En essais</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
+                <li class="" id="essais_av">
+                    <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-wrench"></i> <span class="nav-label">En essais</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="livraisons">
-                    <a href="<?= $this->url($this->section, "master", "livraisons") ?>"><i class="fa fa-wrench"></i> <span class="nav-label">Sous diagnostic TK</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
+                <li class="" id="diagnostics">
+                    <a href="<?= $this->url($this->section, "master", "diagnostics") ?>"><i class="fa fa-wrench"></i> <span class="nav-label">Sous diagnostic TK</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="livraisons">
-                    <a href="<?= $this->url($this->section, "master", "livraisons") ?>"><i class="fa fa-file-text-o"></i> <span class="nav-label">Devis en Attente</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
+                <li class="" id="devis">
+                    <a href="<?= $this->url($this->section, "master", "devis") ?>"><i class="fa fa-file-text-o"></i> <span class="nav-label">Devis en Attente</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="livraisons">
                     <a href="<?= $this->url($this->section, "master", "livraisons") ?>"><i class="fa fa-check"></i> <span class="nav-label">Prêt pour livraison</span> <?php if (count($__lavages) > 0) { ?> <span class="label label-warning float-right"><?= count($__lavages) ?></span> <?php } ?></a>
@@ -84,15 +84,15 @@
                 <li>
                     <a href="#"><i class="fa fa-search"></i> <span class="nav-label">Recherche TecDoc</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="<?= $this->url($this->section, "master", "tec") ?>">Pieces autos/Shecmas</a></li>
-                        <li><a href="<?= $this->url($this->section, "master", "tec") ?>">Pneumatiques</a></li>
+                        <li><a href="<?= $this->url($this->section, "master", "tecdoc") ?>">Pieces autos/Shecmas</a></li>
+                        <li><a href="<?= $this->url($this->section, "master", "tecdoc") ?>">Pneumatiques</a></li>
                     </ul>
                 </li>
 
 
                 <li><hr class="mp3" style="background-color: transparent; "></li>
-                <li class="" id="dossiers">
-                    <a href="<?= $this->url($this->section, "master", "dossiers") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Archives Dossiers</span></a>
+                <li class="" id="archives">
+                    <a href="<?= $this->url($this->section, "master", "archives") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Archives Dossiers</span></a>
                 </li>
 
             </ul>
