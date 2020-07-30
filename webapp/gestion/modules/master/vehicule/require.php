@@ -9,9 +9,9 @@ if ($this->getId() != null && intval($this->getId()) > 0) {
 		$auto->actualise();
 
 		$client = new CLIENT;
-		$datas = $auto->fourni("ticket");
-		if (count($datas) > 0) {
-			$ticket = end($datas);
+		$tickets = $auto->fourni("ticket");
+		if (count($tickets) > 0) {
+			$ticket = end($tickets);
 			$ticket->actualise();
 			$client = $ticket->client;
 		}
