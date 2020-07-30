@@ -43,6 +43,7 @@ class AUTO extends TABLE
 
 
 	public function name(){
+		$this->actualise();
 		return $this->marque->name()." ".$this->modele." - ".$this->immatriculation;
 	}
 
