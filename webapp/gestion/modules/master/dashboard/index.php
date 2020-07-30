@@ -14,7 +14,8 @@
 
             <?php include($this->rootPath("webapp/gestion/elements/templates/header.php")); ?>  
 
-            <div class="wrapper wrapper-content">
+            <br><br>
+            <div class="">
                 <div class="row">
                     <div class="col-md-8">
                      <div class="ibox">
@@ -29,16 +30,16 @@
                             <div class="col">
                                 <div class=" m-l-md">
                                     <span class="h5 font-bold block">$ 406,100</span>
-                                    <small class="text-muted block">Pièces & autres</small>
+                                    <small class="text-muted block">Valeur du Stock</small>
                                 </div>
                             </div>
                             <div class="col border-right border-left">
                                 <span class="h5 font-bold block">$ 150,401</span>
-                                <small class="text-muted block">Annual sales revenue</small>
+                                <small class="text-muted block">Volume du stock</small>
                             </div>
                             <div class="col">
                                 <span class="h5 font-bold block">$ 16,822</span>
-                                <small class="text-muted block">Half-year revenue margin</small>
+                                <small class="text-muted block">Rupture de stock</small>
                             </div>
 
                         </div>
@@ -70,7 +71,9 @@
                                 <div>
                                     <?php Native\BINDING::html("select", "auto") ?>
                                 </div><br>
-                                <button class="btn btn-sm btn-success dim pull-right"><i class="fa fa-search"></i> Rechercher</button>
+                                <div>
+                                    <button class="btn btn-sm btn-success dim pull-right"><i class="fa fa-search"></i> Rechercher</button>
+                                </div><br><br>
                             </div>
                         </div>
                         <div id="tab-4" class="tab-pane">
@@ -89,24 +92,68 @@
     </div>
 
     <div class="row">
-        <div class="row">
-            <?php foreach (Home\TYPEREPARATION::getAll() as $key => $produit) { ?>
-                <div class="col-md border-right">
-                    <h6 class="text-uppercase text-center gras" style="color: <?= $produit->couleur; ?>">Stock de jezhluk</h6>
-                    <ul class="list-group clear-list m-t">
-                       <li class="list-group-item">
-                        <i class="fa fa-flask" style="color: <?= $produit->couleur; ?>"></i> <small>4s</small>          
-                        <span class="float-right">
-                            <span title="en boutique" class="gras text-danger">012</span>&nbsp;|&nbsp;
-                            <span title="en entrepôt" class="">45</span>
-                        </span>
-                    </li>
-                    <li class="list-group-item"></li>
-                </ul>
+        <div class="col-lg-3">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-7">
+                            <h5 class="text-uppercase">Pièces Auto</h5>
+                            <h1 class="no-margins">886,200</h1>
+                        </div>
+                    <div class="col-5 text-right">
+                        <i class="fa fa-wrench fa-5x" style="color: #ddd"></i>
+                    </div>
+                    </div>
+                </div>
             </div>
-        <?php } ?>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-7">
+                            <h5 class="text-uppercase">Pneumatiques</h5>
+                            <h1 class="no-margins">886,200</h1>
+                        </div>
+                    <div class="col-5 text-right">
+                        <i class="fa fa-eercast fa-5x" style="color: #ddd"></i>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-7">
+                            <h5 class="text-uppercase">Autres articles</h5>
+                            <h1 class="no-margins">886,200</h1>
+                        </div>
+                    <div class="col-5 text-right">
+                        <i class="fa fa-cubes fa-5x" style="color: #ddd"></i>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox">
+                <div class="ibox-content  bg-danger">
+                    <div class="row">
+                        <div class="col-7">
+                            <h5 class="text-uppercase">Rupture de stock</h5>
+                            <h1 class="no-margins">886,200</h1>
+                        </div>
+                    <div class="col-5 text-right">
+                        <i class="fa fa-close fa-5x" style="color: #ddd"></i>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
 </div>
 </div>
 

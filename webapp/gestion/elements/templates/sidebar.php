@@ -46,24 +46,6 @@
                 <li><hr class="" style="background-color: transparent; "></li>
 
 
-                <li class="" id="planning">
-                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Faire Demande d'achat</span></a>
-                </li>
-                <li class="" id="garage">
-                    <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Reception commande</span> </a>
-                </li>
-                <li class="" id="garage">
-                    <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Toutes les commandes</span> </a>
-                </li>
-                <li><hr class="" style="background-color: transparent; "></li>
-
-                <li class="" id="garage">
-                    <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Bons de sortie</span> </a>
-                </li>
-                <li class="" id="garage">
-                    <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Usure/perte</span> </a>
-                </li>
-                <li><hr class="" style="background-color: transparent; "></li>
 
                 <li class="" id="essais_av">
                     <a href="<?= $this->url($this->section, "master", "essais_av") ?>"><i class="fa fa-wheelchair"></i> <span class="nav-label">Stock d'articles</span> <?php if (count($__essais_av) > 0) { ?> <span class="label label-warning float-right"><?= count($__essais_av) ?></span> <?php } ?></a>
@@ -79,7 +61,27 @@
                         <li><a href="lockscreen.html">Schemas de montages</a></li>
                     </ul>
                 </li>
+                <li><hr class="" style="background-color: transparent; "></li>
 
+
+                <li class="" id="bonsorties">
+                    <a href="<?= $this->url($this->section, "master", "bonsorties") ?>"><i class="fa fa-home"></i> <span class="nav-label">Bons de sortie</span> </a>
+                </li>
+                <li class="" id="pertes">
+                    <a href="<?= $this->url($this->section, "master", "pertes") ?>"><i class="fa fa-home"></i> <span class="nav-label">Usure/perte</span> </a>
+                </li>
+                <li class="" id="demandes">
+                    <a href="<?= $this->url($this->section, "master", "demandes") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Faire Demande d'achat</span></a>
+                </li>
+                <li><hr class="" style="background-color: transparent; "></li>
+
+
+                <li class="" id="garage">
+                    <a href="<?= $this->url($this->section, "master", "garage") ?>"><i class="fa fa-home"></i> <span class="nav-label">Reception commande</span> </a>
+                </li>
+                <li class="" id="commandes">
+                    <a href="<?= $this->url($this->section, "master", "commandes") ?>"><i class="fa fa-home"></i> <span class="nav-label">Toutes les commandes</span> </a>
+                </li>
             </ul>
 
         </ul>
@@ -89,6 +91,6 @@
 
 <style type="text/css">
     li.dropdown-divider{
-     !important;
- }
+       !important;
+   }
 </style>
