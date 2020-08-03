@@ -15,50 +15,43 @@
             <?php include($this->rootPath("webapp/gestion/elements/templates/header.php")); ?>  
 
 
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-sm-4">
-                    <h2 class="text-uppercase gras">Votre Parc Automobile</h2>
-                    <ol class="breadcrumb">
-                        <li class="text-center">
-                            <button data-toggle="modal" data-target="#modal-vehicule" class="btn btn-primary btn-xs dim"><i class="fa fa-plus"></i> Nouveau véhicule</button>
-                        </li>
-                    </ol>
+            <div class="row ">
+                <div class="col-md border-right">
+                    <h6 class="text-uppercase text-center"> TYPE DE VEHICULE</h6>
+                    <ul class="list-group clear-list m-t">
+                        <?php foreach (Home\TYPEVEHICULE::getAll() as $key => $item) { ?>
+                            <li class="list-group-item">
+                                <i class="fa fa-cubes"></i> <small><?= $item->name() ?></small>          
+                                <span class="float-right">
+                                    <span title="en boutique" class="gras text-<?= (6 > 0)?"green":"danger" ?>"><?= money(20) ?></span>
+                                    <span title="en boutique" class="gras text-<?= (6 > 0)?"green":"danger" ?>"><?= money(4) ?></span>
+                                </span>
+                            </li>
+                        <?php } ?>
+                        <li class="list-group-item"></li>
+                    </ul>
                 </div>
-                <div class="col-sm-8 cards">
-                    <!-- TODO decompte des véhicules -->
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="ibox text-blue">
-                                <div class="ibox-title">
-                                    <h5 class="text-uppercase">Effectif du auto</h5>
-                                </div>
-                                <div class="ibox-content">
-                                    <h2 class="no-margins"><?= start0(count(Home\VEHICULE::getAll())); ?></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="ibox text-green">
-                                <div class="ibox-title">
-                                    <h5 class="text-uppercase">Libres</h5>
-                                </div>
-                                <div class="ibox-content">
-                                    <h2 class="no-margins"><?= start0(count(Home\VEHICULE::getAll())); ?></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="ibox text-red">
-                                <div class="ibox-title">
-                                    <h5 class="text-uppercase">En mission</h5>
-                                </div>
-                                <div class="ibox-content">
-                                    <h2 class="no-margins"><?= start0(count(Home\VEHICULE::getAll())); ?></h2>
-                                </div>
-                            </div>
-                        </div>
+
+                <?php foreach (Home\FONCTIONVEHICULE::getAll() as $key => $item) { ?>
+                    <div class="col-md border-right">
+                        <h6 class="text-uppercase text-center">Stock de <u class="gras"><?= $item->name() ?></u></h6>
+                        <ul class="list-group clear-list m-t">
+                            <li class="list-group-item">
+                                <i class="fa fa-cubes"></i> <small>disponible</small>          
+                                <span class="float-right">
+                                    <span title="en boutique" class="gras text-<?= (6 > 0)?"green":"danger" ?>"><?= money(4) ?></span>
+                                </span>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fa fa-cubes"></i> <small>Au total</small>          
+                                <span class="float-right">
+                                    <small title="en boutique"><?= money(8) ?></small>
+                                </span>
+                            </li>
+                            <li class="list-group-item"></li>
+                        </ul>
                     </div>
-                </div>
+                <?php } ?>
             </div>
 
             <div class="wrapper wrapper-content" >

@@ -12,146 +12,169 @@
 
         <div id="page-wrapper" class="gray-bg">
 
-          <?php include($this->rootPath("webapp/gestion/elements/templates/header.php")); ?>  
+            <?php include($this->rootPath("webapp/gestion/elements/templates/header.php")); ?>  
 
-          <div class="wrapper wrapper-content">
-            <div class="border-bottom white-bg">
-               <div class="row  dashboard-header">
-                <div class="col-md-3">
-                    <h2>Welcome Amelia</h2>
-                    <small>You have 42 messages and 6 notifications.</small>
-                    <ul class="list-group clear-list m-t">
-                        <li class="list-group-item fist-item">
-                            <span class="float-right">
-                                09:00 pm
-                            </span>
-                            <span class="label label-success">1</span> Please contact me
-                        </li>
-                        <li class="list-group-item">
-                            <span class="float-right">
-                                10:16 am
-                            </span>
-                            <span class="label label-info">2</span> Sign a contract
-                        </li>
-                        <li class="list-group-item">
-                            <a href="">
+
+            <div class="wrapper wrapper-content">
+                <div class="row  border-bottom white-bg dashboard-header">
+
+                    <div class="col-md-3">
+                        <h2>Welcome Amelia</h2>
+                        <small>You have 42 messages and 6 notifications.</small>
+                        <ul class="list-group clear-list m-t">
+                            <li class="list-group-item fist-item">
                                 Location en cours
                                 <span class="float-right">2</span>
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="">
+                            </li>
+                            <li class="list-group-item">
+                                Reservation pour aujoourd'hui
+                                <span class="float-right">2</span>
+                            </li>
+                            <li class="list-group-item">
                                 Expertise en cours
                                 <span class="float-right">2</span>
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <span class="float-right">
-                                12:00 am
-                            </span>
-                            <span class="label label-primary">5</span> Write a letter to Sandra
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <div class="flot-chart dashboard-chart">
-                        <div class="flot-chart-content" id="flot-dashboard-chart"></div>
+                            </li>
+                            <li class="list-group-item">
+                                Expertise en cours
+                                <span class="float-right">2</span>
+                            </li>
+                            <li class="list-group-item">
+                                Expertise en cours
+                                <span class="float-right">2</span>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="row text-center">
-                        <div class="col">
-                            <div class=" m-l-md">
-                                <span class="h5 font-bold m-t block">$ 406,100</span>
-                                <small class="text-muted m-b block">Sales marketing report</small>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <span class="h5 font-bold m-t block">$ 150,401</span>
-                            <small class="text-muted m-b block">Annual sales revenue</small>
-                        </div>
-                        <div class="col">
-                            <span class="h5 font-bold m-t block">$ 16,822</span>
-                            <small class="text-muted m-b block">Half-year revenue margin</small>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="statistic-box">
-                        <h4>
-                            Project Beta progress
-                        </h4>
-                        <p>
-                            You have two project with not compleated task.
-                        </p>
+                    <div class="col-md-6">
+                        <div class="flot-chart dashboard-chart">
+                            <div class="flot-chart-content" id="flot-dashboard-chart"></div>
+                        </div><hr>
                         <div class="row text-center">
-                            <div class="col-lg-6">
-                                <canvas id="doughnutChart2" width="80" height="80" style="margin: 18px auto 0"></canvas>
+                            <div class="col">
+                                <div class=" m-l-md text-green">
+                                    <span class="h5 font-bold block">100</span>
+                                    <small class="text-muted block">Disponible</small>
+                                </div>
+                            </div>
+                            <div class="col border-right border-left">
+                                <span class="h4 font-bold block">401</span>
+                                <small class="text-muted block">Total Parc Auto</small>
+                            </div>
+                            <div class="col text-danger">
+                                <span class="h5 font-bold block">22</span>
+                                <small class="text-muted block">En mission</small>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="statistic-box">
+                            <div class="text-center">
+                                <canvas id="doughnutChart2" style="width: 100%"></canvas><br>
                                 <h5 >Kolter</h5>
                             </div>
-                            <div class="col-lg-6">
-                                <canvas id="doughnutChart" width="80" height="80" style="margin: 18px auto 0"></canvas>
-                                <h5 >Maxtor</h5>
+                            <div class="m-t">
+                                <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                             </div>
+
                         </div>
-                        <div class="m-t">
-                            <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
-                        </div>
-
                     </div>
+
                 </div>
+
             </div>
-
-            <hr>
-
-            <div class="text-center">
-                <div class="row" style="font-size: 11px">
-                    <div class="col-sm"><button data-toggle="modal" data-target="#modal-newreparation" class="btn btn-success dim"><i class="fa fa-wrench"></i> Réparation / Entretien</button></div>
-                    <div class="col-sm"><button data-toggle="modal" data-target="#modal-newreparation" class="btn btn-info dim"><i class="fa fa-wrench"></i> Rémorque / Fourrière </button></div>
-                    <div class="col-sm"><button data-toggle="modal" data-target="#modal-newvente" class="btn btn-primary dim"><i class="fa fa-cubes"></i> Vente de pièces</button></div>
-                    <div class="col-sm"><button data-toggle="modal" data-target="#modal-newlocation" class="btn btn-danger dim"><i class="fa fa-cab"></i> Location de véhicule</button></div>
-                    <div class="col-sm"><button data-toggle="modal" data-target="#modal-newdevis" class="btn btn-warning dim"><i class="fa fa-file-text-o"></i> Devis / proforma</button></div>
-                    <div class="col-sm"><button data-toggle="modal" data-target="#modal-newexpertise" class="btn btn-default dim"><i class="fa fa-wrench"></i> Nouvelle Expertise</button></div>
-                </div>
-            </div>
-        </div><br>
-
-        <h3 class="text-uppercase ">En cours de dianostic</h3>
-        <div class="row">
-
-            <?php foreach ($tickets as $key => $ticket) {
-                $ticket->actualise(); ?>
-                <div class="col-lg-3">
-                    <div class="contact-box p-2">
-                        <a href="<?= $this->url("gestion", "garage", "diagnostic", $ticket->id)  ?>">
-                            <h3><strong><?= $ticket->reference ?></strong> <i class="fa fa-close text-danger cursor float-right"></i></h3>
-                            <address>
-                                <?= $ticket->immatriculation ?><br>
-                                <?= $ticket->marque->name() ?> <?= $ticket->modele ?><br>
-                                <abbr title="Phone">Client:</abbr> <?= $ticket->client ?>
-                            </address>
-                        </a>
-                    </div>
-                </div>
-            <?php } ?>
-
         </div>
 
 
+        <?php include($this->rootPath("webapp/gestion/elements/templates/script.php")); ?>
 
-    </div>
-</div>
-</div>
-
-
-<?php include($this->rootPath("webapp/gestion/elements/templates/script.php")); ?>
-
-<?php include($this->rootPath("composants/assets/modals/modal-newreparation.php")); ?>  
-<?php include($this->rootPath("composants/assets/modals/modal-newexpertise.php")); ?>  
-<?php include($this->rootPath("composants/assets/modals/modal-newvente.php")); ?>  
-<?php include($this->rootPath("composants/assets/modals/modal-newlocation.php")); ?>  
-<?php include($this->rootPath("composants/assets/modals/modal-newdevis.php")); ?>  
+        <?php //include($this->rootPath("composants/assets/modals/modal-newlocation.php")); ?>  
+        <?php include($this->rootPath("composants/assets/modals/modal-newdevis.php")); ?>  
 
 
-</body>
+    </body>
 
-</html>
+    </html>
+
+
+
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+                toastr.success('Responsive Admin Theme', 'Welcome to INSPINIA');
+
+            }, 1300);
+
+
+            var data1 = [
+            [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,30],[11,10],[12,13],[13,4],[14,3],[15,3],[16,6]
+            ];
+            var data2 = [
+            [0,1],[1,0],[2,2],[3,0],[4,1],[5,3],[6,1],[7,5],[8,2],[9,3],[10,2],[11,1],[12,0],[13,2],[14,8],[15,0],[16,0]
+            ];
+            $("#flot-dashboard-chart").length && $.plot($("#flot-dashboard-chart"), [
+                data1, data2
+                ],
+                {
+                    series: {
+                        lines: {
+                            show: false,
+                            fill: true
+                        },
+                        splines: {
+                            show: true,
+                            tension: 0.4,
+                            lineWidth: 1,
+                            fill: 0.4
+                        },
+                        points: {
+                            radius: 0,
+                            show: true
+                        },
+                        shadowSize: 2
+                    },
+                    grid: {
+                        hoverable: true,
+                        clickable: true,
+                        tickColor: "#d5d5d5",
+                        borderWidth: 1,
+                        color: '#d5d5d5'
+                    },
+                    colors: ["#1ab394", "#1C84C6"],
+                    xaxis:{
+                    },
+                    yaxis: {
+                        ticks: 4
+                    },
+                    tooltip: false
+                }
+                );
+
+
+            var doughnutData = {
+                labels: ["App","Software","Laptop" ],
+                datasets: [{
+                    data: [70,27,85],
+                    backgroundColor: ["#a3e1d4","#dedede","#9CC3DA"]
+                }]
+            } ;
+
+
+            var doughnutOptions = {
+                responsive: false,
+                legend: {
+                    display: false
+                }
+            };
+
+
+            var ctx4 = document.getElementById("doughnutChart2").getContext("2d");
+            new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
+
+        });
+    </script>
