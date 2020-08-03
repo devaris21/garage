@@ -99,8 +99,12 @@
                 </div>
 
             </div>
+            
+            <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
         </div>
+
     </div>
+
 
 
     <?php include($this->rootPath("webapp/gestion/elements/templates/script.php")); ?>
