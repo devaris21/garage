@@ -60,7 +60,7 @@ $(function(){
 			formData.append('marques', $("#formLocation").find("select[name=marque_id]").val());
 			formData.append('type', id);
 			formData.append('action', 'validerLocation');
-		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
+			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
 				if (data.status) {
 					window.location.reload();
 				}else{

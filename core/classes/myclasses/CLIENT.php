@@ -28,11 +28,11 @@ class CLIENT extends PERSONNE
 				$data = $this->save();
 			}else{
 				$data->status = false;
-				$data->message = "Veuillez renseigner le nom du type de vehicule !";
+				$data->message = "Veuillez renseigner le contact du client !";
 			}
 		}else{
 			$data->status = false;
-			$data->message = "Veuillez renseigner le nom du type de vehicule !";
+			$data->message = "Veuillez renseigner le nom du client !";
 		}
 		return $data;
 	}

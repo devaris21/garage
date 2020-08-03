@@ -233,7 +233,22 @@ if ($action == "validerLocation") {
 			$data = $client->enregistre();
 		}
 		if ($data->status) {
-	# code...
+			$reservation = new RESERVATION;
+			$reservation->hydrater($_POST);
+			$reservation->client_id = $client->id;
+			$data = $reservation->enregistre();
+			if ($data->status) {
+				$critere = new CRITERE;
+				$critere->hydrater($_POST);
+				if ($critere->climatisation == "a") {
+					$critere->climatisation = null;
+				}
+				$critere->reservation_id = $reservation->id;
+				$data = $critere->enregistre();
+			}else{
+				$data->status = false;
+				$data->message = "Veuillez verifier les dates pour cette opération !";
+			}
 		}
 	}else{
 		$data->status = false;
