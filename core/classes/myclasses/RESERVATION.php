@@ -11,12 +11,13 @@ class TARIF extends TABLE
 
 	public $agence_id;
 	public $modereservation_id;
-	public $typevehicule_id;
+	public $critere_id;
 	public $started;
 	public $finished;
 	public $etat_id = ETAT::ENCOURS;
 	public $conducteur = TABLE::NON;
 	public $tarif_id;
+	public $employes_id;
 
 	public function enregistre(){
 		$data = new RESPONSE;

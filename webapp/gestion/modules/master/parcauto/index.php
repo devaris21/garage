@@ -15,46 +15,46 @@
             <?php include($this->rootPath("webapp/gestion/elements/templates/header.php")); ?>  
 
 
-            <div class="row ">
-                <div class="col-md border-right">
-                    <h6 class="text-uppercase text-center"> TYPE DE VEHICULE</h6>
-                    <ul class="list-group clear-list m-t">
-                        <?php foreach (Home\TYPEVEHICULE::getAll() as $key => $item) { ?>
-                            <li class="list-group-item">
-                                <i class="fa fa-cubes"></i> <small><?= $item->name() ?></small>          
-                                <span class="float-right">
-                                    <span title="en boutique" class="gras text-<?= (6 > 0)?"green":"danger" ?>"><?= money(20) ?></span>
-                                    <span title="en boutique" class="gras text-<?= (6 > 0)?"green":"danger" ?>"><?= money(4) ?></span>
-                                </span>
-                            </li>
-                        <?php } ?>
-                        <li class="list-group-item"></li>
-                    </ul>
-                </div>
+            <div class="">
+                <div class="ibox-content">
+                    <div class="row ">
+                        <div class="col-md border-right">
+                            <h4 class="gras text-uppercase">Effectif du parc auto</h4>
+                            <h2 class="gras"><?= start0(count($vehicules)) ?></h2>
+                        </div>
 
-                <?php foreach (Home\FONCTIONVEHICULE::getAll() as $key => $item) { ?>
-                    <div class="col-md border-right">
-                        <h6 class="text-uppercase text-center">Stock de <u class="gras"><?= $item->name() ?></u></h6>
-                        <ul class="list-group clear-list m-t">
-                            <li class="list-group-item">
-                                <i class="fa fa-cubes"></i> <small>disponible</small>          
-                                <span class="float-right">
-                                    <span title="en boutique" class="gras text-<?= (6 > 0)?"green":"danger" ?>"><?= money(4) ?></span>
-                                </span>
-                            </li>
-                            <li class="list-group-item">
-                                <i class="fa fa-cubes"></i> <small>Au total</small>          
-                                <span class="float-right">
-                                    <small title="en boutique"><?= money(8) ?></small>
-                                </span>
-                            </li>
-                            <li class="list-group-item"></li>
-                        </ul>
+                        <div class="col-md border-right">
+                            <h6 class="text-uppercase text-center cursor"> TYPES DE VEHICULES</h6>
+                            <select class="form-control select2" name="fonctionvehicule_id" style="width: 100%">
+                                <option value="0">Tous les véhicules</option>
+                                <?php foreach (Home\TYPEVEHICULE::getAll() as $key => $item) { ?>
+                                    <option value="<?= $item->id ?>"><?= $item->name() ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="col-md border-right">
+                            <h6 class="text-uppercase text-center cursor"> CATEGORIES DE VEHICULES</h6>
+                            <select class="form-control select2" name="fonctionvehicule_id" style="width: 100%">
+                                <option value="0">Tous les véhicules</option>
+                                <?php foreach (Home\FONCTIONVEHICULE::getAll() as $key => $item) { ?>
+                                    <option value="<?= $item->id ?>"><?= $item->name() ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="col-md">
+                            <h6 class="text-uppercase text-center cursor"> DISPONIBILITE DES VEHICULES</h6>
+                            <select class="form-control select2" name="fonctionvehicule_id" style="width: 100%">
+                                <option value="0">Tous les véhicules</option>
+                                <?php foreach (Home\ETATVEHICULE::getAll() as $key => $item) { ?>
+                                    <option value="<?= $item->id ?>"><?= $item->name() ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
-                <?php } ?>
-            </div>
+                </div><br>
 
-            <div class="wrapper wrapper-content" >
                 <div class="ibox" >
                     <div class="ibox-content" style="min-height: 400px;">
                         <div class="row">

@@ -23,14 +23,14 @@ $(function(){
 	});
 
 
-	$("form#formReservation").find("input").first().change();
+	$("form#formLocation").find("input").first().change();
 
-	$("form#formReservation").find("input, select").change(function(){
-		var url = "../../webapp/gestion/modules/master/newreservation/ajax.php";
-		var formData = new FormData($("#formReservation")[0]);
-		formData.append('equipements', $("#formReservation").find("select[name=equipement_id]").val());
-		formData.append('marques', $("#formReservation").find("select[name=marque_id]").val());
-		formData.append('action', 'calculReservation');
+	$("form#formLocation").find("input, select").change(function(){
+		var url = "../../webapp/gestion/modules/master/newlocation/ajax.php";
+		var formData = new FormData($("#formLocation")[0]);
+		formData.append('equipements', $("#formLocation").find("select[name=equipement_id]").val());
+		formData.append('marques', $("#formLocation").find("select[name=marque_id]").val());
+		formData.append('action', 'calculLocation');
 		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
 			$(".nb").html(data.nb+" véhicule(s) trouvée(s)");
 
@@ -41,24 +41,34 @@ $(function(){
 		}, 'json');
 	})
 
-	$("form#formReservation").submit(function(event) {
+	$("form#formLocation").submit(function(event) {
 		return false;
 	});
 
 
-	// $("form#formReservation").submit(function(event) {
-	// 	Loader.start();
-	// 	var url = "../../webapp/gestion/modules/master/locations/ajax.php";
-	// 	var formData = new FormData($(this)[0]);
-	// 	formData.append('action', 'vehicule-louer');
-	// 	$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
-	// 		$(".affichage").html(data);
-	// 		$("#modal-vehicule-preter").find("form input").val("");
-	// 		$("#modal-vehicule-preter").modal("hide");
-	// 		Loader.stop();
-	// 	}, 'html');
-	// 	return false;
-	// });
+	validerLocation = function(id){
+		var url = "../../webapp/gestion/modules/master/locations/ajax.php";
+		alerty.confirm("Voulez-vous vraiment continuer ?", {
+			title: "Attention",
+			cancelLabel : "Non",
+			okLabel : "OUI, approuver",
+		}, function(){
+			Loader.start();
+			var url = "../../webapp/gestion/modules/master/newlocation/ajax.php";
+			var formData = new FormData($("#formLocation")[0]);
+			formData.append('equipements', $("#formLocation").find("select[name=equipement_id]").val());
+			formData.append('marques', $("#formLocation").find("select[name=marque_id]").val());
+			formData.append('type', id);
+			formData.append('action', 'validerLocation');
+		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
+				if (data.status) {
+					window.location.reload();
+				}else{
+					Alerter.error('Erreur !', data.message);
+				}
+			},"json");
+		});
+	}
 
 
 
@@ -74,29 +84,6 @@ $(function(){
 		}, 'html');
 	}
 
-
-
-	newReservation = function(){
-		alerty.confirm("Voulez-vous vraiment valider cette reservation de véhicule ?", {
-			title: "Nouvelle reservation",
-			cancelLabel : "Non",
-			okLabel : "OUI,  valider",
-		}, function(){
-				Loader.start();
-			var url = "../../webapp/gestion/modules/master/newreservation/ajax.php";
-			var formData = new FormData($("#formReservation")[0]);
-			formData.append('equipements', $("#formReservation").find("select[name=equipement_id]").val());
-			formData.append('marques', $("#formReservation").find("select[name=marque_id]").val());
-			formData.append('action', 'newReservation');
-			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
-				if (data.status) {
-					location.reload();
-				}else{
-					Alerter.error('Erreur !', data.message);
-				}
-			}, 'json');
-		})
-	};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

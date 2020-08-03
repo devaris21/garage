@@ -3,6 +3,7 @@ namespace Home;
 require '../../../../../core/root/includes.php';
 
 use Native\ROOTER;
+use Native\BINDING;
 use Native\RESPONSE;
 
 $params = PARAMS::findLastId();
@@ -11,7 +12,7 @@ $data = new RESPONSE;
 extract($_POST);
 
 
-if ($action == "calculReservation") {
+if ($action == "calculLocation") {
 	$data = new RESPONSE;
 
 	if ($finished >= $started && $started >= dateAjoute()) {
@@ -142,7 +143,7 @@ if ($action == "fiche") {
 		</div>
 	</div>
 
-	<div class="col-sm-4">
+	<div class="col-sm-3">
 		<h4 class="text-uppercase gras text-blue">Option équipements spéciaux</h4>
 		<table class="table table-sm table-hover">
 			<tbody>
@@ -165,24 +166,56 @@ if ($action == "fiche") {
 		<?php } ?>
 	</div>
 
+	<div class="col-sm-6">
+		<div class="row">
+			<div class="col-sm-7 text-right" style="padding-right: 3%">
+				<small>Tarif brut de la location</small>
+				<h3 class="gras text-muted mp0"><?= money($tarif->prixJournalier * $jours) ?> <?= $params->devise  ?></h3><br>
 
-	<div class="col-sm-5 text-right" style="padding-right: 3%">
-		<small>Tarif brut de la location</small>
-		<h3 class="gras text-muted mp0"><?= money($tarif->prixJournalier * $jours) ?> <?= $params->devise  ?></h3><br>
+				<small>Total Options équipements</small>
+				<h3 class="gras text-muted mp0"><?= money($option) ?> <?= $params->devise  ?></h3><br>
 
-		<small>Total Options équipements</small>
-		<h3 class="gras text-muted mp0"><?= money($option) ?> <?= $params->devise  ?></h3><br>
+				<small>Remise Client</small>
+				<h3 class="gras text-muted mp0"><?= money($abn) ?> <?= $params->devise  ?></h3><br><br>
 
-		<small>Remise Client</small>
-		<h3 class="gras text-muted mp0"><?= money($abn) ?> <?= $params->devise  ?></h3><br><br>
-
-		<span>Montant Total de la location</span>
-		<h1 class="gras mp0 text-green"><?= money($montant) ?> <?= $params->devise  ?></h1><br>
-		<hr>
-		<div>
-			<button onclick="newDevis()" class="btn btn-default dim"><i class="fa fa-file-text-o"></i> Valider le devis</button>
-
-			<button onclick="newReservation()" class="btn btn-primary dim"><i class="fa fa-check"></i> Valider la reservation</button>
+				<span>Montant Total de la location</span>
+				<h1 class="gras mp0 text-green"><?= money($montant) ?> <?= $params->devise  ?></h1><br>
+			</div>
+			<div class="col-sm-5">
+				<div>
+					<label>Mode de payement <span style="color: red">*</span> </label>                                
+					<div class="input-group">
+						<?php BINDING::html("select", "modepayement"); ?>
+					</div>
+				</div><br>
+				<div class="no_modepayement_facultatif">
+					<div>
+						<label>Montant avancé<span style="color: red">*</span> </label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-money"></i></span><input type="text" value="0" min="0" name="avance" class="form-control">
+						</div>
+					</div>
+				</div><br>
+				<div class="modepayement_facultatif">
+					<div>
+						<label>Structure d'encaissement<span style="color: red">*</span> </label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-bank"></i></span><input type="text" name="structure" class="form-control">
+						</div>
+					</div><br>
+					<div>
+						<label>N° numero dédié<span style="color: red">*</span> </label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-pencil"></i></span><input type="text" name="numero" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><hr>
+		<div class="text-right">
+			<button onclick="validerLocation(<?= TYPELOCATION::LOCATION ?>)" class="btn btn-primary dim"><i class="fa fa-car"></i> Location directe</button>
+			<button onclick="validerLocation(<?= TYPELOCATION::DEVIS ?>)" class="btn btn-default dim"><i class="fa fa-file-text-o"></i> Valider le devis</button>
+			<button onclick="validerLocation(<?= TYPELOCATION::RESERVATION ?>)" class="btn btn-danger dim"><i class="fa fa-calendar"></i> Faire une reservation</button>
 		</div>
 	</div>
 	<?php
@@ -191,7 +224,7 @@ if ($action == "fiche") {
 
 
 
-if ($action == "newReservation") {
+if ($action == "validerLocation") {
 	if ($finished >= $started && $started >= dateAjoute()) {
 		$data->status = true;
 		if ($client == TABLE::NON) {
@@ -204,7 +237,7 @@ if ($action == "newReservation") {
 		}
 	}else{
 		$data->status = false;
-		$data->message = "Veuillez verifier les dates pour la reservation !";
+		$data->message = "Veuillez verifier les dates pour cette opération !";
 	}
 
 	echo json_encode($data);

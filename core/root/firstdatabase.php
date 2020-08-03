@@ -13,9 +13,17 @@ $item->setProtected(1);
 $item->save();
 
 
-$datas = ["Voiture", "Camion", "Tricycle", "Moto", "Camping-car"];
+$datas = ["Voiture", "Camion", "Moto"];
 foreach ($datas as $key => $value) {
 	$item = new TYPEVEHICULE();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
+
+$datas = ["Location", "Reservation", "Devis"];
+foreach ($datas as $key => $value) {
+	$item = new TYPELOCATION();
 	$item->name = $value;
 	$item->setProtected(1);
 	$item->save();

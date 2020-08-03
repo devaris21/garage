@@ -16,69 +16,74 @@
 
 
             <div class="wrapper wrapper-content">
-                <div class="row  border-bottom white-bg dashboard-header">
-
-                    <div class="col-md-3">
-                        <h2>Welcome Amelia</h2>
-                        <small>You have 42 messages and 6 notifications.</small>
-                        <ul class="list-group clear-list m-t">
-                            <li class="list-group-item fist-item">
-                                Location en cours
-                                <span class="float-right">2</span>
-                            </li>
-                            <li class="list-group-item">
-                                Reservation pour aujoourd'hui
-                                <span class="float-right">2</span>
-                            </li>
-                            <li class="list-group-item">
-                                Expertise en cours
-                                <span class="float-right">2</span>
-                            </li>
-                            <li class="list-group-item">
-                                Expertise en cours
-                                <span class="float-right">2</span>
-                            </li>
-                            <li class="list-group-item">
-                                Expertise en cours
-                                <span class="float-right">2</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="flot-chart dashboard-chart">
-                            <div class="flot-chart-content" id="flot-dashboard-chart"></div>
-                        </div><hr>
-                        <div class="row text-center">
-                            <div class="col">
-                                <div class=" m-l-md text-green">
-                                    <span class="h5 font-bold block">100</span>
-                                    <small class="text-muted block">Disponible</small>
+                <div class="border-bottom white-bg dashboard-header">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>Welcome Amelia</h2>
+                            <small>You have 42 messages and 6 notifications.</small>
+                            <ul class="list-group clear-list m-t">
+                                <li class="list-group-item fist-item">
+                                    Location en cours
+                                    <span class="float-right">2</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Reservation pour aujoourd'hui
+                                    <span class="float-right">2</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Expertise en cours
+                                    <span class="float-right">2</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Expertise en cours
+                                    <span class="float-right">2</span>
+                                </li>
+                                <li class="list-group-item">
+                                    Expertise en cours
+                                    <span class="float-right">2</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="flot-chart dashboard-chart">
+                                <div class="flot-chart-content" id="flot-dashboard-chart"></div>
+                            </div><hr>
+                            <div class="row text-center">
+                                <div class="col">
+                                    <div class=" m-l-md text-green">
+                                        <span class="h5 font-bold block">100</span>
+                                        <small class="text-muted block">Disponible</small>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col border-right border-left">
-                                <span class="h4 font-bold block">401</span>
-                                <small class="text-muted block">Total Parc Auto</small>
-                            </div>
-                            <div class="col text-danger">
-                                <span class="h5 font-bold block">22</span>
-                                <small class="text-muted block">En mission</small>
-                            </div>
+                                <div class="col border-right border-left">
+                                    <span class="h4 font-bold block">401</span>
+                                    <small class="text-muted block">Total Parc Auto</small>
+                                </div>
+                                <div class="col text-danger">
+                                    <span class="h5 font-bold block">22</span>
+                                    <small class="text-muted block">En mission</small>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="statistic-box">
-                            <div class="text-center">
-                                <canvas id="doughnutChart2" style="width: 100%"></canvas><br>
-                                <h5 >Kolter</h5>
-                            </div>
-                            <div class="m-t">
-                                <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
-                            </div>
+                        <div class="col-md-3">
+                            <div class="statistic-box">
+                                <div class="text-center">
+                                    <canvas id="doughnutChart2" style="width: 100%"></canvas><br>
+                                    <h5 >Repartition du parc auto</h5>
+                                </div>
+                                <div class="m-t">
+                                    <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
+                    </div><hr>
+                    <div class="">
+                        <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-success dim"><i class="fa fa-wrench"></i> Nouvelle location</button>
 
+                        <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-danger dim pull-right"><i class="fa fa-wrench"></i> Nouvelle reservation</button>
+                    </div>
                 </div>
 
             </div>
