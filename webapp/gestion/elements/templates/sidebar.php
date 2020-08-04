@@ -26,8 +26,8 @@
             </li>
 
             <?php 
-            // $groupes__ = Home\GROUPECOMMANDE::encours();
-            // $prospections__ = Home\PROSPECTION::encours();
+            $locations__ = Home\LOCATION::encours();
+            $reservations__ = Home\RESERVATION::encours();
             // $ventecaves__ = Home\PROSPECTION::findBy(["etat_id ="=>Home\ETAT::ENCOURS, "typeprospection_id ="=>Home\TYPEPROSPECTION::VENTECAVE]);
             // $livraisons__ = Home\PROSPECTION::findBy(["etat_id ="=>Home\ETAT::ENCOURS, "typeprospection_id ="=>Home\TYPEPROSPECTION::LIVRAISON]);
             // $approvisionnements__ = Home\APPROVISIONNEMENT::encours();
@@ -52,16 +52,16 @@
 
 
                 <li class="" id="locations">
-                    <a href="<?= $this->url($this->section, "master", "locations") ?>"><i class="fa fa-home"></i> <span class="nav-label">Locations en cours</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                    <a href="<?= $this->url($this->section, "master", "locations") ?>"><i class="fa fa-home"></i> <span class="nav-label">Locations en cours</span> <?php if (count($locations__) > 0) { ?> <span class="label label-warning float-right"><?= count($locations__) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="reservations">
-                    <a href="<?= $this->url($this->section, "master", "reservations") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Reservations</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                    <a href="<?= $this->url($this->section, "master", "reservations") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Reservations</span> <?php if (count($reservations__) > 0) { ?> <span class="label label-warning float-right"><?= count($reservations__) ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="entrepot">
-                    <a href="<?= $this->url($this->section, "master", "entrepot") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Inspections </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                <li class="" id="inspections">
+                    <a href="<?= $this->url($this->section, "master", "inspections") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">En inspections </span> <?php if (count($locations__) > 0) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
-                <li class="" id="expertise">
-                    <a href="<?= $this->url($this->section, "master", "expertise") ?>"><i class="fa fa-home"></i> <span class="nav-label">Planning </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                <li class="" id="planning">
+                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-home"></i> <span class="nav-label">Planning </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
 
                 <li><hr class="mp3" style="background-color: transparent; "></li>

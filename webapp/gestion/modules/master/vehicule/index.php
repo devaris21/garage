@@ -44,8 +44,8 @@
                                         </address>
                                     </div>
                                     <div class="col-1 text-center">
-                                        <span  data-toggle=modal data-target="#modal-vehicule" class="cursor" onclick="modification('vehicule', <?= $levehicule->getId() ?>)"><i data-toggle='tooltip' title="Modiifer les infos du véhicule" class="fa fa-pencil fa-2x cursor"></i></span><br><br>
-                                        <span data-toggle='tooltip' title="Supprimer le véhicule" onclick="suppressionWithPassword('vehicule', <?= $levehicule->getId() ?>)" class="cursor" ><i class="fa fa-close text-red fa-2x cursor"></i></span><br>                                                                            
+                                        <span  data-toggle=modal data-target="#modal-vehicule" class="cursor" onclick="modification('vehicule', <?= $levehicule->id ?>)"><i data-toggle='tooltip' title="Modiifer les infos du véhicule" class="fa fa-pencil fa-2x cursor"></i></span><br><br>
+                                        <span data-toggle='tooltip' title="Supprimer le véhicule" onclick="suppressionWithPassword('vehicule', <?= $levehicule->id ?>)" class="cursor" ><i class="fa fa-close text-red fa-2x cursor"></i></span><br>                                                                            
                                     </div>
                                 </div>
                                 <button data-toggle=modal data-target="#modal-entretienvehicule1" class="btn btn-warning btn-xs btn-rounded btn-outline pull-right"><i class="fa fa-plus"></i> Nouvel entretien du véhicule</button>
@@ -194,8 +194,8 @@
                                         <tr>
                                             <td class=""><img style="width: 32px" src="<?= $this->stockage("images", "equipements", $equip->equipement->image) ?>"></td>
                                             <td class="gras text-uppercase"><?= $equip->equipement->name(); ?></td>
-                                            <th><i data-toggle="tooltip" title="Riterer l'equipement" class="fa fa-close cursor" onclick="retirer(<?= $equip->getId(); ?>)"></i></th>
-                                            <th><i data-toggle="tooltip" title="Equipement usé ou abimé, equipanger!" class="fa fa-trash text-red cursor" onclick="suppression('equipement_vehicule', <?= $equip->getId(); ?>)"></i></th>
+                                            <th><i data-toggle="tooltip" title="Riterer l'equipement" class="fa fa-close cursor" onclick="retirer(<?= $equip->id; ?>)"></i></th>
+                                            <th><i data-toggle="tooltip" title="Equipement usé ou abimé, equipanger!" class="fa fa-trash text-red cursor" onclick="suppression('equipement_vehicule', <?= $equip->id; ?>)"></i></th>
                                         </tr>
                                     <?php } ?>                                
                                 </tbody>
@@ -222,8 +222,8 @@
                                         <tr>
                                             <td class=""><img style="width: 32px" src="<?= $this->stockage("images", "accessoires", $equip->accessoire->image) ?>"></td>
                                             <td class="gras text-uppercase"><?= $equip->accessoire->name(); ?></td>
-                                            <th><i data-toggle="tooltip" title="Riterer l'accessoire" class="fa fa-close cursor" onclick="retirer(<?= $equip->getId(); ?>)"></i></th>
-                                            <th><i data-toggle="tooltip" title="Equipement usé ou abimé, equipanger!" class="fa fa-trash text-red cursor" onclick="suppression('equipement_vehicule', <?= $equip->getId(); ?>)"></i></th>
+                                            <th><i data-toggle="tooltip" title="Riterer l'accessoire" class="fa fa-close cursor" onclick="retirer(<?= $equip->id; ?>)"></i></th>
+                                            <th><i data-toggle="tooltip" title="Equipement usé ou abimé, equipanger!" class="fa fa-trash text-red cursor" onclick="suppression('equipement_vehicule', <?= $equip->id; ?>)"></i></th>
                                         </tr>
                                     <?php } ?>                                
                                 </tbody>
@@ -336,7 +336,7 @@
                     </div>
                 </div><hr class="">
                 <div class="container">
-                    <input type="hidden" name="vehicule_id" value="<?= $levehicule->getId() ?>">
+                    <input type="hidden" name="vehicule_id" value="<?= $levehicule->id ?>">
                     <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
                     <button class="btn btn-sm btn-success pull-right"><i class="fa fa-check"></i> Valider</button>
                 </div>

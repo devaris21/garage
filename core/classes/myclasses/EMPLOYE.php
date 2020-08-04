@@ -87,7 +87,7 @@ class EMPLOYE extends AUTH
 
 	public function se_connecter(){
 		$connexion = new CONNEXION;
-		$connexion->employe_id = $this->getId();
+		$connexion->employe_id = $this->id;
 		$connexion->connexion_employe();
 	}
 
@@ -95,13 +95,13 @@ class EMPLOYE extends AUTH
 
 	public function se_deconnecter(){
 		$connexion = new CONNEXION;
-		$connexion->employe_id = $this->getId();
+		$connexion->employe_id = $this->id;
 		$connexion->deconnexion_employe();
 	}
 
 
 	public function last_connexion(){
-		$datas = CONNEXION::findBy(["employe_id = "=> $this->getId()], [], ["id"=>"DESC"], 1);
+		$datas = CONNEXION::findBy(["employe_id = "=> $this->id], [], ["id"=>"DESC"], 1);
 		if (count($datas) == 1) {
 			$connexion = $datas[0];
 			if ($connexion->date_deconnexion == null) {
@@ -119,7 +119,7 @@ class EMPLOYE extends AUTH
 		$datas = ROLE::findBy(["name ="=>$role]);
 		if (count($datas) == 1) {
 			$role = $datas[0];
-			$datas = ROLE_EMPLOYE::findBy(["role_id ="=>$role->getId(), "employe_id ="=>$this->getId()]);
+			$datas = ROLE_EMPLOYE::findBy(["role_id ="=>$role->id, "employe_id ="=>$this->id]);
 			if (count($datas) == 1) {
 				return true;
 			}
@@ -132,7 +132,7 @@ class EMPLOYE extends AUTH
 	public function relog_employe(string $login, string $password){
 		$data = new RESPONSE;
 		if ($password != "" && $login != "") {
-			$datas = self::findBy(["login = "=>$login, "id !="=> $this->getId()]);
+			$datas = self::findBy(["login = "=>$login, "id !="=> $this->id]);
 			if (count($datas) == 0) {
 				if($this->password != hasher($password)){
 					if ($this->set_login($login)) {

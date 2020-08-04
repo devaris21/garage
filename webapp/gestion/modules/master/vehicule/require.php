@@ -2,8 +2,8 @@
 namespace Home;
 VEHICULE::etat();
 
-if ($this->getId() != null && intval($this->getId()) > 0) {
-	$datas = VEHICULE::findBy(["id="=>$this->getId()]);
+if ($this->id != null && intval($this->id) > 0) {
+	$datas = VEHICULE::findBy(["id="=>$this->id]);
 	if (count($datas) == 1) {
 		$levehicule = $datas[0];
 		$levehicule->actualise();
@@ -24,7 +24,7 @@ if ($this->getId() != null && intval($this->getId()) > 0) {
 		// usort($historiques, "comparerDateCreated");
 
 		$title = "AMB | ".$levehicule->name();
-		session("vehicule_id", $this->getId());
+		session("vehicule_id", $this->id);
 	}else{
 		header("Location: ../master/parcauto");
 	}

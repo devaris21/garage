@@ -79,7 +79,7 @@ class ADMIN extends AUTH
 
 	public function se_connecter(){
 		$connexion = new CONNEXION;
-		$connexion->admin_id = $this->getId();
+		$connexion->admin_id = $this->id;
 		$connexion->connexion_gestionnaire();
 	}
 
@@ -87,13 +87,13 @@ class ADMIN extends AUTH
 
 	public function se_deconnecter(){
 		$connexion = new CONNEXION;
-		$connexion->admin_id = $this->getId();
+		$connexion->admin_id = $this->id;
 		$connexion->deconnexion_gestionnaire();
 	}
 
 
 	public function last_connexion(){
-		$datas = CONNEXION::findBy(["admin_id = "=> $this->getId()], [], ["id"=>"DESC"], 1);
+		$datas = CONNEXION::findBy(["admin_id = "=> $this->id], [], ["id"=>"DESC"], 1);
 		if (count($datas) == 1) {
 			$connexion = $datas[0];
 			if ($connexion->date_deconnexion == null) {
@@ -132,7 +132,7 @@ class ADMIN extends AUTH
 
 
 	public function is_connected(){
-		$datas = CONNEXION::findBy(["admin_id = "=> $this->getId()], [], ["id"=>"DESC"], 1);
+		$datas = CONNEXION::findBy(["admin_id = "=> $this->id], [], ["id"=>"DESC"], 1);
 		if (count($datas) == 1) {
 			$connexion = $datas[0];
 			if ($connexion->date_deconnexion == null) {
@@ -151,7 +151,7 @@ class ADMIN extends AUTH
 	public function relog_gestionnaire(string $login, string $password){
 		$data = new RESPONSE;
 		if ($password != "" && $login != "") {
-			$datas = self::findBy(["login = "=>$login, "id !="=> $this->getId()]);
+			$datas = self::findBy(["login = "=>$login, "id !="=> $this->id]);
 			if (count($datas) == 0) {
 				if($this->password != hasher($password)){
 					if ($this->setLogin($login)) {

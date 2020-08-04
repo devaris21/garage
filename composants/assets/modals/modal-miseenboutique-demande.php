@@ -30,7 +30,7 @@
                                             $prixdv->actualise(); ?>
                                             <div class="col-sm-3 text-center">
                                                 <label class="text-muted"><?= $prixdv->quantite->name() ?> </label>
-                                                <input type="text" min=0 number class="gras form-control text-green text-center" name="mise-<?= $prixdv->getId() ?>">
+                                                <input type="text" min=0 number class="gras form-control text-green text-center" name="mise-<?= $prixdv->id ?>">
                                             </div>
                                         <?php  } ?>
                                     </div>
@@ -40,7 +40,7 @@
 
                         <hr>
                         <div class="">
-                            <input type="hidden" name="boutique_id" value="<?= $boutique->getId() ?>">
+                            <input type="hidden" name="boutique_id" value="<?= $boutique->id ?>">
                             <input type="hidden" name="etat_id" value="<?= Home\ETAT::PARTIEL ?>">
                             <button class="btn pull-right dim btn-primary" ><i class="fa fa-check"></i> Valider la demande de mise en boutique</button>
                         </div><br>

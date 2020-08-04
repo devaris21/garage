@@ -1,7 +1,7 @@
 <?php 
 namespace Home;
 
-$title = "GRG | Espace d'Administration ";
+$title = "GRG | Liste des reservations ";
 
-$reservations = RESERVATION::getAll();
+$reservations = RESERVATION::findBy(["etat_id ="=>ETAT::ENCOURS], [], ["started"=>"ASC", "finished"=>"ASC", "created"=>"ASC"]);
 ?>

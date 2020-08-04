@@ -134,20 +134,20 @@
                                         <?php } ?>
                                         <td>
                                             <br>
-                                            <button onclick="voirVehicule('<?= $location->getId() ?>')" class="btn btn-rounded btn-outline btn-xs btn-info"><i class="fa fa-eye"></i> Voir les véhicules</button>
+                                            <button onclick="voirVehicule('<?= $location->id ?>')" class="btn btn-rounded btn-outline btn-xs btn-info"><i class="fa fa-eye"></i> Voir les véhicules</button>
                                         </td>
                                         <td class="text-right">
                                             <?php if ($location->etat_id == Home\ETAT::ENCOURS) { ?>
-                                                <button onclick="modification('location', <?= $location->getId() ?>)" data-toggle="modal" data-target="#modal-<?= ($location->typelocation_id == 1)?'location2':'pret2' ?>" class="btn btn-outline btn-warning  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos de la location" class="fa fa-pencil"></i></button>
+                                                <button onclick="modification('location', <?= $location->id ?>)" data-toggle="modal" data-target="#modal-<?= ($location->typelocation_id == 1)?'location2':'pret2' ?>" class="btn btn-outline btn-warning  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos de la location" class="fa fa-pencil"></i></button>
 
                                                 <?php if ($location->typelocation_id == Home\TYPELOCATION::PRET){ ?>
-                                                    <button onclick="modification('preteur', <?= $preteur->getId() ?>)" data-toggle="modal" data-target="#modal-preteur" class="btn btn-outline btn-primary  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos du bénéficiaire" class="fa fa-user"></i></button>
+                                                    <button onclick="modification('preteur', <?= $preteur->id ?>)" data-toggle="modal" data-target="#modal-preteur" class="btn btn-outline btn-primary  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos du bénéficiaire" class="fa fa-user"></i></button>
                                                 <?php } ?>
 
                                                 <br>  
 
-                                                <button onclick="terminerLocation(<?= $location->getId() ?>)" data-toggle="tooltip" title="Terminer la location" class="btn btn-outline btn-primary dim" type="button"><i class="fa fa-check"></i></button>
-                                                <button onclick="annulerLocation(<?= $location->getId() ?>)" data-toggle="tooltip" title="Annuler l'location" class="btn btn-outline btn-danger  dim" type="button"><i class="fa fa-close"></i> </button>
+                                                <button onclick="terminerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Terminer la location" class="btn btn-outline btn-primary dim" type="button"><i class="fa fa-check"></i></button>
+                                                <button onclick="annulerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Annuler l'location" class="btn btn-outline btn-danger  dim" type="button"><i class="fa fa-close"></i> </button>
                                             <?php } ?>
 
                                         </td>

@@ -62,7 +62,7 @@
                                 $vehicule->actualise(); ?>
                                 <div class="col-sm-4 col-md-3 vehicule">
                                     <div class="contact-box product-box">
-                                        <a class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->getId()) ?>">
+                                        <a class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->id) ?>">
                                             <div class="col-4">
                                                 <div class="text-center">
                                                     <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image1) ?>">

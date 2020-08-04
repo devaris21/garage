@@ -144,7 +144,7 @@ if ($action == "listevehicules") {
 		$loca->actualise(); ?>
 		<div class="">
 			<div class="contact-box product-box">
-				<a class="row" href="<?= $rooter->url("gestionnaire", "master", "vehicule", $loca->vehicule->getId()) ?>">
+				<a class="row" href="<?= $rooter->url("gestionnaire", "master", "vehicule", $loca->vehicule->id) ?>">
 					<div class="col-4">
 						<div class="text-center">
 							<img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $rooter->stockage("images", "vehicules", $loca->vehicule->image) ?>">

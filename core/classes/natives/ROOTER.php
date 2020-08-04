@@ -95,7 +95,7 @@ class ROOTER extends PATH
                                     $datas = ROLE::findBy(["name ="=>$this->module]);
                                     if (count($datas) == 1) {
                                         $role = $datas[0];
-                                        if (in_array($role->getId(), $tableauDeRoles)) {
+                                        if (in_array($role->id, $tableauDeRoles)) {
 
                                             $employe->actualise();
 

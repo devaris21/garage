@@ -44,8 +44,8 @@
                                          <img class="img-thumbnail cursor" onclick="openImage('<?= $this->stockage("images", "cartegrises", $carte->image2) ?>')" style="height: 50px; width: 50px;" src="<?= $this->stockage("images", "cartegrises", $carte->image2) ?>">
                                      </td>
                                      <td class="project-actions">
-                                        <button data-toggle="modal" data-target="#modal-cartegrise"  onclick="modification('cartegrise', <?= $carte->getId() ?>)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modiifer </button>
-                                        <button class="btn btn-white btn-sm" onclick="suppressionWithPassword('cartegrise', <?= $carte->getId(); ?>)"><i class="fa fa-close text-red"></i></button>
+                                        <button data-toggle="modal" data-target="#modal-cartegrise"  onclick="modification('cartegrise', <?= $carte->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modiifer </button>
+                                        <button class="btn btn-white btn-sm" onclick="suppressionWithPassword('cartegrise', <?= $carte->id; ?>)"><i class="fa fa-close text-red"></i></button>
                                     </td>
                                 </tr>
                             <?php  } ?>
@@ -95,8 +95,8 @@
                                  <img class="img-thumbnail cursor" onclick="openImage('<?= $this->stockage("images", "assurances", $assurance->image2) ?>')" style="height: 50px; width: 50px;" src="<?= $this->stockage("images", "assurances", $assurance->image2) ?>">
                              </td>
                              <td class="project-actions">
-                                <button data-toggle="modal" data-target="#modal-assurance"  onclick="modification('assurance', <?= $assurance->getId() ?>)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modiifer </button>
-                                <button class="btn btn-white btn-sm" onclick="suppressionWithPassword('assurance', <?= $assurance->getId(); ?>)"><i class="fa fa-close text-red"></i></button>
+                                <button data-toggle="modal" data-target="#modal-assurance"  onclick="modification('assurance', <?= $assurance->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modiifer </button>
+                                <button class="btn btn-white btn-sm" onclick="suppressionWithPassword('assurance', <?= $assurance->id; ?>)"><i class="fa fa-close text-red"></i></button>
                             </td>
                         </tr>
                     <?php  } ?>
@@ -145,8 +145,8 @@
                              <img class="img-thumbnail cursor" onclick="openImage('<?= $this->stockage("images", "visitetechniques", $vist->image2) ?>')" style="height: 50px; width: 50px;" src="<?= $this->stockage("images", "visitetechniques", $vist->image2) ?>">
                          </td>
                          <td class="project-actions">
-                            <button data-toggle="modal" data-target="#modal-visitetechnique"  onclick="modification('visitetechnique', <?= $vist->getId() ?>)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modiifer </button>
-                            <button class="btn btn-white btn-sm" onclick="suppressionWithPassword('visitetechnique', <?= $vist->getId(); ?>)"><i class="fa fa-close text-red"></i></button>
+                            <button data-toggle="modal" data-target="#modal-visitetechnique"  onclick="modification('visitetechnique', <?= $vist->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modiifer </button>
+                            <button class="btn btn-white btn-sm" onclick="suppressionWithPassword('visitetechnique', <?= $vist->id; ?>)"><i class="fa fa-close text-red"></i></button>
                         </td>
                     </tr>
                 <?php  } ?>
@@ -197,8 +197,8 @@
                              <img class="img-thumbnail cursor" onclick="openImage('<?= $this->stockage("images", "piecevehicules", $piece->image2) ?>')" style="height: 50px; width: 50px;" src="<?= $this->stockage("images", "piecevehicules", $piece->image2) ?>">
                          </td>
                          <td class="project-actions">
-                            <button data-toggle="modal" data-target="#modal-piecevehicule"  onclick="modification('piecevehicule', <?= $piece->getId() ?>)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modiifer </button>
-                            <button class="btn btn-white btn-sm" onclick="suppressionWithPassword('piecevehicule', <?= $piece->getId(); ?>)"><i class="fa fa-close text-red"></i></button>
+                            <button data-toggle="modal" data-target="#modal-piecevehicule"  onclick="modification('piecevehicule', <?= $piece->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modiifer </button>
+                            <button class="btn btn-white btn-sm" onclick="suppressionWithPassword('piecevehicule', <?= $piece->id; ?>)"><i class="fa fa-close text-red"></i></button>
                         </td>
                     </tr>
                 <?php  } ?>
@@ -278,8 +278,8 @@
 
                         <?php }else if ($entretien->etat_id == Home\ETAT::ENCOURS){ ?>
                             <div class="btn-group">
-                                <button data-toggle="tooltip" title="Entretien terminé avec succes !" onclick="validerEntretien(<?= $entretien->getId() ?>)" class="btn btn-white btn-sm"><i class="fa fa-check text-green"></i> </button>
-                                <button data-toggle="tooltip" title="Entretien échoué" class="btn btn-white btn-sm" onclick="annulerEntretien(<?= $entretien->getId() ?>)"><i class="fa fa-close text-red"></i></button>
+                                <button data-toggle="tooltip" title="Entretien terminé avec succes !" onclick="validerEntretien(<?= $entretien->id ?>)" class="btn btn-white btn-sm"><i class="fa fa-check text-green"></i> </button>
+                                <button data-toggle="tooltip" title="Entretien échoué" class="btn btn-white btn-sm" onclick="annulerEntretien(<?= $entretien->id ?>)"><i class="fa fa-close text-red"></i></button>
                             </div>
                         <?php } ?>                                      
                     </div>
@@ -362,10 +362,10 @@
                        <?php if ($sinistre->etat_id == Home\ETAT::ENCOURS) { ?>
                         <div class="btn-group btn-group-vertical">
                             <?php if ($sinistre->carplan_id == null) { ?>
-                               <button data-toggle="modal" data-target="#modal-sinistre"  onclick="modification('sinistre', <?= $sinistre->getId() ?>)" class="btn btn-white btn-sm"><i data-toggle="tooltip" title="Modifier les informations du sinistre" class="fa fa-pencil"></i> </button>
+                               <button data-toggle="modal" data-target="#modal-sinistre"  onclick="modification('sinistre', <?= $sinistre->id ?>)" class="btn btn-white btn-sm"><i data-toggle="tooltip" title="Modifier les informations du sinistre" class="fa fa-pencil"></i> </button>
                            <?php } ?>                                
-                           <button data-toggle="tooltip" title="Valider cette déclaration" class="btn btn-white btn-sm" onclick="validerSinistre(<?= $sinistre->getId(); ?>)"><i class="fa fa-check text-green"></i></button>
-                           <button data-toggle="tooltip" title="Annuler cette déclaration" class="btn btn-white btn-sm" onclick="annulerSinistre(<?= $sinistre->getId(); ?>)"><i class="fa fa-close text-red"></i></button>
+                           <button data-toggle="tooltip" title="Valider cette déclaration" class="btn btn-white btn-sm" onclick="validerSinistre(<?= $sinistre->id; ?>)"><i class="fa fa-check text-green"></i></button>
+                           <button data-toggle="tooltip" title="Annuler cette déclaration" class="btn btn-white btn-sm" onclick="annulerSinistre(<?= $sinistre->id; ?>)"><i class="fa fa-close text-red"></i></button>
                        </div>
                    <?php } ?>
                </td>
