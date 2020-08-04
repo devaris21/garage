@@ -10,6 +10,7 @@ class INSPECTION extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $location_id;
+	public $vehicule_id;
 	public $dateInspection;
 	public $kilometrage;
 	public $carburant;

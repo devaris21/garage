@@ -62,7 +62,7 @@ $(function(){
 			formData.append('action', 'validerLocation');
 			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
 				if (data.status) {
-					window.location.reload();
+					window.location.href = data.url;
 				}else{
 					Alerter.error('Erreur !', data.message);
 				}

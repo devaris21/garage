@@ -14,7 +14,7 @@ class VEHICULE extends TABLE
 	public $marque_id;
 	public $modele;
 	public $couleur;
-	public $etatvehicule_id = ETATVEHICULE::RAS;
+	public $etatvehicule_id = ETATVEHICULE::LIBRE;
 
 	public $image1;
 	public $image2;
@@ -80,11 +80,42 @@ class VEHICULE extends TABLE
 	}
 
 
-	public static function etat(){
+	public static function libres(){
 
 	}
 
 
+
+	public static function etat(){
+		$datas = static::getAll();
+		foreach ($datas as $key => $vehicule) {
+			if ($vehicule->etatvehicule_id != ETATVEHICULE::INDISPONIBLE) {
+				$lots = $vehicule->fourni("location", ["vehicule_id ="=>$vehicule->id, "etat_id ="=>ETAT::ENCOURS]);
+				if (count($lots) > 0) {
+					$vehicule->etatvehicule_id = ETATVEHICULE::LOCATION;
+					$vehicule->save();
+					continue;
+				}
+
+				$lots = $vehicule->fourni("inspection", ["vehicule_id ="=>$vehicule->id, "etat_id ="=>ETAT::ENCOURS]);
+				if (count($lots) > 0) {
+					$vehicule->etatvehicule_id = ETATVEHICULE::INSPECTION;
+					$vehicule->save();
+					continue;
+				}
+
+				$lots = $vehicule->fourni("maintenance", ["vehicule_id ="=>$vehicule->id, "etat_id ="=>ETAT::ENCOURS]);
+				if (count($lots) > 0) {
+					$vehicule->etatvehicule_id = ETATVEHICULE::REPARATION;
+					$vehicule->save();
+					continue;
+				}
+
+				$vehicule->etatvehicule_id = ETATVEHICULE::LIBRE;
+				$vehicule->save();
+			}
+		}
+	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

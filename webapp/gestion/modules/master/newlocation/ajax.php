@@ -253,8 +253,24 @@ if ($action == "validerLocation") {
 				if ($critere->climatisation == "a") {
 					$critere->climatisation = null;
 				}
+				$critere->minplace = $min;
+				$critere->maxplace = $max;
 				$critere->reservation_id = $reservation->id;
 				$data = $critere->enregistre();
+				if ($data->status) {
+					if ($marques != "") {
+						$marques = explode(",", $marques);
+					}else{
+						$marques = [];
+					}
+					foreach ($marques as $key => $info) {
+						$item = new MARQUE_CRITERE;
+						$item->marque_id = $info;
+						$item->critere_id = $critere->id;
+						$item->enregistre();
+					}
+				}
+				$data->setUrl("gestion", "master", "reservations");
 			}else{
 				$data->status = false;
 				$data->message = "Veuillez verifier les dates pour cette opération !";

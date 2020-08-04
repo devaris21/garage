@@ -19,10 +19,10 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="ibox">
-                                <div class="ibox-title">
+                                <div class="ibox-title bg-red">
                                     <h5 class="text-uppercase gras d-inline">Nouvelle reservation</h5>
                                     <div class="ibox-tools">
-                                        <button class="btn btn-xs btn-white">2 véhicules trouvés</button>
+                                        <button class="btn btn-xs btn-white text-dark"><span class="nb"></span></button>
                                     </div>
                                 </div>
                                 <div class="ibox-content">
@@ -131,7 +131,7 @@
 
                         <div class="col-md-4">
                             <div class="ibox">
-                                <div class="ibox-title">
+                                <div class="ibox-title bg-red">
                                     <h5 class="text-uppercase gras d-inline">Informations sur le client</h5>
                                 </div>
                                 <div class="ibox-content">
