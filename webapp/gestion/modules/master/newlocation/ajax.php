@@ -105,7 +105,7 @@ if ($action == "fiche") {
 
 	$abonnement = new ABONNEMENT;
 	$abn = 0;
-	if ($client == TABLE::OUI) {
+	if ($isclient == TABLE::OUI) {
 		$datas = CLIENT::findBy(["id ="=>$client_id]);
 		if (count($datas) == 1) { 
 			$client = $datas[0];
@@ -157,7 +157,7 @@ if ($action == "fiche") {
 		</table>
 
 		<h4 class="text-uppercase gras text-blue">Remise abonnement Client</h4>
-		<?php if ($client == TABLE::OUI) { ?>
+		<?php if ($isclient == TABLE::OUI && $abonnement->id != null) { ?>
 			<span><?= $abonnement->typeabonnement->name()  ?></span><br>
 			<h2 class="d-inline gras"><?= money($abonnement->name()) ?> <?= $params->devise  ?></h2>
 		<?php }else{ ?>
@@ -227,10 +227,20 @@ if ($action == "fiche") {
 if ($action == "validerLocation") {
 	if ($finished >= $started && $started >= dateAjoute()) {
 		$data->status = true;
-		if ($client == TABLE::NON) {
+		if ($isclient == TABLE::NON) {
 			$client = new CLIENT;
 			$client->hydrater($_POST);
 			$data = $client->enregistre();
+		}else{
+			$datas = CLIENT::findBy(["id ="=>$client_id]);
+			if (count($datas) == 1) { 
+				$client = $datas[0];
+			// $lots = $client->fourni("abonnement");
+			// if (count($lots) > 0) {
+			// 	$abonnement = $lots[0];
+			// 	$abn = $abonnement->montant($montant);
+			// }
+			}
 		}
 		if ($data->status) {
 			$reservation = new RESERVATION;

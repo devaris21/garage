@@ -10,6 +10,7 @@ class RESERVATION extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $agence_id;
+	public $reference;
 	public $client_id;
 	public $started;
 	public $finished;
@@ -23,6 +24,8 @@ class RESERVATION extends TABLE
 		$datas = CLIENT::findBy(["id ="=>$this->client_id]);
 		if (count($datas) == 1) {
 			if ($this->finished > $this->started && $this->finished > dateAjoute()) {
+				$this->employe_id = getSession("employe_connecte_id");
+				$this->reference = "RES/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
 				$data = $this->save();
 			}else{
 				$data->status = false;

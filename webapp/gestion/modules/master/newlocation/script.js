@@ -3,8 +3,8 @@
 $(function(){
 
 	$("div.old").hide()
-	$("input[name=client]").on('ifChanged', function(event){
-		if ($(this).val() == 1) {
+	$("input[name=isclient]").on('ifChanged', function(event){
+		if ($(this).val() == 0) {
 			$("div.new").fadeIn()
 			$("div.old").fadeOut()
 		}else{

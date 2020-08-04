@@ -137,11 +137,11 @@
                                 <div class="ibox-content">
                                     <div class="row text-center">
                                         <div class="col-6 border-right">
-                                            <label class="col-form-label cursor"><input type="radio" checked class="i-checks" value="<?= Home\TABLE::NON  ?>" name="client"> Nouveau client</label>
+                                            <label class="col-form-label cursor"><input type="radio" checked class="i-checks" value="<?= Home\TABLE::NON  ?>" name="isclient"> Nouveau client</label>
                                         </div>
 
                                         <div class="col-6">
-                                            <label class="col-form-label cursor"><input type="radio" class="i-checks" value="<?= Home\TABLE::OUI  ?>" name="client"> Client existant</label>
+                                            <label class="col-form-label cursor"><input type="radio" class="i-checks" value="<?= Home\TABLE::OUI  ?>" name="isclient"> Client existant</label>
                                         </div>
                                     </div><hr class="mp0">
 
