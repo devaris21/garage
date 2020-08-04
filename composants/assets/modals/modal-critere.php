@@ -16,7 +16,6 @@ if ($critere->transmission_id != 1) {
     $transmission = " AND transmission_id = $critere->transmission_id";
 }
 $requette = "SELECT * FROM infovehicule WHERE 1 $typefonction $place $energie $transmission $clim ";
-    //var_dump($requette);
 
 $marques = [];
 $items = $critere->fourni("marque_critere");
@@ -46,6 +45,9 @@ $liste = join(",", $liste);
 
 $requette = "SELECT * FROM vehicule WHERE etatvehicule_id = ? AND id NOT IN (?)";
 $autres = Home\VEHICULE::execute($requette, [Home\ETATVEHICULE::LIBRE, $liste]);
+
+$chauffeurs = Home\CHAUFFEUR::getAll();
+
 ?>
 
 
@@ -58,7 +60,7 @@ $autres = Home\VEHICULE::execute($requette, [Home\ETATVEHICULE::LIBRE, $liste]);
             <small class="font-bold">Renseigner ces champs pour terminer l'critere</small>
         </div>
         
-        <form class="formValiderApprovisionnement">
+        <form class="formReservation">
             <div class="row">
                 <div class="col-md-8">
                     <div class="ibox">
@@ -163,6 +165,37 @@ $autres = Home\VEHICULE::execute($requette, [Home\ETATVEHICULE::LIBRE, $liste]);
                                 </div>
 
                             </div>
+
+                            <table class="table table-hover table-mail">
+                                <tbody>
+                                    <?php foreach ($chauffeurs as $key => $chauffeur) { ?>
+                                        <tr class="unread">
+                                            <td class="check-mail">
+                                                <input type="radio" class="i-checks" name="chauffeur_id" value="<?= $chauffeur->id ?>">
+                                            </td>
+                                            <td class="mail-ontact"><a href="mail_detail.html">Anna Smith</a></td>
+                                            <td class="mail-subject"><a href="mail_detail.html">Lorem ipsum dolor noretek imit set.</a></td>
+                                            <td class=""><i class="fa fa-paperclip"></i></td>
+                                            <td class="text-right mail-date">6.10 AM</td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table><hr>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Zone de déplacement (si possible)</label>
+                                    <input type="text" class="form-control" name="lieu">
+                                </div>
+                                <div class="col-md-5">
+                                    <label>Etat global du véhicule</label>
+                                    <textarea class="form-control" name="etat" rows="4">Rien à signeler</textarea>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Kilométrage actuel</label>
+                                    <input type="text" class="form-control" name="kilometrage">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -182,7 +215,7 @@ $autres = Home\VEHICULE::execute($requette, [Home\ETATVEHICULE::LIBRE, $liste]);
                                                 <div class="col-4">
                                                     <div class="text-center">
                                                         <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image1) ?>"><br>
-                                                        <input type="radio" name="vehicule_id" class="i-checks cursor">
+                                                        <input type="radio" name="vehicule_id" class="i-checks cursor" value="<?= $vehicule->id  ?>" kilometrage="<?= $vehicule->kilometrage();  ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-8">
@@ -197,52 +230,54 @@ $autres = Home\VEHICULE::execute($requette, [Home\ETATVEHICULE::LIBRE, $liste]);
                                         </label>
                                     </div>
                                 </div>
-                            <?php } ?><br>
+                                <?php } ?><br>
 
-                            <h5 class="text-center gras text-uppercase text-muted">-- D'autres véhicules disponibles -- </h5>
+                                <h5 class="text-center gras text-uppercase text-muted">-- D'autres véhicules disponibles -- </h5>
 
-                            <?php foreach ($autres as $key => $vehicule) {
-                                $vehicule->actualise();
-                                $tems = $vehicule->fourni("infovehicule");
-                                $info = $tems[0]; 
-                                $info->actualise(); ?>
-                                <div class="vehicule">
-                                    <div class="contact-box product-box">
-                                        <label>
-                                            <a class="row">
-                                                <div class="col-4">
-                                                    <div class="text-center">
-                                                        <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image1) ?>"><br>
-                                                        <input type="radio" name="vehicule_id" class="i-checks cursor">
-                                                    </div>
-                                                </div>
-                                                <div class="col-8">
-                                                    <h4 style="margin: 0" class="text-uppercase"><strong><?= $vehicule->immatriculation ?></strong></h4>
-                                                    <span>
-                                                        <?= $vehicule->marque->name ?> <?= $vehicule->modele ?> 
-                                                    </span><br>
-                                                    <small><?= $info->transmission->name() ?> -- <?= $info->energie->name() ?></small><br>
-                                                    <small><?= $info->nbPlaces ?> places</small> // <span><?= $info->fonctionvehicule->name() ?></span>
-                                                </div>
-                                            </a>
-                                        </label>
-                                    </div>
-                                </div>
-                            <?php } ?>
-
+                                <?php foreach ($autres as $key => $vehicule) {
+                                    $vehicule->actualise();
+                                    $tems = $vehicule->fourni("infovehicule");
+                                    $info = $tems[0]; 
+                                    if ($info->typevehicule_id == $critere->typevehicule_id) {
+                                        $info->actualise(); ?>
+                                        <div class="vehicule">
+                                            <div class="contact-box product-box">
+                                                <label>
+                                                    <a class="row">
+                                                        <div class="col-4">
+                                                            <div class="text-center">
+                                                                <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image1) ?>"><br>
+                                                                <input type="radio" name="vehicule_id" class="i-checks cursor" value="<?= $vehicule->id  ?>" kilometrage="<?= $vehicule->kilometrage();  ?>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <h4 style="margin: 0" class="text-uppercase"><strong><?= $vehicule->immatriculation ?></strong></h4>
+                                                            <span>
+                                                                <?= $vehicule->marque->name ?> <?= $vehicule->modele ?> 
+                                                            </span><br>
+                                                            <small><?= $info->transmission->name() ?> -- <?= $info->energie->name() ?></small><br>
+                                                            <small><?= $info->nbPlaces ?> places</small> // <span><?= $info->fonctionvehicule->name() ?></span>
+                                                        </div>
+                                                    </a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    <?php }
+                                }  ?>
+                            </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
 
-            <div class="modal-footer">
-                <button class="btn btn-danger dim"><i class="fa fa-check"></i> Commencer la location</button>
-            </div>
-        </form>
+                <div class="modal-footer">
+                    <input type="hidden" name="reservation_id" value="<?= $reservation->id ?>">
+                    <button class="btn btn-danger dim"><i class="fa fa-check"></i> Commencer la location</button>
+                </div>
+            </form>
 
+        </div>
     </div>
-</div>
 </div>
 
 

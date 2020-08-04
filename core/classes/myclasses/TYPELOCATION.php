@@ -9,7 +9,7 @@ class TYPELOCATION extends TABLE
 	public static $tableName = __CLASS__;
 	public static $namespace = __NAMESPACE__;
 
-	const LOCATION = 1;
+	const DIRECT = 1;
 	const RESERVATION = 2;
 	const DEVIS = 3;
 

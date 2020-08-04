@@ -98,6 +98,7 @@ class ROOTER extends PATH
                                         if (in_array($role->id, $tableauDeRoles)) {
 
                                             $employe->actualise();
+                                            session("agence_connecte_id", 1);
 
                                         }else{
                                             $this->new_root("devaris21", "home", "erreur500");

@@ -76,7 +76,7 @@ class VEHICULE extends TABLE
 
 
 	public function kilometrage(){
-		return 10;
+		return mt_rand(0, 199999);
 	}
 
 

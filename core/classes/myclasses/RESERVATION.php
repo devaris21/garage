@@ -25,6 +25,7 @@ class RESERVATION extends TABLE
 		if (count($datas) == 1) {
 			if ($this->finished > $this->started && $this->finished > dateAjoute()) {
 				$this->employe_id = getSession("employe_connecte_id");
+				$this->agence_id = getSession("agence_connecte_id");
 				$this->reference = "RES/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
 				$data = $this->save();
 			}else{
@@ -37,6 +38,40 @@ class RESERVATION extends TABLE
 		}
 		return $data;
 	}
+
+
+
+	public function annuler(){
+		$data = new RESPONSE;
+		if ($this->etat_id == ETAT::ENCOURS) {
+			$this->etat_id = ETAT::ANNULEE;
+			$this->datevalidation = date("Y-m-d H:i:s");
+			$this->historique("La reservation en reference $this->reference vient d'être annulée !");
+			$data = $this->save();
+		}else{
+			$data->status = false;
+			$data->message = "Vous ne pouvez plus faire cette opération sur cette reservation !";
+		}
+		return $data;
+	}
+
+
+
+	public function valider(){
+		$data = new RESPONSE;
+		if ($this->etat_id == ETAT::ENCOURS) {
+			$this->etat_id = ETAT::VALIDEE;
+			$this->datevalidation = date("Y-m-d H:i:s");
+			$this->historique("La reservation en reference $this->reference vient d'être validée !");
+			$data = $this->save();
+		}else{
+			$data->status = false;
+			$data->message = "Vous ne pouvez plus faire cette opération sur cette reservation !";
+		}
+		return $data;
+	}
+
+
 
 
 	public function sentenseCreate(){
