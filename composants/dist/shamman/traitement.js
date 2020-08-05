@@ -1,5 +1,4 @@
     $(function(){
-
         $("body").on("submit", "form.formShamman", function(event) {
             Loader.start()
             name = $(this).attr('classname');

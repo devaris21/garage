@@ -1,4 +1,8 @@
 <?php 
+namespace Home;
 
-$title = "GRG | Espace d'Administration ";
+$title = "GRG | Liste des reservations ";
+VEHICULE::etat();
+
+$inspections = INSPECTION::findBy(["etat_id ="=>ETAT::ENCOURS]);
 ?>

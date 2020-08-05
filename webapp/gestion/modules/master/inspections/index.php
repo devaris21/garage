@@ -16,7 +16,7 @@
 
           <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2 class="text-uppercase gras">Les reservations en cours</h2>
+                <h2 class="text-uppercase">Liste des inspections</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="index.html">This is</a>
@@ -28,137 +28,84 @@
             </div>
             <div class="col-sm-8">
                 <div class="title-action">
-                    <a href="<?= $this->url("gestion", "")  ?>" class="btn btn-primary dim"><i class="fa fa-plus"></i> Nouvelle reservation</a>
+
                 </div>
             </div>
         </div>
 
         <div class="wrapper wrapper-content">
-            <div class="animated fadeInRightBig">
+            <div class=" animated fadeInRightBig">
 
-                <div class="ibox">
-                    <div class="ibox-title">
-                        <h5>Liste des reservations</h5>
-                    </div>
-                    <div class="ibox-content">
+             <div class="ibox">
+                 <div class="ibox-content">
 
-
-                        <div class="table-responsive">
-                            <table class="table shoping-cart-table">
-
-                                <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation">
+                  <div class="table-responsive">
+                    <table class="table table-hover issue-tracker">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Informations</th>
+                                <th>Véhicule</th>
+                                <th>Kms départ</th>
+                                <th>Durée</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($inspections as $key => $inspection) {
+                                $inspection->actualise(); 
+                                $vehicule = $inspection->vehicule;
+                                $tems = $vehicule->fourni("infovehicule");
+                                $info = $tems[0];
+                                $info->actualise(); ?>
+                                <tr>
+                                    <td>
+                                        <span class="label label-<?= $inspection->etat->class ?>"><?= $inspection->etat->name() ?></span>
+                                    </td>
+                                    <td >
+                                        <span>Inspection N°<?= $inspection->reference ?></span><br>
+                                        <small>enregistré <?= depuis($inspection->created)  ?> </small>
+                                    </td>
+                                    <td>
+                                      <div class="contact-box product-box">
+                                        <a class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->id)  ?>">
+                                            <div class="col-4">
+                                                <div class="text-center">
+                                                    <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image1) ?>">
+                                                </div>
                                             </div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                                <a href="#" class="text-navy">
-                                                    Desktop publishing software
-                                                </a>
-                                            </h3>
-                                            <p class="small">
-                                                It is a long established fact that a reader will be distracted by the readable
-                                                content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                            </p>
-                                            <dl class="small m-b-none">
-                                                <dt>Description lists</dt>
-                                                <dd>A description list is perfect for defining terms.</dd>
-                                            </dl>
-
-                                            <div class="m-t-sm">
-                                                <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                                |
-                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                            <div class="col-8">
+                                                <h4 style="margin: 0" class="text-uppercase"><strong><?= $vehicule->immatriculation ?></strong></h4>
+                                                <span>
+                                                    <?= $vehicule->marque->name ?> <?= $vehicule->modele ?> 
+                                                </span><br>
+                                                <small><?= $info->transmission->name() ?> -- <?= $info->energie->name() ?></small><br>
+                                                <small><?= $info->nbPlaces ?> places</small> // <span><?= $info->fonctionvehicule->name() ?></span>
                                             </div>
-                                        </td>
-
-                                        <td>
-                                            $180,00
-                                            <s class="small text-muted">$230,00</s>
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="1">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $180,00
-                                            </h4>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                    <div class="ibox-content">
-                        <div class="table-responsive">
-                            <table class="table shoping-cart-table">
-
-                                <tbody>
-                                    <tr>
-                                        <td width="90">
-                                            <div class="cart-product-imitation">
-                                            </div>
-                                        </td>
-                                        <td class="desc">
-                                            <h3>
-                                                <a href="#" class="text-navy">
-                                                    Text editor
-                                                </a>
-                                            </h3>
-                                            <p class="small">
-                                                There are many variations of passages of Lorem Ipsum available
-                                            </p>
-                                            <dl class="small m-b-none">
-                                                <dt>Description lists</dt>
-                                                <dd>List is perfect for defining terms.</dd>
-                                            </dl>
-
-                                            <div class="m-t-sm">
-                                                <a href="#" class="text-muted"><i class="fa fa-gift"></i> Add gift package</a>
-                                                |
-                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            $50,00
-                                            <s class="small text-muted">$63,00</s>
-                                        </td>
-                                        <td width="65">
-                                            <input type="text" class="form-control" placeholder="2">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                $100,00
-                                            </h4>
-                                        </td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                    
-                    <div class="ibox-content">
-
-                        <button class="btn btn-primary float-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
-                        <button class="btn btn-white"><i class="fa fa-arrow-left"></i> Continue shopping</button>
-
-                    </div>
-                </div>
-
+                                        </a>
+                                    </div>
+                                </td>
+                                <td><?= $inspection->kilometrage ?> Kms</td>
+                                <td class="text-right">
+                                    <button class="btn btn-white btn-xs" onclick="modification('inspection', <?= $inspection->id ?>)" data-toggle="modal" data-target="#modal-valider-inspection"><i class="fa fa-check text-green"></i> Terminer</button>
+                                    <button class="btn btn-white btn-xs" onclick="annulerInspection(<?= $inspection->id ?>)" data-toggle="modal" data-target="#modal-valider-inspection"><i class="fa fa-close text-danger"></i></button>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
+
         </div>
-
-        
-        <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
-        
-
     </div>
+</div>
+</div>
+
+
+<?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
+
+<?php include($this->rootPath("composants/assets/modals/modal-valider-inspection.php")); ?>
+
+</div>
 </div>
 
 
