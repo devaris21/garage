@@ -189,7 +189,7 @@ $chauffeurs = Home\CHAUFFEUR::getAll();
                                 </div>
                                 <div class="col-md-5">
                                     <label>Etat global du véhicule</label>
-                                    <textarea class="form-control" name="etat" rows="4">Rien à signeler</textarea>
+                                    <textarea class="form-control" name="etatduvehicule" rows="4">Rien à signeler</textarea>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Kilométrage actuel</label>

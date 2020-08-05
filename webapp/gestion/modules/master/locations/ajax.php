@@ -9,78 +9,6 @@ $data = new RESPONSE;
 extract($_POST);
 
 
-if ($action == "vehicule-preter") {
-	$data = new RESPONSE;
-	$datas = [];
-	if (getSession("vehicules-preter") != null) {
-		$datas = getSession("vehicules-preter");
-	}
-
-	if (!in_array($id, $datas)) {
-		$datas[] = $id;
-		$data->status = true;
-	}else{
-		foreach ($datas as $key => $value) {
-			if ($value == $id) {
-				unset($datas[$key]);
-			}
-		}
-		$data->status = false;
-	}
-	session("vehicules-preter", $datas);
-	$data->nb = count($datas);
-	echo json_encode($data);
-}
-
-
-
-if ($action == "vehicule-louer") {
-	$datas = [];
-	if (getSession("vehicules-louer") != null) {
-		$datas = getSession("vehicules-louer");
-	}
-	$vehicule = new VEHICULE;
-	$vehicule->time = uniqid();
-	$vehicule->hydrater($_POST);
-	$vehicule->comment .= " Ce véhicule est en location chez nous !";
-	$datas[] = $vehicule;
-	session("vehicules-louer", $datas);
-	affichage();
-}
-
-
-if ($action == "supVehicule") {
-	$datas = [];
-	if (getSession("vehicules-louer") != null) {
-		$datas = getSession("vehicules-louer");
-	}
-	foreach ($datas as $key => $value) {
-		if ($value->time == $id) {
-			unset($datas[$key]);
-		}
-	}
-	session("vehicules-louer", $datas);
-	affichage();
-}
-
-
-function affichage(){
-	if (getSession("vehicules-louer") != null) {
-		$rooter = new ROOTER;
-		foreach (getSession("vehicules-louer") as $key => $vehicule) { ?>
-			<div class="chat-user">
-				<img class="chat-avatar" src="<?= $rooter->stockage("images", "vehicules", "default.jpg")  ?>" alt="" >
-				<div class="chat-user-name">
-					<h4 class="mp0"><?= $vehicule->immatriculation ?></h4>
-					<h6 class="mp0"><?= $vehicule->modele ?> <i onclick="supVehicule('<?= $vehicule->time ?>')" class="fa fa-close text-red pull-right cursor"></i></h6>
-				</div>
-			</div>
-		<?php }
-	}
-}
-
-
-
 if ($action == "location") {
 	$data = new RESPONSE;
 	$location = new LOCATION;
@@ -144,7 +72,7 @@ if ($action == "listevehicules") {
 		$loca->actualise(); ?>
 		<div class="">
 			<div class="contact-box product-box">
-				<a class="row" href="<?= $rooter->url("gestionnaire", "master", "vehicule", $loca->vehicule->id) ?>">
+				<a class="row" href="<?= $rooter->url("gestion", "master", "vehicule", $loca->vehicule->id) ?>">
 					<div class="col-4">
 						<div class="text-center">
 							<img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $rooter->stockage("images", "vehicules", $loca->vehicule->image) ?>">
@@ -167,26 +95,13 @@ if ($action == "listevehicules") {
 
 
 if ($action == "approuver") {
-	$datas = GESTIONNAIRE::findBy(["id = "=>getSession("gestionnaire_connecte_id")]);
-	if (count($datas) > 0) {
-		$gestionnaire = $datas[0];
-		$gestionnaire->actualise();
-		if ($gestionnaire->checkPassword($password)) {
-			$datas = LOCATION::findBy(["id ="=>$id]);
-			if (count($datas) == 1) {
-				$location = $datas[0];
-				$data = $location->terminer();
-			}else{
-				$data->status = false;
-				$data->message = "Une erreur s'est produite lors de l'opération! Veuillez recommencer";
-			}
-		}else{
-			$data->status = false;
-			$data->message = "Votre mot de passe ne correspond pas !";
-		}
+	$datas = LOCATION::findBy(["id ="=>$id]);
+	if (count($datas) == 1) {
+		$location = $datas[0];
+		$data = $location->terminer();
 	}else{
 		$data->status = false;
-		$data->message = "Vous ne pouvez pas effectué cette opération !";
+		$data->message = "Une erreur s'est produite lors de l'opération! Veuillez recommencer";
 	}
 	echo json_encode($data);
 }
@@ -194,26 +109,13 @@ if ($action == "approuver") {
 
 
 if ($action == "annuler") {
-	$datas = GESTIONNAIRE::findBy(["id = "=>getSession("gestionnaire_connecte_id")]);
-	if (count($datas) > 0) {
-		$gestionnaire = $datas[0];
-		$gestionnaire->actualise();
-		if ($gestionnaire->checkPassword($password)) {
-			$datas = LOCATION::findBy(["id ="=>$id]);
-			if (count($datas) == 1) {
-				$location = $datas[0];
-				$data = $location->annuler();
-			}else{
-				$data->status = false;
-				$data->message = "Une erreur s'est produite lors de l'opération! Veuillez recommencer";
-			}
-		}else{
-			$data->status = false;
-			$data->message = "Votre mot de passe ne correspond pas !";
-		}
+	$datas = LOCATION::findBy(["id ="=>$id]);
+	if (count($datas) == 1) {
+		$location = $datas[0];
+		$data = $location->annuler();
 	}else{
 		$data->status = false;
-		$data->message = "Vous ne pouvez pas effectué cette opération !";
+		$data->message = "Une erreur s'est produite lors de l'opération! Veuillez recommencer";
 	}
 	echo json_encode($data);
 }

@@ -87,29 +87,23 @@
                             <table class="table table-location">
                                 <tbody>
                                     <?php foreach ($locations as $key => $location) {
-                                        $location->actualise() ?>
+                                        $location->actualise();
+                                        $vehicule = $location->vehicule;
+                                        $tems = $vehicule->fourni("infovehicule");
+                                        $info = $tems[0];
+                                        $info->actualise(); ?>
                                         <tr class=" <?= ($location->etat_id != Home\ETAT::ENCOURS)?'fini':'' ?> border-bottom">
-
-                                            <td class="border-right">                                                
-                                                <br>
-                                                <span class="label label-<?= $location->etat->class ?>"><?= $location->etat->name ?></span>
-                                            </td>
                                             <td class="text-left">
-                                                <h3><span class=""><u class="text-info">#<?= $location->reference ?></u> // <?= $location->typelocation->name ?></span></h3>
-                                                <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic sequi aspernatur iure, dolorum ipsam illo!</p>
+                                                <h3><span class=""><u class="text-info">#<?= $location->reference ?></u> // <span class="small text-<?= $location->etat->class ?>"><?= $location->etat->name ?></span></span></h3>
+                                                <p class=""><?= $location->lieu  ?></p>
+                                                <span><b>Etat du véhicule :</b> <?= $location->etatduvehicule ?></span><br>
+                                                <span><b>Kilometrage actuel :</b> <?= $location->kilometrage ?> kms</span>
                                                 <div class="m-t-sm">
-                                                    <a href="#" class="text-muted"><i class="fa fa-trash"></i> Du <?= datecourt($location->started) ?> au <?= datecourt($location->finished) ?></a>
+                                                    <a href="#" class="text-muted"><i class="fa fa-calendar"></i> Du <?= datecourt($location->started) ?> au <?= datecourt($location->finished) ?></a>
                                                 </div>
                                             </td>
                                             <td>
-                                                <?php if ($location->typelocation_id == Home\TYPELOCATION::DIRECT){ ?>
-                                                    <i class="fa fa-long-arrow-left fa-4x text-warning"></i>
-                                                <?php }elseif ($location->typelocation_id == Home\TYPELOCATION::DEVIS) { ?>
-                                                    <i class="fa fa-long-arrow-right fa-4x text-info"></i>
-                                                <?php } ?>
-                                            </td>
-                                            <td>
-                                                <a href="profile.html">
+                                                <a href="<?= $this->url("gestion", "master", "client", $location->client->id)  ?>">
                                                     <h3 class="m-b-xs"><strong><?= $location->client->name() ?></strong></h3>
                                                     <div class="font-bold"><?= $location->client->typeclient->name() ?></div>
                                                     <address class="">
@@ -120,57 +114,54 @@
                                             </td>
 
                                             <td>
-                                                <br>
-                                                <button onclick="voirVehicule('<?= $location->id ?>')" class="btn btn-rounded btn-outline btn-xs btn-info"><i class="fa fa-eye"></i> Voir les véhicules</button>
-                                            </td>
-                                            <td class="text-right">
-                                                <?php if ($location->etat_id == Home\ETAT::ENCOURS) { ?>
-                                                    <button onclick="modification('location', <?= $location->id ?>)" data-toggle="modal" data-target="#modal-<?= ($location->typelocation_id == 1)?'location2':'pret2' ?>" class="btn btn-outline btn-warning  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos de la location" class="fa fa-pencil"></i></button>
+                                              <div class="contact-box product-box">
+                                                <a class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->id)  ?>">
+                                                    <div class="col-4">
+                                                        <div class="text-center">
+                                                            <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image1) ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h4 style="margin: 0" class="text-uppercase"><strong><?= $vehicule->immatriculation ?></strong></h4>
+                                                        <span>
+                                                            <?= $vehicule->marque->name ?> <?= $vehicule->modele ?> 
+                                                        </span><br>
+                                                        <small><?= $info->transmission->name() ?> -- <?= $info->energie->name() ?></small><br>
+                                                        <small><?= $info->nbPlaces ?> places</small> // <span><?= $info->fonctionvehicule->name() ?></span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td class="text-right">
+                                            <?php if ($location->etat_id == Home\ETAT::ENCOURS) { ?>
+                                                <button onclick="modification('location', <?= $location->id ?>)" data-toggle="modal" data-target="#modal-<?= ($location->typelocation_id == 1)?'location2':'pret2' ?>" class="btn btn-outline btn-warning  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos de la location" class="fa fa-pencil"></i></button>
 
-                                                    <button onclick="modification('preteur', <?= $preteur->id ?>)" data-toggle="modal" data-target="#modal-preteur" class="btn btn-outline btn-primary  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos du bénéficiaire" class="fa fa-user"></i></button>
-                                                    <br>  
+                                                <button onclick="modification('preteur', <?= $location->client->id ?>)" data-toggle="modal" data-target="#modal-client" class="btn btn-outline btn-primary  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos du bénéficiaire" class="fa fa-user"></i></button>
+                                                <br>  
 
-                                                    <button onclick="terminerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Terminer la location" class="btn btn-outline btn-primary dim" type="button"><i class="fa fa-check"></i></button>
-                                                    <button onclick="annulerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Annuler l'location" class="btn btn-outline btn-danger  dim" type="button"><i class="fa fa-close"></i> </button>
-                                                <?php } ?>
+                                                <button onclick="terminerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Terminer la location" class="btn btn-outline btn-primary dim" type="button"><i class="fa fa-check"></i></button>
+                                                <button onclick="annulerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Annuler la location" class="btn btn-outline btn-danger  dim" type="button"><i class="fa fa-close"></i> </button>
+                                            <?php } ?>
 
-                                            </td>
-                                        </tr>
-                                                <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
             </div>
 
-
         </div>
     </div>
 
 
-    <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
+</div>
+</div>
 
-    <?php //include($this->rootPath("composants/assets/modals/modal-location.php")); ?> 
 
-
-    <div class="modal inmodal fade" id="modal-listevehicule">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Les véhicules</h4>
-                </div>
-                <div class="modal-body listevehicules">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
+<?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
 
 
 </div>

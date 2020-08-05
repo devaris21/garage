@@ -11,38 +11,42 @@ class INSPECTION extends TABLE
 
 	public $location_id;
 	public $vehicule_id;
-	public $dateInspection;
 	public $kilometrage;
+	public $kilometragefin;
 	public $carburant;
-	public $inspecteur_id;
-	public $etat_id = ETAT::PARTIEL;
+	public $remarques;
+	public $nomInspecteur;
+	public $datevalidation;
+	public $etat_id = ETAT::ENCOURS;
 
 
 	public function enregistre(){
 		$data = new RESPONSE;
-		if ($this->prixJournalier > 0 && $this->prixKilometreComplementaire >= 0) {
-			if ($this->kilometreJournalier > 0) {
+		$datas = LOCATION::findBy(["id ="=>$this->location_id]);
+		if (count($datas) == 1) {
+			$datas = VEHICULE::findBy(["id ="=>$this->vehicule_id]);
+			if (count($datas) == 1) {
 				$data = $this->save();
 			}else{
 				$data->status = false;
-				$data->status = "Veuillez renseigner le kilometrage journalier";
+				$data->message = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";
 			}
 		}else{
 			$data->status = false;
-			$data->status = "Les prix de ce tarif sont incorrects, veuillez recommencer !!!";
+			$data->message = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";
 		}
 		return $data;
 	}
 
 
 	public function sentenseCreate(){
-		return $this->sentense = "Ajout d'une nouveau tarif: $this->name dans les paramétrages";
+		return $this->sentense = "Ajout d'une nouveau inspection dans les paramétrages";
 	}
 	public function sentenseUpdate(){
-		return $this->sentense = "Modification des informations du tarif $this->id : $this->name ";
+		return $this->sentense = "Modification des informations du tarif $this->id : ";
 	}
 	public function sentenseDelete(){
-		return $this->sentense = "Suppression definitive du tarif $this->id : $this->name";
+		return $this->sentense = "Suppression definitive du tarif $this->id :";
 	}
 }
 ?>

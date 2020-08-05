@@ -28,6 +28,7 @@
             <?php 
             $locations__ = Home\LOCATION::encours();
             $reservations__ = Home\RESERVATION::encours();
+            $inspections__ = Home\INSPECTION::encours();
             // $ventecaves__ = Home\PROSPECTION::findBy(["etat_id ="=>Home\ETAT::ENCOURS, "typeprospection_id ="=>Home\TYPEPROSPECTION::VENTECAVE]);
             // $livraisons__ = Home\PROSPECTION::findBy(["etat_id ="=>Home\ETAT::ENCOURS, "typeprospection_id ="=>Home\TYPEPROSPECTION::LIVRAISON]);
             // $approvisionnements__ = Home\APPROVISIONNEMENT::encours();
@@ -58,7 +59,7 @@
                     <a href="<?= $this->url($this->section, "master", "reservations") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Reservations</span> <?php if (count($reservations__) > 0) { ?> <span class="label label-warning float-right"><?= count($reservations__) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="inspections">
-                    <a href="<?= $this->url($this->section, "master", "inspections") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">En inspections </span> <?php if (count($locations__) > 0) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                    <a href="<?= $this->url($this->section, "master", "inspections") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">En inspections </span> <?php if (count($inspections__) > 0) { ?> <span class="label label-warning float-right"><?= count($inspections__) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="planning">
                     <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-home"></i> <span class="nav-label">Planning </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
