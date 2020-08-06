@@ -1,3 +1,4 @@
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/fullcalendar/lib/main.js") ?>"></script>
     <!-- Mainly scripts -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/jquery-3.1.1.min.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/popper.min.js") ?>"></script>
@@ -7,6 +8,7 @@
 
     <!-- Moment js -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/moment/moment.js") ?>"></script>
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/fullcalendar/lib/locales-all.js") ?>"></script>
     <!-- Date range picker -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/daterangepicker/daterangepicker.js") ?>"></script>
 

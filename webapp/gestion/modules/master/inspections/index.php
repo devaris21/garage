@@ -46,8 +46,8 @@
                                 <th></th>
                                 <th>Informations</th>
                                 <th>Véhicule</th>
-                                <th>Kms départ</th>
-                                <th>Durée</th>
+                                <th>Kilometrage</th>
+                                <th>N. carburant</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,9 +61,10 @@
                                     <td>
                                         <span class="label label-<?= $inspection->etat->class ?>"><?= $inspection->etat->name() ?></span>
                                     </td>
-                                    <td >
+                                    <td style="width: 25%;">
                                         <span>Inspection N°<?= $inspection->reference ?></span><br>
                                         <small>enregistré <?= depuis($inspection->created)  ?> </small>
+                                        <p><?= tronquer($inspection->remarques, 50) ?></p>
                                     </td>
                                     <td>
                                       <div class="contact-box product-box">
@@ -84,7 +85,8 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td><?= $inspection->kilometrage ?> Kms</td>
+                                <td><?= $inspection->kilometrage ?> Kms -- <b><?= $inspection->kilometragefin ?></b> kms</td>
+                                <td><?= $inspection->niveaucarburant->name() ?> du reservoir</td>
                                 <td class="text-right">
                                     <button class="btn btn-white btn-xs" onclick="modification('inspection', <?= $inspection->id ?>)" data-toggle="modal" data-target="#modal-valider-inspection"><i class="fa fa-check text-green"></i> Terminer</button>
                                     <button class="btn btn-white btn-xs" onclick="annulerInspection(<?= $inspection->id ?>)" data-toggle="modal" data-target="#modal-valider-inspection"><i class="fa fa-close text-danger"></i></button>

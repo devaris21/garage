@@ -62,7 +62,7 @@
                     <a href="<?= $this->url($this->section, "master", "inspections") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">En inspections </span> <?php if (count($inspections__) > 0) { ?> <span class="label label-warning float-right"><?= count($inspections__) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="planning">
-                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-home"></i> <span class="nav-label">Planning </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-home"></i> <span class="nav-label">Le Planning </span> </a>
                 </li>
 
                 <li><hr class="mp3" style="background-color: transparent; "></li>

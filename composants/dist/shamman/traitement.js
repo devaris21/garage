@@ -84,7 +84,10 @@
                         }
                     });
 
-                    $("form[classname="+table+"] textarea[name=comment]").val(data.comment);
+                    $("form[classname="+table+"] textarea").each(function(){
+                        var name = $(this).attr("name");
+                        $(this).val(data[name]);
+                    })
                     $("form[classname="+table+"] .unmodified").hide();
                     Loader.stop();
                 }else{

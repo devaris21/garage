@@ -37,7 +37,7 @@ if ($action === "save-formShamman") {
 		}
 		if ($item->id != null) {
 			$item->sentenseUpdate();
-			$data = $item->save();
+			$data = $item->update();
 			$item->uploading($files);
 		}else{
 			$item->files = $files;

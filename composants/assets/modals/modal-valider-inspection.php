@@ -10,14 +10,14 @@
             <form method="POST" class="formShamman" classname="inspection">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-6">
                             <label>Nom de l'inspecteur  </label>
                             <div class="form-group">
-                                <input type="text" name="nomInspection" class="form-control" required>
+                                <input type="text" name="nomInspecteur" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <label>Kilometrage du retour (actuel) </label>
+                            <label>Kilometrage du retour </label>
                             <div class="form-group">
                                 <input type="number" name="kilometragefin" class="form-control" required>
                             </div>
@@ -33,20 +33,19 @@
                         <div class="col-sm-6">
                             <label>Remarques sur l'état général du véhicule</label>
                             <div class="form-group">
-                                <textarea class="form-control" name="comment" rows="5"></textarea>
+                                <textarea class="form-control" name="remarques" rows="5"></textarea>
                             </div>
                         </div>
                     </div>
-                </div><br>
-            </div><hr class="">
-            <div class="container">
-                <input type="hidden" name="id">
-                <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
-                <button class="btn btn-sm btn-primary dim pull-right"><i class="fa fa-check"></i> Faire la demande</button>
-            </div>
-            <br>
-        </form>
+                </div><hr class="">
+                <div class="container">
+                    <input type="hidden" name="id">
+                    <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Annuler</button>
+                    <button class="btn btn-sm btn-primary dim pull-right"><i class="fa fa-check"></i> Valider l'inspection</button>
+                </div>
+                <br>
+            </form>
+        </div>
     </div>
-</div>
 </div>
 

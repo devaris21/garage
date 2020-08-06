@@ -14,6 +14,7 @@
     <link href="<?= $this->rootPath("composants/dist/css/bootstrap.min.css") ?>" rel="stylesheet">
     <link href="<?= $this->rootPath("composants/dist/font-awesome/css/font-awesome.css") ?>" rel="stylesheet">
 
+    <link href="<?= $this->rootPath("composants/dist/js/plugins/fullcalendar/lib/main.css") ?>" rel="stylesheet">
 
     <!-- Text spinners style -->
     <link href="<?= $this->rootPath("composants/dist/css/plugins/textSpinners/spinners.css") ?>" rel="stylesheet">
@@ -25,6 +26,7 @@
     
     <link href="<?= $this->rootPath("composants/dist/css/plugins/toastr/toastr.min.css") ?>" rel="stylesheet">
     <link href="<?= $this->rootPath("composants/dist/css/plugins/steps/jquery.steps.css") ?>" rel="stylesheet">
+
 
     <link href="<?= $this->rootPath("composants/dist/css/plugins/iCheck/custom.css") ?>" rel="stylesheet">
     <link href="<?= $this->rootPath("composants/dist/css/plugins/chosen/bootstrap-chosen.css") ?>" rel="stylesheet">
