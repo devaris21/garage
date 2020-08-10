@@ -69,8 +69,8 @@
                                             <small><?= dateDiffe($reservation->started, $reservation->finished)  ?> jours</small>
                                         </td>
                                         <td class="text-right">
-                                            <button class="btn btn-white btn-xs" data-toggle="modal" data-target="#modal-critere-<?= $reservation->id  ?>"><i class="fa fa-file-text-o text-blue"></i> Afficher les details</button>
-                                            <button class="btn btn-white btn-xs"><i class="fa fa-check text-green"></i> Valider</button>
+                                            <button class="btn btn-white btn-xs" data-toggle="modal" data-target="#modal-critere-<?= $reservation->id  ?>"><i class="fa fa-file-text-o text-blue"></i> Voir details</button>
+                                            <button class="btn btn-white btn-xs"><i class="fa fa-check text-green"></i> Commencer</button>
                                             <button class="btn btn-white btn-xs"><i class="fa fa-close text-danger"></i></button>
                                         </td>
                                     </tr>

@@ -77,10 +77,6 @@ class ROOTER extends PATH
 
                 if ($mycompte->expired >= dateAjoute()) {
 
-                       //pour les etats recaps
-                    $datea = dateAjoute(-7);
-                    $dateb = dateAjoute(1);
-
 
                     if ($this->section == "gestion") {
                         $datas = EMPLOYE::findBy(["id = "=>getSession("employe_connecte_id")]);

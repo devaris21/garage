@@ -8,3 +8,7 @@
 .optionsbtn button{
 	margin-bottom: 2%;
 }
+
+.tab-content.loading-data .tab-pane {
+	display: block;
+}

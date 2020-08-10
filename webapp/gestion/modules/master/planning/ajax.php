@@ -25,7 +25,7 @@ if ($action == "changement") {
 	}
 
 	if ($data->status) {
-			$item->started = dateAjoute1(date("Y-m-d", strtotime($start)), -1);
+		$item->started = date("Y-m-d", strtotime($start));
 		$item->finished = dateAjoute1(date("Y-m-d", strtotime($end)), -1);
 		$item->sentense = "Changement de date pour la $type N°$item->reference";
 		$data = $item->save();

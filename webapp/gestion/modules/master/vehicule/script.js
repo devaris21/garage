@@ -1,9 +1,5 @@
 
-
 $(function(){
-
-
-
 
         /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -20,158 +16,6 @@ $(function(){
         	}, "html");
         }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//AFFECTATION
-
-creerCompte = function(id){
-	var url = "../../webapp/gestionnaire/modules/master/vehicule/ajax.php";
-	alerty.confirm("Voulez-vous vraiment un compte en tant que bénéficiaire de carplan pour ce utilisateur ?", {
-		title: "Creation de compte",
-		cancelLabel : "Non",
-		okLabel : "OUI, Créer le compte",
-	}, function(){
-		alerty.prompt("Entrez l'adresse email de ce bénéficiaire !", {
-			title: 'Adresse email !',
-			inputType : "email",
-			cancelLabel : "Annuler",
-			okLabel : "Valider"
-		}, function(email){
-			Loader.start();
-			$.post(url, {action:"creationCompte", id:id, email:email}, (data)=>{
-				if (data.status) {
-					Alerter.success('Compte créé !', data.message);
-				}else{
-					Alerter.error('Erreur !', data.message);
-				}
-			},"json");
-		})
-	})
-}
-
-
-terminerAffectation = function(id){
-	var url = "../../webapp/gestionnaire/modules/master/affectations/ajax.php";
-	alerty.confirm("Voulez-vous vraiment terminer cette affectation de véhicule ?", {
-		title: "Affectation terminée",
-		cancelLabel : "Non",
-		okLabel : "OUI, approuver",
-	}, function(){
-		alerty.prompt("Entrer votre mot de passe pour confirmer l'opération !", {
-			title: 'Récupération du mot de passe !',
-			inputType : "password",
-			cancelLabel : "Annuler",
-			okLabel : "Mot de passe"
-		}, function(password){
-			Loader.start();
-			$.post(url, {action:"approuver", id:id, password:password}, (data)=>{
-				if (data.status) {
-					window.location.reload();
-				}else{
-					Alerter.error('Erreur !', data.message);
-				}
-			},"json");
-		})
-	})
-}
-
-
-annulerAffectation = function(id){
-	var url = "../../webapp/gestionnaire/modules/master/affectations/ajax.php";
-	alerty.confirm("Voulez-vous vraiment refuser cette affectation de véhicule ?", {
-		title: "Annulation de l'affectation",
-		cancelLabel : "Non",
-		okLabel : "OUI, annuler",
-	}, function(){
-		alerty.prompt("Entrer votre mot de passe pour confirmer l'opération !", {
-			title: 'Récupération du mot de passe !',
-			inputType : "password",
-			cancelLabel : "Annuler",
-			okLabel : "Mot de passe"
-		}, function(password){
-			Loader.start();
-			$.post(url, {action:"annuler", id:id, password:password}, (data)=>{
-				if (data.status) {
-					window.location.reload()
-				}else{
-					Alerter.error('Erreur !', data.message);
-				}
-			},"json");
-		})
-	})
-}
-
-
-
-renouveler = function(id){
-	var url = "../../composants/dist/shamman/traitement.php";
-	alerty.confirm("Voulez-vous vraiment renouveler cette affectation de véhicule ?", {
-		title: "Renouvelement d'affectation",
-		cancelLabel : "Non",
-		okLabel : "OUI, renouveler",
-	}, function(){
-		alerty.prompt("Entrer votre mot de passe pour confirmer l'opération !", {
-			title: 'Récupération du mot de passe !',
-			inputType : "password",
-			cancelLabel : "Annuler",
-			okLabel : "Mot de passe"
-		}, function(password){
-			Loader.start();
-			$.post(url, {action:"verifierPassword", password:password}, (data)=>{
-				if (data.status) {
-					session('affectation_id', id);
-					modal("#modal-renouvelement");
-					Loader.stop();
-				}else{
-					Alerter.error('Erreur !', data.message);
-				}
-			},"json");
-		})
-	})
-}
-
-
-$("form#formRenouvelement").submit( function(event) {
-	Loader.start()
-	var url = "../../webapp/gestionnaire/modules/master/affectations/ajax.php";
-	var formdata = new FormData($(this)[0]);
-	formdata.append('action', "renouveler");
-	$.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
-		if (data.status) {
-			window.location.reload();
-		}else{
-			Alerter.error('Erreur !', data.message);
-		}
-	}, 'json')
-	return false;
-});
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// PRETEUR
-
-$("form#formPret").submit(function(event){
-	alerty.confirm("Voulez-vous vraiment valider ce prêt de véhicule ?", {
-		title: "Pret du véhicule",
-		cancelLabel : "Non",
-		okLabel : "OUI,  valider",
-	}, function(){
-		var url = "../../webapp/gestionnaire/modules/master/vehicule/ajax.php";
-		var formData = new FormData($("form#formPret")[0]);
-		formData.append('action', 'location');
-		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
-			if (data.status) {
-				location.reload();
-			}else{
-				iziToast.error({
-					title: 'Erreur !',
-					message: data.message,
-				});
-			}
-		}, 'json');
-	})
-	return false;
-});
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -229,51 +73,6 @@ declassement = function(i){
 		})
 	})
 }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /// 
-
-
-	//ACCESSOIRE ET EQUIPEMENT
-	compte_carplane = function(id){
-		var url = "../../webapp/gestionnaire/modules/master/vehicule/ajax.php";
-		alerty.confirm("Voulez-vous vraiment créer un compte dédié pour ce bénéficiaire ?", {
-			title: "Creation de compte",
-			cancelLabel : "Non",
-			okLabel : "OUI, créer le compte",
-		}, function(){
-			Loader.start()
-			$.post(url, {action:"compte_carplane", id:id}, (data)=>{
-				if (data.status) {
-					window.location.reload()
-				}else{
-					Alerter.error('Erreur !', data.message);
-				}
-			},"json");
-		})
-	}
-
-
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-	$("form#formImage").submit(function(){
-		Loader.start()
-		var url = "../../webapp/gestionnaire/modules/master/vehicule/ajax.php";
-		var formData = new FormData($(this)[0]);
-		formData.append('action', 'image');
-		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
-			if (data.status) {
-				location.reload();
-			}else{
-				Alerter.error('Erreur !', data.message);
-			}
-		}, 'json');
-		return false;
-	})
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ENTRETIEN DU VEHICULE
@@ -409,4 +208,6 @@ $("form#formAffectation").submit(function(){
 	// 	"searching": true,
 	// })
 	
+
+	$(".loading-data").removeClass("loading-data");
 })

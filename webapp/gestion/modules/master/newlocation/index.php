@@ -106,7 +106,7 @@
                                             <div class="form-group">
                                                 <label class="col-form-label" for="date_added">Date de départ</label>
                                                 <div class="input-group date">
-                                                    <input type="date" class="form-control" name="started" value="<?= dateAjoute()  ?>">
+                                                    <input type="date" class="form-control" name="started" value="<?= $date1 ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -114,7 +114,7 @@
                                             <div class="form-group">
                                                 <label class="col-form-label" for="date_modified">Date d'arrivée</label>
                                                 <div class="input-group date">
-                                                    <input type="date" class="form-control" name="finished" value="<?= dateAjoute(2)  ?>">
+                                                    <input type="date" class="form-control" name="finished" value="<?= $date2 ?>">
                                                 </div>
                                             </div>
                                         </div>

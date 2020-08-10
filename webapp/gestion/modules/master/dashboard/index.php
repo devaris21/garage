@@ -16,8 +16,8 @@
 
 
             <div class="wrapper wrapper-content">
-                <div class="border-bottom white-bg dashboard-header">
-                    <div class="row">
+                <div class="border-bottom ">
+                    <div class="row white-bg">
                         <div class="col-md-3">
                             <h2>Welcome Amelia</h2>
                             <small>You have 42 messages and 6 notifications.</small>
@@ -63,28 +63,22 @@
                                     <span class="h5 font-bold block">22</span>
                                     <small class="text-muted block">En mission</small>
                                 </div>
-
+                                <div class="col text-danger">
+                                    <span class="h5 font-bold block">22</span>
+                                    <small class="text-muted block">En mission</small>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="statistic-box">
-                                <div class="text-center">
-                                    <canvas id="doughnutChart2" style="width: 100%"></canvas><br>
-                                    <h5 >Repartition du parc auto</h5>
-                                </div>
-                                <div class="m-t">
-                                    <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
-                                </div>
-
+                            <div class="ibox">
+                               <div class="ibox-content">
+                                <div id="calendar"></div>
                             </div>
                         </div>
-                    </div><hr>
-                    <div class="">
-                        <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-success dim"><i class="fa fa-wrench"></i> Nouvelle location</button>
-
-                        <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-danger dim pull-right"><i class="fa fa-wrench"></i> Nouvelle reservation</button>
                     </div>
+
                 </div>
+
 
             </div>
         </div>
@@ -93,7 +87,6 @@
         <?php include($this->rootPath("webapp/gestion/elements/templates/script.php")); ?>
 
         <?php //include($this->rootPath("composants/assets/modals/modal-newlocation.php")); ?>  
-        <?php include($this->rootPath("composants/assets/modals/modal-newdevis.php")); ?>  
 
 
     </body>
@@ -161,25 +154,42 @@
                 );
 
 
-            var doughnutData = {
-                labels: ["App","Software","Laptop" ],
-                datasets: [{
-                    data: [70,27,85],
-                    backgroundColor: ["#a3e1d4","#dedede","#9CC3DA"]
-                }]
-            } ;
-
-
-            var doughnutOptions = {
-                responsive: false,
-                legend: {
-                    display: false
-                }
-            };
-
-
-            var ctx4 = document.getElementById("doughnutChart2").getContext("2d");
-            new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
-
         });
+    </script>
+
+
+
+    <script type="text/javascript">
+        var events =  [
+        <?php foreach ($locations__ as $key => $item) {
+            $item->actualise(); ?>
+            {
+                title: 'Location de <?= $item->client->name(); ?> // <?= $item->vehicule->immatriculation; ?>',
+                start: "<?= $item->started; ?>",
+                end: "<?= dateAjoute1($item->finished, +1) ?>",
+                className: "bg-green",
+                borderColor: "white",
+                extendedProps: {
+                    type: 'location',
+                    id: "<?= $item->id; ?>"
+                }
+            },
+        <?php } ?>
+
+        <?php foreach ($reservations__ as $key => $item) {
+            $item->actualise(); ?>
+            {
+                title: 'Reservation de <?= $item->client->name(); ?> ',
+                start: "<?= $item->started ?>",
+                end: "<?= dateAjoute1($item->finished, +1) ?>",
+                className: "bg-danger",
+                borderColor: "white",
+                extendedProps: {
+                    type: 'reservation',
+                    id: "<?= $item->id; ?>"
+                }
+            },
+        <?php } ?>
+
+        ]
     </script>

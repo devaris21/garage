@@ -17,7 +17,7 @@
           <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-md-7">
                 <h2>Liste des clients</h2>
-                 <button data-toggle="modal" data-target="#modal-client" class="btn btn-primary dim"><i class="fa fa-plus"></i> Ajouter un client</button>
+                <button data-toggle="modal" data-target="#modal-client" class="btn btn-primary dim"><i class="fa fa-plus"></i> Ajouter un client</button>
             </div>
             <div class="col-md-5">
                 <div class="row">
@@ -46,34 +46,35 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
             <?php if (count($clients) > 0) { ?>
-           <div class="row">
-            <?php foreach ($clients as $key => $client) { ?>
-                <div class="col-lg-3 clients">
-                    <div class="contact-box ">
-                        <a href="<?= $this->url("gestion", "master", "client", $client->id) ?>">
-                            <h3><strong><?= $client->name() ?></strong></h3>
-                            <address>
-                                <i class="fa fa-phone"></i>&nbsp; <?= $client->contact ?><br>
-                                <i class="fa fa-map-marker"></i>&nbsp; <?= $client->adresse ?><br>
-                                <i class="fa fa-envelope"></i>&nbsp; <?= $client->email ?>
-                            </address>
-                        </a>
+             <div class="row">
+                <?php foreach ($clients as $key => $client) {
+                    $client->actualise(); ?>
+                    <div class="col-lg-3 clients">
+                        <div class="contact-box ">
+                            <a href="<?= $this->url("gestion", "master", "client", $client->id) ?>">
+                                <h4><strong><?= $client->name() ?></strong> <span class="text-muted small pull-right"><?= $client->typeclient->name() ?></span></h4>
+                                <address style=" font-size: 12px;">
+                                    <i class="fa fa-phone"></i>&nbsp; <?= $client->contact ?><br>
+                                    <i class="fa fa-map-marker"></i>&nbsp; <?= $client->adresse ?><br>
+                                    <i class="fa fa-envelope"></i>&nbsp; <?= $client->email ?>
+                                </address>
+                            </a>
+                        </div>
                     </div>
-                </div>
-            <?php } ?>
-        </div>
-    <?php }else{ ?>
-        <div class="text-center">
-            <h1 style="margin-top: 10%;" class="text-center text-muted"><i class="fa fa-folder-open-o fa-3x"></i> <br> Vous n'avez pas encore inscrit de client !</h1>
-            <button data-toggle="modal" data-target="#modal-client" class="btn btn-primary dim"><i class="fa fa-plus"></i> Ajouter un client</button>
-        </div>
-    <?php } ?>
+                <?php } ?>
+            </div>
+        <?php }else{ ?>
+            <div class="text-center">
+                <h1 style="margin-top: 10%;" class="text-center text-muted"><i class="fa fa-folder-open-o fa-3x"></i> <br> Vous n'avez pas encore inscrit de client !</h1>
+                <button data-toggle="modal" data-target="#modal-client" class="btn btn-primary dim"><i class="fa fa-plus"></i> Ajouter un client</button>
+            </div>
+        <?php } ?>
 
-</div>
+    </div>
 
 
-<?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
- <?php include($this->rootPath("composants/assets/modals/modal-client.php")); ?>  
+    <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
+    <?php include($this->rootPath("composants/assets/modals/modal-client.php")); ?>  
 
 </div>
 </div>

@@ -12,12 +12,17 @@ if ($this->id != null && intval($this->id) > 0) {
 			$i = $datas[0];
 			$i->actualise();
 			$levehicule->infovehicule = $i;
-
-			$equipements = $i->fourni("equipement_infovehicule");
-			$accessoires = $i->fourni("accessoire_infovehicule");
 		}
 
+		$locations = $levehicule->fourni("location");
 
+
+		$location = null;
+		$encours = $levehicule->fourni("location", ["etat_id ="=>ETAT::ENCOURS]);
+		if (count($encours) > 0) {
+			$location = $encours[0];
+			$location->actualise();
+		}
 		
 		// $historiques = $levehicule->historiques();
 		// $historiques = array_merge($datas, $datas5, $datas6, $historiques);

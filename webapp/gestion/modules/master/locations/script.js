@@ -81,33 +81,10 @@ $(function(){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-dsqsd = function(id){
-	var formData = new FormData();
-	alerty.confirm("Voulez-vous vraiment terminer cette location ?", {
-		title: "Attention",
-		cancelLabel : "Non",
-		okLabel : "OUI, approuver",
-	}, function(){
-		Loader.start();
-		var url = "../../webapp/gestion/modules/master/locations/ajax.php";
-		formData.append('id', id);
-		formData.append('action', 'approuver');
-		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
-			if (data.status) {
-				window.location.reload();
-			}else{
-				Alerter.error('Erreur !', data.message);
-			}
-		},"json");
-	});
-	return false;
-};
-
-
 terminerLocation = function(id){
 	var url = "../../webapp/gestion/modules/master/locations/ajax.php";
-	alerty.confirm("Voulez-vous vraiment terminer cette location/Pret de véhicule ?", {
-		title: "Location/Pret terminée",
+	alerty.confirm("Voulez-vous vraiment terminer cette location de véhicule ?", {
+		title: "Location terminée",
 		cancelLabel : "Non",
 		okLabel : "OUI, approuver",
 	}, function(){
@@ -125,8 +102,8 @@ terminerLocation = function(id){
 
 annulerLocation = function(id){
 	var url = "../../webapp/gestion/modules/master/locations/ajax.php";
-	alerty.confirm("Voulez-vous vraiment annuler cette location/Pret de véhicule ?", {
-		title: "Annulation de la declaration",
+	alerty.confirm("Voulez-vous vraiment annuler cette location de véhicule ?", {
+		title: "Annulation de la location",
 		cancelLabel : "Non",
 		okLabel : "OUI, annuler",
 	}, function(){

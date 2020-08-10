@@ -13,6 +13,7 @@ class ETAT extends TABLE
 		const ENCOURS = 2;
 		const PARTIEL = 3;
 		const VALIDEE = 4;
+		const EXPIREE = 5;
 
 		public $name;
 		public $class;

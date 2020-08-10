@@ -13,6 +13,39 @@ $item->setProtected(1);
 $item->save();
 
 
+
+$item = new ETATVEHICULE();
+$item->name = "Disponible";
+$item->class = "success";
+$item->setProtected(1);
+$item->save();
+
+$item = new ETATVEHICULE();
+$item->name = "En location";
+$item->class = "warning";
+$item->setProtected(1);
+$item->save();
+
+$item = new ETATVEHICULE();
+$item->name = "En reparation";
+$item->class = "info";
+$item->setProtected(1);
+$item->save();
+
+$item = new ETATVEHICULE();
+$item->name = "Sous inspection";
+$item->class = "success";
+$item->setProtected(1);
+$item->save();
+
+$item = new ETATVEHICULE();
+$item->name = "Indisponible";
+$item->class = "danger";
+$item->setProtected(1);
+$item->save();
+
+
+
 $datas = ["Voiture", "Camion", "Moto"];
 foreach ($datas as $key => $value) {
 	$item = new TYPEVEHICULE();
@@ -242,7 +275,11 @@ $item->class = "success";
 $item->setProtected(1);
 $item->save();
 
-
+$item = new ETAT();
+$item->name = "Expiré";
+$item->class = "success";
+$item->setProtected(1);
+$item->save();
 
 // $item = new CATEGORIEOPERATION();
 // $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;

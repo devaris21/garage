@@ -29,11 +29,6 @@
             $locations__ = Home\LOCATION::encours();
             $reservations__ = Home\RESERVATION::encours();
             $inspections__ = Home\INSPECTION::encours();
-            // $ventecaves__ = Home\PROSPECTION::findBy(["etat_id ="=>Home\ETAT::ENCOURS, "typeprospection_id ="=>Home\TYPEPROSPECTION::VENTECAVE]);
-            // $livraisons__ = Home\PROSPECTION::findBy(["etat_id ="=>Home\ETAT::ENCOURS, "typeprospection_id ="=>Home\TYPEPROSPECTION::LIVRAISON]);
-            // $approvisionnements__ = Home\APPROVISIONNEMENT::encours();
-            // $datas1__ = array_merge(Home\PANNE::encours(), Home\DEMANDEENTRETIEN::encours(), Home\ENTRETIENVEHICULE::encours(), Home\ENTRETIENMACHINE::encours());
-
             ?>
 
             <ul class="nav metismenu" id="side-menu">
@@ -66,9 +61,6 @@
                 </li>
 
                 <li><hr class="mp3" style="background-color: transparent; "></li>
-                <li class="" id="ventepieces">
-                    <a href="<?= $this->url($this->section, "master", "ventepieces") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Rapport du jour</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
-                </li>
                 <li class="" id="entrepot">
                     <a href="<?= $this->url($this->section, "master", "entrepot") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Maintenance </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
                 </li>
