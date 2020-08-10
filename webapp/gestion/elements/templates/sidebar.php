@@ -41,8 +41,8 @@
                 <li class="" id="parcauto">
                     <a href="<?= $this->url($this->section, "master", "parcauto") ?>"><i class="fa fa-car"></i> <span class="nav-label">Parc auto</span> </a>
                 </li>
-                <li class="" id="rechercher">
-                    <a href="<?= $this->url($this->section, "master", "rechercher") ?>"><i class="fa fa-search"></i> <span class="nav-label">Rechercher</span></a>
+                <li class="" id="planning">
+                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-home"></i> <span class="nav-label">Le Planning </span> </a>
                 </li>
                 <li><hr class="mp3" style="background-color: transparent; "></li>
 
@@ -54,24 +54,21 @@
                     <a href="<?= $this->url($this->section, "master", "reservations") ?>"><i class="fa fa-archive"></i> <span class="nav-label">Reservations</span> <?php if (count($reservations__) > 0) { ?> <span class="label label-warning float-right"><?= count($reservations__) ?></span> <?php } ?></a>
                 </li>
                 <li class="" id="inspections">
-                    <a href="<?= $this->url($this->section, "master", "inspections") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">En inspections </span> <?php if (count($inspections__) > 0) { ?> <span class="label label-warning float-right"><?= count($inspections__) ?></span> <?php } ?></a>
-                </li>
-                <li class="" id="planning">
-                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-home"></i> <span class="nav-label">Le Planning </span> </a>
+                    <a href="<?= $this->url($this->section, "master", "inspections") ?>"><i class="fa fa-wrench"></i> <span class="nav-label">En inspections </span> <?php if (count($inspections__) > 0) { ?> <span class="label label-warning float-right"><?= count($inspections__) ?></span> <?php } ?></a>
                 </li>
 
                 <li><hr class="mp3" style="background-color: transparent; "></li>
-                <li class="" id="entrepot">
-                    <a href="<?= $this->url($this->section, "master", "entrepot") ?>"><i class="fa fa-handshake-o"></i> <span class="nav-label">Maintenance </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
+                <li class="" id="devis">
+                    <a href="<?= $this->url($this->section, "master", "devis") ?>"><i class="fa fa-file-text-o"></i> <span class="nav-label">Devis / Proforma</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= count([]) ?></span> <?php } ?></a>
+                </li>
+                <li class="" id="maintenances">
+                    <a href="<?= $this->url($this->section, "master", "maintenances") ?>"><i class="fa fa-gears"></i> <span class="nav-label">Maintenance </span> <?php if (count($inspections__) > 0) { ?> <span class="label label-warning float-right"><?= count($inspections__) ?></span> <?php } ?></a>
                 </li>
 
 
                 <li><hr class="mp3" style="background-color: transparent; "></li>
                 <li class="" id="expertise">
                     <a href="<?= $this->url($this->section, "master", "expertise") ?>"><i class="fa fa-home"></i> <span class="nav-label">Les tarifs </span> <?php if (true) { ?> <span class="label label-warning float-right"><?= 0 ?></span> <?php } ?></a>
-                </li>
-                <li class="" id="devis">
-                    <a href="<?= $this->url($this->section, "master", "devis") ?>"><i class="fa fa-truck"></i> <span class="nav-label">Devis / Proforma</span> <?php if (true) { ?> <span class="label label-warning float-right"><?= count([]) ?></span> <?php } ?></a>
                 </li>
                 <?php if ($employe->isAutoriser("master")) { ?>
 

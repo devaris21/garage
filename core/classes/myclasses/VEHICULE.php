@@ -14,6 +14,7 @@ class VEHICULE extends TABLE
 	public $marque_id;
 	public $modele;
 	public $couleur;
+	public $downgraded = TABLE::NON;
 	public $etatvehicule_id = ETATVEHICULE::LIBRE;
 
 	public $image1;
@@ -80,9 +81,15 @@ class VEHICULE extends TABLE
 	}
 
 
-	public static function libres(){
-
+	public static function parcauto(){
+		return static::findBy(["downgraded !="=>TABLE::OUI]);
 	}
+
+
+	public static function enEtatDe(int $etat){
+		return static::findBy(["etatvehicule_id ="=>$etat]);
+	}
+
 
 
 

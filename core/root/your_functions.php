@@ -152,11 +152,11 @@ function initial($mot){
 }
 
 
-function tronquer($texte, $nb){
+function tronquer($texte, $nb, $sep = "..."){
 	if (strlen($texte) <= $nb) {
 		return $texte;
 	}else{
-		return substr($texte, 0, $nb)."...";
+		return substr($texte, 0, $nb).$sep;
 	}
 }
 
@@ -355,6 +355,17 @@ function datelong3($timestamp)
 	return $date1;
 }
 
+#fonction pour afficher la date dans son court format
+function jour($timestamp)
+{
+	if ($timestamp == '' OR $timestamp==null) {
+		$date1 = '...';
+	}else{
+		$tableau_jour = ["", "Lundi", "Mardi", "Mercredi", "jeudi", "Vendredi", "Samedi", "Dimanche"];
+		$date1 = $tableau_jour[date("N", strtotime($timestamp))];
+	}
+	return $date1;
+}
 
 #fonction pour afficher l'heure actuelle
 function heure()

@@ -32,6 +32,7 @@ class LOCATION extends TABLE
 		if (count($datas) == 1) {
 			$datas = VEHICULE::findBy(["id ="=>$this->vehicule_id]);
 			if (count($datas) == 1) {
+				$vehicule = $datas[0];
 				if ($vehicule->etatvehicule_id == ETATVEHICULE::LIBRE) {
 					if ($this->finished > $this->started && $this->finished > dateAjoute()) {
 						$this->employe_id = getSession("employe_connecte_id");

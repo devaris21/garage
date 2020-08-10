@@ -34,8 +34,8 @@
         </div>
 
         <div class="wrapper wrapper-content">
-            <div class="row animated fadeInDown d-flex justify-content-center">
-                <div class="col-lg-11">
+            <div class="row animated fadeInDown">
+                <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
                             <h5>Toues les locations & reservations </h5>
@@ -57,17 +57,82 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="ibox-content">
-                            <div id="calendar"></div>
+                        <div class="ibox-content scroll" style="overflow-x: scroll;">
+                            <table class="table table-bordered">
+                                <?php 
+                                $ladate = dateAjoute(-10);
+                                $last = date("W", strtotime($ladate));
+                                $lt = date("W", strtotime($ladate));
+                                ?>
+                                <thead>
+                                    <tr>
+                                        <th rowspan="3"></th>
+                                        <?php $ladate = dateAjoute(-10); 
+                                        for ($i=0; $i < 100 ; $i++) { 
+                                            if ((date("m", strtotime($ladate)) != date("m", strtotime(dateAjoute1($ladate, -1))) || $i == 0)) {
+                                                $nb = ($i == 0)? (date("t", strtotime($ladate)) - date("d", strtotime($ladate))) : date("t", strtotime($ladate)); ?>
+                                                <th class="small text-center gras text-uppercase" colspan="<?= $nb  ?>"><?= datecourt4($ladate) ?></th>
+                                            <?php }
+                                            $ladate = dateAjoute1($ladate, 1);
+                                        } ?>
+                                    </tr>
+                                    <tr>
+                                        <?php $ladate = dateAjoute(-10); 
+                                        for ($i=0; $i < 100 ; $i++) { 
+                                            if ((date("W", strtotime($ladate)) != date("W", strtotime(dateAjoute1($ladate, -1))) || $i == 0)) {
+                                                $nb = ($i == 0)?7 - date("w", strtotime($ladate)) : 7; ?>
+                                                <th class="small text-center gras" colspan="<?= $nb  ?>">Semaine <?= date("W", strtotime($ladate))  ?></th>
+                                            <?php }
+                                            $ladate = dateAjoute1($ladate, 1);
+                                        } ?>
+                                    </tr>
+                                    <tr>
+                                        <?php $ladate = dateAjoute(-10);
+                                        for ($i=0; $i < 100 ; $i++) { 
+                                            $ladate = dateAjoute1($ladate, 1); ?>
+                                            <th class="small text-center" ><span class="d-block" style="width: 40px"><?= ucfirst(tronquer(jour($ladate), 3, "")) ?> <?= date("d", strtotime($ladate)) ?></span></th>
+                                        <?php } ?>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($vehicules as $key => $vehicule) {
+                                        $vehicule->actualise();
+                                        $tems = $vehicule->fourni("infovehicule");
+                                        $info = $tems[0];
+                                        $info->actualise();
+                                        $locations = $vehicule->fourni("location"); ?>
+                                        <tr data-id="<?= $vehicule->id ?>">
+                                            <td >
+                                                <a style="width: 300px" class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->id)  ?>">
+                                                    <div class="col-3">
+                                                        <div class="text-center">
+                                                            <img alt="image" style="height: 40px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image1) ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <h4 style="margin: 0" class="text-uppercase"><strong><?= $vehicule->immatriculation ?></strong></h4>
+                                                        <span><?= $vehicule->marque->name ?> <?= $vehicule->modele ?></span>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <?php $ladate = dateAjoute(-10);
+                                            for ($i=0; $i < 100 ; $i++) { 
+                                                $ladate = dateAjoute1($ladate, 1); ?>
+                                                <td id="<?= $ladate ?>" class="mp0 grid"></td>
+                                            <?php  } ?>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        
+
         <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
-        
+
         <?php foreach ($reservations__ as $key => $reservation) { 
             $cris = $reservation->fourni("critere");
             if (count($cris) > 0) {
@@ -78,7 +143,7 @@
 
 
         <?php include($this->rootPath("webapp/gestion/elements/templates/footer.php")); ?>
-        
+
         <?php foreach ($locations__ as $key => $location) {
             $location->actualise(); 
             if (count($cris) > 0) {
@@ -97,7 +162,6 @@
 <script type="text/javascript" src="<?= $this->relativePath("../reservations/script.js")  ?>"></script>
 
 
-
 <script type="text/javascript">
     var events =  [
     <?php foreach ($locations__ as $key => $item) {
@@ -108,30 +172,46 @@
             end: "<?= dateAjoute1($item->finished, +1) ?>",
             className: "bg-green",
             borderColor: "white",
-            extendedProps: {
-                type: 'location',
-                id: "<?= $item->id; ?>"
-            }
+            type: 'location',
+            id: "<?= $item->vehicule->id; ?>"
         },
     <?php } ?>
 
-    <?php foreach ($reservations__ as $key => $item) {
-        $item->actualise(); ?>
-        {
-            title: 'Reservation de <?= $item->client->name(); ?> ',
-            start: "<?= $item->started ?>",
-            end: "<?= dateAjoute1($item->finished, +1) ?>",
-            className: "bg-danger",
-            borderColor: "white",
-            extendedProps: {
-                type: 'reservation',
-                id: "<?= $item->id; ?>"
-            }
-        },
-    <?php } ?>
 
-    ]
+    ];
+
+    events.forEach(element => {
+        $("tr[data-id="+element.id+"] td.grid").each(function(){
+            var x = new Date(element.start);
+            var y = new Date(element.end);
+            var length = Math.floor((y-x)/86400000)+1;
+            console.log(length);
+            var date = new Date($(this).attr("id"));
+            if ((date >= x) && (date <= y)) {
+                $(this).append("<div class='element bg-danger'>"+element.title+"</div>");
+                for (var i = 1; i < length; i++) {
+                    $(this).next().remove();
+                }
+                $(this).prop("colspan", length)
+                
+            }
+        })
+    })
 </script>
+
+<style type="text/css">
+    .element{
+        display: inline-block;
+        height: 20px;
+        width: 100%;
+        border-radius: 10px;
+        margin-top: 3%;
+        cursor: pointer;
+        font-size: 11px;
+        padding-left: 6px;
+    }
+</style>
+
 </body>
 
 </html>
