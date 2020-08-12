@@ -18,39 +18,15 @@
             <div class="">
                 <div class="ibox-content">
                     <div class="row ">
-                        <div class="col-md border-right">
+                        <div class="col-md">
                             <h4 class="gras text-uppercase">Effectif du parc auto</h4>
                             <h2 class="gras"><?= start0(count($vehicules)) ?></h2>
                         </div>
 
-                        <div class="col-md border-right">
-                            <h6 class="text-uppercase text-center cursor"> TYPES DE VEHICULES</h6>
-                            <select class="form-control select2" name="fonctionvehicule_id" style="width: 100%">
-                                <option value="0">Tous les véhicules</option>
-                                <?php foreach (Home\TYPEVEHICULE::getAll() as $key => $item) { ?>
-                                    <option value="<?= $item->id ?>"><?= $item->name() ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
-                        <div class="col-md border-right">
-                            <h6 class="text-uppercase text-center cursor"> CATEGORIES DE VEHICULES</h6>
-                            <select class="form-control select2" name="fonctionvehicule_id" style="width: 100%">
-                                <option value="0">Tous les véhicules</option>
-                                <?php foreach (Home\FONCTIONVEHICULE::getAll() as $key => $item) { ?>
-                                    <option value="<?= $item->id ?>"><?= $item->name() ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
                         <div class="col-md">
-                            <h6 class="text-uppercase text-center cursor"> DISPONIBILITE DES VEHICULES</h6>
-                            <select class="form-control select2" name="fonctionvehicule_id" style="width: 100%">
-                                <option value="0">Tous les véhicules</option>
-                                <?php foreach (Home\ETATVEHICULE::getAll() as $key => $item) { ?>
-                                    <option value="<?= $item->id ?>"><?= $item->name() ?></option>
-                                <?php } ?>
-                            </select>
+                            <div class="title-action">
+                                <button class="btn btn-primary dim" data-toggle="modal" data-target="#modal-vehicule"><i class="fa fa-plus"></i> Ajouter nouveau véhicule</button>
+                            </div>
                         </div>
                     </div>
                 </div><br>
@@ -65,7 +41,7 @@
                                         <a class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->id) ?>">
                                             <div class="col-4">
                                                 <div class="text-center">
-                                                    <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image1) ?>">
+                                                    <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image) ?>">
                                                 </div>
                                             </div>
                                             <div class="col-8">
@@ -75,6 +51,7 @@
                                                     <?= $vehicule->modele ?> 
                                                 </span>
                                                 <span><?= $vehicule->infovehicule->fonctionvehicule->name() ?></span>
+                                                <small class="label small label-<?= $vehicule->etatvehicule->class; ?> float-right mp5"><?= $vehicule->etatvehicule->name() ?></small>
                                             </div>
                                         </a>
                                     </div>

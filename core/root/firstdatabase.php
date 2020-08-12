@@ -4,6 +4,7 @@ namespace Home;
 
 $item = new AGENCE();
 $item->name = "Agence principal";
+$item->comptebanque_id = COMPTEBANQUE::PRINCIPAL;
 $item->setProtected(1);
 $item->save();
 
@@ -22,6 +23,12 @@ $item->save();
 
 $item = new ETATVEHICULE();
 $item->name = "En location";
+$item->class = "warning";
+$item->setProtected(1);
+$item->save();
+
+$item = new ETATVEHICULE();
+$item->name = "En reservation";
 $item->class = "warning";
 $item->setProtected(1);
 $item->save();
@@ -185,6 +192,22 @@ foreach ($datas as $key => $value) {
 	$item->save();
 }
 
+$datas = ["Dépôt", "Retrait"];
+foreach ($datas as $key => $value) {
+	$item = new TYPEMOUVEMENT();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
+
+
+$datas = ["Caisse courante"];
+foreach ($datas as $key => $value) {
+	$item = new COMPTEBANQUE();
+	$item->name = $value;
+	$item->setProtected(1);
+	$item->save();
+}
 
 $item = new PARAMS();
 $item->societe = "Devaris 21";

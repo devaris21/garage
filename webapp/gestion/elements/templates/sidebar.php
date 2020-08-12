@@ -27,7 +27,7 @@
 
             <?php 
             $locations__ = Home\LOCATION::encours();
-            $reservations__ = Home\LOCATION::encours();
+            $reservations__ = Home\RESERVATION::encours();
             $devis__ = Home\DEVIS::encours();
             $inspections__ = Home\INSPECTION::encours();
             ?>
@@ -43,7 +43,7 @@
                     <a href="<?= $this->url($this->section, "master", "parcauto") ?>"><i class="fa fa-car"></i> <span class="nav-label">Parc auto</span> </a>
                 </li>
                 <li class="" id="planning">
-                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-home"></i> <span class="nav-label">Le Planning </span> </a>
+                    <a href="<?= $this->url($this->section, "master", "planning") ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Le Planning </span> </a>
                 </li>
                 <li><hr class="mp3" style="background-color: transparent; "></li>
 

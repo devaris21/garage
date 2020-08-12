@@ -46,6 +46,17 @@ class CLIENT extends PERSONNE
 	}
 
 
+	public function dette(){
+		$datas = $this->fourni("reservation", ["etat_id ="=>ETAT::ENCOURS]);  
+		$datas1 = $this->fourni("location", ["etat_id ="=>ETAT::ENCOURS]);
+		return comptage($datas, "montant", "somme") + comptage($datas1, "montant", "somme");
+	}
+
+
+	public function acompte(){
+		return 0;
+	}
+
 
 	public function sentenseCreate(){
 		return $this->sentense = "Ajout d'un nouvel employé dans votre gestion : $this->name $this->lastname";

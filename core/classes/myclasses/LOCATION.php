@@ -44,7 +44,7 @@ class LOCATION extends TABLE
 						$data = $this->save();
 					}else{
 						$data->status = false;
-						$data->message = "les dates du contrat sont incorectes, veuillez recommencer !!!";
+						$data->message = "les dates du contrat sont incorectes, veuillez recommencer 3!!!";
 					}
 				}else{
 					$data->status = false;
@@ -52,7 +52,7 @@ class LOCATION extends TABLE
 				}
 			}else{
 				$data->status = false;
-				$data->message = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";
+				$data->message = "Aucun véhicule n'a été selectionné pour cette location !!!";
 			}
 		}else{
 			$data->status = false;

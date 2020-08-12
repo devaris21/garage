@@ -11,9 +11,10 @@ class ETATVEHICULE extends TABLE
 
 	const LIBRE = 1;
 	const LOCATION = 2;
-	const REPARATION = 3;
-	const INSPECTION = 4;
-	const INDISPONIBLE = 5;
+	const RESERVATION = 3;
+	const REPARATION = 4;
+	const INSPECTION = 5;
+	const INDISPONIBLE = 6;
 
 
 	public $name;

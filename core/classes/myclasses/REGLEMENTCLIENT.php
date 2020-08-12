@@ -22,7 +22,8 @@ class REGLEMENTCLIENT extends TABLE
 	public $date_approbation;
 	public $isModified = 0;
 	public $employe_id;
-
+	public $location_id;
+	public $reservation_id;
 	public $acompteClient = 0;
 	public $detteClient = 0;
 

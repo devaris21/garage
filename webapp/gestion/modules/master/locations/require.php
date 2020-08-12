@@ -7,5 +7,5 @@ $locations = LOCATION::getAll();
 // $loues = VEHICULE::loues();
 // $pretes = VEHICULE::pretes();
 
-$title = "AMB | Locations & prets de véhicules ";
+$title = "AMB | Locations de véhicules ";
 ?>

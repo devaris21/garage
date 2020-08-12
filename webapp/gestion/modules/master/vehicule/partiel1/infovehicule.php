@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="text-center" data-toggle="tooltip" title="Double-cliquez sur l'image pour la changer">
-                            <img class="cursor" data-toggle="modal" data-target="#modal-image" src="<?= $this->stockage("images", "vehicules", $levehicule->image1) ?>" class="img-thumbnail cursor" style="height: 110px;">
+                            <img class="cursor" data-toggle="modal" data-target="#modal-image" src="<?= $this->stockage("images", "vehicules", $levehicule->image) ?>" class="img-thumbnail cursor" style="height: 100px;">
                         </div>
                     </div>
                     <div class="col-7">
@@ -17,7 +17,7 @@
                         </address>
                     </div>
                     <div class="col-1 text-center">
-                        <span  data-toggle=modal data-target="#modal-vehicule" class="cursor" onclick="modification('vehicule', <?= $levehicule->id ?>)"><i data-toggle='tooltip' title="Modiifer les infos du véhicule" class="fa fa-pencil fa-2x cursor"></i></span><br><br>
+                        <span  data-toggle=modal data-target="#modal-vehicule2" class="cursor" onclick="modification('vehicule', <?= $levehicule->id ?>)"><i data-toggle='tooltip' title="Modiifer les infos du véhicule" class="fa fa-pencil fa-2x cursor"></i></span><br><br>
                         <span data-toggle='tooltip' title="Supprimer le véhicule" onclick="suppressionWithPassword('vehicule', <?= $levehicule->id ?>)" class="cursor" ><i class="fa fa-close text-red fa-2x cursor"></i></span><br>                                                                            
                     </div>
                 </div>

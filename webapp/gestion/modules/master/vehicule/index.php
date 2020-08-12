@@ -29,12 +29,12 @@
             </div>
             <br>
             <div>
-                <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-xs btn-success dim"><i class="fa fa-wrench"></i> Nouvelle location</button>
+                <button data-target="#modal-infovehicule" data-toggle="modal" onclick="modification('infovehicule', <?= $levehicule->infovehicule->id ?>)" class="btn btn-xs btn-default dim"><i class="fa fa-pencil"></i> Modifier les infos</button>
 
-                <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-xs btn-danger dim pull-right"><i class="fa fa-wrench"></i> Nouvelle reservation</button>
-                <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-xs btn-danger dim pull-right"><i class="fa fa-wrench"></i> Nouvelle reservation</button>
-                <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-xs btn-danger dim pull-right"><i class="fa fa-wrench"></i> Nouvelle reservation</button>
-                <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-xs btn-danger dim pull-right"><i class="fa fa-wrench"></i> Nouvelle reservation</button>
+                <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-xs btn-warning dim pull-right"><i class="fa fa-strikethrough"></i> Déclassé le véhicule</button>
+                <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-xs btn-warning dim pull-right"><i class="fa fa-ban"></i> Rendre indisponible</button>
+                <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-xs btn-danger dim pull-right"><i class="fa fa-calendar"></i> Nouvelle reservation</button>
+                <button data-toggle="modal" data-target="#modal-newintervention" class="btn btn-xs btn-primary dim pull-right"><i class="fa fa-eercast"></i> Nouvelle location</button>
             </div>
         </div>
 
@@ -112,6 +112,10 @@
 
 
 <?php include($this->rootPath("webapp/gestion/elements/templates/script.php")); ?>
+
+<?php include($this->rootPath("composants/assets/modals/modal-vehicule.php")); ?>  
+<?php include($this->rootPath("composants/assets/modals/modal-vehicule2.php")); ?>  
+<?php include($this->rootPath("composants/assets/modals/modal-infovehicule.php")); ?>  
 
 
 <script type="text/javascript" src="<?= $this->relativePath("../planning/script.js")  ?>"></script>

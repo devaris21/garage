@@ -63,9 +63,34 @@ if ($action == "calculLocation") {
 				}
 			}
 		}
+		
+		$requette = "SELECT * FROM infovehicule WHERE id NOT IN (SELECT infovehicule.id AS id FROM vehicule, infovehicule, location WHERE infovehicule.vehicule_id = vehicule.id AND vehicule.id = location.vehicule_id AND location.etat_id =? AND ((? BETWEEN location.started AND location.started) OR (? BETWEEN location.started AND location.started))) ";
+		$locations = INFOVEHICULE::execute($requette, [ETAT::ENCOURS, $started, $finished]);
+
+
+		$requette = "SELECT * FROM infovehicule WHERE id NOT IN (SELECT infovehicule.id AS id FROM vehicule, infovehicule, reservation WHERE infovehicule.vehicule_id = vehicule.id AND vehicule.id = reservation.vehicule_id AND reservation.etat_id = ? AND ((? BETWEEN reservation.started AND reservation.started) OR (? BETWEEN reservation.started AND reservation.started))) ";
+		$reservations = INFOVEHICULE::execute($requette, [ETAT::ENCOURS, $started, $finished]);
+
+		$lot = [];
+		foreach ($datas as $key => $info) {
+			$test = false;
+			foreach ($locations as $key => $item) {
+				if ($info->id == $item->id) {
+					foreach ($reservations as $key => $val) {
+						if ($info->id == $val->id) {
+							$lot[] = $info;
+							$test = true;
+							continue 3;
+						}
+					}
+				}
+			}
+		}
+
+
 		$data->status = true;
-		$data->nb = count($datas);
-		session("infovehicules", $datas);
+		$data->nb = count($lot);
+		session("infovehicules", $lot);
 	}else{
 		$data->status = false;
 		$data->message = "Veuillez verifier les dates pour la reservation !";
@@ -215,9 +240,8 @@ if ($action == "fiche") {
 			</div>
 		</div><hr>
 		<div class="text-right">
-			<button onclick="validerLocation(<?= TYPELOCATION::RESERVATION ?>)" class="btn btn-danger dim"><i class="fa fa-calendar"></i> Faire une reservation</button>
-			<button onclick="validerLocation(<?= TYPELOCATION::DEVIS ?>)" class="btn btn-default dim"><i class="fa fa-file-text-o"></i> Valider le devis</button>
-			<button onclick="validerLocation(<?= TYPELOCATION::DIRECT ?>)" class="btn btn-primary dim"><i class="fa fa-car"></i> Location directe</button>
+			<button onclick="validerDevis(<?= TYPELOCATION::DEVIS ?>)" class="btn  btn-xs btn-default dim"><i class="fa fa-file-text-o"></i> Valider le devis</button>
+			<button onclick="validerReservation(<?= TYPELOCATION::RESERVATION ?>)" class="btn btn-danger dim"><i class="fa fa-calendar"></i> Faire une reservation</button>
 		</div>
 	</div>
 	<?php
@@ -235,7 +259,7 @@ if ($action == "listevehicules") {
 					<a class="row">
 						<div class="col-4">
 							<div class="text-center">
-								<img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $rooter->stockage("images", "vehicules", $vehicule->image1) ?>"><br>
+								<img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $rooter->stockage("images", "vehicules", $vehicule->image) ?>"><br>
 								<input type="radio" name="vehicule_id" class="i-checks cursor" value="<?= $vehicule->id  ?>" kilometrage="<?= $vehicule->kilometrage();  ?>">
 							</div>
 						</div>
@@ -255,7 +279,8 @@ if ($action == "listevehicules") {
 }
 
 
-if ($action == "validerLocation") {
+
+if ($action == "validerReservation") {
 	if (getSession("montant") >= $avance) {
 		if ((getSession("montant") - $avance) <= $params->seuilCredit) {
 			if ($finished >= $started && $started >= dateAjoute()) {
@@ -268,19 +293,15 @@ if ($action == "validerLocation") {
 					$datas = CLIENT::findBy(["id ="=>$client_id]);
 					if (count($datas) == 1) { 
 						$client = $datas[0];
-// $lots = $client->fourni("abonnement");
-// if (count($lots) > 0) {
-// 	$abonnement = $lots[0];
-// 	$abn = $abonnement->montant($montant);
-// }
 					}
 				}
 				if ($data->status) {
-					$location = new LOCATION;
-					$location->hydrater($_POST);
-					$location->client_id = $client->id;
-					$data = $location->enregistre();
+					$reservation = new RESERVATION;
+					$reservation->hydrater($_POST);
+					$reservation->client_id = $client->id;
+					$data = $reservation->enregistre();
 					if ($data->status) {
+
 						$critere = new CRITERE;
 						$critere->hydrater($_POST);
 						if ($critere->climatisation == "a") {
@@ -288,48 +309,38 @@ if ($action == "validerLocation") {
 						}
 						$critere->minplace = $min;
 						$critere->maxplace = $max;
-						$critere->location_id = $location->id;
+						$critere->reservation_id = $reservation->id;
 						$data = $critere->enregistre();
 						if ($data->status) {
-							if ($location->typelocation_id != TYPELOCATION::DEVIS) {
-								$reglement = new REGLEMENTCLIENT;
-								$reglement->hydrater($_POST);
-								$reglement->client_id = $client->id;
-								$reglement->montant = getSession("montant");
-								$data = $reglement->enregistre();
-								if ($data->status) {
-									$location->montant = getSession("montant");
-									$location->reste = $location->montant - $location->avance;
-									$location->save();
-								}
+							$reglement = new REGLEMENTCLIENT;
+							$reglement->hydrater($_POST);
+							$reglement->client_id = $client->id;
+							$reglement->montant = getSession("montant");
+							$reglement->reservation_id = $reservation->id;
+							$data = $reglement->enregistre();
+							if ($data->status) {
+								$reservation->montant = getSession("montant");
+								$reservation->reste = $reservation->montant - $reservation->avance;
+								$reservation->save();
+
+								$reglement->detteClient = $client->dette();
+								$reglement->acompte = $client->acompte();
+								$reglement->save();
 							}
 
-							if ($location->typelocation_id != TYPELOCATION::DIRECT) {
-								if ($marques != "") {
-									$marques = explode(",", $marques);
-								}else{
-									$marques = [];
-								}
-								foreach ($marques as $key => $info) {
-									$item = new MARQUE_CRITERE;
-									$item->marque_id = $info;
-									$item->critere_id = $critere->id;
-									$item->enregistre();
-								}
+							if ($marques != "") {
+								$marques = explode(",", $marques);
+							}else{
+								$marques = [];
+							}
+							foreach ($marques as $key => $info) {
+								$item = new MARQUE_CRITERE;
+								$item->marque_id = $info;
+								$item->critere_id = $critere->id;
+								$item->enregistre();
 							}
 						}
-
-						switch ($location->typelocation_id) {
-							case TYPELOCATION::DIRECT:
-							$data->setUrl("gestion", "master", "locations");
-							break;
-							case TYPELOCATION::RESERVATION:
-							$data->setUrl("gestion", "master", "reservations");
-							break;
-							case TYPELOCATION::DEVIS:
-							$data->setUrl("gestion", "master", "devis");
-							break;
-						}
+						$data->setUrl("gestion", "master", "reservations");
 					}else{
 						$data->status = false;
 						$data->message = "Veuillez verifier les dates pour cette opération !";
@@ -346,6 +357,68 @@ if ($action == "validerLocation") {
 	}else{
 		$data->status = false;
 		$data->message = "Veuillez verifier l'avance, elle est trop elevée !";
+	}
+	echo json_encode($data);
+}
+
+
+
+
+
+
+if ($action == "validerDevis") {
+	if ($finished >= $started && $started >= dateAjoute()) {
+		$data->status = true;
+		if ($isclient == TABLE::NON) {
+			$client = new CLIENT;
+			$client->hydrater($_POST);
+			$data = $client->enregistre();
+		}else{
+			$datas = CLIENT::findBy(["id ="=>$client_id]);
+			if (count($datas) == 1) { 
+				$client = $datas[0];
+			}
+		}
+		if ($data->status) {
+			$devis = new DEVIS;
+			$devis->hydrater($_POST);
+			$devis->client_id = $client->id;
+			$devis->montant = getSession("montant");
+			$data = $devis->enregistre();
+			if ($data->status) {
+
+				$critere = new CRITERE;
+				$critere->hydrater($_POST);
+				if ($critere->climatisation == "a") {
+					$critere->climatisation = null;
+				}
+				$critere->minplace = $min;
+				$critere->maxplace = $max;
+				$critere->devis_id = $devis->id;
+				$data = $critere->enregistre();
+				if ($data->status) {
+
+					if ($marques != "") {
+						$marques = explode(",", $marques);
+					}else{
+						$marques = [];
+					}
+					foreach ($marques as $key => $info) {
+						$item = new MARQUE_CRITERE;
+						$item->marque_id = $info;
+						$item->critere_id = $critere->id;
+						$item->enregistre();
+					}
+				}
+				$data->setUrl("gestion", "master", "devis");
+			}else{
+				$data->status = false;
+				$data->message = "Veuillez verifier les dates pour cette opération !";
+			}
+		}
+	}else{
+		$data->status = false;
+		$data->message = "Veuillez verifier les dates pour cette opération !";
 	}
 	echo json_encode($data);
 }

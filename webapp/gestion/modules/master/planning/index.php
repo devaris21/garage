@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="ibox-content scroll" style="overflow-x: scroll; min-height: 500px;">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-hover">
                                 <?php 
                                 $ladate = dateAjoute(-10);
                                 $last = date("W", strtotime($ladate));
@@ -106,7 +106,7 @@
                                                 <a style="width: 300px" class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->id)  ?>">
                                                     <div class="col-3">
                                                         <div class="text-center">
-                                                            <img alt="image" style="height: 40px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image1) ?>">
+                                                            <img alt="image" style="height: 40px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image) ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-9">
@@ -146,10 +146,7 @@
 
         <?php foreach ($locations__ as $key => $location) {
             $location->actualise(); 
-            if (count($cris) > 0) {
-                $critere = $cris[0];
-                include($this->rootPath("composants/assets/modals/modal-location.php"));
-            }
+            include($this->rootPath("composants/assets/modals/modal-location.php"));
         } ?>
 
     </div>
@@ -167,9 +164,9 @@
     <?php foreach ($locations__ as $key => $item) {
         $item->actualise(); ?>
         {
-            title: 'Location de <?= $item->client->name(); ?> // <?= $item->vehicule->immatriculation; ?>',
+            title: 'Location de <?= $item->client->name(); ?>',
             start: "<?= $item->started; ?>",
-            end: "<?= dateAjoute1($item->finished, +1) ?>",
+            end: "<?= $item->finished ?>",
             className: "bg-green",
             borderColor: "white",
             type: 'location',
@@ -182,9 +179,9 @@
         if ($item->vehicule->id != null) {
             $item->actualise(); ?>
             {
-                title: 'Reservation de <?= $item->client->name(); ?> // <?= $item->vehicule->immatriculation; ?>',
+                title: 'Reservation de <?= $item->client->name(); ?>',
                 start: "<?= $item->started; ?>",
-                end: "<?= dateAjoute1($item->finished, +1) ?>",
+                end: "<?= $item->finished ?>",
                 className: "bg-warning",
                 borderColor: "white",
                 type: 'reservation',

@@ -29,7 +29,7 @@ if (count($datas) > 0) {
                             <table class="table table-striped">
                                 <tbody>
                                     <td>
-                                        <td colspan="2"><img src="<?= $this->stockage("images", "vehicules", $location->vehicule->image1) ?>" style="width: 100%;"></td>
+                                        <td colspan="2"><img src="<?= $this->stockage("images", "vehicules", $location->vehicule->image) ?>" style="width: 100%;"></td>
                                     </td>
                                     <tr>
                                         <td><i>Type de véhicule :</i></td>

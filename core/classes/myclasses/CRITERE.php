@@ -10,6 +10,7 @@ class CRITERE extends TABLE
 	public static $namespace = __NAMESPACE__;
 
 	public $reservation_id;
+	public $devis_id;
 	public $typevehicule_id;
 	public $fonctionvehicule_id;
 	public $energie_id;

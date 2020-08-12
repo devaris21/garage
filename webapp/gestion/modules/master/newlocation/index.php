@@ -124,7 +124,23 @@
                                                 <?php Native\BINDING::html("select", "tarifvehicule") ?>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Zone de déplacement (si possible)</label>
+                                            <input type="text" class="form-control" name="lieu">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label>Etat global du véhicule</label>
+                                            <textarea class="form-control" name="etatduvehicule" rows="4">Rien à signeler</textarea>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Kilométrage actuel</label>
+                                            <input type="text" class="form-control" name="kilometrage">
+                                        </div>
                                     </div><hr>
+                                    
                                     <div class="row listevehicules"  style="background-color: #eee; padding-top: 1%;">
                                         <!-- rempli en ajax -->
                                     </div>
@@ -149,7 +165,7 @@
                                     </div><hr class="mp0">
 
                                     <div class="new">
-                                       <div class="form-group">
+                                     <div class="form-group">
                                         <label class="col-form-label" for="status">Type de client</label>
                                         <?php Native\BINDING::html("select", "typeclient") ?>
                                     </div>

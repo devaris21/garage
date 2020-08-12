@@ -17,9 +17,7 @@ class VEHICULE extends TABLE
 	public $downgraded = TABLE::NON;
 	public $etatvehicule_id = ETATVEHICULE::LIBRE;
 
-	public $image1;
-	public $image2;
-	public $image3;
+	public $image;
 
 
 	public function enregistre(){
@@ -51,7 +49,7 @@ class VEHICULE extends TABLE
 
 	public function uploading(Array $files){
 		//les proprites d'images;
-		$tab = ["image1", "image2", "image3"];
+		$tab = ["image"];
 		if (is_array($files) && count($files) > 0) {
 			$i = 0;
 			foreach ($files as $key => $file) {

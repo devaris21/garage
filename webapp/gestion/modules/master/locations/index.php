@@ -93,7 +93,7 @@
                                                 <a class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->id)  ?>">
                                                     <div class="col-4">
                                                         <div class="text-center">
-                                                            <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image1) ?>">
+                                                            <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image) ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-8">

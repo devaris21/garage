@@ -25,7 +25,7 @@ $(function(){
 
 
 	$("form#formLocation").find("input, select").change(function(){
-		var url = "../../webapp/gestion/modules/master/newlocation/ajax.php";
+		var url = "../../webapp/gestion/modules/master/newreservation/ajax.php";
 		var formData = new FormData($("#formLocation")[0]);
 		formData.append('equipements', $("#formLocation").find("select[name=equipement_id]").val());
 		formData.append('marques', $("#formLocation").find("select[name=marque_id]").val());
@@ -59,20 +59,19 @@ $(function(){
 	}
 
 
-	validerLocation = function(id){
-		var url = "../../webapp/gestion/modules/master/locations/ajax.php";
+	validerReservation = function(id){
 		alerty.confirm("Voulez-vous vraiment continuer ?", {
 			title: "Attention",
 			cancelLabel : "Non",
 			okLabel : "OUI, approuver",
 		}, function(){
 			Loader.start();
-			var url = "../../webapp/gestion/modules/master/newlocation/ajax.php";
+			var url = "../../webapp/gestion/modules/master/newreservation/ajax.php";
 			var formData = new FormData($("#formLocation")[0]);
 			formData.append('equipements', $("#formLocation").find("select[name=equipement_id]").val());
 			formData.append('marques', $("#formLocation").find("select[name=marque_id]").val());
 			formData.append('typelocation_id', id);
-			formData.append('action', 'validerLocation');
+			formData.append('action', 'validerReservation');
 			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
 				if (data.status) {
 					window.location.href = data.url;
@@ -84,34 +83,31 @@ $(function(){
 	}
 
 
-
-	supVehicule = function(id){
-		Loader.start();
-		var url = "../../webapp/gestion/modules/master/locations/ajax.php";
-		var formData = new FormData();
-		formData.append('id', id);
-		formData.append('action', 'supVehicule');
-		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
-			$(".affichage").html(data)
-			Loader.stop();
-		}, 'html');
+	validerDevis = function(id){
+		alerty.confirm("Voulez-vous vraiment continuer ?", {
+			title: "Attention",
+			cancelLabel : "Non",
+			okLabel : "OUI, approuver",
+		}, function(){
+			Loader.start();
+			var url = "../../webapp/gestion/modules/master/newreservation/ajax.php";
+			var formData = new FormData($("#formLocation")[0]);
+			formData.append('equipements', $("#formLocation").find("select[name=equipement_id]").val());
+			formData.append('marques', $("#formLocation").find("select[name=marque_id]").val());
+			formData.append('typelocation_id', id);
+			formData.append('action', 'validerDevis');
+			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
+				if (data.status) {
+					window.location.href = data.url;
+				}else{
+					Alerter.error('Erreur !', data.message);
+				}
+			},"json");
+		});
 	}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-voirVehicule = function(id){
-	Loader.start();
-	var url = "../../webapp/gestion/modules/master/locations/ajax.php";
-	var formData = new FormData();
-	formData.append('id', id);
-	formData.append('action', 'listevehicules');
-	$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
-		$(".modal .listevehicules").html(data)
-		modal("#modal-listevehicule");
-		Loader.stop();
-	}, 'html');
-}
 
 
 terminerLocation = function(id){
