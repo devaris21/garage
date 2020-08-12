@@ -54,14 +54,6 @@ foreach ($datas as $key => $value) {
 	$item->save();
 }
 
-$datas = ["Location", "Reservation", "Devis"];
-foreach ($datas as $key => $value) {
-	$item = new TYPELOCATION();
-	$item->name = $value;
-	$item->setProtected(1);
-	$item->save();
-}
-
 
 $datas = ["Tourisme", "Utilitaire", "Prestige", "Camping-car"];
 foreach ($datas as $key => $value) {
@@ -185,7 +177,7 @@ foreach ($datas as $key => $value) {
 
 
 
-$datas = ["master", "administrateur"];
+$datas = ["master", "caisse", "administrateur"];
 foreach ($datas as $key => $value) {
 	$item = new ROLE();
 	$item->name = $value;
@@ -251,6 +243,7 @@ $item->save();
 
 
 
+
 $item = new ETAT();
 $item->name = "Annulé";
 $item->class = "danger";
@@ -258,89 +251,62 @@ $item->setProtected(1);
 $item->save();
 
 $item = new ETAT();
+$item->name = "Expiré";
+$item->class = "default";
+$item->setProtected(1);
+$item->save();
+
+$item = new ETAT();
 $item->name = "En cours";
-$item->class = "warning";
+$item->class = "primary";
 $item->setProtected(1);
 $item->save();
 
 $item = new ETAT();
 $item->name = "Partiellement";
-$item->class = "info";
+$item->class = "success";
 $item->setProtected(1);
 $item->save();
 
 $item = new ETAT();
 $item->name = "Validé";
-$item->class = "success";
+$item->class = "primary";
 $item->setProtected(1);
 $item->save();
 
-$item = new ETAT();
-$item->name = "Expiré";
-$item->class = "success";
+
+
+
+$item = new CATEGORIEOPERATION();
+$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
+$item->name = "Location d'engins pour livraison";
 $item->setProtected(1);
 $item->save();
 
-// $item = new CATEGORIEOPERATION();
-// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
-// $item->name = "Réglement de commande";
-// $item->setProtected(1);
-// $item->save();
-
-// $item = new CATEGORIEOPERATION();
-// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
-// $item->name = "Remboursement par le fournisseur";
-// $item->setProtected(1);
-// $item->save();
-
-// $item = new CATEGORIEOPERATION();
-// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
-// $item->name = "Location d'engins pour livraison";
-// $item->setProtected(1);
-// $item->save();
-
-// $item = new CATEGORIEOPERATION();
-// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
-// $item->name = "Autre entrée en caisse";
-// $item->setProtected(1);
-// $item->save();
+$item = new CATEGORIEOPERATION();
+$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::ENTREE;
+$item->name = "Autre entrée en caisse";
+$item->setProtected(1);
+$item->save();
 
 
-// $item = new CATEGORIEOPERATION();
-// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-// $item->name = "Réglement de facture d'approvisionnemnt";
-// $item->setProtected(1);
-// $item->save();
+$item = new CATEGORIEOPERATION();
+$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+$item->name = "Réglement de facture de reparation / d'entretien";
+$item->setProtected(1);
+$item->save();
 
-// $item = new CATEGORIEOPERATION();
-// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-// $item->name = "Payement de salaire du personnel";
-// $item->setProtected(1);
-// $item->save();
+$item = new CATEGORIEOPERATION();
+$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+$item->name = "Location de tricycle pour livraison";
+$item->setProtected(1);
+$item->save();
 
-// $item = new CATEGORIEOPERATION();
-// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-// $item->name = "Réglement de facture de reparation / d'entretien";
-// $item->setProtected(1);
-// $item->save();
-
-// $item = new CATEGORIEOPERATION();
-// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-// $item->name = "Remboursement du client";
-// $item->setProtected(1);
-// $item->save();
-
-// $item = new CATEGORIEOPERATION();
-// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-// $item->name = "Location de tricycle pour livraison";
-// $item->setProtected(1);
-// $item->save();
-
-// $item = new CATEGORIEOPERATION();
-// $item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
-// $item->name = "Autre dépense";
-// $item->setProtected(1);
-// $item->save();
+$item = new CATEGORIEOPERATION();
+$item->typeoperationcaisse_id = TYPEOPERATIONCAISSE::SORTIE;
+$item->name = "Autre dépense";
+$item->setProtected(1);
+$item->save();
 
 
 

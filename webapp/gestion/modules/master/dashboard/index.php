@@ -38,7 +38,7 @@
                                 <div class="row">
                                     <div class="col-7">
                                         <h5 class="text-uppercase">Locations en cours</h5>
-                                        <h1 class="no-margins"><?= start0(count(Home\LOCATION::encours()))  ?></h1>
+                                        <h1 class="no-margins"><?= start0(count($locations__))  ?></h1>
                                     </div>
                                     <div class="col-5 text-right">
                                         <i class="fa fa-eercast fa-5x text-green"></i>
@@ -53,7 +53,7 @@
                                 <div class="row">
                                     <div class="col-7">
                                         <h5 class="text-uppercase">Reservations</h5>
-                                        <h1 class="no-margins"><?= start0(count(Home\RESERVATION::encours()))  ?></h1>
+                                        <h1 class="no-margins"><?= start0(count($reservations__))  ?></h1>
                                     </div>
                                     <div class="col-5 text-right">
                                         <i class="fa fa-calendar fa-5x text-danger"></i>

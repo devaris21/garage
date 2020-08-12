@@ -80,7 +80,7 @@ class COMPTEBANQUE extends TABLE
 
 
 
-	public function depots(string $date1, string $date2){
+	public function getIn(string $date1, string $date2){
 		$requette = "SELECT SUM(montant) as montant FROM mouvement WHERE mouvement.typemouvement_id = ? AND mouvement.comptebanque_id = ? AND mouvement.valide = 1 AND DATE(mouvement.created) >= ? AND DATE(mouvement.created) <= ?";
 		$item = MOUVEMENT::execute($requette, [TYPEMOUVEMENT::DEPOT, $this->id, $date1, $date2]);
 		if (count($item) < 1) {$item = [new MOUVEMENT()]; }
@@ -88,7 +88,7 @@ class COMPTEBANQUE extends TABLE
 	}
 
 
-	public function retraits(string $date1, string $date2){
+	public function getOut(string $date1, string $date2){
 		$requette = "SELECT SUM(montant) as montant FROM mouvement WHERE mouvement.typemouvement_id = ? AND mouvement.comptebanque_id = ? AND mouvement.valide = 1 AND DATE(mouvement.created) >= ? AND DATE(mouvement.created) <= ?";
 		$item = MOUVEMENT::execute($requette, [TYPEMOUVEMENT::RETRAIT, $this->id, $date1, $date2]);
 		if (count($item) < 1) {$item = [new MOUVEMENT()]; }

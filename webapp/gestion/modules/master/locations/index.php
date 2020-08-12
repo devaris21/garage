@@ -16,13 +16,13 @@
 
           <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-6">
-                <h2 class="text-uppercase text-red gras">Locations de véhicules</h2>
+                <h2 class="text-uppercase text-green gras">Locations de véhicules</h2>
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-7 gras text-capitalize">Afficher seulement les locations en cours</div>
                         <div class="offset-1"></div>
                         <div class="col-xs-4">
-                           <div class="switch">
+                         <div class="switch">
                             <div class="onoffswitch">
                                 <input type="checkbox" class="onoffswitch-checkbox" id="example1">
                                 <label class="onoffswitch-label" for="example1">
@@ -36,33 +36,8 @@
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="widget style1 navy-bg">
-                        <div class="row">
-                            <div class="col-4">
-                                <i class="fa fa-cloud fa-3x"></i>
-                            </div>
-                            <div class="col-8 text-right">
-                                <span>Locations ce mois </span>
-                                <h2 class="font-bold"><?= start0(count(Home\LOCATION::encours()))  ?></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="widget style1 lazur-bg">
-                        <div class="row">
-                            <div class="col-4">
-                                <i class="fa fa-envelope-o fa-3x"></i>
-                            </div>
-                            <div class="col-8 text-right">
-                                <span> Prêts ce mois </span>
-                                <h2 class="font-bold"><?= start0(count(Home\LOCATION::encours()))  ?></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="title-action">
+                <a href="<?= $this->url("gestion", "master", "newlocation")  ?>" class="btn btn-primary dim"><i class="fa fa-plus"></i> Nouvelle location</a>
             </div>
         </div>
     </div>
@@ -78,7 +53,7 @@
                     <div class="ibox-title">
                         <h5>Liste des locations de véhicules</h5>
                         <div class="ibox-tools">
-                            <button style="margin-top: -4%" data-toggle="modal" data-target="#modal-location" class="btn btn-primary btn-xs dim"><i class="fa fa-plus"></i> Nouvelle location / pret</button>
+
                         </div>
                     </div>
                     <div class="ibox-content">

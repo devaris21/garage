@@ -11,15 +11,18 @@ class LOCATION extends TABLE
 
 	public $agence_id;
 	public $reference;
-	public $typelocation_id;
+	public $reservation_id;
+	public $devis_id;
 	public $started;
 	public $finished;
+	public $montant;
+	public $avance;
+	public $reste;
 	public $vehicule_id;
 	public $etatduvehicule;
 	public $kilometrage;
 	public $kilometragefin;
 	public $lieu;
-	public $reservation_id;
 	public $chauffeur_id;
 	public $etat_id = ETAT::PARTIEL;
 	public $tarifvehicule_id;

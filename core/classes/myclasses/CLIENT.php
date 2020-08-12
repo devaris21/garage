@@ -39,6 +39,13 @@ class CLIENT extends PERSONNE
 
 
 
+	public static function dettes(){
+		$datas = RESERVATION::encours();
+		$datas1 = LOCATION::encours();
+		return comptage($datas, "montant", "somme") + comptage($datas1, "montant", "somme");
+	}
+
+
 
 	public function sentenseCreate(){
 		return $this->sentense = "Ajout d'un nouvel employé dans votre gestion : $this->name $this->lastname";

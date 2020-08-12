@@ -57,7 +57,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="ibox-content scroll" style="overflow-x: scroll;">
+                        <div class="ibox-content scroll" style="overflow-x: scroll; min-height: 500px;">
                             <table class="table table-bordered">
                                 <?php 
                                 $ladate = dateAjoute(-10);
@@ -66,7 +66,7 @@
                                 ?>
                                 <thead>
                                     <tr>
-                                        <th rowspan="3"></th>
+                                        <th rowspan="3"><h3 class="text-uppercase gras text-center" style="margin-top: 10%">Tous les véhicules<br> du parc auto</h3></th>
                                         <?php $ladate = dateAjoute(-10); 
                                         for ($i=0; $i < 100 ; $i++) { 
                                             if ((date("m", strtotime($ladate)) != date("m", strtotime(dateAjoute1($ladate, -1))) || $i == 0)) {
@@ -173,44 +173,32 @@
             className: "bg-green",
             borderColor: "white",
             type: 'location',
-            id: "<?= $item->vehicule->id; ?>"
+            id: "<?= $item->id; ?>",
+            veh: "<?= $item->vehicule->id; ?>"
         },
     <?php } ?>
 
+    <?php foreach ($reservations__ as $key => $item) {
+        if ($item->vehicule->id != null) {
+            $item->actualise(); ?>
+            {
+                title: 'Reservation de <?= $item->client->name(); ?> // <?= $item->vehicule->immatriculation; ?>',
+                start: "<?= $item->started; ?>",
+                end: "<?= dateAjoute1($item->finished, +1) ?>",
+                className: "bg-warning",
+                borderColor: "white",
+                type: 'reservation',
+                id: "<?= $item->id; ?>",
+                veh: "<?= $item->vehicule->id; ?>"
+            },
+        <?php }
+    } ?>
 
     ];
 
-    events.forEach(element => {
-        $("tr[data-id="+element.id+"] td.grid").each(function(){
-            var x = new Date(element.start);
-            var y = new Date(element.end);
-            var length = Math.floor((y-x)/86400000)+1;
-            console.log(length);
-            var date = new Date($(this).attr("id"));
-            if ((date >= x) && (date <= y)) {
-                $(this).append("<div class='element bg-danger'>"+element.title+"</div>");
-                for (var i = 1; i < length; i++) {
-                    $(this).next().remove();
-                }
-                $(this).prop("colspan", length)
-                
-            }
-        })
-    })
+
 </script>
 
-<style type="text/css">
-    .element{
-        display: inline-block;
-        height: 20px;
-        width: 100%;
-        border-radius: 10px;
-        margin-top: 3%;
-        cursor: pointer;
-        font-size: 11px;
-        padding-left: 6px;
-    }
-</style>
 
 </body>
 

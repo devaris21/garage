@@ -1,13 +1,19 @@
 $(function(){
+	$("div[data-toggle=buttons] label").click(function(event) {
+		Loader.start();
+		$("div[data-toggle=buttons] label").removeClass('active');
+		$(this).addClass('active');
 
-	filtrer = function(){
 		var url = "../../webapp/gestion/modules/caisse/caisse/ajax.php";
-		var formdata = new FormData($("#formFiltrer")[0]);
+		var jour = $(this).attr("jour");
+		var formdata = new FormData();
+		formdata.append('jour', jour);
 		formdata.append('action', "filtrer");
 		$.post({url:url, data:formdata, contentType:false, processData:false}, function(data){
-			window.location.href = data.url;
-		}, "json")
-	}
+			$("tbody.tableau").html(data);
+			Loader.stop();
+		}, 'html')
+	});
 
 
 	$("#top-search").on("keyup", function() {

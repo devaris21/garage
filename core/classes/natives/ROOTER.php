@@ -74,6 +74,9 @@ class ROOTER extends PATH
                 $params = PARAMS::findLastId();
                 $mycompte = MYCOMPTE::findLastId();
 
+                $date1 = dateAjoute(-30);
+                $date2 = dateAjoute();
+
 
                 if ($mycompte->expired >= dateAjoute()) {
 

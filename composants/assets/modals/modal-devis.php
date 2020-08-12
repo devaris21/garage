@@ -51,7 +51,7 @@ $chauffeurs = Home\CHAUFFEUR::getAll();
 ?>
 
 
-<div class="modal inmodal fade" id="modal-critere-<?= $reservation->id ?>" style="z-index: 99999999">
+<div class="modal inmodal fade" id="modal-devis-<?= $reservation->id ?>" style="z-index: 99999999">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">

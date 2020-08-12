@@ -3,7 +3,7 @@ namespace Home;
 use Native\RESPONSE;/**
  * 
  */
-class RESERVATION extends TABLE
+class DEVIS extends TABLE
 {
 
 	public static $tableName = __CLASS__;
@@ -15,14 +15,9 @@ class RESERVATION extends TABLE
 	public $started;
 	public $finished;
 	public $montant;
-	public $avance;
-	public $reste;
+	public $lieu;
 	public $etat_id = ETAT::ENCOURS;
 	public $conducteur = TABLE::NON;
-	public $vehicule_id;
-	public $chauffeur_id;
-	public $devis_id;
-	public $lieu;
 	public $tarifvehicule_id;
 	public $employe_id;
 
