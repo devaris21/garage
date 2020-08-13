@@ -298,7 +298,6 @@ if ($action == "validerLocation") {
 					$location->hydrater($_POST);
 					$location->client_id = $client->id;
 					$data = $location->enregistre();
-					var_dump($data);
 					if ($data->status) {
 						$reglement = new REGLEMENTCLIENT;
 						$reglement->hydrater($_POST);

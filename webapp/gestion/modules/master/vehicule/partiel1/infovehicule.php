@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="text-center" data-toggle="tooltip" title="Double-cliquez sur l'image pour la changer">
-                            <img class="cursor" data-toggle="modal" data-target="#modal-image" src="<?= $this->stockage("images", "vehicules", $levehicule->image) ?>" class="img-thumbnail cursor" style="height: 100px;">
+                            <img class="cursor" data-toggle="modal" data-target="#modal-image" src="<?= $this->stockage("images", "vehicules", $levehicule->image) ?>" class="img-thumbnail cursor" style="width: 100%;">
                         </div>
                     </div>
                     <div class="col-7">
@@ -25,33 +25,37 @@
             </div>
             <div class="col-sm-6 border-right">
                 <?php if ($location != null) { ?>
-                    <h2 class="text-green gras " style="margin-top: 0;">Location N°<?= $location->reference ?></h2>
                     <div class="row">
-                        <div class="col-sm-6">
-                            <p class=""><?= $location->lieu  ?></p>
-                            <span><b>Etat du véhicule :</b> <?= $location->etatduvehicule ?></span><br>
-                            <span><b>Kilometrage actuel :</b> <?= $location->kilometrage ?> kms</span>
-                            <h5><i class="fa fa-calendar"></i> Du <?= datecourt($location->started) ?> au <?= datecourt($location->finished) ?></h5>
+                        <div class="col-sm-9">
+                            <h2 class="text-green gras " style="margin-top: 0;">Location N°<?= $location->reference ?></h2>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class=""><?= $location->lieu  ?></p>
+                                    <span><b>Etat du véhicule :</b> <?= $location->etatduvehicule ?></span><br>
+                                    <span><b>Kilometrage actuel :</b> <?= $location->kilometrage ?> kms</span>
+                                    <h5><i class="fa fa-calendar"></i> Du <?= datecourt($location->started) ?> au <?= datecourt($location->finished) ?></h5>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="<?= $this->url("gestion", "master", "client", $location->client->id)  ?>">
+                                        <h3 class="m-b-xs"><strong><?= $location->client->name() ?></strong></h3>
+                                        <div class="font-bold"><?= $location->client->typeclient->name() ?></div>
+                                        <address class="">
+                                            <strong><?= $location->client->contact ?></strong><br>
+                                            <?= $location->client->email ?>
+                                        </address>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-6">
-                            <a href="<?= $this->url("gestion", "master", "client", $location->client->id)  ?>">
-                                <h3 class="m-b-xs"><strong><?= $location->client->name() ?></strong></h3>
-                                <div class="font-bold"><?= $location->client->typeclient->name() ?></div>
-                                <address class="">
-                                    <strong><?= $location->client->contact ?></strong><br>
-                                    <?= $location->client->email ?>
-                                </address>
-                            </a>
+                        <div class="col-sm-3">
+                            <button onclick="modification('location', <?= $location->id ?>)" data-toggle="modal" data-target="#modal-<?= ($location->typelocation_id == 1)?'location2':'pret2' ?>" class="btn btn-outline btn-xs btn-block btn-warning  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos de la location" class="fa fa-pencil"></i> Modifier</button>
+
+                            <button data-toggle="modal" data-target="#modal-client" class="btn btn-outline btn-xs btn-block btn-success  dim" type="button"><i data-toggle="tooltip" title="Voir le contrat" class="fa fa-user"></i> Voir Contrat</button>
+
+
+                            <button onclick="terminerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Terminer la location" class="btn btn-outline btn-xs btn-block btn-primary dim" type="button"><i class="fa fa-check"></i> Terminer</button>
+                            <button onclick="annulerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Annuler la location" class="btn btn-outline btn-xs btn-block btn-danger  dim" type="button"><i class="fa fa-close"></i> Annuler</button>
                         </div>
-                    </div>
-                    <div class="justify-content-center">
-                        <button onclick="modification('location', <?= $location->id ?>)" data-toggle="modal" data-target="#modal-<?= ($location->typelocation_id == 1)?'location2':'pret2' ?>" class="btn btn-outline btn-xs btn-warning  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos de la location" class="fa fa-pencil"></i> Modifier</button>
-
-                        <button data-toggle="modal" data-target="#modal-client" class="btn btn-outline btn-xs btn-success  dim" type="button"><i data-toggle="tooltip" title="Voir le contrat" class="fa fa-user"></i> Contrat</button>
-
-
-                        <button onclick="terminerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Terminer la location" class="btn btn-outline btn-xs btn-primary dim" type="button"><i class="fa fa-check"></i> Terminer</button>
-                        <button onclick="annulerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Annuler la location" class="btn btn-outline btn-xs btn-danger  dim" type="button"><i class="fa fa-close"></i> Annuler</button>
                     </div>
                 <?php }else{ ?>
                     <h1 class="text-center text-green gras">Le véhicule est libre</h1>
@@ -61,7 +65,7 @@
         </div><br><hr>
 
         <div class="row">
-            <div class="col-md-3 border-right">
+            <div class="col-md-4 border-right">
                 <table class="table table-sm">
                     <tbody>
                         <tr>
@@ -83,17 +87,17 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-3 border-right">
+            <div class="col-md-4 border-right">
                 <table class="table table-sm">
                     <tbody>                                    
                         <tr>
                             <td>N°Chasis</td>
                             <td><?= $levehicule->infovehicule->chasis ?></td>
                         </tr>
-                        <tr>
+                       <!--  <tr>
                             <td>CNIT</td>
                             <td><?= $levehicule->infovehicule->cnit ?></td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td>Energie</td>
                             <td><?= $levehicule->infovehicule->energie->name() ?></td>
@@ -109,7 +113,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-3 border-right">
+            <div class="col-md-4 ">
                 <table class="table table-sm">
                     <tbody>                                    
                         <tr>
@@ -121,6 +125,14 @@
                             <td><?= $levehicule->infovehicule->puissance ?> chevaux</td>
                         </tr>
                         <tr>
+                            <td>Mise en circulation</td>
+                            <td><?= datecourt($levehicule->infovehicule->dateMiseCirculation) ?></td>
+                        </tr>
+                        <tr>
+                            <td>Kilometrage actuel</td>
+                            <td><?= $levehicule->kilometrage() ?> Kms</td>
+                        </tr>
+                        <!-- <tr>
                             <td>Airbag Conduction</td>
                             <td><?= $levehicule->infovehicule->nbPortes ?> portières / <?= $levehicule->infovehicule->nbPlaces ?> places</td>
                         </tr>
@@ -131,11 +143,11 @@
                         <tr>
                             <td>Sacs / Valises</td>
                             <td><?= $levehicule->infovehicule->nbSacs ?> sacs / <?= $levehicule->infovehicule->nbValises ?> valises</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-3">
+     <!--        <div class="col-md-3">
                 <table class="table table-sm">
                     <tbody>
                         <tr>
@@ -157,7 +169,7 @@
 
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </div>
 
      <!--       <div class="col-md-2 optionsbtn">  

@@ -105,9 +105,7 @@
                                             <td >
                                                 <a style="width: 300px" class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->id)  ?>">
                                                     <div class="col-3">
-                                                        <div class="text-center">
-                                                            <img alt="image" style="height: 40px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image) ?>">
-                                                        </div>
+                                                        <img alt="image" style="width: 120%;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image) ?>">
                                                     </div>
                                                     <div class="col-9">
                                                         <h4 style="margin: 0" class="text-uppercase"><strong><?= $vehicule->immatriculation ?></strong></h4>

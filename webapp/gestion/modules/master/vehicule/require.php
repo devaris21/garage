@@ -15,7 +15,16 @@ if ($this->id != null && intval($this->id) > 0) {
 		}
 
 		$locations = $levehicule->fourni("location");
+		foreach ($locations as $key => $value) {
+			$value->type = "location";
+		}
+		$reservations = $levehicule->fourni("reservation");
+		foreach ($reservations as $key => $value) {
+			$value->type = "reservation";
+		}
 
+		$historiques = array_merge($locations, $reservations);
+		usort($historiques, "comparerDateCreated");
 
 		$location = null;
 		$encours = $levehicule->fourni("location", ["etat_id ="=>ETAT::ENCOURS]);
