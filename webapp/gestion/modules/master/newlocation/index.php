@@ -20,10 +20,7 @@
                         <div class="col-md-8">
                             <div class="ibox">
                                 <div class="ibox-title bg-green">
-                                    <h5 class="text-uppercase gras d-inline">Nouvelle reservation</h5>
-                                    <div class="ibox-tools">
-                                        <button class="btn btn-xs btn-white text-dark" onclick="voirlistevehicules()"><span class="nb"></span></button>
-                                    </div>
+                                    <h5 class="text-uppercase gras d-inline">Nouvelle location</h5>
                                 </div>
                                 <div class="ibox-content">
                                     <div class="row">
@@ -125,25 +122,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>Zone de déplacement (si possible)</label>
-                                            <input type="text" class="form-control" name="lieu">
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label>Etat global du véhicule</label>
-                                            <textarea class="form-control" name="etatduvehicule" rows="4">Rien à signeler</textarea>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Kilométrage actuel</label>
-                                            <input type="text" class="form-control" name="kilometrage">
-                                        </div>
-                                    </div><hr>
-                                    
-                                    <div class="row listevehicules"  style="background-color: #eee; padding-top: 1%;">
-                                        <!-- rempli en ajax -->
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -216,8 +194,52 @@
                 </div>
 
                 <div class="ibox">
+                    <div class="ibox-title bg-green">
+                        <h5 class="text-uppercase gras d-inline">Validation du faormulaire de location</h5>
+                        <div class="ibox-tools">
+                            <button class="btn btn-xs btn-white text-dark" onclick="voirlistevehicules()"><span class="nb"></span></button>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row listevehicules"  style="background-color: #eee; padding-top: 1%;">
+                            <!-- rempli en ajax -->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Etat intérieur du véhicule</label>
+                                        <input type="text" class="form-control" name="etatinterieur" value="correct !">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Etat extérieur du véhicule</label>
+                                        <input type="text" class="form-control" name="etatinterieur" value="correct !">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Kilométrage actuel</label>
+                                        <input type="text" class="form-control" name="kilometrage">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <label class="gras">Niveau de carburant</label><br>
+                                        <?php Native\BINDING::html("radio", "niveaucarburant") ?><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ibox">
                     <div class="ibox-title">
-                        <h5 class="text-uppercase gras d-inline">Validation du faormulaire de reservation</h5>
+                        <h5 class="text-uppercase gras d-inline">Validation du faormulaire de location</h5>
                     </div>
                     <div class="ibox-content">
                         <div class="row fiche">
