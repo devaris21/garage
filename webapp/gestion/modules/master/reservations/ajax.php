@@ -30,6 +30,13 @@ if ($action == "validerLocation") {
 				$data = $location->enregistre();
 				if ($data->status) {
 					$data = $reservation->valider();
+					if ($data->status) {
+						$datas = $reservation->fourni("reglementclient");
+						foreach ($datas as $key => $value) {
+							$value->location_id = $location->id;
+							$value->save();
+						}
+					}
 				}
 			}else{
 				$data->status = false;

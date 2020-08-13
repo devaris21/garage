@@ -302,8 +302,9 @@ if ($action == "validerLocation") {
 						$reglement = new REGLEMENTCLIENT;
 						$reglement->hydrater($_POST);
 						$reglement->client_id = $client->id;
-						$reglement->montant = getSession("montant");
+						$reglement->montant = $avance;
 						$reglement->location_id = $location->id;
+						$reglement->comment = "avance sur la location de véhicule N°".$location->reference;
 						$data = $reglement->enregistre();
 						if ($data->status) {
 							$location->montant = getSession("montant");

@@ -99,6 +99,7 @@
                                     </td>
                                     <td class="text-right">
                                         <button class="btn btn-white btn-xs" data-toggle="modal" data-target="#modal-critere-<?= $reservation->id  ?>"><i class="fa fa-check text-green"></i> Commencer</button>
+                                        <a href="<?= $this->url("gestion", "fiches", "reservation", $reservation->id)  ?>" class="btn btn-white btn-xs"><i class="fa fa-book text-blue"></i></a>
                                         <button class="btn btn-white btn-xs"><i class="fa fa-close text-danger"></i></button>
                                     </td>
                                 </tr>

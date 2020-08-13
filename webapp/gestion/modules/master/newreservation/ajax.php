@@ -315,8 +315,9 @@ if ($action == "validerReservation") {
 							$reglement = new REGLEMENTCLIENT;
 							$reglement->hydrater($_POST);
 							$reglement->client_id = $client->id;
-							$reglement->montant = getSession("montant");
+							$reglement->montant = $avance;
 							$reglement->reservation_id = $reservation->id;
+							$reglement->comment = "avance sur la reservation de véhicule N°".$reservation->reference;
 							$data = $reglement->enregistre();
 							if ($data->status) {
 								$reservation->montant = getSession("montant");

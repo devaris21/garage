@@ -165,7 +165,7 @@
                                     </div><hr class="mp0">
 
                                     <div class="new">
-                                     <div class="form-group">
+                                       <div class="form-group">
                                         <label class="col-form-label" for="status">Type de client</label>
                                         <?php Native\BINDING::html("select", "typeclient") ?>
                                     </div>
@@ -186,7 +186,10 @@
                                             <input type="text" class="form-control" uppercase name="numero">
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label class="col-form-label">Domicile / Lieu habitation</label>
+                                        <input type="text" class="form-control" name="adresse">
+                                    </div>
                                     <div class="row">
                                         <div class="form-group col-5">
                                             <label class="col-form-label">Contact</label>

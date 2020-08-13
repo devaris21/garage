@@ -22,7 +22,7 @@
                         <div class="col-xs-7 gras text-capitalize">Afficher seulement les locations en cours</div>
                         <div class="offset-1"></div>
                         <div class="col-xs-4">
-                         <div class="switch">
+                           <div class="switch">
                             <div class="onoffswitch">
                                 <input type="checkbox" class="onoffswitch-checkbox" id="example1">
                                 <label class="onoffswitch-label" for="example1">
@@ -71,7 +71,6 @@
                                             <td class="text-left">
                                                 <h3><span class=""><u class="text-info">#<?= $location->reference ?></u> // <span class="small text-<?= $location->etat->class ?>"><?= $location->etat->name ?></span></span></h3>
                                                 <p class=""><?= $location->lieu  ?></p>
-                                                <span><b>Etat du véhicule :</b> <?= $location->etatduvehicule ?></span><br>
                                                 <span><b>Kilometrage actuel :</b> <?= $location->kilometrage ?> kms</span>
                                                 <div class="m-t-sm">
                                                     <a href="#" class="text-muted"><i class="fa fa-calendar"></i> Du <?= datecourt($location->started) ?> au <?= datecourt($location->finished) ?></a>
@@ -89,50 +88,49 @@
                                             </td>
 
                                             <td>
-                                              <div class="contact-box product-box">
-                                                <a class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->id)  ?>">
-                                                    <div class="col-4">
-                                                        <div class="text-center">
-                                                            <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image) ?>">
+                                                <div class="contact-box product-box">
+                                                    <a class="row" href="<?= $this->url("gestion", "master", "vehicule", $vehicule->id)  ?>">
+                                                        <div class="col-4">
+                                                            <div class="text-center">
+                                                                <img alt="image" style="height: 50px;" class="m-t-xs" src="<?= $this->stockage("images", "vehicules", $vehicule->image) ?>">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <h4 style="margin: 0" class="text-uppercase"><strong><?= $vehicule->immatriculation ?></strong></h4>
-                                                        <span>
-                                                            <?= $vehicule->marque->name ?> <?= $vehicule->modele ?> 
-                                                        </span><br>
-                                                        <small><?= $info->transmission->name() ?> -- <?= $info->energie->name() ?></small><br>
-                                                        <small><?= $info->nbPlaces ?> places</small> // <span><?= $info->fonctionvehicule->name() ?></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <?php if ($location->etat_id == Home\ETAT::ENCOURS) { ?>
-                                                <button onclick="modification('location', <?= $location->id ?>)" data-toggle="modal" data-target="#modal-<?= ($location->typelocation_id == 1)?'location2':'pret2' ?>" class="btn btn-outline btn-warning  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos de la location" class="fa fa-pencil"></i></button>
+                                                        <div class="col-8">
+                                                            <h4 style="margin: 0" class="text-uppercase"><strong><?= $vehicule->immatriculation ?></strong></h4>
+                                                            <span>
+                                                                <?= $vehicule->marque->name ?> <?= $vehicule->modele ?> 
+                                                            </span><br>
+                                                            <small><?= $info->transmission->name() ?> -- <?= $info->energie->name() ?></small><br>
+                                                            <small><?= $info->nbPlaces ?> places</small> // <span><?= $info->fonctionvehicule->name() ?></span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">
+                                                <?php if ($location->etat_id == Home\ETAT::ENCOURS) { ?>
+                                                    <button onclick="modification('location', <?= $location->id ?>)" data-toggle="modal" data-target="#modal-<?= ($location->typelocation_id == 1)?'location2':'pret2' ?>" class="btn btn-outline btn-warning  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos de la location" class="fa fa-pencil"></i></button>
 
-                                                <button onclick="modification('preteur', <?= $location->client->id ?>)" data-toggle="modal" data-target="#modal-client" class="btn btn-outline btn-primary  dim" type="button"><i data-toggle="tooltip" title="Modifier les infos du bénéficiaire" class="fa fa-user"></i></button>
-                                                <br>  
+                                                    <a href="<?= $this->url("gestion", "fiches", "location", $location->id) ?>" class="btn btn-outline btn-success dim" type="button"><i data-toggle="tooltip" title="Voir le contrat" class="fa fa-book"></i></a><br>  
 
-                                                <button onclick="terminerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Terminer la location" class="btn btn-outline btn-primary dim" type="button"><i class="fa fa-check"></i></button>
-                                                <button onclick="annulerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Annuler la location" class="btn btn-outline btn-danger  dim" type="button"><i class="fa fa-close"></i> </button>
-                                            <?php } ?>
+                                                    <button onclick="terminerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Terminer la location" class="btn btn-outline btn-primary dim" type="button"><i class="fa fa-check"></i></button>
+                                                    <button onclick="annulerLocation(<?= $location->id ?>)" data-toggle="tooltip" title="Annuler la location" class="btn btn-outline btn-danger  dim" type="button"><i class="fa fa-close"></i> </button>
+                                                <?php } ?>
 
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
-
                 </div>
+
             </div>
-
         </div>
+
+
     </div>
-
-
-</div>
 </div>
 
 

@@ -213,6 +213,7 @@ $item = new PARAMS();
 $item->societe = "Devaris 21";
 $item->email = "info@devaris21.com";
 $item->devise = "Fcfa";
+$item->image = "logo.png";
 $item->tva = 0;
 $item->seuilCredit = 0;
 $item->minImmobilisation = 350000;

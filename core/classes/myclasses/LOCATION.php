@@ -19,14 +19,18 @@ class LOCATION extends TABLE
 	public $avance;
 	public $reste;
 	public $vehicule_id;
-	public $etatduvehicule;
+	public $etatinterieur;
+	public $etatexterieur;
 	public $kilometrage;
 	public $kilometragefin;
 	public $lieu;
 	public $chauffeur_id;
+	public $niveaucarburant_id;
+	public $niveaucarburant_id_fin;
 	public $etat_id = ETAT::PARTIEL;
 	public $tarifvehicule_id;
 	public $datevalidation;
+	public $image;
 	public $employe_id;
 
 	public function enregistre(){
