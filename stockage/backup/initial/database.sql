@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 15 juil. 2020 à 13:14
+-- Généré le : jeu. 13 août 2020 à 15:44
 -- Version du serveur :  5.7.24
 -- Version de PHP : 7.3.2
 
@@ -48,6 +48,7 @@ CREATE TABLE `abonnement` (
 CREATE TABLE `accessoire` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
+  `image` varchar(200) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',
@@ -105,6 +106,23 @@ CREATE TABLE `cadremaintenance` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `categorieoperation`
+--
+
+CREATE TABLE `categorieoperation` (
+  `id` int(11) NOT NULL,
+  `typeoperationcaisse_id` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8_bin NOT NULL,
+  `color` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `chauffeur`
 --
 
@@ -112,10 +130,6 @@ CREATE TABLE `chauffeur` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `lastname` varchar(150) DEFAULT NULL,
-  `matricule` varchar(50) DEFAULT NULL,
-  `sexe_id` int(2) NOT NULL,
-  `nationalite` varchar(200) DEFAULT NULL,
-  `adresse` varchar(150) DEFAULT NULL,
   `typepermis` varchar(50) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `contact` varchar(200) DEFAULT NULL,
@@ -140,6 +154,8 @@ CREATE TABLE `client` (
   `adresse` varchar(150) COLLATE utf8_bin DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `contact` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `typepiece_id` int(2) NOT NULL,
+  `numero` varchar(200) COLLATE utf8_bin DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',
@@ -203,6 +219,55 @@ CREATE TABLE `contractpartenaire` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `critere`
+--
+
+CREATE TABLE `critere` (
+  `id` int(11) NOT NULL,
+  `reservation_id` int(11) DEFAULT NULL,
+  `devis_id` int(11) DEFAULT NULL,
+  `typevehicule_id` int(11) NOT NULL,
+  `fonctionvehicule_id` int(11) NOT NULL,
+  `energie_id` int(11) NOT NULL DEFAULT '0',
+  `transmission_id` int(11) NOT NULL DEFAULT '0',
+  `minplace` int(11) DEFAULT NULL,
+  `maxplace` int(11) DEFAULT NULL,
+  `climatisation` int(11) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `devis`
+--
+
+CREATE TABLE `devis` (
+  `id` int(11) NOT NULL,
+  `reference` varchar(20) NOT NULL,
+  `agence_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `started` date NOT NULL,
+  `finished` date NOT NULL,
+  `conducteur` int(11) DEFAULT NULL,
+  `montant` int(11) DEFAULT NULL,
+  `lieu` text,
+  `employe_id` int(11) DEFAULT NULL,
+  `tarifvehicule_id` int(11) DEFAULT NULL,
+  `etat_id` int(11) NOT NULL,
+  `datevalidation` datetime DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `employe`
 --
 
@@ -249,6 +314,7 @@ CREATE TABLE `energie` (
 CREATE TABLE `equipement` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
+  `image` varchar(200) DEFAULT NULL,
   `price` int(11) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
@@ -349,6 +415,30 @@ CREATE TABLE `fonctionvehicule` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `fournisseur`
+--
+
+CREATE TABLE `fournisseur` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8_bin NOT NULL,
+  `acompte` int(11) NOT NULL,
+  `dette` int(11) NOT NULL,
+  `contact` varchar(150) COLLATE utf8_bin NOT NULL,
+  `fax` varchar(200) COLLATE utf8_bin NOT NULL,
+  `email` text COLLATE utf8_bin,
+  `adresse` text COLLATE utf8_bin NOT NULL,
+  `image` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `description` text COLLATE utf8_bin,
+  `visibility` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `garage`
 --
 
@@ -393,8 +483,7 @@ CREATE TABLE `infovehicule` (
   `vehicule_id` int(11) NOT NULL,
   `typevehicule_id` int(11) NOT NULL,
   `fonctionvehicule_id` int(11) NOT NULL,
-  `marque_id` int(11) NOT NULL,
-  `modele` varchar(200) NOT NULL,
+  `cnit` varchar(200) DEFAULT NULL,
   `chasis` text,
   `nbPlaces` int(11) DEFAULT NULL,
   `nbPortes` int(11) DEFAULT NULL,
@@ -402,7 +491,7 @@ CREATE TABLE `infovehicule` (
   `nbSacs` int(11) DEFAULT NULL,
   `transmission_id` int(11) NOT NULL,
   `energie_id` int(11) NOT NULL,
-  `puissance` int(10) NOT NULL,
+  `puissance` int(10) DEFAULT NULL,
   `climatisation` int(11) DEFAULT NULL,
   `ageMinimumConducteur` int(11) DEFAULT NULL,
   `anneeMinimumPermis` int(11) DEFAULT NULL,
@@ -417,25 +506,6 @@ CREATE TABLE `infovehicule` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `inspecteur`
---
-
-CREATE TABLE `inspecteur` (
-  `id` int(11) NOT NULL,
-  `agence_id` int(2) NOT NULL,
-  `name` varchar(50) COLLATE utf8_bin NOT NULL,
-  `adresse` varchar(150) COLLATE utf8_bin DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `contact` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL,
-  `protected` int(11) NOT NULL DEFAULT '0',
-  `valide` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `inspection`
 --
 
@@ -443,11 +513,14 @@ CREATE TABLE `inspection` (
   `id` int(11) NOT NULL,
   `reference` varchar(20) NOT NULL,
   `location_id` int(11) NOT NULL,
-  `inspecteur_id` int(11) NOT NULL,
-  `dateInspection` datetime NOT NULL,
-  `carburant` date NOT NULL,
-  `kilometrage` int(11) DEFAULT NULL,
+  `vehicule_id` int(11) NOT NULL,
+  `nomInspecteur` varchar(50) DEFAULT '',
+  `niveaucarburant_id` int(11) DEFAULT '0',
+  `kilometrage` int(11) NOT NULL,
+  `kilometragefin` int(11) DEFAULT NULL,
+  `remarques` text,
   `etat_id` int(11) NOT NULL,
+  `datevalidation` datetime NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',
@@ -495,15 +568,26 @@ CREATE TABLE `listeverification` (
 CREATE TABLE `location` (
   `id` int(11) NOT NULL,
   `reference` varchar(20) NOT NULL,
-  `reservation_id` int(11) NOT NULL,
   `agence_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `reservation_id` int(11) DEFAULT NULL,
+  `devis_id` int(11) DEFAULT NULL,
   `started` date NOT NULL,
   `finished` date NOT NULL,
   `vehicule_id` int(11) DEFAULT NULL,
-  `conducteur_id` int(11) DEFAULT NULL,
+  `montant` int(11),
+  `avance` int(11) DEFAULT NULL,
+  `reste` int(11) DEFAULT NULL,
+  `kilometrage` int(11) DEFAULT NULL,
+  `etatinterieur` text,
+  `etatexterieur` text,
+  `lieu` text,
+  `chauffeur_id` int(11) DEFAULT NULL,
   `employe_id` int(11) DEFAULT NULL,
   `tarifvehicule_id` int(11) DEFAULT NULL,
   `etat_id` int(11) NOT NULL,
+  `image` text,
+  `datevalidation` datetime DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',
@@ -521,6 +605,7 @@ CREATE TABLE `maintenance` (
   `reference` varchar(20) NOT NULL,
   `typemaintenance_id` int(11) NOT NULL,
   `cadremaintenance_id` int(11) NOT NULL,
+  `vehicule_id` int(11) NOT NULL,
   `datePrevue` date NOT NULL,
   `dureePrevue` date NOT NULL,
   `garage_id` int(11) DEFAULT NULL,
@@ -566,6 +651,22 @@ CREATE TABLE `marque` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `marque_critere`
+--
+
+CREATE TABLE `marque_critere` (
+  `id` int(11) NOT NULL,
+  `marque_id` int(11) NOT NULL,
+  `critere_id` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `modepayement`
 --
 
@@ -598,6 +699,27 @@ CREATE TABLE `modereservation` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `mouvement`
+--
+
+CREATE TABLE `mouvement` (
+  `id` int(11) NOT NULL,
+  `reference` varchar(20) COLLATE utf8_bin NOT NULL,
+  `typemouvement_id` int(11) NOT NULL,
+  `comptebanque_id` int(11) NOT NULL,
+  `montant` int(11) NOT NULL,
+  `comment` text COLLATE utf8_bin,
+  `etat_id` int(11) NOT NULL,
+  `employe_id` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `mycompte`
 --
 
@@ -608,6 +730,47 @@ CREATE TABLE `mycompte` (
   `protected` int(11) NOT NULL DEFAULT '1',
   `valide` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `niveaucarburant`
+--
+
+CREATE TABLE `niveaucarburant` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8_bin NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `operation`
+--
+
+CREATE TABLE `operation` (
+  `id` int(11) NOT NULL,
+  `categorieoperation_id` int(11) NOT NULL,
+  `reference` varchar(20) COLLATE utf8_bin NOT NULL,
+  `montant` int(11) NOT NULL,
+  `agence_id` int(11) NOT NULL,
+  `mouvement_id` int(11) NOT NULL,
+  `modepayement_id` int(11) NOT NULL,
+  `structure` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `numero` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `comment` text COLLATE utf8_bin,
+  `employe_id` int(11) NOT NULL,
+  `etat_id` int(11) NOT NULL,
+  `date_approbation` datetime DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -640,8 +803,6 @@ CREATE TABLE `params` (
   `devise` varchar(50) COLLATE utf8_bin NOT NULL,
   `tva` int(11) NOT NULL,
   `seuilCredit` int(11) NOT NULL,
-  `ruptureStock` int(11) NOT NULL,
-  `minImmobilisation` int(11) NOT NULL,
   `adresse` varchar(200) COLLATE utf8_bin DEFAULT NULL,
   `postale` varchar(200) COLLATE utf8_bin DEFAULT NULL,
   `image` varchar(50) COLLATE utf8_bin DEFAULT NULL,
@@ -673,20 +834,87 @@ CREATE TABLE `partenaire` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `reglementclient`
+--
+
+CREATE TABLE `reglementclient` (
+  `id` int(11) NOT NULL,
+  `reference` varchar(20) COLLATE utf8_bin NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `mouvement_id` int(11) NOT NULL,
+  `modepayement_id` int(11) NOT NULL,
+  `structure` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `numero` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `comment` text COLLATE utf8_bin,
+  `acompteClient` int(11) NOT NULL,
+  `detteClient` int(11) NOT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `reservation_id` int(11) DEFAULT NULL,
+  `etat_id` int(11) NOT NULL,
+  `agence_id` int(11) NOT NULL,
+  `employe_id` int(11) NOT NULL,
+  `date_approbation` datetime DEFAULT NULL,
+  `image` text COLLATE utf8_bin,
+  `isModified` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reglementfournisseur`
+--
+
+CREATE TABLE `reglementfournisseur` (
+  `id` int(11) NOT NULL,
+  `reference` varchar(20) COLLATE utf8_bin NOT NULL,
+  `fournisseur_id` int(11) NOT NULL,
+  `mouvement_id` int(11) NOT NULL,
+  `modepayement_id` int(11) NOT NULL,
+  `structure` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `numero` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `comment` text COLLATE utf8_bin,
+  `acompteFournisseur` int(11) NOT NULL,
+  `detteFournisseur` int(11) NOT NULL,
+  `etat_id` int(11) NOT NULL,
+  `employe_id` int(11) NOT NULL,
+  `date_approbation` datetime DEFAULT NULL,
+  `image` text COLLATE utf8_bin,
+  `isModified` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `reservation`
 --
 
 CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
-  `agence_id` int(11) DEFAULT NULL,
-  `typevehicule_id` int(11) NOT NULL,
-  `modereservation_id` int(11) NOT NULL,
+  `reference` varchar(20) NOT NULL,
+  `agence_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `devis_id` int(11) DEFAULT NULL,
   `started` date NOT NULL,
   `finished` date NOT NULL,
-  `tarif_id` int(11) DEFAULT NULL,
+  `vehicule_id` int(11) DEFAULT NULL,
+  `chauffeur_id` int(11) DEFAULT NULL,
   `conducteur` int(11) DEFAULT NULL,
+  `montant` int(11) DEFAULT NULL,
+  `avance` int(11) DEFAULT NULL,
+  `reste` int(11) DEFAULT NULL,
+  `lieu` text,
   `employe_id` int(11) DEFAULT NULL,
-  `etat_id` int(11) DEFAULT NULL,
+  `tarifvehicule_id` int(11) DEFAULT NULL,
+  `etat_id` int(11) NOT NULL,
+  `datevalidation` datetime DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `protected` int(11) NOT NULL DEFAULT '0',
@@ -764,6 +992,21 @@ CREATE TABLE `tarifvehicule` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `tarif_fonction`
+--
+
+CREATE TABLE `tarif_fonction` (
+  `id` int(11) NOT NULL,
+  `tarifvehicule_id` int(11) NOT NULL,
+  `fonctionvehicule_id` int(11) NOT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `transmission`
 --
 
@@ -809,10 +1052,55 @@ CREATE TABLE `typeclient` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `typelocation`
+--
+
+CREATE TABLE `typelocation` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `typemaintenance`
 --
 
 CREATE TABLE `typemaintenance` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8_bin NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `typemouvement`
+--
+
+CREATE TABLE `typemouvement` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8_bin NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `typeoperationcaisse`
+--
+
+CREATE TABLE `typeoperationcaisse` (
   `id` int(11) NOT NULL,
   `name` varchar(200) COLLATE utf8_bin NOT NULL,
   `created` datetime DEFAULT NULL,
@@ -839,6 +1127,36 @@ CREATE TABLE `typepartenaire` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `typepiece`
+--
+
+CREATE TABLE `typepiece` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `typeremise`
+--
+
+CREATE TABLE `typeremise` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `protected` int(11) NOT NULL DEFAULT '0',
+  `valide` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `typevehicule`
 --
 
@@ -860,7 +1178,11 @@ CREATE TABLE `typevehicule` (
 CREATE TABLE `vehicule` (
   `id` int(11) NOT NULL,
   `immatriculation` varchar(20) NOT NULL,
+  `modele` varchar(100) NOT NULL,
+  `marque_id` int(11) NOT NULL,
+  `couleur` varchar(20) DEFAULT NULL,
   `etatvehicule_id` int(11) NOT NULL,
+  `downgraded` int(11) NOT NULL,
   `dateMiseCirculation` date DEFAULT NULL,
   `image` varchar(50) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
@@ -904,6 +1226,12 @@ ALTER TABLE `cadremaintenance`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `categorieoperation`
+--
+ALTER TABLE `categorieoperation`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `chauffeur`
 --
 ALTER TABLE `chauffeur`
@@ -931,6 +1259,18 @@ ALTER TABLE `connexion`
 -- Index pour la table `contractpartenaire`
 --
 ALTER TABLE `contractpartenaire`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `critere`
+--
+ALTER TABLE `critere`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `devis`
+--
+ALTER TABLE `devis`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -988,6 +1328,12 @@ ALTER TABLE `fonctionvehicule`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `fournisseur`
+--
+ALTER TABLE `fournisseur`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `garage`
 --
 ALTER TABLE `garage`
@@ -1003,12 +1349,6 @@ ALTER TABLE `history`
 -- Index pour la table `infovehicule`
 --
 ALTER TABLE `infovehicule`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `inspecteur`
---
-ALTER TABLE `inspecteur`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1054,6 +1394,12 @@ ALTER TABLE `marque`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `marque_critere`
+--
+ALTER TABLE `marque_critere`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `modepayement`
 --
 ALTER TABLE `modepayement`
@@ -1066,9 +1412,27 @@ ALTER TABLE `modereservation`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `mouvement`
+--
+ALTER TABLE `mouvement`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `mycompte`
 --
 ALTER TABLE `mycompte`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `niveaucarburant`
+--
+ALTER TABLE `niveaucarburant`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `operation`
+--
+ALTER TABLE `operation`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1087,6 +1451,18 @@ ALTER TABLE `params`
 -- Index pour la table `partenaire`
 --
 ALTER TABLE `partenaire`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `reglementclient`
+--
+ALTER TABLE `reglementclient`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `reglementfournisseur`
+--
+ALTER TABLE `reglementfournisseur`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1120,6 +1496,12 @@ ALTER TABLE `tarifvehicule`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `tarif_fonction`
+--
+ALTER TABLE `tarif_fonction`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `transmission`
 --
 ALTER TABLE `transmission`
@@ -1138,15 +1520,45 @@ ALTER TABLE `typeclient`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `typelocation`
+--
+ALTER TABLE `typelocation`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `typemaintenance`
 --
 ALTER TABLE `typemaintenance`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `typemouvement`
+--
+ALTER TABLE `typemouvement`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `typeoperationcaisse`
+--
+ALTER TABLE `typeoperationcaisse`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `typepartenaire`
 --
 ALTER TABLE `typepartenaire`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `typepiece`
+--
+ALTER TABLE `typepiece`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `typeremise`
+--
+ALTER TABLE `typeremise`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1196,6 +1608,12 @@ ALTER TABLE `cadremaintenance`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `categorieoperation`
+--
+ALTER TABLE `categorieoperation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `chauffeur`
 --
 ALTER TABLE `chauffeur`
@@ -1223,6 +1641,18 @@ ALTER TABLE `connexion`
 -- AUTO_INCREMENT pour la table `contractpartenaire`
 --
 ALTER TABLE `contractpartenaire`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `critere`
+--
+ALTER TABLE `critere`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `devis`
+--
+ALTER TABLE `devis`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1280,6 +1710,12 @@ ALTER TABLE `fonctionvehicule`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `fournisseur`
+--
+ALTER TABLE `fournisseur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `garage`
 --
 ALTER TABLE `garage`
@@ -1295,12 +1731,6 @@ ALTER TABLE `history`
 -- AUTO_INCREMENT pour la table `infovehicule`
 --
 ALTER TABLE `infovehicule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `inspecteur`
---
-ALTER TABLE `inspecteur`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1346,6 +1776,12 @@ ALTER TABLE `marque`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `marque_critere`
+--
+ALTER TABLE `marque_critere`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `modepayement`
 --
 ALTER TABLE `modepayement`
@@ -1358,9 +1794,27 @@ ALTER TABLE `modereservation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `mouvement`
+--
+ALTER TABLE `mouvement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `mycompte`
 --
 ALTER TABLE `mycompte`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `niveaucarburant`
+--
+ALTER TABLE `niveaucarburant`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `operation`
+--
+ALTER TABLE `operation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1379,6 +1833,18 @@ ALTER TABLE `params`
 -- AUTO_INCREMENT pour la table `partenaire`
 --
 ALTER TABLE `partenaire`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `reglementclient`
+--
+ALTER TABLE `reglementclient`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `reglementfournisseur`
+--
+ALTER TABLE `reglementfournisseur`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1412,6 +1878,12 @@ ALTER TABLE `tarifvehicule`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `tarif_fonction`
+--
+ALTER TABLE `tarif_fonction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `transmission`
 --
 ALTER TABLE `transmission`
@@ -1430,15 +1902,45 @@ ALTER TABLE `typeclient`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `typelocation`
+--
+ALTER TABLE `typelocation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `typemaintenance`
 --
 ALTER TABLE `typemaintenance`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `typemouvement`
+--
+ALTER TABLE `typemouvement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `typeoperationcaisse`
+--
+ALTER TABLE `typeoperationcaisse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `typepartenaire`
 --
 ALTER TABLE `typepartenaire`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `typepiece`
+--
+ALTER TABLE `typepiece`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `typeremise`
+--
+ALTER TABLE `typeremise`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
