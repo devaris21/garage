@@ -24,7 +24,7 @@ $(function(){
 
 
 
-	$("form#formLocation").find("input, select").change(function(){
+	$("form#formLocation div.form").find("input, select").change(function(){
 		var url = "../../webapp/gestion/modules/master/newlocation/ajax.php";
 		var formData = new FormData($("#formLocation")[0]);
 		formData.append('equipements', $("#formLocation").find("select[name=equipement_id]").val());
@@ -32,7 +32,7 @@ $(function(){
 		formData.append('action', 'calculLocation');
 		$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
 			$(".nb").html(data.nb+" véhicule(s) trouvée(s)");
-
+			$("div.formvehicule").hide();
 			formData.append('action', 'fiche');
 			$.post({url:url, data:formData, processData:false, contentType:false}, function(data) {
 				$(".fiche").html(data);
@@ -44,6 +44,7 @@ $(function(){
 						checkboxClass: 'icheckbox_square-green',
 						radioClass: 'iradio_square-green',
 					});
+					$("div.modepayement_facultatif").hide();
 				}, 'html');
 
 			}, 'html');
@@ -57,6 +58,11 @@ $(function(){
 	voirlistevehicules = function(){
 		$("div.listevehicules").fadeIn();
 	}
+
+	$('body').on('ifChanged', "input[name=vehicule_id]", function(event){
+		$('input[name=kilometrage]').val($(this).attr("kilometrage"));
+		$('div.formvehicule').fadeIn();
+	});
 
 
 	validerLocation = function(id){
@@ -167,5 +173,4 @@ annulerLocation = function(id){
 
 
 $('select[name=typevehicule_id]').trigger('change');
-
 })

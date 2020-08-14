@@ -66,6 +66,11 @@
     <script src="<?= $this->rootPath("composants/dist/js/plugins/select2/dist/js/select2.js") ?>"></script>
     <script src="<?= $this->rootPath("composants/dist/js/plugins/alerty/alerty.min.js") ?>"></script>
 
+        <!-- litterally -->
+    <script src="<?= $this->rootPath("composants/dist/js/plugins/literallycanvas/_js_libs/react-0.14.3.js") ?>"></script>
+    <script src="<?= $this->rootPath("composants/dist/js/plugins/literallycanvas//_js_libs/literallycanvas.js") ?>"></script>
+
+
     <!-- script pour mon alerter.js -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/shamman/loader.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/shamman/alerter.js") ?>"></script>

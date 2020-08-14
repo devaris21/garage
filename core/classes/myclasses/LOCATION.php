@@ -1,6 +1,8 @@
 <?php
 namespace Home;
-use Native\RESPONSE;/**
+use Native\RESPONSE;
+use Native\FICHIER;
+/**
  * 
  */
 class LOCATION extends TABLE
@@ -23,6 +25,7 @@ class LOCATION extends TABLE
 	public $etatexterieur;
 	public $kilometrage;
 	public $kilometragefin;
+	public $details;
 	public $lieu;
 	public $chauffeur_id;
 	public $niveaucarburant_id;
@@ -33,10 +36,13 @@ class LOCATION extends TABLE
 	public $image;
 	public $employe_id;
 
+	public $img;
+
 	public function enregistre(){
 		$data = new RESPONSE;
 		$datas = CLIENT::findBy(["id ="=>$this->client_id]);
 		if (count($datas) == 1) {
+			VEHICULE::etat();
 			$datas = VEHICULE::findBy(["id ="=>$this->vehicule_id]);
 			if (count($datas) == 1) {
 				$vehicule = $datas[0];
@@ -46,6 +52,18 @@ class LOCATION extends TABLE
 						$this->agence_id = getSession("agence_connecte_id");
 						$this->reference = "LOC/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
 						$data = $this->save();
+						if ($data->status) {
+							$final_path = __DIR__."/../../../stockage/images/locations";
+							if (!file_exists($final_path)) {
+								mkdir($final_path, 0777, true);
+							}
+							$name = substr(uniqid(), 5).".png";
+							$b = imagepng($this->img, $final_path."/".$name);
+							if ($b) {
+								$this->image = $name;
+								$this->save();
+							}
+						}
 					}else{
 						$data->status = false;
 						$data->message = "les dates du contrat sont incorectes, veuillez recommencer 3!!!";
@@ -63,6 +81,30 @@ class LOCATION extends TABLE
 			$data->message = "Une erreur s'est produite lors de l'opération, veuillez recommencer !!!";
 		}
 		return $data;
+	}
+
+
+
+	public function uploading(Array $files){
+		//les proprites d'images;
+		$tab = ["image"];
+		if (is_array($files) && count($files) > 0) {
+			$i = 0;
+			foreach ($files as $key => $file) {
+				if ($file["tmp_name"] != "") {
+					$image = new FICHIER();
+					$image->hydrater($file);
+					if ($image->is_image()) {
+						$a = substr(uniqid(), 5);
+						$result = $image->upload("images", "locations", $a);
+						$name = $tab[$i];
+						$this->$name = $result->filename;
+						$this->save();
+					}
+				}	
+				$i++;			
+			}			
+		}
 	}
 
 

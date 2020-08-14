@@ -64,11 +64,11 @@ if ($action == "calculLocation") {
 			}
 		}
 		
-		$requette = "SELECT * FROM infovehicule WHERE id NOT IN (SELECT infovehicule.id AS id FROM vehicule, infovehicule, location WHERE infovehicule.vehicule_id = vehicule.id AND vehicule.id = location.vehicule_id AND location.etat_id =? AND ((? BETWEEN location.started AND location.started) OR (? BETWEEN location.started AND location.started))) ";
+		$requette = "SELECT * FROM infovehicule WHERE id NOT IN (SELECT infovehicule.id FROM vehicule, infovehicule, location WHERE infovehicule.vehicule_id = vehicule.id AND vehicule.id = location.vehicule_id AND location.etat_id = ? AND NOT ((( location.finished < ?) OR (location.started > ? ))))";
 		$locations = INFOVEHICULE::execute($requette, [ETAT::ENCOURS, $started, $finished]);
 
 
-		$requette = "SELECT * FROM infovehicule WHERE id NOT IN (SELECT infovehicule.id AS id FROM vehicule, infovehicule, reservation WHERE infovehicule.vehicule_id = vehicule.id AND vehicule.id = reservation.vehicule_id AND reservation.etat_id = ? AND ((? BETWEEN reservation.started AND reservation.started) OR (? BETWEEN reservation.started AND reservation.started))) ";
+		$requette = "SELECT * FROM infovehicule WHERE id NOT IN (SELECT infovehicule.id FROM vehicule, infovehicule, reservation WHERE infovehicule.vehicule_id = vehicule.id AND vehicule.id = reservation.vehicule_id AND reservation.etat_id = ? AND NOT ((( reservation.finished < ?) OR (reservation.started > ? ))))";
 		$reservations = INFOVEHICULE::execute($requette, [ETAT::ENCOURS, $started, $finished]);
 
 		$lot = [];

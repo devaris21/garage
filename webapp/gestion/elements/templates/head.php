@@ -2,7 +2,8 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="#">
     <meta name="keywords" content="Application de gestion des metiers d'une briqueterie industrielle">
@@ -15,6 +16,9 @@
     <link href="<?= $this->rootPath("composants/dist/font-awesome/css/font-awesome.css") ?>" rel="stylesheet">
 
     <link href="<?= $this->rootPath("composants/dist/js/plugins/fullcalendar/lib/main.css") ?>" rel="stylesheet">
+
+    <!-- litterally -->
+    <link href="<?= $this->rootPath("composants/dist/js/plugins/literallycanvas/_assets/literallycanvas.css") ?>" rel="stylesheet">
 
     <!-- Text spinners style -->
     <link href="<?= $this->rootPath("composants/dist/css/plugins/textSpinners/spinners.css") ?>" rel="stylesheet">

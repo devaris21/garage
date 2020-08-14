@@ -22,7 +22,7 @@
                                 <div class="ibox-title bg-green">
                                     <h5 class="text-uppercase gras d-inline">Nouvelle location</h5>
                                 </div>
-                                <div class="ibox-content">
+                                <div class="ibox-content form">
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <div class="form-group">
@@ -195,7 +195,7 @@
 
                 <div class="ibox">
                     <div class="ibox-title bg-green">
-                        <h5 class="text-uppercase gras d-inline">Validation du faormulaire de location</h5>
+                        <h5 class="text-uppercase gras d-inline">Caractériques du véhicule pour la location</h5>
                         <div class="ibox-tools">
                             <button class="btn btn-xs btn-white text-dark" onclick="voirlistevehicules()"><span class="nb"></span></button>
                         </div>
@@ -203,10 +203,10 @@
                     <div class="ibox-content">
                         <div class="row listevehicules"  style="background-color: #eee; padding-top: 1%;">
                             <!-- rempli en ajax -->
-                        </div>
+                        </div><br>
 
-                        <div class="row">
-                            <div class="col-md-7">
+                        <div class="row formvehicule">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>Etat intérieur du véhicule</label>
@@ -214,9 +214,9 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label>Etat extérieur du véhicule</label>
-                                        <input type="text" class="form-control" name="etatinterieur" value="correct !">
+                                        <input type="text" class="form-control" name="etatexterieur" value="correct !">
                                     </div>
-                                </div>
+                                </div><br>
 
                                 <div class="row">
                                     <div class="col-md-3">
@@ -227,10 +227,19 @@
                                         <label class="gras">Niveau de carburant</label><br>
                                         <?php Native\BINDING::html("radio", "niveaucarburant") ?><br>
                                     </div>
+                                </div><br>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Décrivez très précisement les défauts du véhicule </label>
+                                        <textarea class="form-control" rows="5" name="details"></textarea>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-sm-5">
-
+                            <div class="col-sm-6 text-center">
+                                <label>Veuillez Marquer les défauts sur le véhicule</label>
+                                <div class="literally backgrounds" id="lc"></div>
+                                <input type="hidden" name="img">
                             </div>
                         </div>
                     </div>
@@ -259,7 +268,56 @@
 
 <?php include($this->rootPath("webapp/gestion/elements/templates/script.php")); ?>
 
+<script type="text/javascript">
+  $(document).ready(function() {
+     var image = '';
+     var backgroundImage = new Image()
+     backgroundImage.src = '<?= $this->stockage("images", "societe", "test.png") ?>';
+     var lc = LC.init(
+        document.getElementsByClassName('literally backgrounds')[0],
+        {
+            imageURLPrefix: '../../../stockage/images/lc-images',
+            primaryColor : "#c00",
+            secondaryColor : "#cc0",
+            backgroundColor : "transparent",
+            defaultStrokeWidth :2,
+            strokeWidths : [1, 2, 4],
+            tools: [
+                LC.tools.Pencil,
+                LC.tools.Eraser,
+                LC.tools.Line,
+                LC.tools.Rectangle,
+                LC.tools.Text,
+                LC.tools.Ellipse,
+                //LC.tools.Polygon,
+                //LC.tools.Pan,
+                //LC.tools.Eyedropper
+            ],
+            backgroundShapes: [
+            LC.createShape(
+                'Image', {image: backgroundImage, scale: 0.51})
+            ]
+        });
+    // the background image is not included in the shape list that is
+    // saved/loaded here
 
+  //   if (localStorage.getItem(localStorageKey)) {
+  //     lc.loadSnapshot(JSON.parse(localStorage.getItem(localStorageKey)));
+  // }
+  lc.on('drawingChange', function() {
+      //localStorage.setItem(image, lc.canvasForExport().toDataURL());
+      $("input[name=img]").val(lc.canvasForExport().toDataURL());
+  });
+
+});
+</script>
+
+<style type="text/css">
+  .literally {
+    width: 100%;
+    position: relative;
+}
+</style>
 </body>
 
 </html>

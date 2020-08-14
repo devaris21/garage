@@ -25,7 +25,7 @@
                                         <button class="btn btn-xs btn-white text-dark" onclick="voirlistevehicules()"><span class="nb"></span></button>
                                     </div>
                                 </div>
-                                <div class="ibox-content">
+                                <div class="ibox-content form">
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <div class="form-group">

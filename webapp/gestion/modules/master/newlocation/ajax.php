@@ -64,19 +64,20 @@ if ($action == "calculLocation") {
 			}
 		}
 
-		$requette = "SELECT * FROM infovehicule WHERE id NOT IN (SELECT infovehicule.id AS id FROM vehicule, infovehicule, location WHERE infovehicule.vehicule_id = vehicule.id AND vehicule.id = location.vehicule_id AND location.etat_id =? AND ((? BETWEEN location.started AND location.started) OR (? BETWEEN location.started AND location.started))) ";
+		$requette = "SELECT * FROM infovehicule WHERE id NOT IN (SELECT infovehicule.id FROM vehicule, infovehicule, location WHERE infovehicule.vehicule_id = vehicule.id AND vehicule.id = location.vehicule_id AND location.etat_id = ? AND NOT ((( location.finished < ?) OR (location.started > ? ))))";
 		$locations = INFOVEHICULE::execute($requette, [ETAT::ENCOURS, $started, $finished]);
 
 
-		$requette = "SELECT * FROM infovehicule WHERE id NOT IN (SELECT infovehicule.id AS id FROM vehicule, infovehicule, reservation WHERE infovehicule.vehicule_id = vehicule.id AND vehicule.id = reservation.vehicule_id AND reservation.etat_id = ? AND ((? BETWEEN reservation.started AND reservation.started) OR (? BETWEEN reservation.started AND reservation.started))) ";
+		$requette = "SELECT * FROM infovehicule WHERE id NOT IN (SELECT infovehicule.id FROM vehicule, infovehicule, reservation WHERE infovehicule.vehicule_id = vehicule.id AND vehicule.id = reservation.vehicule_id AND reservation.etat_id = ? AND NOT ((( reservation.finished < ?) OR (reservation.started > ? ))))";
 		$reservations = INFOVEHICULE::execute($requette, [ETAT::ENCOURS, $started, $finished]);
+
 
 		$lot = [];
 		foreach ($datas as $key => $info) {
 			$test = false;
-			foreach ($locations as $key => $item) {
+			foreach ($locations as $a => $item) {
 				if ($info->id == $item->id) {
-					foreach ($reservations as $key => $val) {
+					foreach ($reservations as $z => $val) {
 						if ($info->id == $val->id) {
 							$lot[] = $info;
 							$test = true;
@@ -86,7 +87,6 @@ if ($action == "calculLocation") {
 				}
 			}
 		}
-
 
 		$data->status = true;
 		$data->nb = count($lot);
@@ -297,6 +297,8 @@ if ($action == "validerLocation") {
 					$location = new LOCATION;
 					$location->hydrater($_POST);
 					$location->client_id = $client->id;
+					$img = str_replace("data:image/png;base64,","",$img);
+					$location->img = imageCreateFromString(base64_decode($img));
 					$data = $location->enregistre();
 					if ($data->status) {
 						$reglement = new REGLEMENTCLIENT;

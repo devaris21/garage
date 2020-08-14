@@ -11,5 +11,6 @@ if (getSession("date1") != null) {
 	$date2 = dateAjoute1(getSession("date2"), -1);
 }
 
+
 $title = "AMB | Locations & prets de véhicules ";
 ?>

@@ -24,7 +24,7 @@ $(function(){
 
 
 
-	$("form#formLocation").find("input, select").change(function(){
+	$("form#formLocation div.form").find("input, select").change(function(){
 		var url = "../../webapp/gestion/modules/master/newreservation/ajax.php";
 		var formData = new FormData($("#formLocation")[0]);
 		formData.append('equipements', $("#formLocation").find("select[name=equipement_id]").val());
@@ -44,6 +44,7 @@ $(function(){
 						checkboxClass: 'icheckbox_square-green',
 						radioClass: 'iradio_square-green',
 					});
+					$("div.modepayement_facultatif").hide();
 				}, 'html');
 
 			}, 'html');
