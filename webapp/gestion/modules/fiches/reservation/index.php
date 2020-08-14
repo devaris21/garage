@@ -85,8 +85,8 @@
                                         <td><?= $critere->fonctionvehicule->name() ?></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" class="gras"><i>Marque(s) souhaitée(s) :</i></td>
-                                        <td colspan="2"><?php foreach ($marques as $key => $value) {
+                                        <td class="gras"><i>Marque(s) souhaitée(s) :</i></td>
+                                        <td colspan="3"><?php foreach ($marques as $key => $value) {
                                             echo $value->marque->name().", ";
                                         } ?></td>
                                     </tr>

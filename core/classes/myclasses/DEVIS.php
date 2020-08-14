@@ -28,7 +28,7 @@ class DEVIS extends TABLE
 			if ($this->finished > $this->started && $this->finished > dateAjoute()) {
 				$this->employe_id = getSession("employe_connecte_id");
 				$this->agence_id = getSession("agence_connecte_id");
-				$this->reference = "RES/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
+				$this->reference = "DEVIS/".date('dmY')."-".strtoupper(substr(uniqid(), 5, 6));
 				$data = $this->save();
 			}else{
 				$data->status = false;

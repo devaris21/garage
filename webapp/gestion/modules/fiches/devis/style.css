@@ -1,0 +1,10 @@
+
+@media print {
+	.break{
+		page-break-after : always;
+	}
+
+	dd{
+		font-size: 14px;
+	}
+}

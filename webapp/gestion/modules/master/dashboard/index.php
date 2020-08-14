@@ -128,20 +128,21 @@
                                 </div>
                             </div><hr>
                             <div class="">
-                                <a href="<?= $this->url("gestion", "master", "newlocation") ?>" class="btn btn-xs btn-primary dim"><i class="fa fa-eercast"></i> faire une Nouvelle location</a>
+                                <a href="<?= $this->url("gestion", "master", "newlocation") ?>" class="btn btn-sm btn-primary dim"><i class="fa fa-eercast"></i> faire une Nouvelle location</a>
 
-                                <a href="<?= $this->url("gestion", "master", "newlocation") ?>" class="btn btn-xs btn-danger dim pull-right"><i class="fa fa-calendar"></i> faire une  Nouvelle reservation</a>
+                                <a href="<?= $this->url("gestion", "master", "newreservation") ?>" class="btn btn-sm btn-danger dim pull-right"><i class="fa fa-calendar"></i> faire une  Nouvelle reservation</a>
                             </div>
                         </div>
                         <div class="col-md-3 border-left">
                             <h5 class="text-uppercase gras text-danger">Reservations prochainse (8 jours)<span class="badge bg-danger pull-right"><?= start0(count($reservations)); ?></span></h5><hr>
                             <div class="ibox">
                                 <?php if (count($reservations) > 0 ) {
-                                    foreach ($reservations as $key => $item) { ?>
+                                    foreach ($reservations as $key => $item) {
+                                        $a = dateDiffe(dateAjoute(), $item->started); ?>
                                         <div class="feed-activity-list cursor" data-toggle="modal" data-target="#modal-critere-<?= $item->id  ?>">
                                             <div class="feed-element ">
                                                 <div class="media-body ">
-                                                    <small class="float-right">5m ago</small>
+                                                    <small class="float-right"><?= ($a == 0)?"Aujoourd'hui":"Dans $a jours"; ?></small>
                                                     <strong><?= $item->reference ?></strong><br>
                                                     <small class="text-muted">Du <?= datecourt($item->started) ?> au <?= datecourt($item->finished) ?></small>
                                                 </div>

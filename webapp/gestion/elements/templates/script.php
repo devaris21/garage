@@ -12,6 +12,9 @@
     <!-- Date range picker -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/daterangepicker/daterangepicker.js") ?>"></script>
 
+    <!-- printjs-->
+    <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/printjs/print.min.js") ?>"></script>
+
     <!-- Flot -->
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/flot/jquery.flot.js") ?>"></script>
     <script type="text/javascript" src="<?= $this->rootPath("composants/dist/js/plugins/flot/jquery.flot.tooltip.min.js") ?>"></script>

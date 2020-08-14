@@ -30,7 +30,7 @@ class LOCATION extends TABLE
 	public $chauffeur_id;
 	public $niveaucarburant_id;
 	public $niveaucarburant_id_fin;
-	public $etat_id = ETAT::PARTIEL;
+	public $etat_id = ETAT::ENCOURS;
 	public $tarifvehicule_id;
 	public $datevalidation;
 	public $image;

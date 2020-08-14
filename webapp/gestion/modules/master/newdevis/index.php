@@ -19,8 +19,11 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="ibox">
-                                <div class="ibox-title bg-red">
-                                    <h5 class="text-uppercase gras d-inline">Nouvelle reservation</h5>
+                                <div class="ibox-title bg-blue">
+                                    <h5 class="text-uppercase gras d-inline">Nouvelle devis</h5>
+                                                            <div class="ibox-tools">
+                            <button class="btn btn-xs btn-white text-dark" onclick="voirlistevehicules()"><span class="nb"></span></button>
+                        </div>
                                 </div>
                                 <div class="ibox-content form">
                                     <div class="row">
@@ -128,7 +131,7 @@
 
                         <div class="col-md-4">
                             <div class="ibox">
-                                <div class="ibox-title bg-red">
+                                <div class="ibox-title bg-blue">
                                     <h5 class="text-uppercase gras d-inline">Informations sur le client</h5>
                                 </div>
                                 <div class="ibox-content">
@@ -192,23 +195,8 @@
 
 
                 <div class="ibox">
-                    <div class="ibox-title bg-red">
-                        <h5 class="text-uppercase gras d-inline">Caractériques du véhicule pour la reservation</h5>
-                        <div class="ibox-tools">
-                            <button class="btn btn-xs btn-white text-dark" onclick="voirlistevehicules()"><span class="nb"></span></button>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="row listevehicules"  style="background-color: #eee; padding-top: 1%;">
-                            <!-- rempli en ajax -->
-                        </div><br>
-                    </div>
-                </div>
-
-
-                <div class="ibox">
                     <div class="ibox-title">
-                        <h5 class="text-uppercase gras d-inline">Validation du faormulaire de reservation</h5>
+                        <h5 class="text-uppercase gras d-inline">Validation du faormulaire de devis</h5>
                     </div>
                     <div class="ibox-content">
                         <div class="row fiche">

@@ -20,6 +20,9 @@
     <!-- litterally -->
     <link href="<?= $this->rootPath("composants/dist/js/plugins/literallycanvas/_assets/literallycanvas.css") ?>" rel="stylesheet">
 
+ <!-- printjs -->
+    <link href="<?= $this->rootPath("composants/dist/js/plugins/printjs/print.min.css") ?>" rel="stylesheet">
+
     <!-- Text spinners style -->
     <link href="<?= $this->rootPath("composants/dist/css/plugins/textSpinners/spinners.css") ?>" rel="stylesheet">
     

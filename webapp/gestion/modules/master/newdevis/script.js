@@ -25,7 +25,7 @@ $(function(){
 
 
 	$("form#formLocation div.form").find("input, select").change(function(){
-		var url = "../../webapp/gestion/modules/master/newreservation/ajax.php";
+		var url = "../../webapp/gestion/modules/master/newdevis/ajax.php";
 		var formData = new FormData($("#formLocation")[0]);
 		formData.append('equipements', $("#formLocation").find("select[name=equipement_id]").val());
 		formData.append('marques', $("#formLocation").find("select[name=marque_id]").val());

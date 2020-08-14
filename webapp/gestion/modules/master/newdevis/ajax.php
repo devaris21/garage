@@ -195,7 +195,7 @@ if ($action == "fiche") {
 
 	<div class="col-sm-6">
 		<div class="row">
-			<div class="col-sm-7 text-right" style="padding-right: 3%">
+			<div class="col-sm-11 text-right" style="padding-right: 3%">
 				<small>Tarif brut de la location</small>
 				<h3 class="gras text-muted mp0"><?= money($tarif->prixJournalier * $jours) ?> <?= $params->devise  ?></h3><br>
 
@@ -208,11 +208,11 @@ if ($action == "fiche") {
 				<span>Montant Total de la location</span>
 				<h1 class="gras mp0 text-green"><?= money($montant) ?> <?= $params->devise  ?></h1><br>
 			</div>
-			<div class="col-sm-5 border-left">
+		<!-- 	<div class="col-sm-5 border-left">
 				<div>
 					<label>Mode de payement <span style="color: red">*</span> </label>                                
 					<div class="input-group">
-						<?php BINDING::html("select", "modepayement"); ?>
+						<?php //BINDING::html("select", "modepayement"); ?>
 					</div>
 				</div><br>
 				<div class="no_modepayement_facultatif">
@@ -237,11 +237,11 @@ if ($action == "fiche") {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div><hr>
 		<div class="text-right">
-			<button onclick="validerDevis(<?= TYPELOCATION::DEVIS ?>)" class="btn  btn-xs btn-default dim"><i class="fa fa-file-text-o"></i> Valider le devis</button>
-			<button onclick="validerReservation(<?= TYPELOCATION::RESERVATION ?>)" class="btn btn-danger dim"><i class="fa fa-calendar"></i> Faire une reservation</button>
+			<button onclick="validerReservation(<?= TYPELOCATION::RESERVATION ?>)" class="btn btn-danger btn-xs dim"><i class="fa fa-calendar"></i> Faire une reservation</button>
+			<button onclick="validerDevis(<?= TYPELOCATION::DEVIS ?>)" class="btn  btn-default dim"><i class="fa fa-file-text-o"></i> Valider le devis</button>
 		</div>
 	</div>
 	<?php
@@ -280,85 +280,58 @@ if ($action == "listevehicules") {
 
 
 
-if ($action == "validerReservation") {
-	if (getSession("montant") >= $avance) {
-		if ((getSession("montant") - $avance) <= $params->seuilCredit) {
-			if ($finished >= $started && $started >= dateAjoute()) {
-				$data->status = true;
-				if ($isclient == TABLE::NON) {
-					$client = new CLIENT;
-					$client->hydrater($_POST);
-					$data = $client->enregistre();
-				}else{
-					$datas = CLIENT::findBy(["id ="=>$client_id]);
-					if (count($datas) == 1) { 
-						$client = $datas[0];
-					}
+if ($action == "validerDevis") {
+	if ($finished >= $started && $started >= dateAjoute()) {
+		$data->status = true;
+		if ($isclient == TABLE::NON) {
+			$client = new CLIENT;
+			$client->hydrater($_POST);
+			$data = $client->enregistre();
+		}else{
+			$datas = CLIENT::findBy(["id ="=>$client_id]);
+			if (count($datas) == 1) { 
+				$client = $datas[0];
+			}
+		}
+		if ($data->status) {
+			$devis = new DEVIS;
+			$devis->hydrater($_POST);
+			$devis->client_id = $client->id;
+			$devis->montant = getSession("montant");
+			$data = $devis->enregistre();
+			if ($data->status) {
+
+				$critere = new CRITERE;
+				$critere->hydrater($_POST);
+				if ($critere->climatisation == "a") {
+					$critere->climatisation = null;
 				}
+				$critere->minplace = $min;
+				$critere->maxplace = $max;
+				$critere->devis_id = $devis->id;
+				$data = $critere->enregistre();
 				if ($data->status) {
-					$reservation = new RESERVATION;
-					$reservation->hydrater($_POST);
-					$reservation->client_id = $client->id;
-					$data = $reservation->enregistre();
-					if ($data->status) {
-
-						$critere = new CRITERE;
-						$critere->hydrater($_POST);
-						if ($critere->climatisation == "a") {
-							$critere->climatisation = null;
-						}
-						$critere->minplace = $min;
-						$critere->maxplace = $max;
-						$critere->reservation_id = $reservation->id;
-						$data = $critere->enregistre();
-						if ($data->status) {
-							$reglement = new REGLEMENTCLIENT;
-							$reglement->hydrater($_POST);
-							$reglement->client_id = $client->id;
-							$reglement->montant = $avance;
-							$reglement->reservation_id = $reservation->id;
-							$reglement->comment = "avance sur la reservation de véhicule N°".$reservation->reference;
-							$data = $reglement->enregistre();
-							if ($data->status) {
-								$reservation->montant = getSession("montant");
-								$reservation->reste = $reservation->montant - $reservation->avance;
-								$reservation->save();
-
-								$reglement->detteClient = $client->dette();
-								$reglement->acompte = $client->acompte();
-								$reglement->save();
-							}
-
-							if ($marques != "") {
-								$marques = explode(",", $marques);
-							}else{
-								$marques = [];
-							}
-							foreach ($marques as $key => $info) {
-								$item = new MARQUE_CRITERE;
-								$item->marque_id = $info;
-								$item->critere_id = $critere->id;
-								$item->enregistre();
-							}
-						}
-						$data->setUrl("gestion", "master", "reservations");
+					if ($marques != "") {
+						$marques = explode(",", $marques);
 					}else{
-						$data->status = false;
-						$data->message = "Veuillez verifier les dates pour cette opération !";
+						$marques = [];
+					}
+					foreach ($marques as $key => $info) {
+						$item = new MARQUE_CRITERE;
+						$item->marque_id = $info;
+						$item->critere_id = $critere->id;
+						$item->enregistre();
 					}
 				}
+				$data->setUrl("gestion", "master", "devis");
 			}else{
 				$data->status = false;
 				$data->message = "Veuillez verifier les dates pour cette opération !";
 			}
-		}else{
-			$data->status = false;
-			$data->message = "Veuillez verifier l'avance, elle est petite !";
 		}
 	}else{
 		$data->status = false;
-		$data->message = "Veuillez verifier l'avance, elle est trop elevée !";
+		$data->message = "Veuillez verifier les dates pour cette opération !";
 	}
 	echo json_encode($data);
 }
-
